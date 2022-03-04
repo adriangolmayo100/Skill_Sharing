@@ -1,7 +1,7 @@
 package es.uji.ei1027.SkillSharing.model;
 
 public class Student {
-    private int di_student;
+    private int id_student;
     private String name;
     private String email;
     private int postalCode;
@@ -12,12 +12,12 @@ public class Student {
     private boolean skp;
     private String gender;
 
-    public int getDi_student() {
-        return di_student;
+    public int getIdStudent() {
+        return id_student;
     }
 
-    public void setDi_student(int di_student) {
-        this.di_student = di_student;
+    public void setIdStudent(int di_student) {
+        this.id_student = di_student;
     }
 
     public String getName() {
