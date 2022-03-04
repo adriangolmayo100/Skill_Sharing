@@ -3,12 +3,13 @@ package es.uji.ei1027.SkillSharing.model;
 import javax.xml.crypto.Data;
 
 public class Collaboration{
+    private int idRequest;
     private int id_offer;
     private Data start;
     private Data finish;
     private int rating;
     private String comments;
-    private int idRequest;
+
 
     public int getIdRequest() {
         return idRequest;
