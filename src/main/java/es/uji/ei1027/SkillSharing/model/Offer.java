@@ -2,7 +2,7 @@ package es.uji.ei1027.SkillSharing.model;
 
 import java.sql.Date;
 
-public class offer {
+public class Offer {
 
     private int idOffer;
     private int idStudent;
