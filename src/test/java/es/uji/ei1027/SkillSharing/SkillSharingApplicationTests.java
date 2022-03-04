@@ -1,0 +1,13 @@
+package es.uji.ei1027.SkillSharing;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class SkillSharingApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
