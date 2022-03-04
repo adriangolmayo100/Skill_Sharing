@@ -12,22 +12,6 @@ public class Student {
     private boolean skp;
     private String gender;
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "di_student=" + di_student +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", postalCode=" + postalCode +
-                ", balance=" + balance +
-                ", degree='" + degree + '\'' +
-                ", course=" + course +
-                ", phoneNumber=" + phoneNumber +
-                ", skp=" + skp +
-                ", gender='" + gender + '\'' +
-                '}';
-    }
-
     public int getDi_student() {
         return di_student;
     }
