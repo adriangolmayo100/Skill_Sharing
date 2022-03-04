@@ -1,3 +1,3 @@
-#**Proyecto EI1027**
-##Skill Sharing
+# **Proyecto EI1027**
+## Skill Sharing
 :shipit:
