@@ -19,22 +19,22 @@ public class CollaborationDao {
     }
 
     public void addCollaboartion(Collaboration collaboration) {
-        jdbcTemplate.update("INSERT INTO Request VALUES(?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO Collaboration VALUES(?, ?, ?, ?, ?, ?)",
                 collaboration.getIdRequest(), collaboration.getId_offer(), collaboration.getStart(), collaboration.getFinish(),collaboration.getRating(),collaboration.getComments());
     }
 
     public void deleteCollaboration(int idrequest, int id_offer) {
-        jdbcTemplate.update("DELETE from Request where id_request=?",
+        jdbcTemplate.update("DELETE from Collaboration where id_request=?",
                 idrequest,id_offer);
     }
 
     public void deleteCollaboration(Collaboration collaboration) {
-        jdbcTemplate.update("DELETE from Request where id_request=?",
-                collaboration.getIdRequest());
+        jdbcTemplate.update("DELETE from Collaboration where id_request=? AND id_offer=?",
+                collaboration.getIdRequest(),collaboration.getId_offer());
     }
 
     public void updateCollaboration(Collaboration collaboration) {
-        jdbcTemplate.update("UPDATE Request SET start=?,finish=?,rating=?,comments=? ",
+        jdbcTemplate.update("UPDATE Collaboration SET start=?,finish=?,rating=?,comments=? ",
                 collaboration.getStart(),collaboration.getFinish(),collaboration.getRating(),collaboration.getComments());
     }
 
@@ -47,7 +47,7 @@ public class CollaborationDao {
         }
     }
 
-    public List<Request> getCollaboration() {
+    public List<Collaboration> getCollaboration() {
         try {
             return jdbcTemplate.query("SELECT * from Collaboration",
                     new CollaborationRowMapper());
