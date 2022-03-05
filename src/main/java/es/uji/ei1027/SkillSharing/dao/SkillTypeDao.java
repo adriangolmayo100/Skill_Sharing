@@ -28,17 +28,17 @@ public class SkillTypeDao {
                 idSkillType );
     }
 
-    public void deleteRequest(SkillType skillType) {
+    public void deleteSkillType(SkillType skillType) {
         jdbcTemplate.update("DELETE from SkillType where id_request=?",
                 skillType.getIdskillType());
     }
 
-    public void updateRequest(SkillType skillType) {
+    public void updateSkillType(SkillType skillType) {
         jdbcTemplate.update("UPDATE SkillType SET name=?, description=?,level=? where id_skilltype=?",
                 skillType.getName(),skillType.getDescription(),skillType.getLevel(),skillType.getIdskillType());
     }
 
-    public SkillType getRequest(int idskilltype) {
+    public SkillType getSkillType(int idskilltype) {
         try {
             return jdbcTemplate.queryForObject("SELECT * from SkillType WHERE id_skilltype=?",
                     new SkillTypeRowMapper(), idskilltype);
@@ -47,7 +47,7 @@ public class SkillTypeDao {
         }
     }
 
-    public List<SkillType> getRequests() {
+    public List<SkillType> getSkillTypes() {
         try {
             return jdbcTemplate.query("SELECT * from SkillType",
                     new SkillTypeRowMapper());
