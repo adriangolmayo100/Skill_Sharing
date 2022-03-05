@@ -1,6 +1,8 @@
 package es.uji.ei1027.SkillSharing.model;
 
-import java.sql.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalTime;
 
 public class Offer {
 
@@ -8,8 +10,9 @@ public class Offer {
     private int idStudent;
     private int idSkillType;
     private String description;
-    private Date start;
-    private Date finish;
+    private LocalTime start;
+    private LocalTime finish;
+    @DateTimeFormat(pattern = "HH:mm:ss.SSS")
     private int duration;
 
     public int getIdOffer() {
@@ -44,19 +47,19 @@ public class Offer {
         this.description = description;
     }
 
-    public Date getStart() {
+    public LocalTime getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(LocalTime start) {
         this.start = start;
     }
 
-    public Date getFinish() {
+    public LocalTime getFinish() {
         return finish;
     }
 
-    public void setFinish(Date finish) {
+    public void setFinish(LocalTime finish) {
         this.finish = finish;
     }
 
