@@ -22,7 +22,7 @@ public class SkillTypeDao {
 
     public void addSkillType(SkillType skillType){
         jdbcTemplate.update("INSERT INTO SkillType VALUES(?, ?, ?, ?)",
-                skillType.getIdskillType(),skillType.getName(),skillType.getDescription(),skillType.getLevel());
+                skillType.getIdSkillType(),skillType.getName(),skillType.getDescription(),skillType.getLevel());
 
     }
     public void deleteSkillType(int idSkillType) {
@@ -32,12 +32,12 @@ public class SkillTypeDao {
 
     public void deleteSkillType(SkillType skillType) {
         jdbcTemplate.update("DELETE from SkillType where id_request=?",
-                skillType.getIdskillType());
+                skillType.getIdSkillType());
     }
 
     public void updateSkillType(SkillType skillType) {
         jdbcTemplate.update("UPDATE SkillType SET name=?, description=?,level=? where id_skilltype=?",
-                skillType.getName(),skillType.getDescription(),skillType.getLevel(),skillType.getIdskillType());
+                skillType.getName(),skillType.getDescription(),skillType.getLevel(),skillType.getIdSkillType());
     }
 
     public SkillType getSkillType(int idskilltype) {

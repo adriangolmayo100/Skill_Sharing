@@ -29,7 +29,7 @@ public class SkillTypeController {
     }
     @RequestMapping("/list")
     public String listSkillTypes(Model model) {
-        model.addAttribute("requests", skillTypeDao.getSkillTypes());
+        model.addAttribute("skills", skillTypeDao.getSkillTypes());
         return "skilltype/list";
     }
 

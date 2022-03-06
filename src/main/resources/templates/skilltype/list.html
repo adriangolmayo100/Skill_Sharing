@@ -21,12 +21,12 @@
         </thead>
         <tbody>
         <tr th:each="skill: ${skills}">
-            <td th:text="${skill.idskillType}"></td>
+            <td th:text="${skill.idSkillType}"></td>
             <td th:text="${skill.name}"></td>
             <td th:text="${skill.description}"></td>
             <td th:text="${skill.level}"></td>
-            <td><a th:href="@{/skilltype/update/{id_skilltype}(id_skilltype=${skill.idskillType})}" class="btn btn-warning" role="button">Editar</a></td>
-            <td><a th:href="@{/skilltype/delete/{id_skilltype}(id_skilltype=${skill.idskillType})}" class="btn btn-danger" role="button">Borrar</a></td>
+            <td><a th:href="@{/skilltype/update/{idSkilltype}(idSkilltype=${skill.idSkillType})}" class="btn btn-warning" role="button">Editar</a></td>
+            <td><a th:href="@{/skilltype/delete/{idSkilltype}(idSkilltype=${skill.idSkillType})}" class="btn btn-danger" role="button">Borrar</a></td>
         </tr>
         </tbody>
     </table>

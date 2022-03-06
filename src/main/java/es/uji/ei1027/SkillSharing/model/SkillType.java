@@ -4,19 +4,18 @@ package es.uji.ei1027.SkillSharing.model;
 
 
 public class SkillType {
-     private int idskillType;
-     private  String name;
+     private int idSkillType;
+     private String name;
      private String description;
      private int level;
 
-     public SkillType(){}
 
-    public int getIdskillType() {
-        return idskillType;
+    public int getIdSkillType() {
+        return idSkillType;
     }
 
-    public void setIdskillType(int idskillType) {
-        this.idskillType = idskillType;
+    public void setIdSkillType(int idSkillType) {
+        this.idSkillType = idSkillType;
     }
 
     public String getName() {
@@ -46,7 +45,7 @@ public class SkillType {
     @Override
     public String toString() {
         return "SkillType{" +
-                "skillType=" + idskillType +
+                "skillType=" + idSkillType +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", level=" + level +
