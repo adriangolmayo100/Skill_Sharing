@@ -27,12 +27,6 @@ public class SkillTypeController {
         skillTypeDao.deleteSkillType(idSkillType);
         return "redirect:../../list";
     }
-    @RequestMapping(value = "/delete/{id_skilltype}")
-    public String processDeleteRequest(@PathVariable SkillType skillType) {
-        skillTypeDao.deleteSkillType(skillType);
-        return "redirect:../../list";
-    }
-
     @RequestMapping("/list")
     public String listSkillTypes(Model model) {
         model.addAttribute("requests", skillTypeDao.getSkillTypes());
