@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>update nou skiltype</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
+<h2>Nou skilltype</h2>
+<form action="#" th:action="@{/skiltype/update}"
+      th:object="${skiltype}" method="post">
+    <table>
+        <tr>
+            <td><label>ID</label></td>
+            <td><input type="text" th:field="*{id_skilltype}" /></td>
+        </tr>
+        <tr>
+            <td><label>Name</label></td>
+            <td><input type="text" th:field="*{name}" /></td>
+        </tr>
+        <tr>
+            <td><label>Description</label></td>
+            <td><input type="text" th:field="*{description}" /></td>
+        </tr>
+        <tr>
+            <td><label>Level</label></td>
+            <td><input type="number" th:field="*{level}" /></td>
+        </tr>
 
+        <tr>
+            <td colspan="2"><input type="submit" value="edita" /></td>
+        </tr>
+    </table>
+
+</form>
 </body>
 </html>
