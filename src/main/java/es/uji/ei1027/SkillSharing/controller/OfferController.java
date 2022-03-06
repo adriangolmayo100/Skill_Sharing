@@ -30,12 +30,7 @@ public class OfferController {
         offerDao.deleteOffer(idOffer);
         return "redirect:../../list";
     }
-
-    @RequestMapping(value="/delete/{idOffer}")
-    public String processDelete(@PathVariable Integer idOffer){
-        offerDao.deleteOffer(offerDao.getOffer(idOffer));
-        return  "reditect:../list";
-    }
+    
 
     @RequestMapping("/list")
     public String listOffer(Model model){
