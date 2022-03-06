@@ -22,10 +22,10 @@ public class SkillTypeController {
         this.skillTypeDao=skillTypeDao;
     }
 
-    @RequestMapping(value = "/delete/{id_skilltype}")
+    @RequestMapping(value = "/delete/{idSkillType}")
     public String processDeleteSkillType(@PathVariable int idSkillType) {
         skillTypeDao.deleteSkillType(idSkillType);
-        return "redirect:../../list";
+        return "redirect:../list";
     }
     @RequestMapping("/list")
     public String listSkillTypes(Model model) {
@@ -47,14 +47,14 @@ public class SkillTypeController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/update/{id_skilltype}", method = RequestMethod.GET)
-    public String editSkillType(Model model, @PathVariable int idSkillType) {
+    @RequestMapping(value="/update/{idSkillType}", method = RequestMethod.GET)
+    public String editSkillType(Model model, @PathVariable Integer idSkillType) {
         model.addAttribute("skilltype", skillTypeDao.getSkillType(idSkillType));
         return "skilltype/update";
     }
 
 
-    @RequestMapping(value="/update/{id_skilltype}", method = RequestMethod.POST)
+    @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
             @ModelAttribute("skilltype") SkillType skillType,
             BindingResult bindingResult) {

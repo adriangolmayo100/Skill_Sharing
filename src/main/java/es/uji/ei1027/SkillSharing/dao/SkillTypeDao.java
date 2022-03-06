@@ -30,11 +30,6 @@ public class SkillTypeDao {
                 idSkillType );
     }
 
-    public void deleteSkillType(SkillType skillType) {
-        jdbcTemplate.update("DELETE from SkillType where id_request=?",
-                skillType.getIdSkillType());
-    }
-
     public void updateSkillType(SkillType skillType) {
         jdbcTemplate.update("UPDATE SkillType SET name=?, description=?,level=? where id_skilltype=?",
                 skillType.getName(),skillType.getDescription(),skillType.getLevel(),skillType.getIdSkillType());
