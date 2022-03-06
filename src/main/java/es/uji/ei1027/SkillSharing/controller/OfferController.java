@@ -30,7 +30,7 @@ public class OfferController {
         offerDao.deleteOffer(idOffer);
         return "redirect:../../list";
     }
-    
+
 
     @RequestMapping("/list")
     public String listOffer(Model model){
