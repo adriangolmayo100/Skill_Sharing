@@ -3,7 +3,6 @@ package es.uji.ei1027.SkillSharing.model;
 public class User {
     String username;
     String password;
-    int skp;
 
     public String getUsername() {
         return username;
@@ -21,11 +20,4 @@ public class User {
         this.password = password;
     }
 
-    public int getSkp() {
-        return skp;
     }
-
-    public void setSkp(int skp) {
-        this.skp = skp;
-    }
-}

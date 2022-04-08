@@ -1,10 +1,19 @@
 package es.uji.ei1027.SkillSharing.dao;
 
-import es.uji.ei1027.SkillSharing.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
+import javax.sql.DataSource;
 
-public interface UserDao {
-    User loadUserByUsername(String username, String password);
-    Collection<User> listAllUsers();
+@Repository
+public class UserDao {
+    JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+
+
 }
