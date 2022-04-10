@@ -22,11 +22,11 @@ public class LoginController {
 
     @RequestMapping("/login")
     public String login(Model model){
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new User(""));
         return "login";
     }
 
-    @RequestMapping(value="/login", method=RequestMethod.POST)
+    @RequestMapping(value="/login", method=RequestMethod.POST)          //Comprobación de login
     public String checkLogin(@ModelAttribute("user") User user,
                              BindingResult bindingResult, HttpSession session) {
         UserValidator userValidator = new UserValidator();
@@ -38,7 +38,7 @@ public class LoginController {
         // intentant carregar les dades de l'usuari
         user = userDao.loadUserByUsername(user.getUsername(), user.getPassword());
         if (user == null) {
-            bindingResult.rejectValue("password", "badpw", "Contrasenya incorrecta");
+            bindingResult.rejectValue("password", "badpw", "Contrasenya o usuari incorrecte");
             return "login";
         }
         session.setAttribute("user", user);
@@ -59,7 +59,7 @@ public class LoginController {
     }
 }
 
-class UserValidator implements Validator {
+class UserValidator implements Validator {      //Clase para comprobar que no se pasan espacios en blanco. En verdad es una chorrada ya que esto lo hace el HTML
     @Override
     public boolean supports(Class<?> cls) {
         return User.class.isAssignableFrom(cls);

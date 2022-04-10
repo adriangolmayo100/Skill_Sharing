@@ -1,6 +1,9 @@
 package es.uji.ei1027.SkillSharing.dao;
 
 import es.uji.ei1027.SkillSharing.model.User;
+import es.uji.ei1027.SkillSharing.dao.UserPasswd;
+
+import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +23,15 @@ public class UserDao {
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
+
+    public User cargaUsuario(String username, String password) throws FileNotFoundException {   //Busca el usuario, y si existe lo devuelve como objeto User. NULL si no existe
+        UserPasswd userPasswd = new UserPasswd();
+        if(userPasswd.encontrarUser(username) && userPasswd.comprobarPasswd(password)){
+            return new User(username);
+        }return null;
+    }
+
+    public void registrar(){}
 
     public User loadUserByUsername(String username, String password) {
         User user = knownUsers.get(username.trim());

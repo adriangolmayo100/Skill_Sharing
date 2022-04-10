@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
 <head>
     <link rel="stylesheet" type="text/css"
           href="/css/estilo.css"
@@ -10,6 +12,7 @@
 
 </head>
 <body>
+<div layout:fragment="content">
 <h2>Accés</h2>
 <form action="#" th:action="@{/login}"
       th:object="${user}" method="post">
@@ -24,7 +27,9 @@
     <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
     </p>
     <input type="submit" value="Accedir" />
-</form>
+    <a href="../register" class="btn" role="button">Registrarse</a>
 
+</form>
+</div>
 </body>
 </html>

@@ -10,7 +10,7 @@ public class UserPasswd {
         this.fich = new File("fichero.txt");
     }
 
-    private boolean encontrarUser(String user) throws FileNotFoundException {
+    public boolean encontrarUser(String user) throws FileNotFoundException {
         Scanner lector = new Scanner(fich);
         while (lector.hasNextLine()) {
             String linea = lector.nextLine();
@@ -21,7 +21,7 @@ public class UserPasswd {
         return false;
     }
 
-    private boolean comprobarPasswd(String password) throws FileNotFoundException {
+    public boolean comprobarPasswd(String password) throws FileNotFoundException {
         Scanner lector = new Scanner(fich);
         while (lector.hasNextLine()) {
             String linea = lector.nextLine();
@@ -32,7 +32,7 @@ public class UserPasswd {
         return false;
     }
 
-    private void nuevoUser(String user, String password) throws IOException {
+    public void nuevoUser(String user, String password) throws IOException {
         try{
             FileWriter escritor = new FileWriter(fich);
             String linea = user + " " + password + "\n";
