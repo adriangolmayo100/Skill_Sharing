@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>es.uji.ei1027</groupId>
-	<artifactId>clubesportiu</artifactId>
+	<artifactId>SkillSharing</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>clubesportiu</name>
+	<name>SkillSharing</name>
 	<description>Exemple laboratori EI1027</description>
 	<properties>
 		<java.version>11</java.version>
