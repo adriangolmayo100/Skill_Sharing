@@ -7,12 +7,7 @@ public class UserPasswd {
     private File fich;
 
     public UserPasswd() {
-        try {
-            this.fich = new File("fichero.txt");
-            fich.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.fich = new File("fichero.txt");
     }
 
     private boolean encontrarUser(String user) throws FileNotFoundException {

@@ -2,6 +2,7 @@ package es.uji.ei1027.SkillSharing.controller;
 
 import javax.servlet.http.HttpSession;
 
+import es.uji.ei1027.SkillSharing.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +14,10 @@ import es.uji.ei1027.SkillSharing.model.User;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    private UserInt userInt;
+    private UserDao userDao;
 
     @Autowired
-    public void setUserDao(UserInt userInt){ this.userInt = userInt; }
+    public void setDao(UserDao userDao){ this.userDao = userDao; }
 
     @RequestMapping("/list")
     public String pagUser(HttpSession session, Model model){
@@ -28,6 +29,7 @@ public class UserController {
             String nomUser = usuario.getUsername();
             String password = usuario.getPassword();
         }
-        return "vacio";
+        model.addAttribute("users", userDao.listAllUsers());
+        return session.getAttribute("nextUrl").toString();
     }
 }

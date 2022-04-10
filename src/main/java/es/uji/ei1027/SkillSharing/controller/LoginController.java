@@ -2,6 +2,7 @@ package es.uji.ei1027.SkillSharing.controller;
 
 import javax.servlet.http.HttpSession;
 
+import es.uji.ei1027.SkillSharing.dao.UserDao;
 import es.uji.ei1027.SkillSharing.dao.UserInt;
 import es.uji.ei1027.SkillSharing.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import org.springframework.validation.Validator;
 @Controller
 public class LoginController {
     @Autowired
-    private UserInt userInt;
+    private UserDao userDao;
 
     @RequestMapping("/login")
     public String login(Model model){
@@ -35,7 +36,7 @@ public class LoginController {
         }
         // Comprova que el login siga correcte
         // intentant carregar les dades de l'usuari
-        user = userInt.loadUserByUsername(user.getUsername(), user.getPassword());
+        user = userDao.loadUserByUsername(user.getUsername(), user.getPassword());
         if (user == null) {
             bindingResult.rejectValue("password", "badpw", "Contrasenya incorrecta");
             return "login";
