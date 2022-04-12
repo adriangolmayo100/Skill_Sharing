@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css"
           href="/css/estilo.css"
           th:href="@{/css/estilo.css}"/>
-    <title>Register</title>
+    <title>Registrar</title>
     <meta charset="UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
 
@@ -15,10 +15,10 @@
 <div layout:fragment="content">
     <h2>Registrarse</h2>
     <form action="#" th:action="@{/register}"
-          th:object="${user}" method="post">
+          th:object="${student}" method="post">
         <table>
             <tr>
-                <td><label>Nombre</label></td>
+                <td><label>usuario</label></td>
                 <td><input type="text" th:field="*{username}" placeholder="Nombre usuario"></td>
             </tr>
             <tr>
@@ -29,7 +29,7 @@
     </form>
 </div>
 <div>
-    <a href="/register" class="btn" role="button">Registrarse</a>
+    <a href="/register/datos" class="btn" role="button">Continuar</a>
 </div>
 </body>
 </html>
