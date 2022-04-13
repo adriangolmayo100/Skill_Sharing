@@ -14,22 +14,22 @@
 <body>
 <div layout:fragment="content">
     <h2>Registrarse</h2>
-    <form action="#" th:action="@{/register}"
-          th:object="${student}" method="post">
+    <form action="#" th:action="@{/register/user}"
+          th:object="${user}" method="post"> <!-- Cuidado con el th:object, los parámetros que aparecen abajo como *{...] tienen que ser parámetros de ese objeto, sino dará error de template-->
         <table>
             <tr>
-                <td><label>usuario</label></td>
+                <td><label>Usuario</label></td>
                 <td><input type="text" th:field="*{username}" placeholder="Nombre usuario"></td>
             </tr>
             <tr>
                 <td><label>Contraseña</label></td>
                 <td><input type="text" th:field="*{password}" placeholder="Contraseña"></td>
             </tr>
+            <tr>
+                <td><a th:href="@{/register/datos}" class="btn btn-warning" role="button">Continuar</a></td>
+            </tr>
         </table>
     </form>
-</div>
-<div>
-    <a href="/register/datos" class="btn" role="button">Continuar</a>
 </div>
 </body>
 </html>

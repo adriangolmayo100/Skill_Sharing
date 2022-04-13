@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import es.uji.ei1027.SkillSharing.dao.UserDao;
 import es.uji.ei1027.SkillSharing.dao.UserInt;
+import es.uji.ei1027.SkillSharing.model.Student;
 import es.uji.ei1027.SkillSharing.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,15 +20,19 @@ import org.springframework.validation.Validator;
 @RequestMapping("/register")
 public class RegisterController {
 
+
+
     @RequestMapping("/datos")
-    public String registerUser(Model model){
-    /*    model.addAttribute("user", new User());
-        return "register";
-    }*/return "register/datos";
+    public String registerDatos(Model model){
+        model.addAttribute("student", new Student());
+        //return "register";
+    return "register/datos";
     }
 
     @RequestMapping("/user")
-    public String registerDatos(Model model){
+    public String registerUser(Model model){
+        model.addAttribute("user", new User());
+
     /*    model.addAttribute("user", new User());
         return "register";
     }*/return "register/user";
