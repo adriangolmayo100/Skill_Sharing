@@ -22,7 +22,7 @@ public class UserController {
     @RequestMapping("/list")
     public String pagUser(HttpSession session, Model model){
         if (session.getAttribute("user") == null){
-            model.addAttribute("user", new User(""));
+            model.addAttribute("user", new User("", ""));
             return "login";
         }else{
             User usuario = (User) session.getAttribute("user");

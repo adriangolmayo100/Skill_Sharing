@@ -19,14 +19,14 @@
         <table>
             <tr>
                 <td><label>Usuario</label></td>
-                <td><input type="text" th:field="*{username}" placeholder="Nombre usuario"></td>
+                <td><input type="text" th:field="*{username}" placeholder="Nombre usuario" required></td>
             </tr>
             <tr>
                 <td><label>Contraseña</label></td>
-                <td><input type="text" th:field="*{password}" placeholder="Contraseña"></td>
+                <td><input type="text" th:field="*{password}" placeholder="Contraseña" required></td>
             </tr>
             <tr>
-                <td><a th:href="@{/register/datos}" class="btn btn-warning" role="button">Continuar</a></td>
+                <td colspan="2"><input type="submit" value="Continuar" /></td>
             </tr>
         </table>
     </form>

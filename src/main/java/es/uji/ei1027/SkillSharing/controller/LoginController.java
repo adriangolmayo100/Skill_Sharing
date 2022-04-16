@@ -22,7 +22,7 @@ public class LoginController {
 
     @RequestMapping("/login")
     public String login(Model model){
-        model.addAttribute("user", new User(""));
+        model.addAttribute("user", new User("", ""));
         return "login";
     }
 

@@ -5,11 +5,10 @@ public class User {
     String password;
     String id_user; //el id del usuario, para identificar a quien le corresponde el correo
 
-    public User(String username){
+    public User(String username, String password) {
         this.username = username;
+        this.password = password;
     }
-
-    public User() { this.username = ""; }
 
     public String getUsername() {
         return username;
