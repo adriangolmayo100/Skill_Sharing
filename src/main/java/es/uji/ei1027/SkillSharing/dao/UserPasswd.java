@@ -34,8 +34,8 @@ public class UserPasswd { //Clase para acceder al fichero de usuarios
 
     public void nuevoUser(String user, String password) throws IOException {
         try{
-            FileWriter escritor = new FileWriter(fich);
-            String id = contarUsuarios();
+            FileWriter escritor = new FileWriter(fich, true); //Añado true para que me rellene al final. SIn esto sobreescribe al principio del fichero
+            int id = contarUsuarios() + 1;
             String linea = user + " " + password + " " + id + "\n";
             escritor.write(linea);
             escritor.close();
@@ -44,21 +44,22 @@ public class UserPasswd { //Clase para acceder al fichero de usuarios
         }
     }
 
-    public String contarUsuarios() throws IOException {
+    public int contarUsuarios() throws IOException {
         int lineas = 0;
-        String id = "";
         try(BufferedReader reader = new BufferedReader(new FileReader(fich))){
             while(reader.readLine()!= null)
                 lineas ++;
-            if(lineas < 9)
+            /*if(lineas < 9)
                 id = "00" + lineas+1;
-            else
-            if(lineas > 9 && lineas < 99)
-                id = "0" + lineas + 1;
-            else
-                id = Integer.toString(lineas);
+            else {
+                if (lineas > 9 && lineas < 99)
+                    id = "0" + lineas + 1;
+                else
+                    id = Integer.toString(lineas);
+            }*/ // Para hacerlo como String y no como Int
         }catch (IOException e){
             e.printStackTrace();
-        }return id;
+        }
+        return lineas;
     }
 }

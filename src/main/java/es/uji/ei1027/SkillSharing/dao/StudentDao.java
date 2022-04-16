@@ -17,6 +17,10 @@ public class StudentDao{
     }
 
     public void nuevoStudent(Student student){
-        jdbcTemplate.update("INSERT INTO Student VALUES()");
+
+        jdbcTemplate.update("INSERT INTO Student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                student.getIdStudent(), student.getName(), student.getEmail(), student.getPostalCode(),
+                student.getBalance(), student.getDegree(), student.getCourse(), student.getSkp(),
+                student.getPhoneNumber(), student.getGender());
     }
 }

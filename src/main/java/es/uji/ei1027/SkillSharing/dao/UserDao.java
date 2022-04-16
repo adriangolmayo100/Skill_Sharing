@@ -28,25 +28,24 @@ public class UserDao {
 
     public User cargaUsuario(String username, String password) throws FileNotFoundException {   //Busca el usuario, y si existe lo devuelve como objeto User. NULL si no existe
         UserPasswd userPasswd = new UserPasswd();
-        if(userPasswd.encontrarUser(username) && userPasswd.comprobarPasswd(password)){
+        if(userPasswd.encontrarUser(username)){
             return new User(username, password);
         }return null;
     }
 
-    public void nuevoUsuario(String username, String password) throws IOException {
+    public boolean nuevoUsuario(String username, String password) throws IOException {
         User usuario = cargaUsuario(username, password);
         if (usuario == null && username.length() > 0 && password.length() > 0){
             userPasswd.nuevoUser(username, password);
-        }
+            return true;
+        }return false;
     }
 
-    public String obtenerId() throws IOException { //Sirve para obtener ID, no llamo a la clase UserPasswd desde el controller para respetar la jerarquía
+    public int obtenerId() throws IOException { //Sirve para obtener ID, no llamo a la clase UserPasswd desde el controller para respetar la jerarquía
         return userPasswd.contarUsuarios();
     }
 
-    public void registrar(){}
-
-    public User loadUserByUsername(String username, String password) {
+    public User loadUserByUsername(String username, String password) { //inutil
         User user = knownUsers.get(username.trim());
         if (user == null)
             return null; // Usuari no trobat
@@ -63,7 +62,7 @@ public class UserDao {
 
     public Collection<User> listAllUsers() {
         return knownUsers.values();
-    }
+    } //inutil
 
 }
 

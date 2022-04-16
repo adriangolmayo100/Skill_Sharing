@@ -2,6 +2,7 @@ package es.uji.ei1027.SkillSharing.controller;
 
 import javax.servlet.http.HttpSession;
 
+import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import es.uji.ei1027.SkillSharing.dao.StudentDao;
 import es.uji.ei1027.SkillSharing.dao.UserDao;
 import es.uji.ei1027.SkillSharing.dao.UserInt;
@@ -26,6 +27,11 @@ public class RegisterController {
     UserDao userDao = new UserDao();
     StudentDao studentDao = new StudentDao();
 
+    @Autowired
+    public void setRequestDao(StudentDao studentDao, UserDao userDao) {
+        this.userDao = userDao;
+        this.studentDao=studentDao;
+    }
 
     @RequestMapping("/datos")
     public String registerDatos(Model model){
@@ -38,11 +44,10 @@ public class RegisterController {
                                    BindingResult bindingResult) throws IOException {
         if (bindingResult.hasErrors())
             return "register/datos";
-        student.setIdStudent(Integer.parseInt(userDao.obtenerId()));
+        student.setIdStudent(userDao.obtenerId());
         student.setBalance(0);
-        student.setSkp(false);
         studentDao.nuevoStudent(student);
-        return "redirect:datos";
+        return "redirect:../";
     }
 
     @RequestMapping("/user")
@@ -55,7 +60,9 @@ public class RegisterController {
                                    BindingResult bindingResult) throws IOException {
         if (bindingResult.hasErrors())
             return "register/user";
-        userDao.nuevoUsuario(user.getUsername(), user.getPassword());
+        if(! userDao.nuevoUsuario(user.getUsername(), user.getPassword())){
+            return "register/usuarioExistente"; //Si ya existe usuario con esta cuenta, no vamos a registrarlo
+        }
         return "redirect:datos";
     }
 
