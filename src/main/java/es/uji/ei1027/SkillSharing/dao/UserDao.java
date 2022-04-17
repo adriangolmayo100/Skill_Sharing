@@ -28,7 +28,7 @@ public class UserDao {
 
     public User cargaUsuario(String username, String password) throws FileNotFoundException {   //Busca el usuario, y si existe lo devuelve como objeto User. NULL si no existe
         UserPasswd userPasswd = new UserPasswd();
-        if(userPasswd.encontrarUser(username)){
+        if(userPasswd.encontrarUser(username) && userPasswd.comprobarPasswd(password)){
             return new User(username, password);
         }return null;
     }

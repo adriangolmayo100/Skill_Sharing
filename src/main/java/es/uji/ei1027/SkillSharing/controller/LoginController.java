@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.io.FileNotFoundException;
+
 @Controller
 public class LoginController {
     @Autowired
@@ -28,7 +30,7 @@ public class LoginController {
 
     @RequestMapping(value="/login", method=RequestMethod.POST)          //Comprobación de login
     public String checkLogin(@ModelAttribute("user") User user,
-                             BindingResult bindingResult, HttpSession session) {
+                             BindingResult bindingResult, HttpSession session) throws FileNotFoundException {
         UserValidator userValidator = new UserValidator();
         userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
@@ -36,7 +38,9 @@ public class LoginController {
         }
         // Comprova que el login siga correcte
         // intentant carregar les dades de l'usuari
-        user = userDao.loadUserByUsername(user.getUsername(), user.getPassword());
+        String nomUser = user.getUsername();
+        String password = user.getPassword();
+        user = userDao.cargaUsuario(nomUser, password);
         if (user == null) {
             bindingResult.rejectValue("password", "badpw", "Contrasenya o usuari incorrecte");
             return "login";
