@@ -21,8 +21,10 @@ public class RequestDao {
     }
 
     public void addRequest(Request request) {
+        List<Request>l=getRequests();
+        int id = l.size()+1;
         jdbcTemplate.update("INSERT INTO Request VALUES(?, ?, ?, ?,?,?,?)",
-                request.getIdRequest(), request.getDescription(), request.getStart(), request.getFinish(),request.getDuration(),request.getIdStudent(),request.getIdSkillType());
+                id, request.getDescription(), request.getStart(), request.getFinish(),request.getDuration(),request.getIdStudent(),request.getIdSkillType());
     }
 
     public void deleteRequest(int idrequest) {
