@@ -52,8 +52,8 @@ public class LoginController {
         if (session.getAttribute("nextUrl") != null)
             return "redirect:" + session.getAttribute("nextUrl").toString();
 
-        // Torna a la pàgina principal
-        return "redirect:/";
+        // Lleva a la página de usuario
+        return "usuario";
     }
 
     @RequestMapping("/logout")
