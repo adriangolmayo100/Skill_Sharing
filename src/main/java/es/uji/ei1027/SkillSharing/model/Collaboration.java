@@ -1,12 +1,17 @@
 package es.uji.ei1027.SkillSharing.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.xml.crypto.Data;
+import java.time.LocalDate;
 
 public class Collaboration{
     private int idRequest;
     private int id_offer;
-    private Data start;
-    private Data finish;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate start;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate finish;
     private int rating;
     private String comments;
 
@@ -27,19 +32,19 @@ public class Collaboration{
         this.id_offer = id_offer;
     }
 
-    public Data getStart() {
+    public LocalDate getStart() {
         return start;
     }
 
-    public void setStart(Data start) {
+    public void setStart(LocalDate start) {
         this.start = start;
     }
 
-    public Data getFinish() {
+    public LocalDate getFinish() {
         return finish;
     }
 
-    public void setFinish(Data finish) {
+    public void setFinish(LocalDate finish) {
         this.finish = finish;
     }
 

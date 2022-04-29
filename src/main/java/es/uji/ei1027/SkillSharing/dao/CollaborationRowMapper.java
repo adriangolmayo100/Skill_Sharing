@@ -7,6 +7,7 @@ import javax.xml.crypto.Data;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public final class CollaborationRowMapper implements RowMapper<Collaboration> {
 
@@ -14,10 +15,10 @@ public final class CollaborationRowMapper implements RowMapper<Collaboration> {
         Collaboration collaboration = new Collaboration();
         collaboration.setIdRequest(rs.getInt("idrequest"));
         collaboration.setId_offer(rs.getInt("IdOffer"));
-        Date d = rs.getDate("start");
-        collaboration.setStart((Data) d);
-        Date d1 = rs.getDate("finish");
-        collaboration.setFinish((Data) d1);
+        LocalDate d = rs.getObject("start", LocalDate.class);
+        collaboration.setStart((LocalDate) d);
+        LocalDate d1 =rs.getObject("finish", LocalDate.class);
+        collaboration.setFinish((LocalDate) d1);
         collaboration.setRating(rs.getInt("rating"));
         collaboration.setComments(rs.getString("comments"));
         return collaboration;
