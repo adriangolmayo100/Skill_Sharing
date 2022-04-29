@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado skill type</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <h1>Lista de skill type</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>idRequest</th>
+            <th>description</th>
+            <th>start</th>
+            <th>finish</th>
+            <th>duration</th>
+            <th>idStudent</th>
+            <th>idSkillType</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="request: ${request}">
+            <td th:text="${request.idRequest}"></td>
+            <td th:text="${request.description}"></td>
+            <td th:text="${request.start}"></td>
+            <td th:text="${colaboration.finish}"></td>
+            <td th:text="${request.idStudent}"></td>
+            <td th:text="${request.idSkillType}"></td>
+            <td><a th:href="@{/request/update/{idRequest}/{id_offer}(id_offer=${colaboration.id_offer},idRequest=${colaboration.idRequest})}" class="btn btn-warning" role="button">Editar</a></td>
+            <td><a th:href="@{/colaboration/delete/{idRequest}/{id_offer}(id_offer=${colaboration.id_offer},idRequest=${colaboration.idRequest})}" class="btn btn-danger" role="button">Borrar</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="add" class="btn btn-succes" role="button">Añadir collaboration</a>
+</div>
+</body>
+</html>
