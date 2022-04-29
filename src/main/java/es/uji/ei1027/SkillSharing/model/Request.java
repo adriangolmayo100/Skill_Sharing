@@ -1,6 +1,7 @@
 package es.uji.ei1027.SkillSharing.model;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Request {
 
@@ -68,6 +69,14 @@ public class Request {
 
     public void setIdSkillType(int idSkillType) {
         this.idSkillType = idSkillType;
+    }
+
+    public String getNameSkillType(List<SkillType> skillTypeList){
+        for(SkillType skillType: skillTypeList){
+            if(idSkillType==skillType.getIdSkillType())
+                return skillType.getName();
+        }
+        return "";
     }
 
     @Override

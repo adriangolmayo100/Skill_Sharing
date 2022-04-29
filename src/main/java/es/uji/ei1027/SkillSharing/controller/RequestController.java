@@ -1,6 +1,7 @@
 package es.uji.ei1027.SkillSharing.controller;
 
 import es.uji.ei1027.SkillSharing.dao.RequestDao;
+import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import es.uji.ei1027.SkillSharing.model.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,11 +19,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class RequestController {
 
     private RequestDao requestDao;
+    private SkillTypeDao skillTypeDao;
 
 
     @Autowired
     public void setRequestDao(RequestDao requestDao){
         this.requestDao = requestDao;
+    }
+    @Autowired
+    public void setSkillTypeDao(SkillTypeDao skillType){
+        this.skillTypeDao = skillType;
     }
 
     @RequestMapping(value = "/delete/{idRequest}")
@@ -35,6 +41,7 @@ public class RequestController {
     @RequestMapping("/list")
     public String listRequest(Model model){
         model.addAttribute("requests", requestDao.getRequests());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "request/list";
     }
 

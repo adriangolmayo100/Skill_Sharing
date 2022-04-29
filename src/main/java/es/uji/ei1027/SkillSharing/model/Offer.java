@@ -3,6 +3,7 @@ package es.uji.ei1027.SkillSharing.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalTime;
+import java.util.List;
 
 public class Offer {
 
@@ -12,7 +13,6 @@ public class Offer {
     private String description;
     private LocalTime start;
     private LocalTime finish;
-    @DateTimeFormat(pattern = "HH:mm:ss.SSS")
     private int duration;
 
     public int getIdOffer() {
@@ -69,6 +69,14 @@ public class Offer {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public String getNameSkillType(List<SkillType> skillTypeList){
+        for(SkillType skillType: skillTypeList){
+            if(idSkillType==skillType.getIdSkillType())
+                return skillType.getName();
+        }
+        return "";
     }
 
     @Override

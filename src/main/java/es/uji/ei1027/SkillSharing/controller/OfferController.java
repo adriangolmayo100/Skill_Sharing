@@ -1,6 +1,7 @@
 package es.uji.ei1027.SkillSharing.controller;
 
 import es.uji.ei1027.SkillSharing.dao.OfferDao;
+import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import es.uji.ei1027.SkillSharing.model.Offer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,11 +19,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class OfferController {
 
     private OfferDao offerDao;
+    private SkillTypeDao skillTypeDao;
 
 
     @Autowired
     public void setOfferDao(OfferDao offerDao){
         this.offerDao = offerDao;
+    }
+    @Autowired
+    public void setSkillTypeDao(SkillTypeDao skillType){
+        this.skillTypeDao = skillType;
     }
 
     @RequestMapping(value = "/delete/{idOffer}")
@@ -35,8 +41,10 @@ public class OfferController {
     @RequestMapping("/list")
     public String listOffer(Model model){
         model.addAttribute("offers", offerDao.getOffers());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "offer/list";
     }
+
 
     @RequestMapping(value="/add")
     public String addOffer(Model model){

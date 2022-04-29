@@ -1,7 +1,6 @@
 package es.uji.ei1027.SkillSharing.dao;
 
 import es.uji.ei1027.SkillSharing.model.User;
-import es.uji.ei1027.SkillSharing.dao.UserPasswd;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
