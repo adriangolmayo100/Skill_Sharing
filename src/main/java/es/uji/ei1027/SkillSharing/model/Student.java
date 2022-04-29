@@ -1,23 +1,23 @@
 package es.uji.ei1027.SkillSharing.model;
 
 public class Student {
-    private int id_student;
+    private int idStudent;
     private String name;
     private String email;
     private int postalCode;
     private int balance;
     private String degree;
     private int course;
-    private int phoneNumber;
     private boolean skp;
+    private int phoneNumber;
     private String gender;
 
     public int getIdStudent() {
-        return id_student;
+        return idStudent;
     }
 
-    public void setIdStudent(int di_student) {
-        this.id_student = di_student;
+    public void setIdStudent(int idStudent) {
+        this.idStudent = idStudent;
     }
 
     public String getName() {
@@ -72,16 +72,16 @@ public class Student {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public boolean isSkp() {
+    public boolean getSkp() {
         return skp;
     }
 
     public void setSkp(boolean skp) {
         this.skp = skp;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getGender() {
@@ -90,5 +90,21 @@ public class Student {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "idStudent=" + idStudent +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", postalCode=" + postalCode +
+                ", balance=" + balance +
+                ", degree='" + degree + '\'' +
+                ", course=" + course +
+                ", skp=" + skp +
+                ", phoneNumber=" + phoneNumber +
+                ", gender='" + gender + '\'' +
+                '}';
     }
 }

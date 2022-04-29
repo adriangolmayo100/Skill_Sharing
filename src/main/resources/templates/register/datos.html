@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
+    <title>Registrar</title>
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+</head>
+<body>
+<div layout:fragment="content">
+    <h2>Registrarse</h2>
+    <form action="#" th:action="@{/register/datos}"
+          th:object="${student}" method="post">
+        <table>
+            <tr>
+                <td><label>Nombre</label></td>
+                <td><input type="text" th:field="*{name}"></td>
+            </tr>
+            <tr>
+                <td><label>Email</label></td>
+                <td><input type="text" th:field="*{email}"></td>
+            </tr>
+            <tr>
+                <td><label>Código Postal</label></td>
+                <td><input type="number" th:field="*{postalCode}"></td>
+            </tr>
+            <tr>
+                <td><label>Grado</label></td>
+                <td><input type="text" th:field="*{degree}"></td>
+            </tr>
+            <tr>
+                <td><label>Curso</label></td>
+                <td><input type="number" th:field="*{course}"></td>
+            </tr>
+            <tr>
+                <td><label>teléfono</label></td>
+                <td><input type="number" th:field="*{phoneNumber}" maxlength="9"></td>
+            </tr>
+            <tr>
+                <td><label>Género</label></td>
+                <td><select class="form_control" type="text" th:field="*{gender}">
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otros">Otros</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Continuar" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
