@@ -12,14 +12,13 @@ public final class RequestRowMapper implements RowMapper<Request> {
     public Request mapRow(ResultSet rs, int rowNum) throws SQLException
     {
         Request request = new Request();
-        request.setIdRequest(rs.getInt("id_request"));
         request.setDescription(rs.getString("description"));
         request.setDuration(rs.getInt("duration"));
         Date d = rs.getDate("start");
         request.setStart(d);
         Date d1 = rs.getDate("finish");
         request.setFinish(d1);
-        request.setIdSkillType(rs.getInt("id_skilltype"));
+        request.setIdSkillType(rs.getString("id_skilltype"));
         request.setIdStudent(rs.getInt("id_student"));
 
         return request;

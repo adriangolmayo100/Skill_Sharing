@@ -78,13 +78,6 @@ public class Request {
         }
         return "";
     }
-    public void createRequestForOffer(Offer offer){
-        this.description=offer.getDescription();
-        this.duration=offer.getDuration();
-        this.start=offer.getStart();
-        this.finish=offer.getFinish();
-        this.idSkillType=offer.getIdSkillType();
-    }
 
     @Override
     public String toString() {
