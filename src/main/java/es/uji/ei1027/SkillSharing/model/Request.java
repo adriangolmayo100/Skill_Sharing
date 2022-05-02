@@ -1,6 +1,9 @@
 package es.uji.ei1027.SkillSharing.model;
 
+import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
+
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Request {
@@ -67,8 +70,18 @@ public class Request {
         return idSkillType;
     }
 
-    public void setIdSkillType(int idSkillType) {
-        this.idSkillType = idSkillType;
+    public void setIdSkillType(String idSkillType) {
+        this.idSkillType = getIdSkT(idSkillType);
+    }
+    public int getIdSkT(String SkillType){
+        SkillTypeDao s = new SkillTypeDao();
+        List<SkillType> skillTypeList= s.getSkillTypes();
+        for(SkillType skillType: skillTypeList){
+            if (skillType.getName().equals(SkillType)){
+                return skillType.getIdSkillType();
+            }
+        }
+        return -1;
     }
 
     public String getNameSkillType(List<SkillType> skillTypeList){
@@ -77,6 +90,15 @@ public class Request {
                 return skillType.getName();
         }
         return "";
+    }
+    public List<String> getNameSkillTypes() {
+        SkillTypeDao s = new SkillTypeDao();
+        List<String> n = new ArrayList<>();
+        List<SkillType> skillTypeList = s.getSkillTypes();
+        for (SkillType skillType : skillTypeList) {
+            n.add(skillType.getName());
+        }
+        return n;
     }
 
     @Override
