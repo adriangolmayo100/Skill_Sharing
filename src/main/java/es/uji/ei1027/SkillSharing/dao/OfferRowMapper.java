@@ -19,7 +19,7 @@ public final class OfferRowMapper implements RowMapper<Offer> {
         Time start = rs.getTime("start");
         offer.setStart(start != null ? rs.getObject("start", Date.class) : null);
         Time finish = rs.getTime("finish");
-        offer.setStart(finish != null ? rs.getObject("finish", Date.class) : null);
+        offer.setFinish(finish != null ? rs.getObject("finish", Date.class) : null);
         offer.setDuration(rs.getInt("duration"));
         return offer;
     }

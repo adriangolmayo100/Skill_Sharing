@@ -44,7 +44,7 @@ public class RequestController {
     public void setSkillTypeDao(SkillTypeDao skillType){
         this.skillTypeDao = skillType;
     }
-    @RequestMapping(value="/accept{idRequest}", method=RequestMethod.GET)
+    @RequestMapping(value="/accept/{idRequest}", method=RequestMethod.GET)
     public String accept(Model model, @PathVariable Integer idRequest) {
         Request request = requestDao.getRequest(idRequest);
         Offer offer = new Offer();
@@ -53,7 +53,7 @@ public class RequestController {
         Collaboration collaboration = new Collaboration();
         collaboration.createCollaboration(offer,request);
         collaborationDao.addCollaboration(collaboration);
-        return "redirect:list";
+        return "redirect:../list";
     }
     @RequestMapping(value = "/delete/{idRequest}")
     public String processDeleteRequest(@PathVariable Integer idRequest){

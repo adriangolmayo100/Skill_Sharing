@@ -21,7 +21,6 @@
             <th>Fin</th>
             <th>Duración</th>
             <th></th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -31,10 +30,7 @@
             <td th:text="${request.start}"></td>
             <td th:text="${request.finish}"></td>
             <td th:text="${request.duration}"></td>
-            <td><a th:href="@{/request/update/{id}(id=${request.idRequest})}" class="btn btn-warning">Editar</a>
-            </td>
-            <td><a th:href="@{/request/delete/{id}(id=${request.idRequest})}" class="btn btn-danger">Borrar</a>
-            </td>
+            <td><a th:href="@{/request/accept/{id}(id=${request.idRequest})}" class="btn btn-success">Aceptar</a>
         </tr>
         </tbody>
     </table>

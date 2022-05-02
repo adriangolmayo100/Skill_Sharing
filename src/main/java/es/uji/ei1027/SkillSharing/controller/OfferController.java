@@ -74,16 +74,16 @@ public class OfferController {
         offerDao.addOffer(offer);
         return "redirect:list";
     }
-    @RequestMapping(value="/accept{id}", method=RequestMethod.GET)
-    public String accept(Model model, @PathVariable Integer idOffer) {
-        Offer offer = offerDao.getOffer(idOffer);
+    @RequestMapping(value="/accept/{id}", method=RequestMethod.GET)
+    public String accept(Model model, @PathVariable Integer id) {
+        Offer offer = offerDao.getOffer(id);
         Request request = new Request();
         request.createRequestForOffer(offer);
         requestDao.addRequest(request);
         Collaboration collaboration = new Collaboration();
         collaboration.createCollaboration(offer,request);
         collaborationDao.addCollaboration(collaboration);
-        return "redirect:list";
+        return "redirect:../list";
     }
 
     @RequestMapping(value="/update/{idOffer}", method=RequestMethod.GET)

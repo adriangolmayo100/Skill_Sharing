@@ -20,9 +20,9 @@ public class OfferDao {
 
     public void addOffer(Offer offer){
         List<Offer>l=getOffers();
-        int id = l.size()+1;
+        offer.setIdOffer(l.size()+1);
         jdbcTemplate.update("INSERT INTO Offer Values(?, ?, ?, ?, ?, ?, ?)",
-                id, offer.getIdStudent(), offer.getIdSkillType(), offer.getDescription(),
+                offer.getIdOffer(), offer.getIdStudent(), offer.getIdSkillType(), offer.getDescription(),
                 offer.getStart(), offer.getFinish(), offer.getDuration());
     }
 
