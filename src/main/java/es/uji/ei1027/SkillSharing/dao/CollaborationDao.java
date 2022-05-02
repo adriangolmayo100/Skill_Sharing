@@ -20,7 +20,7 @@ public class CollaborationDao {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public void addCollaboartion(Collaboration collaboration) {
+    public void addCollaboration(Collaboration collaboration) {
         jdbcTemplate.update("INSERT INTO Collaboration VALUES(?, ?, ?, ?, ?, ?)",
                 collaboration.getIdRequest(), collaboration.getId_offer(), collaboration.getStart(), collaboration.getFinish(),collaboration.getRating(),collaboration.getComments());
     }

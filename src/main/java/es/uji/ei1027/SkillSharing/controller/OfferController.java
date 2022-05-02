@@ -1,8 +1,12 @@
 package es.uji.ei1027.SkillSharing.controller;
 
+import es.uji.ei1027.SkillSharing.dao.CollaborationDao;
 import es.uji.ei1027.SkillSharing.dao.OfferDao;
+import es.uji.ei1027.SkillSharing.dao.RequestDao;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
+import es.uji.ei1027.SkillSharing.model.Collaboration;
 import es.uji.ei1027.SkillSharing.model.Offer;
+import es.uji.ei1027.SkillSharing.model.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +24,18 @@ public class OfferController {
 
     private OfferDao offerDao;
     private SkillTypeDao skillTypeDao;
+    private RequestDao requestDao;
+    private CollaborationDao collaborationDao;
 
 
+    @Autowired
+    public void setCollaborationDao(CollaborationDao collaborationDao){
+        this.collaborationDao = collaborationDao;
+    }
+    @Autowired
+    public void setRequestDao(RequestDao requestDao){
+        this.requestDao = requestDao;
+    }
     @Autowired
     public void setOfferDao(OfferDao offerDao){
         this.offerDao = offerDao;
@@ -58,6 +72,17 @@ public class OfferController {
         if (bindingResult.hasErrors())
             return "offer/add";
         offerDao.addOffer(offer);
+        return "redirect:list";
+    }
+    @RequestMapping(value="/accept{id}", method=RequestMethod.GET)
+    public String accept(Model model, @PathVariable Integer idOffer) {
+        Offer offer = offerDao.getOffer(idOffer);
+        Request request = new Request();
+        request.createRequestForOffer(offer);
+        requestDao.addRequest(request);
+        Collaboration collaboration = new Collaboration();
+        collaboration.createCollaboration(offer,request);
+        collaborationDao.addCollaboration(collaboration);
         return "redirect:list";
     }
 

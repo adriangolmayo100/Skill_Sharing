@@ -2,6 +2,7 @@ package es.uji.ei1027.SkillSharing.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.sql.Date;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -11,8 +12,8 @@ public class Offer {
     private int idStudent;
     private int idSkillType;
     private String description;
-    private LocalTime start;
-    private LocalTime finish;
+    private Date start;
+    private Date finish;
     private int duration;
 
     public int getIdOffer() {
@@ -47,19 +48,19 @@ public class Offer {
         this.description = description;
     }
 
-    public LocalTime getStart() {
+    public Date getStart() {
         return start;
     }
 
-    public void setStart(LocalTime start) {
+    public void setStart(Date start) {
         this.start = start;
     }
 
-    public LocalTime getFinish() {
+    public Date getFinish() {
         return finish;
     }
 
-    public void setFinish(LocalTime finish) {
+    public void setFinish(Date finish) {
         this.finish = finish;
     }
 
@@ -77,6 +78,13 @@ public class Offer {
                 return skillType.getName();
         }
         return "";
+    }
+    public void createOfferForRequest(Request request){
+        this.description=request.getDescription();
+        this.duration=request.getDuration();
+        this.start=request.getStart();
+        this.finish=request.getFinish();
+        this.idSkillType=request.getIdSkillType();
     }
 
     @Override

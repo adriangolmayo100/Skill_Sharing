@@ -47,7 +47,7 @@ public class CollaborationController {
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "collaboration/add";
-        collaborationDao.addCollaboartion(collaboration);
+        collaborationDao.addCollaboration(collaboration);
         return "redirect:list";
     }
 

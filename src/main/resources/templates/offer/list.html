@@ -21,7 +21,6 @@
             <th>Fin</th>
             <th>Duración</th>
             <th></th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -31,9 +30,7 @@
             <td th:text="${offer.start}"></td>
             <td th:text="${offer.finish}"></td>
             <td th:text="${offer.duration}"></td>
-            <td><a th:href="@{/offer/update/{id}(id=${offer.idOffer})}" class="btn btn-warning">Editar</a>
-            </td>
-            <td><a th:href="@{/offer/delete/{id}(id=${offer.idOffer})}" class="btn btn-danger">Borrar</a>
+            <td><a th:href="@{/offer/accept/{id}(id=${offer.idOffer})}" class="btn btn-success">Aceptar</a>
             </td>
         </tr>
         </tbody>

@@ -1,7 +1,11 @@
 package es.uji.ei1027.SkillSharing.controller;
 
+import es.uji.ei1027.SkillSharing.dao.CollaborationDao;
+import es.uji.ei1027.SkillSharing.dao.OfferDao;
 import es.uji.ei1027.SkillSharing.dao.RequestDao;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
+import es.uji.ei1027.SkillSharing.model.Collaboration;
+import es.uji.ei1027.SkillSharing.model.Offer;
 import es.uji.ei1027.SkillSharing.model.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +24,18 @@ public class RequestController {
 
     private RequestDao requestDao;
     private SkillTypeDao skillTypeDao;
+    private OfferDao offerDao;
+    private CollaborationDao collaborationDao;
 
 
+    @Autowired
+    public void setCollaborationDao(CollaborationDao collaborationDao){
+        this.collaborationDao = collaborationDao;
+    }
+    @Autowired
+    public void setOfferDao(OfferDao offerDao){
+        this.offerDao = offerDao;
+    }
     @Autowired
     public void setRequestDao(RequestDao requestDao){
         this.requestDao = requestDao;
@@ -30,7 +44,17 @@ public class RequestController {
     public void setSkillTypeDao(SkillTypeDao skillType){
         this.skillTypeDao = skillType;
     }
-
+    @RequestMapping(value="/accept{idRequest}", method=RequestMethod.GET)
+    public String accept(Model model, @PathVariable Integer idRequest) {
+        Request request = requestDao.getRequest(idRequest);
+        Offer offer = new Offer();
+        offer.createOfferForRequest(request);
+        offerDao.addOffer(offer);
+        Collaboration collaboration = new Collaboration();
+        collaboration.createCollaboration(offer,request);
+        collaborationDao.addCollaboration(collaboration);
+        return "redirect:list";
+    }
     @RequestMapping(value = "/delete/{idRequest}")
     public String processDeleteRequest(@PathVariable Integer idRequest){
         requestDao.deleteRequest(idRequest);

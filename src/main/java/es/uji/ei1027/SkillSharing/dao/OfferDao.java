@@ -1,6 +1,7 @@
 package es.uji.ei1027.SkillSharing.dao;
 
 import es.uji.ei1027.SkillSharing.model.Offer;
+import es.uji.ei1027.SkillSharing.model.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,9 +19,10 @@ public class OfferDao {
     public void setDataSource(DataSource dataSource) { jdbcTemplate = new JdbcTemplate(dataSource); }
 
     public void addOffer(Offer offer){
-
+        List<Offer>l=getOffers();
+        int id = l.size()+1;
         jdbcTemplate.update("INSERT INTO Offer Values(?, ?, ?, ?, ?, ?, ?)",
-                offer.getIdOffer(), offer.getIdStudent(), offer.getIdSkillType(), offer.getDescription(),
+                id, offer.getIdStudent(), offer.getIdSkillType(), offer.getDescription(),
                 offer.getStart(), offer.getFinish(), offer.getDuration());
     }
 
@@ -47,7 +49,6 @@ public class OfferDao {
             return null;
         }
     }
-
     public List<Offer> getOffers(){
         try{
             return jdbcTemplate.query("SELECT * FROM offer",

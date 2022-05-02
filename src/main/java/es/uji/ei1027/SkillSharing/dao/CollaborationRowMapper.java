@@ -15,10 +15,10 @@ public final class CollaborationRowMapper implements RowMapper<Collaboration> {
         Collaboration collaboration = new Collaboration();
         collaboration.setIdRequest(rs.getInt("idrequest"));
         collaboration.setId_offer(rs.getInt("IdOffer"));
-        LocalDate d = rs.getObject("start", LocalDate.class);
-        collaboration.setStart((LocalDate) d);
-        LocalDate d1 =rs.getObject("finish", LocalDate.class);
-        collaboration.setFinish((LocalDate) d1);
+        Date d = rs.getObject("start", Date.class);
+        collaboration.setStart((Date) d);
+        Date d1 =rs.getObject("finish", Date.class);
+        collaboration.setFinish((Date) d1);
         collaboration.setRating(rs.getInt("rating"));
         collaboration.setComments(rs.getString("comments"));
         return collaboration;
