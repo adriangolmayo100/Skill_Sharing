@@ -47,8 +47,10 @@ public class RequestController {
     @RequestMapping(value="/accept/{idRequest}", method=RequestMethod.GET)
     public String accept(Model model, @PathVariable Integer idRequest) {
         Request request = requestDao.getRequest(idRequest);
+        request.setValid(false);
         Offer offer = new Offer();
         offer.createOfferForRequest(request);
+        requestDao.updateRequest(request);
         offerDao.addOffer(offer);
         Collaboration collaboration = new Collaboration();
         collaboration.createCollaboration(offer,request);
@@ -64,7 +66,7 @@ public class RequestController {
 
     @RequestMapping("/list")
     public String listRequest(Model model){
-        model.addAttribute("requests", requestDao.getRequests());
+        model.addAttribute("requests", requestDao.getValidRequests());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "request/list";
     }

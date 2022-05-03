@@ -20,7 +20,7 @@ public final class RequestRowMapper implements RowMapper<Request> {
         request.setFinish(d1);
         request.setIdSkillType(rs.getInt("id_skilltype"));
         request.setIdStudent(rs.getInt("id_student"));
-
+        request.setValid(rs.getBoolean("valid"));
         return request;
     }
 

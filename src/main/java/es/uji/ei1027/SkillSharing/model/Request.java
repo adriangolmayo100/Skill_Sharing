@@ -12,6 +12,7 @@ public class Request {
     private int duration;
     private int idStudent;
     private int idSkillType;
+    private boolean valid;
 
     public Request(){}
 
@@ -85,7 +86,9 @@ public class Request {
         this.finish=offer.getFinish();
         this.idSkillType=offer.getIdSkillType();
         this.idStudent=offer.getIdStudent();
+        this.valid=offer.isValid();
     }
+
     @Override
     public String toString() {
         return "Request{" +
@@ -96,6 +99,15 @@ public class Request {
                 ", duration=" + duration +
                 ", idStudent=" + idStudent +
                 ", idSkillType=" + idSkillType +
+                ", valid=" + valid +
                 '}';
+    }
+
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
     }
 }

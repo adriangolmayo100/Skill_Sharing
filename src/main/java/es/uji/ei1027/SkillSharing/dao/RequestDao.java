@@ -23,8 +23,8 @@ public class RequestDao {
     public void addRequest(Request request) {
         List<Request>l=getRequests();
         request.setIdRequest(l.size()+1);
-        jdbcTemplate.update("INSERT INTO Request VALUES(?, ?, ?, ?,?,?,?)",
-                request.getIdRequest(),request.getIdStudent(),request.getIdSkillType(),request.getDescription(),request.getStart(), request.getFinish(),request.getDuration());
+        jdbcTemplate.update("INSERT INTO Request VALUES(?, ?, ?, ?,?,?,?,?)",
+                request.getIdRequest(),request.getIdStudent(),request.getIdSkillType(),request.getDescription(),request.getStart(), request.getFinish(),request.getDuration(),request.isValid());
     }
 
     public void deleteRequest(int idrequest) {
@@ -38,14 +38,22 @@ public class RequestDao {
     }
 
     public void updateRequest(Request request) {
-        jdbcTemplate.update("UPDATE Request SET description=?, start=?,finish=?,duration=?,id_skill_type=? where nom_nadador=? and nom_prova=?",
-                request.getDescription(), request.getStart(), request.getFinish(), request.getDuration(),request.getIdSkillType(),request.getIdRequest());
+        jdbcTemplate.update("UPDATE Request SET description=?, start=?,finish=?,duration=?,id_skilltype=?, valid=? where id_request=?",
+                request.getDescription(), request.getStart(), request.getFinish(), request.getDuration(),request.getIdSkillType(),request.isValid(),request.getIdRequest());
     }
 
     public Request getRequest(int idRequest) {
         try {
             return jdbcTemplate.queryForObject("SELECT * from Request WHERE id_request=?",
                     new RequestRowMapper(), idRequest);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+    public Request getValidRequests() {
+        try {
+            return jdbcTemplate.queryForObject("SELECT * from Request WHERE valid=?",
+                    new RequestRowMapper(), true);
         } catch (EmptyResultDataAccessException e) {
             return null;
         }

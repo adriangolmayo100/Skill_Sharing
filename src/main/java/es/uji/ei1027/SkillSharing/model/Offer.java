@@ -15,6 +15,31 @@ public class Offer {
     private Date start;
     private Date finish;
     private int duration;
+    private boolean valid;
+
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    }
+
+    @Override
+    public String toString() {
+        return "Offer{" +
+                "idOffer=" + idOffer +
+                ", idStudent=" + idStudent +
+                ", idSkillType=" + idSkillType +
+                ", description='" + description + '\'' +
+                ", start=" + start +
+                ", finish=" + finish +
+                ", duration=" + duration +
+                ", valid=" + valid +
+                '}';
+    }
+
+    private boolean valide;
 
     public int getIdOffer() {
         return idOffer;
@@ -86,18 +111,7 @@ public class Offer {
         this.finish=request.getFinish();
         this.idSkillType=request.getIdSkillType();
         this.idStudent=request.getIdStudent();
+        this.valid=request.isValid();
     }
 
-    @Override
-    public String toString() {
-        return "offer{" +
-                "idOffer=" + idOffer +
-                ", idStudent=" + idStudent +
-                ", idSkillType=" + idSkillType +
-                ", description='" + description + '\'' +
-                ", start=" + start +
-                ", finish=" + finish +
-                ", duration=" + duration +
-                '}';
-    }
 }

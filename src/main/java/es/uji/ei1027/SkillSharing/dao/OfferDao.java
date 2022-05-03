@@ -21,9 +21,9 @@ public class OfferDao {
     public void addOffer(Offer offer){
         List<Offer>l=getOffers();
         offer.setIdOffer(l.size()+1);
-        jdbcTemplate.update("INSERT INTO Offer Values(?, ?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO Offer Values(?, ?, ?, ?, ?, ?, ?,?)",
                 offer.getIdOffer(), offer.getIdStudent(), offer.getIdSkillType(), offer.getDescription(),
-                offer.getStart(), offer.getFinish(), offer.getDuration());
+                offer.getStart(), offer.getFinish(), offer.getDuration(), offer.isValid());
     }
 
     public void deleteOffer(Integer idOffer){
@@ -36,9 +36,9 @@ public class OfferDao {
 
     public void updateOffer(Offer offer){
         jdbcTemplate.update("UPDATE offer SET id_student=?, id_skilltype=?, description=?, start=?," +
-                "finish=?, duration=? where id_offer=?",
+                "finish=?, duration=?,valid=? where id_offer=?",
                 offer.getIdStudent(), offer.getIdSkillType(), offer.getDescription(),
-                offer.getStart(), offer.getFinish(), offer.getDuration(), offer.getIdOffer());
+                offer.getStart(), offer.getFinish(), offer.getDuration(),offer.isValid(), offer.getIdOffer());
     }
 
     public Offer getOffer(Integer idOffer){
@@ -46,6 +46,14 @@ public class OfferDao {
             return jdbcTemplate.queryForObject("Select * from offer where id_offer=?",
                     new OfferRowMapper(), idOffer);
         }catch(EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+    public Offer getValidOffers() {
+        try {
+            return jdbcTemplate.queryForObject("SELECT * from offer WHERE valid=?",
+                    new OfferRowMapper(),true);
+        } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }
