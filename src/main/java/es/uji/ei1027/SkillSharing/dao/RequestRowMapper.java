@@ -2,6 +2,8 @@ package es.uji.ei1027.SkillSharing.dao;
 
 import es.uji.ei1027.SkillSharing.model.Request;
 import org.springframework.jdbc.core.RowMapper;
+
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,8 +20,13 @@ public final class RequestRowMapper implements RowMapper<Request> {
         request.setStart(d);
         Date d1 = rs.getDate("finish");
         request.setFinish(d1);
-        request.setIdSkillType(rs.getInt("id_skilltype"));
-        request.setIdStudent(rs.getInt("id_student"));
+        request.setSkillType(rs.getString("id_skilltype"));
+        UserDao user = new UserDao();
+        try {
+            request.setIdStudent(user.obtenerId());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         request.setValid(rs.getBoolean("valid"));
         return request;
     }
