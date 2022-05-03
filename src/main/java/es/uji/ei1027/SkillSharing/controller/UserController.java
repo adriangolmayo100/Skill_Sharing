@@ -12,7 +12,7 @@ import es.uji.ei1027.SkillSharing.dao.UserInt;
 import es.uji.ei1027.SkillSharing.model.User;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/tipos_usuario")
 public class UserController {
     private UserDao userDao;
 
@@ -31,5 +31,10 @@ public class UserController {
         }
         model.addAttribute("users", userDao.listAllUsers());
         return session.getAttribute("nextUrl").toString();
+    }
+
+    @RequestMapping("/usuario")
+    public String prueba(Model model){
+        return "tipos_usuario/usuario";
     }
 }

@@ -1,9 +1,11 @@
 package es.uji.ei1027.SkillSharing.model;
 
+import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Offer {
@@ -103,6 +105,24 @@ public class Offer {
                 return skillType.getName();
         }
         return "";
+    }
+    public void setSkillType(String name){
+        SkillTypeDao s = new SkillTypeDao();
+        List<SkillType> l = s.getSkillTypes();
+        for  (SkillType sk : l){
+            if (sk.getName().equals(name)){
+                setIdSkillType(sk.getIdSkillType());
+            }
+        }
+    }
+    public List<String> getNameSkillTypes(){
+        SkillTypeDao s = new SkillTypeDao();
+        List<SkillType> l = s.getSkillTypes();
+        List<String> names = new ArrayList<>();
+        for (SkillType sk : l){
+            names.add(sk.getName());
+        }
+        return names;
     }
     public void createOfferForRequest(Request request){
         this.description=request.getDescription();
