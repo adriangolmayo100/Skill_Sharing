@@ -53,7 +53,7 @@ public class LoginController {
             return "redirect:" + session.getAttribute("nextUrl").toString();
 
         // Lleva a la página de usuario
-        return "usuario";
+        return "redirect:tipos_usuario/usuario";
     }
 
     @RequestMapping("/logout")
