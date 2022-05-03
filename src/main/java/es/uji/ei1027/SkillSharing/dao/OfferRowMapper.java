@@ -3,6 +3,7 @@ package es.uji.ei1027.SkillSharing.dao;
 import es.uji.ei1027.SkillSharing.model.Offer;
 import org.springframework.jdbc.core.RowMapper;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +13,12 @@ public final class OfferRowMapper implements RowMapper<Offer> {
     @Override
     public Offer mapRow(ResultSet rs, int rowNum) throws SQLException {
         Offer offer = new Offer();
-        offer.setIdStudent(rs.getInt("id_student"));
+        UserDao user = new UserDao();
+        try {
+            offer.setIdStudent(user.obtenerId());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         offer.setSkillType(rs.getString("id_skilltype"));
         offer.setDescription(rs.getString("description"));
         Time start = rs.getTime("start");
