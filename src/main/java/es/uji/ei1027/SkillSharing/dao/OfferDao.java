@@ -57,6 +57,7 @@ public class OfferDao {
             return null;
         }
     }
+
     public List<Offer> getOffers(){
         try{
             return jdbcTemplate.query("SELECT * FROM offer",
