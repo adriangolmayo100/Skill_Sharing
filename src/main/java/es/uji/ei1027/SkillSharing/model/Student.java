@@ -11,7 +11,7 @@ public class Student {
     private String degree;
     private int course;
     private boolean skp;
-    private int phoneNumber;
+    private int numberPhone;
     private String gender;
 
     public int getIdStudent() {
@@ -94,12 +94,12 @@ public class Student {
         this.skp = skp;
     }
 
-    public int getPhoneNumber() {
-        return phoneNumber;
+    public int getNumberPhone() {
+        return numberPhone;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setNumberPhone(int numberPhone) {
+        this.numberPhone = numberPhone;
     }
 
     public String getGender() {
@@ -123,7 +123,7 @@ public class Student {
                 ", degree='" + degree + '\'' +
                 ", course=" + course +
                 ", skp=" + skp +
-                ", phoneNumber=" + phoneNumber +
+                ", phoneNumber=" + numberPhone +
                 ", gender='" + gender + '\'' +
                 '}';
     }

@@ -21,6 +21,6 @@ public class StudentDao{
         jdbcTemplate.update("INSERT INTO Student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 student.getIdStudent(), student.getName(), student.getEmail(), student.getUsername(),
                 student.getPassword(), student.getPostalCode(), student.getBalance(), student.getDegree(),
-                student.getCourse(), student.isSkp(), student.getPhoneNumber(), student.getGender());
+                student.getCourse(), student.isSkp(), student.getNumberPhone(), student.getGender());
     }
 }
