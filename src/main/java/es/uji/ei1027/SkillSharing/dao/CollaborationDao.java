@@ -1,7 +1,6 @@
 package es.uji.ei1027.SkillSharing.dao;
 
 import es.uji.ei1027.SkillSharing.model.Collaboration;
-import es.uji.ei1027.SkillSharing.model.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,7 +21,7 @@ public class CollaborationDao {
 
     public void addCollaboration(Collaboration collaboration) {
         jdbcTemplate.update("INSERT INTO Collaboration VALUES(?, ?, ?, ?, ?, ?)",
-                collaboration.getIdRequest(), collaboration.getId_offer(), collaboration.getStart(), collaboration.getFinish(),collaboration.getRating(),collaboration.getComments());
+                collaboration.getIdRequest(), collaboration.getIdOffer(), collaboration.getStart(), collaboration.getFinish(),collaboration.getRating(),collaboration.getComments());
     }
 
     public void deleteCollaboration(int idrequest, int id_offer) {
@@ -32,7 +31,7 @@ public class CollaborationDao {
 
     public void deleteCollaboration(Collaboration collaboration) {
         jdbcTemplate.update("DELETE from Collaboration where id_request=? AND id_offer=?",
-                collaboration.getIdRequest(),collaboration.getId_offer());
+                collaboration.getIdRequest(),collaboration.getIdOffer());
     }
 
     public void updateCollaboration(Collaboration collaboration) {

@@ -2,13 +2,11 @@ package es.uji.ei1027.SkillSharing.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.xml.crypto.Data;
 import java.sql.Date;
-import java.time.LocalDate;
 
 public class Collaboration{
     private int idRequest;
-    private int id_offer;
+    private int idOffer;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date start;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -25,12 +23,12 @@ public class Collaboration{
         this.idRequest = idRequest;
     }
 
-    public int getId_offer() {
-        return id_offer;
+    public int getIdOffer() {
+        return idOffer;
     }
 
-    public void setId_offer(int id_offer) {
-        this.id_offer = id_offer;
+    public void setIdOffer(int idOffer) {
+        this.idOffer = idOffer;
     }
 
     public Date getStart() {
@@ -68,7 +66,7 @@ public class Collaboration{
     @Override
     public String toString() {
         return "Collaboration{" +
-                "id_offer=" + id_offer +
+                "id_offer=" + idOffer +
                 ", start=" + start +
                 ", finish=" + finish +
                 ", rating=" + rating +
@@ -77,7 +75,7 @@ public class Collaboration{
                 '}';
     }
     public void createCollaboration(Offer offer,Request request){
-        this.setId_offer(offer.getIdOffer());
+        this.setIdOffer(offer.getIdOffer());
         this.setIdRequest(request.getIdRequest());
         this.setStart(offer.getStart());
         this.setFinish(offer.getFinish());

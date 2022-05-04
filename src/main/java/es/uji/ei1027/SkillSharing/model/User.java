@@ -3,7 +3,7 @@ package es.uji.ei1027.SkillSharing.model;
 public class User {
     String username;
     String password;
-    String id_user; //el id del usuario, para identificar a quien le corresponde el correo
+    String idUser; //el id del usuario, para identificar a quien le corresponde el correo
 
     public User(String username, String password) {
         this.username = username;
@@ -26,12 +26,12 @@ public class User {
         this.password = password;
     }
 
-    public String getId_user() {
-        return id_user;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setId_user(String id_user) {
-        this.id_user = id_user;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
 }
