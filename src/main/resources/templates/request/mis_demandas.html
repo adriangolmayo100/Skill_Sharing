@@ -11,16 +11,18 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>Consultar propuestas</h1>
+    <h1>Consultar Demandas</h1>
     <table th:unless="${#lists.isEmpty(requests)}" class="table table-striped">
         <thead class="table table-striped">
         <tr>
-            <th>Habilidad</th>
-            <th>Descripción propuesta</th>
+            <th>idRequest</th>
+            <th>Descripción Demanda</th>
             <th>Inicio</th>
             <th>Fin</th>
             <th>Duración</th>
-            <th></th>
+            <th>idStudent</th>
+            <th>idSkillType</th>
+            <th>Estado</th>
         </tr>
         </thead>
         <tbody>
@@ -30,11 +32,14 @@
             <td th:text="${request.start}"></td>
             <td th:text="${request.finish}"></td>
             <td th:text="${request.duration}"></td>
+            <td th:text="${request.idStudent}"></td>
+            <td th:text="${request.idSkillType}"></td>
+            <td th:text="${request.valid}"></td>
             <td><a th:href="@{/request/accept/{id}(id=${request.idRequest})}" class="btn btn-success">Aceptar</a>
         </tr>
         </tbody>
     </table>
-    <a href="add">Añadir propuesta</a>
+    <a href="add">Añadir Demanda</a>
 </div>
 </body>
 </html>
