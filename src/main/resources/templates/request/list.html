@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Consultar propuestas</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Consultar propuestas</h1>
+    <table th:unless="${#lists.isEmpty(requests)}" class="table table-striped">
+        <thead class="table table-striped">
+        <tr>
+            <th>Habilidad</th>
+            <th>Descripción propuesta</th>
+            <th>Inicio</th>
+            <th>Fin</th>
+            <th>Duración</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="request: ${requests}">
+            <td th:text="${request.getNameSkillType(skillTypes)}"></td>
+            <td th:text="${request.description}"></td>
+            <td th:text="${request.start}"></td>
+            <td th:text="${request.finish}"></td>
+            <td th:text="${request.duration}"></td>
+            <td><a th:href="@{/request/accept/{id}(id=${request.idRequest})}" class="btn btn-success">Aceptar</a>
+        </tr>
+        </tbody>
+    </table>
+    <a href="add">Añadir propuesta</a>
+</div>
+</body>
+</html>

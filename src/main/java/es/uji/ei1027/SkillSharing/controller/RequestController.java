@@ -76,7 +76,11 @@ public class RequestController {
         model.addAttribute("request", new Request());
         return "request/add";
     }
-
+    @RequestMapping(value="/mis_demandas")
+    public String mis_requests(Model model){
+        //Imanol dale
+        return "request/mis_demandas";
+    }
     @RequestMapping(value="/add", method=RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("request") Request request,
                                    BindingResult bindingResult) {

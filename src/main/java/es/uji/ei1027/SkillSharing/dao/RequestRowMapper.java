@@ -22,11 +22,7 @@ public final class RequestRowMapper implements RowMapper<Request> {
         request.setFinish(d1);
         request.setSkillType(rs.getString("id_skilltype"));
         UserDao user = new UserDao();
-        try {
-            request.setIdStudent(user.obtenerId());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        request.setIdStudent(rs.getInt("id_student"));
         request.setValid(rs.getBoolean("valid"));
         return request;
     }

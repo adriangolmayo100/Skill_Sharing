@@ -93,7 +93,11 @@ public class OfferController {
         model.addAttribute("offer", offerDao.getOffer(idOffer));
         return "offer/update";
     }
-
+    @RequestMapping(value="/mis_ofertas")
+    public String mis_ofertas(Model model){
+        //Imanol dale
+        return "offer/mis_ofertas";
+    }
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(@ModelAttribute("offer") Offer offer,
                                       BindingResult bindingResult){
