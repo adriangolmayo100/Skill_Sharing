@@ -6,7 +6,7 @@ public class Student {
     private String email;
     private String username;
     private String password;
-    private int postalCode;
+    private int codePostal;
     private int balance;
     private String degree;
     private int course;
@@ -54,12 +54,12 @@ public class Student {
         this.password = password;
     }
 
-    public int getPostalCode() {
-        return postalCode;
+    public int getCodePostal() {
+        return codePostal;
     }
 
-    public void setPostalCode(int postalCode) {
-        this.postalCode = postalCode;
+    public void setCodePostal(int codePostal) {
+        this.codePostal = codePostal;
     }
 
     public int getBalance() {
@@ -118,7 +118,7 @@ public class Student {
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", postalCode=" + postalCode +
+                ", postalCode=" + codePostal +
                 ", balance=" + balance +
                 ", degree='" + degree + '\'' +
                 ", course=" + course +
