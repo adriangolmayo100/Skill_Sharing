@@ -37,8 +37,10 @@ public class RegisterController {
         if(studentDao.obtenerStudentConUser(user) != null){ //Si ya existe usuario con esta cuenta, no vamos a registrarlo
             return "register/usuarioExistente";
         }
-        int cantStudent = studentDao.obtenerTodosStudent().size();
-        student.setIdStudent(cantStudent + 1);
+        int max_id = studentDao.obtenerNuevoId();
+        if (max_id == -1)
+            max_id = 0;
+        student.setIdStudent(max_id);
         student.setBalance(0);
         studentDao.nuevoStudent(student);
         return "redirect:../";

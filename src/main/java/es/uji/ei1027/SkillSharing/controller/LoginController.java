@@ -37,19 +37,15 @@ public class LoginController {
         }
         // Comprova que el login siga correcte
         // intentant carregar les dades de l'usuari
-        //String nomUser = student.getUsername();
-        //String password = student.getPassword();
+
         userValidator.validate(student, bindingResult);
-        /*user = userDao.cargaUsuario(nomUser, password);
-        if (user == null) {
-            bindingResult.rejectValue("password", "badpw", "Contrasenya o usuari incorrecte");
-            return "login";
-        }*/
         if (studentDao.loadStudent(student.getUsername(),student.getPassword()) == null){
             //bindingResult.rejectValue("username", "badUser", "no se ha introducido un usuario");
             return "redirect:/login";
         }
-        session.setAttribute("student", student);
+        String username = student.getUsername();
+        Student student_completo = studentDao.obtenerStudentConUser(username);
+        session.setAttribute("student", student_completo);
         // Autenticats correctament.
         // Guardem les dades de l'usuari autenticat a la sessió
         if (session.getAttribute("nextUrl") != null)

@@ -27,7 +27,6 @@ public class UserController {
             String nomUser = usuario.getUsername();
             String password = usuario.getPassword();
         }
-        model.addAttribute("users", studentDao.obtenerTodosStudent());
         return session.getAttribute("nextUrl").toString();
     }
 

@@ -63,12 +63,13 @@ public class StudentDao{
         return null;
     }
 
-    public List<Student> obtenerTodosStudent(){
-        try {
-            return jdbcTemplate.query("SELECT * from Student",
-                    new StudentRowMapper());
+
+    public int obtenerNuevoId(){ //Funcion para obtener el máximo id. Si por ejemplo el student 1 se borra, nos aseguramos de que el siguiente student no se meta en medio sino(como teniamos antes) que se vaya anotando al final
+        try{
+            return jdbcTemplate.queryForObject("Select MAX(id_student) from Student",
+                    new StudentRowMapper()).getIdStudent();
         } catch (EmptyResultDataAccessException e) {
-            return new ArrayList<Student>();
+            return -1;
         }
     }
 }

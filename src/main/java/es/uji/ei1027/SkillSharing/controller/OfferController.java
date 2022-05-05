@@ -55,7 +55,8 @@ public class OfferController {
 
 
     @RequestMapping("/list")
-    public String listOffer(Model model){
+    public String listOffer(Model model, HttpSession session){
+        Student student = (Student) session.getAttribute("student");
         model.addAttribute("offers", offerDao.getValidOffers());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "offer/list";
