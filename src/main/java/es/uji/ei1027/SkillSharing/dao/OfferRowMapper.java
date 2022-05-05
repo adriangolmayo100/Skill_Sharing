@@ -13,12 +13,7 @@ public final class OfferRowMapper implements RowMapper<Offer> {
     @Override
     public Offer mapRow(ResultSet rs, int rowNum) throws SQLException {
         Offer offer = new Offer();
-        UserDao user = new UserDao();
-        try {
-            offer.setIdStudent(user.obtenerId());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        offer.setIdStudent(rs.getInt("id_student"));
         offer.setSkillType(rs.getString("id_skilltype"));
         offer.setDescription(rs.getString("description"));
         Time start = rs.getTime("start");
