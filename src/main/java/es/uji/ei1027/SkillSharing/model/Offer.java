@@ -130,7 +130,6 @@ public class Offer {
         this.start=request.getStart();
         this.finish=request.getFinish();
         this.idSkillType=request.getIdSkillType();
-        this.idStudent=request.getIdStudent();
         this.valid=request.isValid();
     }
 

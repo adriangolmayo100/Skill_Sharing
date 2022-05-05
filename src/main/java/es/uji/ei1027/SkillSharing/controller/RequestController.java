@@ -7,6 +7,7 @@ import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import es.uji.ei1027.SkillSharing.model.Collaboration;
 import es.uji.ei1027.SkillSharing.model.Offer;
 import es.uji.ei1027.SkillSharing.model.Request;
+import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -45,7 +47,13 @@ public class RequestController {
         this.skillTypeDao = skillType;
     }
     @RequestMapping(value="/accept/{idRequest}", method=RequestMethod.GET)
-    public String accept(Model model, @PathVariable Integer idRequest) {
+    public String accept(HttpSession session, Model model, @PathVariable Integer idRequest) {
+        Student student= (Student) session.getAttribute("student");
+        if ( student == null)
+        {
+            model.addAttribute("student", new Student());
+            return "login";
+        }
         Request request = requestDao.getRequest(idRequest);
         request.setValid(false);
         Offer offer = new Offer();

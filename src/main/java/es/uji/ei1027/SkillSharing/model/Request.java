@@ -106,7 +106,6 @@ public class Request {
         this.start=offer.getStart();
         this.finish=offer.getFinish();
         this.idSkillType=offer.getIdSkillType();
-        this.idStudent=offer.getIdStudent();
         this.valid=offer.isValid();
     }
 
