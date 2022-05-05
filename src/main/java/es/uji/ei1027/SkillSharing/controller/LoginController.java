@@ -50,7 +50,8 @@ public class LoginController {
             bindingResult.rejectValue("username", "badUser", "no se ha introducido un usuario");
         }
         session.setAttribute("student", student);
-
+        System.out.println(student.getUsername());
+        System.out.println(student.getPassword());
         // Autenticats correctament.
         // Guardem les dades de l'usuari autenticat a la sessió
         if (session.getAttribute("nextUrl") != null)
@@ -81,7 +82,6 @@ class UserValidator implements Validator {      //Clase para comprobar que no se
         String password = student.getPassword();
         if (username.equals(""))
             errors.rejectValue("username", "badUser", "usuario requerido");
-        String posiblePasswd = student.getPassword();
         if (password.equals(""))
             errors.rejectValue("password", "badPassword", "usuario requerido");
 
