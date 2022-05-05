@@ -52,9 +52,11 @@ public class StudentDao{
     public Student loadStudent(String username,String password){
         Student student;
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+        String passwordEncriptada = passwordEncryptor.encryptPassword(password);
+        System.out.println(passwordEncriptada);
         try{
             student = jdbcTemplate.queryForObject("SELECT * from Student WHERE username=? and password=?",
-                    new StudentRowMapper(), username,password);
+                    new StudentRowMapper(), username,passwordEncriptada);
         }catch (EmptyResultDataAccessException e){
             return null;
         }

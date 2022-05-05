@@ -47,11 +47,10 @@ public class LoginController {
             return "login";
         }*/
         if (studentDao.loadStudent(student.getUsername(),student.getPassword()) == null){
-            bindingResult.rejectValue("username", "badUser", "no se ha introducido un usuario");
+            //bindingResult.rejectValue("username", "badUser", "no se ha introducido un usuario");
+            return "redirect:/login";
         }
         session.setAttribute("student", student);
-        System.out.println(student.getUsername());
-        System.out.println(student.getPassword());
         // Autenticats correctament.
         // Guardem les dades de l'usuari autenticat a la sessió
         if (session.getAttribute("nextUrl") != null)
