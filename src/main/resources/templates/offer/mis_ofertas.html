@@ -31,13 +31,13 @@
             <td th:text="${offer.start}"></td>
             <td th:text="${offer.finish}"></td>
             <td th:text="${offer.duration}"></td>
-            <td><a th:href="@{/offer/update/{id}(id=${offer.idOffer})}" class="btn btn-success">Actualizar</a>
-            <td><a th:href="@{/offer/delete/{id}(id=${offer.idOffer})}" class="btn btn-success">Eliminar</a>
+            <td><a th:href="@{/offer/mis_ofertas/{id}(id=${offer.idOffer})}" class="btn btn-success">Aceptar</a>
             </td>
         </tr>
         </tbody>
     </table>
-    <a href="add">Añadir oferta</a>
+    <td><a th:href="@{/offer/update/{id}(id=${offer.idOffer})}" class="btn btn-success">Actualizar</a>
+    <td><a th:href="@{/offer/delete/{id}(id=${offer.idOffer})}" class="btn btn-success">Eliminar</a>
 </div>
 </body>
 </html>
