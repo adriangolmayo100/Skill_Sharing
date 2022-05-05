@@ -2,9 +2,11 @@ package es.uji.ei1027.SkillSharing.controller;
 
 import javax.servlet.http.HttpSession;
 
+import es.uji.ei1027.SkillSharing.dao.StudentDao;
 import es.uji.ei1027.SkillSharing.dao.UserDao;
-import es.uji.ei1027.SkillSharing.dao.UserInt;
+import es.uji.ei1027.SkillSharing.model.Student;
 import es.uji.ei1027.SkillSharing.model.User;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,32 +22,33 @@ import java.io.FileNotFoundException;
 @Controller
 public class LoginController {
     @Autowired
-    private UserDao userDao;
+    private StudentDao studentDao;
+
 
     @RequestMapping("/login")
     public String login(Model model){
-        model.addAttribute("user", new User("", ""));
+        model.addAttribute("student", new Student());
         return "login";
     }
 
     @RequestMapping(value="/login", method=RequestMethod.POST)          //Comprobación de login
-    public String checkLogin(@ModelAttribute("user") User user,
+    public String checkLogin(@ModelAttribute("student") Student student,
                              BindingResult bindingResult, HttpSession session) throws FileNotFoundException {
         UserValidator userValidator = new UserValidator();
-        userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
             return "login";
         }
         // Comprova que el login siga correcte
         // intentant carregar les dades de l'usuari
-        String nomUser = user.getUsername();
-        String password = user.getPassword();
-        user = userDao.cargaUsuario(nomUser, password);
+        //String nomUser = student.getUsername();
+        //String password = student.getPassword();
+        userValidator.validate(student, bindingResult);
+        /*user = userDao.cargaUsuario(nomUser, password);
         if (user == null) {
             bindingResult.rejectValue("password", "badpw", "Contrasenya o usuari incorrecte");
             return "login";
-        }
-        session.setAttribute("user", user);
+        }*/
+        session.setAttribute("student", student);
 
         // Autenticats correctament.
         // Guardem les dades de l'usuari autenticat a la sessió
@@ -64,6 +67,10 @@ public class LoginController {
 }
 
 class UserValidator implements Validator {      //Clase para comprobar que no se pasan espacios en blanco. En verdad es una chorrada ya que esto lo hace el HTML
+
+    BasicPasswordEncryptor encryptor = new BasicPasswordEncryptor();
+    StudentDao studentDao = new StudentDao();
+
     @Override
     public boolean supports(Class<?> cls) {
         return User.class.isAssignableFrom(cls);
@@ -71,11 +78,20 @@ class UserValidator implements Validator {      //Clase para comprobar que no se
 
     @Override
     public void validate(Object target, Errors errors) {
-        User usuario = (User) target;
-        if (usuario.getUsername().equals(""))
-            errors.rejectValue("username", "badUser", "user required");
-        if (usuario.getPassword().equals("")) {
-            errors.rejectValue("password", "badPasswd", "password required");
+        Student student = (Student) target;
+        String username = student.getUsername();
+        if (username.equals(""))
+            errors.rejectValue("username", "badUser", "usuario requerido");
+        String posiblePasswd = student.getPassword();
+        if (studentDao.obtenerStudentConUser(username) == null){
+            errors.rejectValue("username", "badUser", "no se ha introducido un usuario");
+        }else{
+            Student studentAlmacenado = studentDao.obtenerStudentConUser(username);
+            if(!encryptor.checkPassword(posiblePasswd, studentAlmacenado.getPassword())){
+                errors.rejectValue("password", "badPasswd", "contraseña incorrecta");
+            }
         }
+
+
     }
 }

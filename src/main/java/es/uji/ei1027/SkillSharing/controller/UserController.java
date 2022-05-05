@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import es.uji.ei1027.SkillSharing.dao.UserInt;
 import es.uji.ei1027.SkillSharing.model.User;
 
 @Controller

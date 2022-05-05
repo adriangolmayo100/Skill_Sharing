@@ -13,6 +13,8 @@ public class StudentRowMapper implements RowMapper<Student> {
         student.setIdStudent(rs.getInt("id_student"));
         student.setName(rs.getString("name"));
         student.setEmail(rs.getString("email"));
+        student.setUsername(rs.getString("username"));
+        student.setPassword(rs.getString("password"));
         student.setCodePostal(rs.getInt("postal_code"));
         student.setBalance(rs.getInt("balance"));
         student.setDegree(rs.getString("degree"));

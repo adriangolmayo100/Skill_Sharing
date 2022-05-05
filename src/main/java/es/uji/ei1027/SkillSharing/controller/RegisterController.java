@@ -1,12 +1,7 @@
 package es.uji.ei1027.SkillSharing.controller;
 
-import javax.servlet.http.HttpSession;
-
-import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import es.uji.ei1027.SkillSharing.dao.StudentDao;
 import es.uji.ei1027.SkillSharing.dao.UserDao;
-import es.uji.ei1027.SkillSharing.dao.UserInt;
-import es.uji.ei1027.SkillSharing.model.SkillType;
 import es.uji.ei1027.SkillSharing.model.Student;
 import es.uji.ei1027.SkillSharing.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 
 import java.io.IOException;
 
@@ -44,7 +37,8 @@ public class RegisterController {
                                    BindingResult bindingResult) throws IOException {
         if (bindingResult.hasErrors())
             return "register/datos";
-        student.setIdStudent(userDao.obtenerId());
+        int cantStudent = studentDao.obtenerTodosStudent().size();
+        student.setIdStudent(cantStudent + 1);
         student.setBalance(0);
         studentDao.nuevoStudent(student);
         return "redirect:../";
@@ -52,14 +46,14 @@ public class RegisterController {
 
     @RequestMapping("/user")
     public String registerUser(Model model){
-        model.addAttribute("user", new User("", ""));
+        model.addAttribute("student", new Student());
         return "register/user";
     }
-    @RequestMapping(value="/user", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("user") User user,
+    @RequestMapping(value="/student", method= RequestMethod.POST)
+    public String processAddSubmit(@ModelAttribute("student") User user,
                                    BindingResult bindingResult) throws IOException {
         if (bindingResult.hasErrors())
-            return "register/user";
+            return "register/datos";
         if(! userDao.nuevoUsuario(user.getUsername(), user.getPassword())){
             return "register/usuarioExistente"; //Si ya existe usuario con esta cuenta, no vamos a registrarlo
         }
