@@ -78,7 +78,7 @@ public class RequestController {
     }
     @RequestMapping(value="/mis_demandas")
     public String mis_requests(Model model){
-        //Imanol dale
+        model.addAttribute("request",requestDao.getRequests());
         return "request/mis_demandas";
     }
     @RequestMapping(value="/add", method=RequestMethod.POST)
