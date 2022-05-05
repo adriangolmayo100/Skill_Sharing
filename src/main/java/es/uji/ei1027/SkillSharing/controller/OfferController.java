@@ -81,6 +81,7 @@ public class OfferController {
         Student student= (Student) session.getAttribute("student");
         if ( student == null)
         {
+            session.setAttribute("nextUrl","/offer/accept/"+id);
             model.addAttribute("student", new Student());
             return "login";
         }
@@ -103,7 +104,14 @@ public class OfferController {
         return "offer/update";
     }
     @RequestMapping(value="/mis_ofertas")
-    public String mis_ofertas(Model model){
+    public String mis_ofertas(HttpSession session,Model model){
+        Student student= (Student) session.getAttribute("student");
+        if ( student == null)
+        {
+            session.setAttribute("nextUrl","/offer/mis_ofertas");
+            model.addAttribute("student", new Student());
+            return "login";
+        }
         model.addAttribute("offer",offerDao.getOffers());
         return "offer/mis_ofertas";
     }

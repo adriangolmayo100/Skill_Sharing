@@ -51,14 +51,16 @@ public class RequestController {
         Student student= (Student) session.getAttribute("student");
         if ( student == null)
         {
+            session.setAttribute("nextUrl","/request/accept/"+idRequest);
             model.addAttribute("student", new Student());
             return "login";
         }
         Request request = requestDao.getRequest(idRequest);
         request.setValid(false);
+        requestDao.updateRequest(request);
         Offer offer = new Offer();
         offer.createOfferForRequest(request);
-        requestDao.updateRequest(request);
+        offer.setIdStudent(student.getIdStudent());
         offerDao.addOffer(offer);
         Collaboration collaboration = new Collaboration();
         collaboration.createCollaboration(offer,request);
@@ -85,7 +87,14 @@ public class RequestController {
         return "request/add";
     }
     @RequestMapping(value="/mis_demandas")
-    public String mis_requests(Model model){
+    public String mis_requests(HttpSession session,Model model){
+        Student student= (Student) session.getAttribute("student");
+        if ( student == null)
+        {
+            session.setAttribute("nextUrl","/offer/mis_demandas/");
+            model.addAttribute("student", new Student());
+            return "login";
+        }
         model.addAttribute("request",requestDao.getRequests());
         return "request/mis_demandas";
     }
