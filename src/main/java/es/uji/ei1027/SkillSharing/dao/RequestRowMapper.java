@@ -21,7 +21,6 @@ public final class RequestRowMapper implements RowMapper<Request> {
         Date d1 = rs.getDate("finish");
         request.setFinish(d1);
         request.setSkillType(rs.getString("id_skilltype"));
-        UserDao user = new UserDao();
         request.setIdStudent(rs.getInt("id_student"));
         request.setValid(rs.getBoolean("valid"));
         return request;

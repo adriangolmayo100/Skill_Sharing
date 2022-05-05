@@ -2,33 +2,32 @@ package es.uji.ei1027.SkillSharing.controller;
 
 import javax.servlet.http.HttpSession;
 
-import es.uji.ei1027.SkillSharing.dao.UserDao;
+import es.uji.ei1027.SkillSharing.dao.StudentDao;
+import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import es.uji.ei1027.SkillSharing.model.User;
-
 @Controller
 @RequestMapping("/tipos_usuario")
 public class UserController {
-    private UserDao userDao;
+    private StudentDao studentDao;
 
     @Autowired
-    public void setDao(UserDao userDao){ this.userDao = userDao; }
+    public void setDao(StudentDao userDao){ this.studentDao = userDao; }
 
     @RequestMapping("/list")
     public String pagUser(HttpSession session, Model model){
         if (session.getAttribute("user") == null){
-            model.addAttribute("user", new User("", ""));
+            model.addAttribute("user", new Student());
             return "login";
         }else{
-            User usuario = (User) session.getAttribute("user");
+            Student usuario = (Student) session.getAttribute("user");
             String nomUser = usuario.getUsername();
             String password = usuario.getPassword();
         }
-        model.addAttribute("users", userDao.listAllUsers());
+        model.addAttribute("users", studentDao.obtenerTodosStudent());
         return session.getAttribute("nextUrl").toString();
     }
 

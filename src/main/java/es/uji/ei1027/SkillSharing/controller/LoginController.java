@@ -3,9 +3,7 @@ package es.uji.ei1027.SkillSharing.controller;
 import javax.servlet.http.HttpSession;
 
 import es.uji.ei1027.SkillSharing.dao.StudentDao;
-import es.uji.ei1027.SkillSharing.dao.UserDao;
 import es.uji.ei1027.SkillSharing.model.Student;
-import es.uji.ei1027.SkillSharing.model.User;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +19,9 @@ import java.io.FileNotFoundException;
 
 @Controller
 public class LoginController {
+
     @Autowired
     private StudentDao studentDao;
-
 
     @RequestMapping("/login")
     public String login(Model model){
@@ -48,6 +46,9 @@ public class LoginController {
             bindingResult.rejectValue("password", "badpw", "Contrasenya o usuari incorrecte");
             return "login";
         }*/
+        if (studentDao.loadStudent(student.getUsername(),student.getPassword()) == null){
+            bindingResult.rejectValue("username", "badUser", "no se ha introducido un usuario");
+        }
         session.setAttribute("student", student);
 
         // Autenticats correctament.
@@ -68,29 +69,21 @@ public class LoginController {
 
 class UserValidator implements Validator {      //Clase para comprobar que no se pasan espacios en blanco. En verdad es una chorrada ya que esto lo hace el HTML
 
-    BasicPasswordEncryptor encryptor = new BasicPasswordEncryptor();
-    StudentDao studentDao = new StudentDao();
-
     @Override
     public boolean supports(Class<?> cls) {
-        return User.class.isAssignableFrom(cls);
+        return Student.class.isAssignableFrom(cls);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
         Student student = (Student) target;
         String username = student.getUsername();
+        String password = student.getPassword();
         if (username.equals(""))
             errors.rejectValue("username", "badUser", "usuario requerido");
         String posiblePasswd = student.getPassword();
-        if (studentDao.obtenerStudentConUser(username) == null){
-            errors.rejectValue("username", "badUser", "no se ha introducido un usuario");
-        }else{
-            Student studentAlmacenado = studentDao.obtenerStudentConUser(username);
-            if(!encryptor.checkPassword(posiblePasswd, studentAlmacenado.getPassword())){
-                errors.rejectValue("password", "badPasswd", "contraseña incorrecta");
-            }
-        }
+        if (password.equals(""))
+            errors.rejectValue("password", "badPassword", "usuario requerido");
 
 
     }

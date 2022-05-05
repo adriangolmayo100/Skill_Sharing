@@ -49,6 +49,19 @@ public class StudentDao{
             return null;
         }
     }
+    public Student loadStudent(String username,String password){
+        Student student;
+        BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+        try{
+            student = jdbcTemplate.queryForObject("SELECT * from Student WHERE username=? and password=?",
+                    new StudentRowMapper(), username,password);
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
+        if (passwordEncryptor.checkPassword(password, student.getPassword()))
+            return student;
+        return null;
+    }
 
     public List<Student> obtenerTodosStudent(){
         try {
