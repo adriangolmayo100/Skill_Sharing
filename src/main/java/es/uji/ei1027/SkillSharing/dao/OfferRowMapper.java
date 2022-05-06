@@ -16,10 +16,8 @@ public final class OfferRowMapper implements RowMapper<Offer> {
         offer.setIdStudent(rs.getInt("id_student"));
         offer.setIdSkillType(rs.getInt("id_skilltype"));
         offer.setDescription(rs.getString("description"));
-        Time start = rs.getTime("start");
-        offer.setStart(start != null ? rs.getObject("start", Date.class) : null);
-        Time finish = rs.getTime("finish");
-        offer.setFinish(finish != null ? rs.getObject("finish", Date.class) : null);
+        offer.setStart(rs.getDate("start"));
+        offer.setFinish(rs.getDate("finish"));
         offer.setDuration(rs.getInt("duration"));
         offer.setValid(rs.getBoolean("valid"));
         return offer;

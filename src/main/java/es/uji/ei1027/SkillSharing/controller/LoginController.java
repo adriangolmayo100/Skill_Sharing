@@ -23,8 +23,14 @@ public class LoginController {
     private StudentDao studentDao;
 
     @RequestMapping("/login")
-    public String login(Model model){
+    public String login(HttpSession session, Model model){
+        Student student= (Student) session.getAttribute("student");
         model.addAttribute("student", new Student());
+        Student student1 = (Student) session.getAttribute("student");
+        if ( student1 != null)
+        {
+            return "redirect:tipos_usuario/usuario";
+        }
         return "login";
     }
 
