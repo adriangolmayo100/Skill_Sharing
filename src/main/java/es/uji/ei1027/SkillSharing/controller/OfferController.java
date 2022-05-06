@@ -66,7 +66,7 @@ public class OfferController {
     public String addOffer(HttpSession session,Model model){
         String mensaje = validator.comprobar_conexion(session, model, "/add");
         model.addAttribute("offer", new Offer());
-        model.addAttribute("skilltypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "offer/add";
     }
 

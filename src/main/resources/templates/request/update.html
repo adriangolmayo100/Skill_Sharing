@@ -11,7 +11,7 @@
 <body>
 <div  layout:fragment="content">
     <h1>Nova solicitut</h1>
-    <form action="#" th:action="@{/request/add}"
+    <form action="#" th:action="@{/request/update/{id}(id=${request.idRequest})}"
           th:object="${request}" method="post">
         <table class="table table-striped">
             <tr>
@@ -37,13 +37,15 @@
 
             <tr>
                 <td><label>SkillType</label></td>
-                <td><select class="form_control" type="text" th:field="*{id_skilltype}">
-                    <option th:each= "skillType : ${request.getNameSkillTypes()}" value="${skillType}"></option>
+                <td><select class="form_control" type="text" th:field="*{idSkillType}">
+                    <option th:each= "skillType : ${skillTypes}"
+                            th:value="${skillType.getIdSkillType()}"
+                            th:text="${skillType.getName()}"></option>
                 </select></td>
             </tr>
 
             <tr>
-                <td colspan="2"><input type="submit" value="edita" /></td>
+                <td colspan="2"><input type="submit" value="Aceptar" /></td>
             </tr>
         </table>
     </form>

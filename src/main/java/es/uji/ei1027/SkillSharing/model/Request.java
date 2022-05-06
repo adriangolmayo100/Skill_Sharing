@@ -130,4 +130,11 @@ public class Request {
     public void setValid(boolean valid) {
         this.valid = valid;
     }
+    public void updateRequest(Request request){
+        this.setDescription(request.getDescription());
+        this.setFinish(request.getFinish());
+        this.setStart(request.getStart());
+        this.setDuration(request.getDuration());
+        this.setIdSkillType(request.getIdSkillType());
+    }
 }

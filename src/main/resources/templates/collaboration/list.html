@@ -13,8 +13,6 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>idRequest</th>
-            <th>id_offer</th>
             <th>start</th>
             <th>finish</th>
             <th>rating</th>
@@ -23,18 +21,13 @@
         </thead>
         <tbody>
         <tr th:each="colaboration: ${collaborations}">
-            <td th:text="${colaboration.idRequest}"></td>
-            <td th:text="${colaboration.id_offer}"></td>
             <td th:text="${colaboration.start}"></td>
             <td th:text="${colaboration.finish}"></td>
             <td th:text="${colaboration.rating}"></td>
             <td th:text="${colaboration.comments}"></td>
-            <td><a th:href="@{/colaboration/update/{idRequest}/{id_offer}(id_offer=${colaboration.id_offer},idRequest=${colaboration.idRequest})}" class="btn btn-warning" role="button">Editar</a></td>
-            <td><a th:href="@{/colaboration/delete/{idRequest}/{id_offer}(id_offer=${colaboration.id_offer},idRequest=${colaboration.idRequest})}" class="btn btn-danger" role="button">Borrar</a></td>
         </tr>
         </tbody>
     </table>
-    <a href="add" class="btn btn-succes" role="button">Añadir collaboration</a>
 </div>
 </body>
 </html>

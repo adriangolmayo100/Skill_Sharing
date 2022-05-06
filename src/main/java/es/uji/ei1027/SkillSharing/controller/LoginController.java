@@ -54,8 +54,11 @@ public class LoginController {
         session.setAttribute("student", student_completo);
         // Autenticats correctament.
         // Guardem les dades de l'usuari autenticat a la sessió
-        if (session.getAttribute("nextUrl") != null)
-            return "redirect:" + session.getAttribute("nextUrl").toString();
+        if (session.getAttribute("nextUrl") != null){
+            String nextUrl = session.getAttribute("nextUrl").toString();
+            session.removeAttribute("nextUrl");
+            return "redirect:" + nextUrl;
+        }
 
         // Lleva a la página de usuario
         return "redirect:tipos_usuario/usuario";

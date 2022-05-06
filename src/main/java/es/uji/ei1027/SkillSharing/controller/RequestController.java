@@ -29,6 +29,7 @@ public class RequestController {
     private OfferDao offerDao;
     private CollaborationDao collaborationDao;
 
+    private UserValidator validator = new UserValidator();
 
     @Autowired
     public void setCollaborationDao(CollaborationDao collaborationDao){
@@ -70,7 +71,7 @@ public class RequestController {
     @RequestMapping(value = "/delete/{idRequest}")
     public String processDeleteRequest(@PathVariable Integer idRequest){
         requestDao.deleteRequest(idRequest);
-        return "redirect:../../list";
+        return "redirect:../mis_demandas";
     }
 
 
@@ -82,8 +83,10 @@ public class RequestController {
     }
 
     @RequestMapping(value="/add")
-    public String addRequest(Model model){
+    public String addRequest(HttpSession session,Model model){
+        String mensaje = validator.comprobar_conexion(session, model, "/request/add");
         model.addAttribute("request", new Request());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "request/add";
     }
     @RequestMapping(value="/mis_demandas")
@@ -91,7 +94,7 @@ public class RequestController {
         Student student= (Student) session.getAttribute("student");
         if ( student == null)
         {
-            session.setAttribute("nextUrl","/offer/mis_demandas/");
+            session.setAttribute("nextUrl","/request/mis_demandas/");
             model.addAttribute("student", new Student());
             return "login";
         }
@@ -102,8 +105,9 @@ public class RequestController {
     @RequestMapping(value="/add", method=RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("request") Request request,
                                    BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()){
             return "request/add";
+        }
         requestDao.addRequest(request);
         return "redirect:list";
     }
@@ -111,15 +115,18 @@ public class RequestController {
     @RequestMapping(value="/update/{idRequest}", method=RequestMethod.GET)
     public String editRequest(Model model, @PathVariable Integer idRequest){
         model.addAttribute("request", requestDao.getRequest(idRequest));
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "request/update";
     }
 
-    @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(@ModelAttribute("request") Request request,
+    @RequestMapping(value="/update/{id_request}", method = RequestMethod.POST)
+    public String processUpdateSubmit(@ModelAttribute("request") Request requestModel, @PathVariable int id_request,
                                       BindingResult bindingResult){
         if (bindingResult.hasErrors())
             return "request/update";
+        Request request= requestDao.getRequest(id_request);
+        request.updateRequest(requestModel);
         requestDao.updateRequest(request);
-        return "redirect:list";
+        return "redirect:../mis_demandas";
     }
 }
