@@ -35,12 +35,12 @@
             <td th:text="${request.idStudent}"></td>
             <td th:text="${request.idSkillType}"></td>
             <td th:text="${request.valid}"></td>
-            <td><a th:href="@{/offer/mis_requests/{id}(id=${offer.idOffer})}" class="btn btn-success">Aceptar</a>
+            <td><a th:href="@{/request/update/{id}(id=${request.idRequest})}" class="btn btn-success">Actualizar</a></td>
+            <td><a th:href="@{/request/delete/{id}(id=${request.idRequest})}" class="btn btn-success">Eliminar</a></td>
         </tr>
         </tbody>
     </table>
-    <td><a th:href="@{/request/update/{id}(id=${request.idRequest})}" class="btn btn-success">Actualizar</a>
-    <td><a th:href="@{/request/delete/{id}(id=${request.idRequest})}" class="btn btn-success">Eliminar</a>
+
 </div>
 </body>
 </html>

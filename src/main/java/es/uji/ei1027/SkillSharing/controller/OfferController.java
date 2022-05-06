@@ -113,7 +113,8 @@ public class OfferController {
             model.addAttribute("student", new Student());
             return "login";
         }
-        model.addAttribute("offer",offerDao.getOffers(student.getIdStudent()));
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("offers",offerDao.getOffers(student.getIdStudent()));
         return "offer/mis_ofertas";
     }
     @RequestMapping(value="/update", method = RequestMethod.POST)

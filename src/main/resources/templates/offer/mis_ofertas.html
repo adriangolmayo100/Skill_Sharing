@@ -12,7 +12,7 @@
 
 <body>
 <div layout:fragment="content">
-    <h1>Consultar ofertas</h1>
+    <h1>Consultar mis ofertas</h1>
     <table th:unless="${#lists.isEmpty(offers)}" class="table table-striped">
         <thead class="table table-striped">
         <tr>
@@ -32,13 +32,12 @@
             <td th:text="${offer.start}"></td>
             <td th:text="${offer.finish}"></td>
             <td th:text="${offer.duration}"></td>
-            <td><a th:href="@{/offer/mis_ofertas/{id}(id=${offer.idOffer})}" class="btn btn-success">Aceptar</a>
-            </td>
+            <td><a th:href="@{/offer/update/{id}(id=${offer.idOffer})}" class="btn btn-success">Actualizar</a></td>
+            <td><a th:href="@{/offer/delete/{id}(id=${offer.idOffer})}" class="btn btn-success">Eliminar</a></td>
         </tr>
         </tbody>
     </table>
-    <td><a th:href="@{/offer/update/{id}(id=${offer.idOffer})}" class="btn btn-success">Actualizar</a>
-    <td><a th:href="@{/offer/delete/{id}(id=${offer.idOffer})}" class="btn btn-success">Eliminar</a>
+
 </div>
 </body>
 </html>
