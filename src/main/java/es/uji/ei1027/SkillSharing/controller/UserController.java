@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/tipos_usuario")
 public class UserController {
     private StudentDao studentDao;
+    private UserValidator validator = new UserValidator();
 
     @Autowired
     public void setDao(StudentDao userDao){ this.studentDao = userDao; }
@@ -31,7 +32,10 @@ public class UserController {
     }
 
     @RequestMapping("/usuario")
-    public String prueba(Model model){
+    public String prueba(HttpSession session, Model model){
+        String mensaje = validator.comprobar_conexion(session, model, "/tipos_usuario/usuario");
+        if (!mensaje.equals(""))
+            return mensaje;
         return "tipos_usuario/usuario";
     }
 }
