@@ -59,7 +59,7 @@ public class CollaborationDao {
     public List<Collaboration> getMyCollaborations(int idStudent) {
         try {
             return jdbcTemplate.query("SELECT * from Collaboration " +
-                            "JOIN offer USING(id_offer) AS of JOIN request USING(id_request) AS re" +
+                            "JOIN offer AS of USING(id_offer) JOIN request AS re USING(id_request)" +
                             "WHERE of.id_student=?or re.id_student=?",
                     new CollaborationRowMapper(),idStudent,idStudent);
         } catch (EmptyResultDataAccessException e) {

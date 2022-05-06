@@ -21,9 +21,17 @@ public class SkillTypeDao {
     }
 
     public void addSkillType(SkillType skillType){
+        skillType.setIdSkillType(getNextId());
         jdbcTemplate.update("INSERT INTO SkillType VALUES(?, ?, ?, ?)",
                 skillType.getIdSkillType(),skillType.getName(),skillType.getDescription(),skillType.getLevel());
 
+    }
+    public Integer getNextId(){
+        try{
+            return jdbcTemplate.queryForObject("SELECT MAX(id_skilltype) AS max_id FROM skilltype",new MaxIdMapper());
+        }catch(EmptyResultDataAccessException e){
+            return null;
+        }
     }
     public void deleteSkillType(int idSkillType) {
         jdbcTemplate.update("DELETE from SkillType where id_skilltype=?",

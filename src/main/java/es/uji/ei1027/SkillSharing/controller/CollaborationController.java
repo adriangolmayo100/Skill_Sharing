@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/collaboration")
 public class CollaborationController {
+    private UserValidator validator = new UserValidator();
     private CollaborationDao collaborationDao;
     @Autowired
     private SkillTypeDao skillTypeDao;
@@ -41,6 +42,10 @@ public class CollaborationController {
     @RequestMapping("/mis_colaboraciones")
     public String listMisCollaboration(HttpSession session, Model model){
         Student student = (Student) session.getAttribute("student");
+        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/mis_colaboraciones");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         model.addAttribute("collaborations", collaborationDao.getMyCollaborations(student.getIdStudent()));
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "collaboration/mis_colaboraciones";

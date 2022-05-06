@@ -37,7 +37,7 @@ public class RegisterController {
         if(studentDao.obtenerStudentConUser(user) != null){ //Si ya existe usuario con esta cuenta, no vamos a registrarlo
             return "register/usuarioExistente";
         }
-        int max_id = studentDao.obtenerNuevoId();
+        int max_id = studentDao.getNextId();
         if (max_id == -1)
             max_id = 0;
         student.setIdStudent(max_id);

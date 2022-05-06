@@ -2,7 +2,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/base}">
 <head>
-  <title>Crear nova proposta</title>
+  <title>Crear una oferta</title>
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
   <link rel="stylesheet" type="text/css" href="/css/estilo.css"
@@ -28,11 +28,11 @@
       </tr>
       <tr>
         <td><label>Data de inici</label></td>
-        <td><input type="text" th:field="*{start}" placeholder="dd/MM/yyyy" /></td>
+        <td><input type="text" th:field="*{start}" placeholder="yyyy/MM/dd" /></td>
       </tr>
       <tr>
         <td><label>Data de fi</label></td>
-        <td><input type="text" th:field="*{finish}" placeholder="dd/MM/yyyy" /></td>
+        <td><input type="text" th:field="*{finish}" placeholder="yyyy/MM/dd" /></td>
       </tr>
 
       <tr>

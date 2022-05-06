@@ -57,15 +57,17 @@ public class RequestController {
             return "login";
         }
         Request request = requestDao.getRequest(idRequest);
-        request.setValid(false);
-        requestDao.updateRequest(request);
-        Offer offer = new Offer();
-        offer.createOfferForRequest(request);
-        offer.setIdStudent(student.getIdStudent());
-        offerDao.addOffer(offer);
-        Collaboration collaboration = new Collaboration();
-        collaboration.createCollaboration(offer,request);
-        collaborationDao.addCollaboration(collaboration);
+        if (student.getIdStudent()!=request.getIdStudent()){
+            request.setValid(false);
+            requestDao.updateRequest(request);
+            Offer offer = new Offer();
+            offer.createOfferForRequest(request);
+            offer.setIdStudent(student.getIdStudent());
+            offerDao.addOffer(offer);
+            Collaboration collaboration = new Collaboration();
+            collaboration.createCollaboration(offer,request);
+            collaborationDao.addCollaboration(collaboration);
+        }
         return "redirect:../list";
     }
     @RequestMapping(value = "/delete/{idRequest}")
@@ -103,13 +105,17 @@ public class RequestController {
         return "request/mis_demandas";
     }
     @RequestMapping(value="/add", method=RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("request") Request request,
-                                   BindingResult bindingResult) {
+    public String processAddSubmit(@ModelAttribute("request") Request request,Model model,
+                                   BindingResult bindingResult,HttpSession session) {
         if (bindingResult.hasErrors()){
+            model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
             return "request/add";
         }
+        Student student= (Student) session.getAttribute("student");
+        request.setValid(true);
+        request.setIdStudent(student.getIdStudent());
         requestDao.addRequest(request);
-        return "redirect:list";
+        return "redirect:/request/mis_demandas";
     }
 
     @RequestMapping(value="/update/{idRequest}", method=RequestMethod.GET)
