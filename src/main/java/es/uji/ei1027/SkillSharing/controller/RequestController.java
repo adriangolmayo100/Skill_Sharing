@@ -95,7 +95,7 @@ public class RequestController {
             model.addAttribute("student", new Student());
             return "login";
         }
-        model.addAttribute("request",requestDao.getRequests());
+        model.addAttribute("request",requestDao.getRequests(student.getIdStudent()));
         return "request/mis_demandas";
     }
     @RequestMapping(value="/add", method=RequestMethod.POST)

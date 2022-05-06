@@ -66,4 +66,13 @@ public class OfferDao {
             return new ArrayList<>();
         }
     }
+
+    public List<Offer> getOffers(int idUser){
+        try{
+            return jdbcTemplate.query("SELECT * FROM offer WHERE=?",
+                    new OfferRowMapper(),idUser);
+        }catch(EmptyResultDataAccessException e){
+            return new ArrayList<>();
+        }
+    }
 }
