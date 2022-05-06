@@ -14,7 +14,7 @@ public final class OfferRowMapper implements RowMapper<Offer> {
     public Offer mapRow(ResultSet rs, int rowNum) throws SQLException {
         Offer offer = new Offer();
         offer.setIdStudent(rs.getInt("id_student"));
-        offer.setSkillType(rs.getString("id_skilltype"));
+        offer.setIdSkillType(rs.getInt("id_skilltype"));
         offer.setDescription(rs.getString("description"));
         Time start = rs.getTime("start");
         offer.setStart(start != null ? rs.getObject("start", Date.class) : null);

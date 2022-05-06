@@ -66,4 +66,5 @@ public class OfferDao {
             return new ArrayList<>();
         }
     }
+
 }
