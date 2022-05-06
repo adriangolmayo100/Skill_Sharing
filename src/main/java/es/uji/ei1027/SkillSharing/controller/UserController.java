@@ -7,6 +7,7 @@ import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -28,10 +29,5 @@ public class UserController {
             String password = usuario.getPassword();
         }
         return session.getAttribute("nextUrl").toString();
-    }
-
-    @RequestMapping("/usuario")
-    public String prueba(Model model){
-        return "tipos_usuario/usuario";
     }
 }
