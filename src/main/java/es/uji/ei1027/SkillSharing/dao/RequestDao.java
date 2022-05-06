@@ -68,4 +68,13 @@ public class RequestDao {
         }
     }
 
+    public List<Request> getRequests(int idUser) {
+        try {
+            return jdbcTemplate.query("SELECT * from Request WHERE = id_student?",
+                    new RequestRowMapper(), idUser);
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Request>();
+        }
+    }
+
 }
