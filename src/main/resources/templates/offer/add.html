@@ -37,8 +37,10 @@
 
       <tr>
         <td><label>SkillType</label></td>
-        <td><select class="form_control" type="text" th:field="*{id_skilltype}">
-          <option th:each= "skillType : ${offer.getNameSkillTypes()}" value="${skillType}"></option>
+        <td><select class="form_control" type="text" th:field="*{idSkillType}">
+          <option th:each= "skillType : ${skillTypes}"
+                  th:value="${skillType.getIdSkillType()}"
+                  th:text="${skillType.getName()}"></option>
         </select></td>
       </tr>
 

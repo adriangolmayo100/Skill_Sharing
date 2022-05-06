@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -64,8 +63,10 @@ public class OfferController {
 
 
     @RequestMapping(value="/add")
-    public String addOffer(Model model){
+    public String addOffer(HttpSession session,Model model){
+        String mensaje = validator.comprobar_conexion(session, model, "/add");
         model.addAttribute("offer", new Offer());
+        model.addAttribute("skilltypes", skillTypeDao.getSkillTypes());
         return "offer/add";
     }
 
@@ -74,6 +75,7 @@ public class OfferController {
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "offer/add";
+
         offerDao.addOffer(offer);
         return "redirect:list";
     }
