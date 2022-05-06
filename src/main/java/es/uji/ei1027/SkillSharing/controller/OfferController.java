@@ -4,10 +4,7 @@ import es.uji.ei1027.SkillSharing.dao.CollaborationDao;
 import es.uji.ei1027.SkillSharing.dao.OfferDao;
 import es.uji.ei1027.SkillSharing.dao.RequestDao;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
-import es.uji.ei1027.SkillSharing.model.Collaboration;
-import es.uji.ei1027.SkillSharing.model.Offer;
-import es.uji.ei1027.SkillSharing.model.Request;
-import es.uji.ei1027.SkillSharing.model.Student;
+import es.uji.ei1027.SkillSharing.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -107,6 +106,7 @@ public class OfferController {
     @RequestMapping(value="/update/{idOffer}", method=RequestMethod.GET)
     public String editOffer(Model model, @PathVariable Integer idOffer){
         model.addAttribute("offer", offerDao.getOffer(idOffer));
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "offer/update";
     }
     @RequestMapping(value="/mis_ofertas")
@@ -118,16 +118,22 @@ public class OfferController {
             model.addAttribute("student", new Student());
             return "login";
         }
-        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        List<SkillType> skillTypeList = skillTypeDao.getSkillTypes();
+        model.addAttribute("skillTypes", skillTypeList);
+        List<String> listSkillTypes = new ArrayList<>();
+        for (SkillType skillType: skillTypeList){
+            listSkillTypes.add(skillType.getName());
+        }
         model.addAttribute("offers",offerDao.getOffers(student.getIdStudent()));
         return "offer/mis_ofertas";
     }
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(@ModelAttribute("offer") Offer offer,
                                       BindingResult bindingResult){
+        System.out.println(offer);
         if (bindingResult.hasErrors())
             return "offer/update";
         offerDao.updateOffer(offer);
-        return "redirect:list";
+        return "redirect:mis_ofertas";
     }
 }

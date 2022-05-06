@@ -41,11 +41,12 @@ public class OfferDao {
                 offer.getStart(), offer.getFinish(), offer.getDuration(),offer.isValid(), offer.getIdOffer());
     }
 
-    public Offer getOffer(Integer idOffer){
+    public Offer getOffer(int idOffer){
         try{
             return jdbcTemplate.queryForObject("Select * from offer where id_offer=?",
                     new OfferRowMapper(), idOffer);
         }catch(EmptyResultDataAccessException e){
+            e.printStackTrace();
             return null;
         }
     }

@@ -11,8 +11,8 @@ public final class CollaborationRowMapper implements RowMapper<Collaboration> {
 
     public Collaboration mapRow(ResultSet rs, int rowNum) throws SQLException{
         Collaboration collaboration = new Collaboration();
-        collaboration.setIdRequest(rs.getInt("idrequest"));
-        collaboration.setIdOffer(rs.getInt("IdOffer"));
+        collaboration.setIdRequest(rs.getInt("id_request"));
+        collaboration.setIdOffer(rs.getInt("id_offer"));
         Date d = rs.getObject("start", Date.class);
         collaboration.setStart((Date) d);
         Date d1 =rs.getObject("finish", Date.class);
