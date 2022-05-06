@@ -132,5 +132,12 @@ public class Offer {
         this.idSkillType=request.getIdSkillType();
         this.valid=request.isValid();
     }
+    public void updateOffer(Offer offer){
+        this.setDescription(offer.getDescription());
+        this.setFinish(offer.getFinish());
+        this.setStart(offer.getStart());
+        this.setDuration(offer.getDuration());
+        this.setIdSkillType(offer.getIdSkillType());
+    }
 
 }

@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Crear nova proposta</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
+</head>
+<body>
+<div  layout:fragment="content">
+    <h1>Nova proposta</h1>
+    <form action="#" th:action="@{/offer/update/{id}(id=${offer.idOffer})}"
+          th:object="${offer}" method="post">
+        <table class="table table-striped">
+            <tr>
+                <td><label>Descripció</label></td>
+                <td><input type="text" th:field="*{description}"/></td>
+
+
+            </tr>
+            <tr>
+                <td><label>Duració</label></td>
+                <td><input type="text" th:field="*{duration}"/></td>
+
+            </tr>
+            <tr>
+                <td><label>Data de inici</label></td>
+                <td><input type="text" th:field="*{start}" placeholder="dd/MM/yyyy" /></td>
+            </tr>
+            <tr>
+                <td><label>Data de fi</label></td>
+                <td><input type="text" th:field="*{finish}" placeholder="dd/MM/yyyy" /></td>
+            </tr>
+
+            <tr>
+                <td><label>SkillType</label></td>
+                <td><select class="form_control" type="text" th:field="*{idSkillType}">
+                    <option th:each= "skillType : ${skillTypes}"
+                            th:value="${skillType.getIdSkillType()}"
+                            th:text="${skillType.getName()}"></option>
+                </select></td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><input type="submit" value="Aceptar" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

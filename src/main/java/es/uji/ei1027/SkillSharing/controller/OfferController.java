@@ -50,7 +50,7 @@ public class OfferController {
     @RequestMapping(value = "/delete/{idOffer}")
     public String processDeleteOffer(@PathVariable Integer idOffer){
         offerDao.deleteOffer(idOffer);
-        return "redirect:../../list";
+        return "redirect:../mis_ofertas";
     }
 
 
@@ -120,20 +120,17 @@ public class OfferController {
         }
         List<SkillType> skillTypeList = skillTypeDao.getSkillTypes();
         model.addAttribute("skillTypes", skillTypeList);
-        List<String> listSkillTypes = new ArrayList<>();
-        for (SkillType skillType: skillTypeList){
-            listSkillTypes.add(skillType.getName());
-        }
         model.addAttribute("offers",offerDao.getOffers(student.getIdStudent()));
         return "offer/mis_ofertas";
     }
-    @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(@ModelAttribute("offer") Offer offer,
-                                      BindingResult bindingResult){
-        System.out.println(offer);
+    @RequestMapping(value="/update/{idOffer}", method = RequestMethod.POST)
+    public String processUpdateSubmit(@ModelAttribute("offer") Offer offerModel,
+                                      BindingResult bindingResult,@PathVariable Integer idOffer){
         if (bindingResult.hasErrors())
             return "offer/update";
+        Offer offer = offerDao.getOffer(idOffer);
+        offer.updateOffer(offerModel);
         offerDao.updateOffer(offer);
-        return "redirect:mis_ofertas";
+        return "redirect:../mis_ofertas";
     }
 }
