@@ -56,4 +56,14 @@ public class CollaborationDao {
             return new ArrayList<Collaboration>();
         }
     }
+    public List<Collaboration> getMyCollaborations(int idStudent) {
+        try {
+            return jdbcTemplate.query("SELECT * from Collaboration " +
+                            "JOIN offer USING(id_offer) AS of JOIN request USING(id_request) AS re" +
+                            "WHERE of.id_student=?or re.id_student=?",
+                    new CollaborationRowMapper(),idStudent,idStudent);
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Collaboration>();
+        }
+    }
 }
