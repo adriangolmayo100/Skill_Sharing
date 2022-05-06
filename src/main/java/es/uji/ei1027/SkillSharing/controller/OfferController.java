@@ -28,6 +28,7 @@ public class OfferController {
     private SkillTypeDao skillTypeDao;
     private RequestDao requestDao;
     private CollaborationDao collaborationDao;
+    private UserValidator validator;
 
 
     @Autowired
@@ -79,12 +80,16 @@ public class OfferController {
     }
     @RequestMapping(value="/accept/{id}", method=RequestMethod.GET)
     public String accept(HttpSession session, Model model, @PathVariable Integer id) {
-        Student student= (Student) session.getAttribute("student");
-        if ( student == null)
+        /*if ( student == null)
         {
             session.setAttribute("nextUrl","/offer/accept/"+id);
             model.addAttribute("student", new Student());
             return "login";
+        }*/
+        Student student= (Student) session.getAttribute("student");
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}", id);
+        if (!mensaje.equals("")){
+            return mensaje;
         }
         Offer offer = offerDao.getOffer(id);
         offer.setValid(false);

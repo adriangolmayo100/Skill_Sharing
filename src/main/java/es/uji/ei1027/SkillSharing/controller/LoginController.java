@@ -84,7 +84,14 @@ class UserValidator implements Validator {      //Clase para comprobar que no se
             errors.rejectValue("username", "badUser", "usuario requerido");
         if (password.equals(""))
             errors.rejectValue("password", "badPassword", "usuario requerido");
-
-
+    }
+    public String comprobar_conexion(HttpSession session, Model model, String url, Integer id) {
+        Student student = (Student) session.getAttribute("student");
+        if (student == null) {
+            session.setAttribute("nextUrl", url + id);
+            model.addAttribute("student", new Student());
+            return "login";
+        }
+        return "";
     }
 }
