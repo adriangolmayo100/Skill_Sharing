@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado skill type</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <h1>Lista de mis colaboraciones</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>start</th>
+            <th>finish</th>
+            <th>rating</th>
+            <th>comments</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="colaboration: ${collaborations}">
+            <td th:text="${colaboration.start}"></td>
+            <td th:text="${colaboration.finish}"></td>
+            <td th:text="${colaboration.rating}"></td>
+            <td th:text="${colaboration.comments}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
