@@ -27,7 +27,7 @@ public class OfferController {
     private SkillTypeDao skillTypeDao;
     private RequestDao requestDao;
     private CollaborationDao collaborationDao;
-    private UserValidator validator;
+    private UserValidator validator = new UserValidator();
 
 
     @Autowired
@@ -86,7 +86,7 @@ public class OfferController {
             return "login";
         }*/
         Student student= (Student) session.getAttribute("student");
-        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}", id);
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
         if (!mensaje.equals("")){
             return mensaje;
         }
