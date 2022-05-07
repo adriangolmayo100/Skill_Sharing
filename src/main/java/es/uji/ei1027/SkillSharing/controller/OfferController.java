@@ -83,6 +83,8 @@ public class OfferController {
     @RequestMapping(value="/add", method=RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("offer") Offer offer, Model model,
                                    BindingResult bindingResult,HttpSession session) {
+        OfferValidator offerValidator = new OfferValidator();
+        offerValidator.validate(offer,bindingResult);
         if (bindingResult.hasErrors()){
             model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
             return "offer/add";

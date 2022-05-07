@@ -114,6 +114,8 @@ public class RequestController {
     @RequestMapping(value="/add", method=RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("request") Request request,Model model,
                                    BindingResult bindingResult,HttpSession session) {
+        RequestValidator requestValidator = new RequestValidator();
+        requestValidator.validate(request,bindingResult);
         if (bindingResult.hasErrors()){
             model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
             return "request/add";

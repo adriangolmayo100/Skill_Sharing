@@ -14,7 +14,9 @@ public class Offer {
     private int idStudent;
     private int idSkillType;
     private String description;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date start;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date finish;
     private int duration;
     private boolean valid;
