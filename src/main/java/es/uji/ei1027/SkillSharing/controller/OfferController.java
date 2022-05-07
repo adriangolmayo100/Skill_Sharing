@@ -47,7 +47,11 @@ public class OfferController {
     }
 
     @RequestMapping(value = "/delete/{idOffer}")
-    public String processDeleteOffer(@PathVariable Integer idOffer){
+    public String processDeleteOffer(HttpSession session, Model model, @PathVariable Integer idOffer){
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         offerDao.deleteOffer(idOffer);
         return "redirect:../mis_ofertas";
     }
@@ -55,6 +59,10 @@ public class OfferController {
 
     @RequestMapping("/list")
     public String listOffer(Model model, HttpSession session){
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         model.addAttribute("offers", offerDao.getValidOffers());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "offer/list";
@@ -63,7 +71,6 @@ public class OfferController {
 
     @RequestMapping(value="/add")
     public String addOffer(HttpSession session,Model model){
-        Student student= (Student) session.getAttribute("student");
         String mensaje = validator.comprobar_conexion(session, model, "offer/add");
         if (!mensaje.equals("")){
             return mensaje;
@@ -109,7 +116,11 @@ public class OfferController {
     }
 
     @RequestMapping(value="/update/{idOffer}", method=RequestMethod.GET)
-    public String editOffer(Model model, @PathVariable Integer idOffer){
+    public String editOffer(HttpSession session, Model model, @PathVariable Integer idOffer){
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         model.addAttribute("offer", offerDao.getOffer(idOffer));
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "offer/update";

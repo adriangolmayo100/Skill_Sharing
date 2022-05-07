@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @RequestMapping("/usuario")
-    public String prueba(HttpSession session, Model model){
+    public String pagStudent(HttpSession session, Model model){
         String mensaje = validator.comprobar_conexion(session, model, "/tipos_usuario/usuario");
         if (!mensaje.equals(""))
             return mensaje;
