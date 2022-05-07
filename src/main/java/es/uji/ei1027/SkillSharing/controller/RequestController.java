@@ -28,6 +28,8 @@ public class RequestController {
     private SkillTypeDao skillTypeDao;
     private OfferDao offerDao;
     private CollaborationDao collaborationDao;
+    private UserValidator validator = new UserValidator();
+
 
 
     @Autowired

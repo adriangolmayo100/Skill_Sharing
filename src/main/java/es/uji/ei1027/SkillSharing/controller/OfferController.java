@@ -80,12 +80,6 @@ public class OfferController {
     }
     @RequestMapping(value="/accept/{id}", method=RequestMethod.GET)
     public String accept(HttpSession session, Model model, @PathVariable Integer id) {
-        /*if ( student == null)
-        {
-            session.setAttribute("nextUrl","/offer/accept/"+id);
-            model.addAttribute("student", new Student());
-            return "login";
-        }*/
         Student student= (Student) session.getAttribute("student");
         String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
         if (!mensaje.equals("")){
