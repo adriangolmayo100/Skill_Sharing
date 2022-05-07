@@ -115,15 +115,6 @@ public class Offer {
             }
         }
     }
-    public List<String> getNameSkillTypes(){
-        SkillTypeDao s = new SkillTypeDao();
-        List<SkillType> l = s.getSkillTypes();
-        List<String> names = new ArrayList<>();
-        for (SkillType sk : l){
-            names.add(sk.getName());
-        }
-        return names;
-    }
     public void createOfferForRequest(Request request){
         this.description=request.getDescription();
         this.duration=request.getDuration();
@@ -131,6 +122,13 @@ public class Offer {
         this.finish=request.getFinish();
         this.idSkillType=request.getIdSkillType();
         this.valid=request.isValid();
+    }
+    public void updateOffer(Offer offer){
+        this.setDescription(offer.getDescription());
+        this.setFinish(offer.getFinish());
+        this.setStart(offer.getStart());
+        this.setDuration(offer.getDuration());
+        this.setIdSkillType(offer.getIdSkillType());
     }
 
 }

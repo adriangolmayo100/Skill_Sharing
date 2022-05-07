@@ -4,10 +4,7 @@ import es.uji.ei1027.SkillSharing.dao.CollaborationDao;
 import es.uji.ei1027.SkillSharing.dao.OfferDao;
 import es.uji.ei1027.SkillSharing.dao.RequestDao;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
-import es.uji.ei1027.SkillSharing.model.Collaboration;
-import es.uji.ei1027.SkillSharing.model.Offer;
-import es.uji.ei1027.SkillSharing.model.Request;
-import es.uji.ei1027.SkillSharing.model.Student;
+import es.uji.ei1027.SkillSharing.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Controller
@@ -51,13 +49,12 @@ public class OfferController {
     @RequestMapping(value = "/delete/{idOffer}")
     public String processDeleteOffer(@PathVariable Integer idOffer){
         offerDao.deleteOffer(idOffer);
-        return "redirect:../../list";
+        return "redirect:../mis_ofertas";
     }
 
 
     @RequestMapping("/list")
     public String listOffer(Model model, HttpSession session){
-        Student student = (Student) session.getAttribute("student");
         model.addAttribute("offers", offerDao.getValidOffers());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "offer/list";
@@ -65,18 +62,29 @@ public class OfferController {
 
 
     @RequestMapping(value="/add")
-    public String addOffer(Model model){
+    public String addOffer(HttpSession session,Model model){
+        Student student= (Student) session.getAttribute("student");
+        String mensaje = validator.comprobar_conexion(session, model, "offer/add");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         model.addAttribute("offer", new Offer());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "offer/add";
     }
 
     @RequestMapping(value="/add", method=RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("offer") Offer offer,
-                                   BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+    public String processAddSubmit(@ModelAttribute("offer") Offer offer, Model model,
+                                   BindingResult bindingResult,HttpSession session) {
+        if (bindingResult.hasErrors()){
+            model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
             return "offer/add";
+        }
+        Student student= (Student) session.getAttribute("student");
+        offer.setValid(true);
+        offer.setIdStudent(student.getIdStudent());
         offerDao.addOffer(offer);
-        return "redirect:list";
+        return "redirect:/offer/mis_ofertas";
     }
     @RequestMapping(value="/accept/{id}", method=RequestMethod.GET)
     public String accept(HttpSession session, Model model, @PathVariable Integer id) {
@@ -86,21 +94,24 @@ public class OfferController {
             return mensaje;
         }
         Offer offer = offerDao.getOffer(id);
-        offer.setValid(false);
-        offerDao.updateOffer(offer);
-        Request request = new Request();
-        request.setIdStudent(student.getIdStudent());
-        request.createRequestForOffer(offer);
-        requestDao.addRequest(request);
-        Collaboration collaboration = new Collaboration();
-        collaboration.createCollaboration(offer,request);
-        collaborationDao.addCollaboration(collaboration);
+        if (student.getIdStudent()!=offer.getIdStudent()){
+            offer.setValid(false);
+            offerDao.updateOffer(offer);
+            Request request = new Request();
+            request.setIdStudent(student.getIdStudent());
+            request.createRequestForOffer(offer);
+            requestDao.addRequest(request);
+            Collaboration collaboration = new Collaboration();
+            collaboration.createCollaboration(offer,request);
+            collaborationDao.addCollaboration(collaboration);
+        }
         return "redirect:../list";
     }
 
     @RequestMapping(value="/update/{idOffer}", method=RequestMethod.GET)
     public String editOffer(Model model, @PathVariable Integer idOffer){
         model.addAttribute("offer", offerDao.getOffer(idOffer));
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "offer/update";
     }
     @RequestMapping(value="/mis_ofertas")
@@ -112,16 +123,19 @@ public class OfferController {
             model.addAttribute("student", new Student());
             return "login";
         }
-        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        List<SkillType> skillTypeList = skillTypeDao.getSkillTypes();
+        model.addAttribute("skillTypes", skillTypeList);
         model.addAttribute("offers",offerDao.getOffers(student.getIdStudent()));
         return "offer/mis_ofertas";
     }
-    @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(@ModelAttribute("offer") Offer offer,
-                                      BindingResult bindingResult){
+    @RequestMapping(value="/update/{idOffer}", method = RequestMethod.POST)
+    public String processUpdateSubmit(@ModelAttribute("offer") Offer offerModel,
+                                      BindingResult bindingResult,@PathVariable Integer idOffer){
         if (bindingResult.hasErrors())
             return "offer/update";
+        Offer offer = offerDao.getOffer(idOffer);
+        offer.updateOffer(offerModel);
         offerDao.updateOffer(offer);
-        return "redirect:list";
+        return "redirect:../mis_ofertas";
     }
 }

@@ -11,11 +11,10 @@
 <body>
 <div  layout:fragment="content">
     <h1>Nova proposta</h1>
-    <form action="#" th:action="@{/offer/add}"
+    <form action="#" th:action="@{/offer/update/{id}(id=${offer.idOffer})}"
           th:object="${offer}" method="post">
         <table class="table table-striped">
             <tr>
-
                 <td><label>Descripció</label></td>
                 <td><input type="text" th:field="*{description}"/></td>
 
@@ -37,13 +36,15 @@
 
             <tr>
                 <td><label>SkillType</label></td>
-                <td><select class="form_control" type="text" th:field="*{id_skilltype}">
-                    <option th:each= "skillType : ${offer.getNameSkillTypes()}" value="${skillType}"></option>
+                <td><select class="form_control" type="text" th:field="*{idSkillType}">
+                    <option th:each= "skillType : ${skillTypes}"
+                            th:value="${skillType.getIdSkillType()}"
+                            th:text="${skillType.getName()}"></option>
                 </select></td>
             </tr>
 
             <tr>
-                <td colspan="2"><input type="submit" value="edita" /></td>
+                <td colspan="2"><input type="submit" value="Aceptar" /></td>
             </tr>
         </table>
     </form>

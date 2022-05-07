@@ -1,9 +1,9 @@
 package es.uji.ei1027.SkillSharing.controller;
 
 import es.uji.ei1027.SkillSharing.dao.CollaborationDao;
-import es.uji.ei1027.SkillSharing.dao.OfferDao;
+import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import es.uji.ei1027.SkillSharing.model.Collaboration;
-import es.uji.ei1027.SkillSharing.model.Offer;
+import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/collaboration")
 public class CollaborationController {
+    private UserValidator validator = new UserValidator();
     private CollaborationDao collaborationDao;
-
-
+    @Autowired
+    private SkillTypeDao skillTypeDao;
     @Autowired
     public void setCollaborationDao(CollaborationDao collaborationDao){
         this.collaborationDao = collaborationDao;
@@ -32,8 +35,20 @@ public class CollaborationController {
 
     @RequestMapping("/list")
     public String listCollaboration(Model model){
-        model.addAttribute("collaborations", collaborationDao.getCollaboration());
+        model.addAttribute("collaborations", collaborationDao.getCollaborations());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "collaboration/list";
+    }
+    @RequestMapping("/mis_colaboraciones")
+    public String listMisCollaboration(HttpSession session, Model model){
+        Student student = (Student) session.getAttribute("student");
+        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/mis_colaboraciones");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
+        model.addAttribute("collaborations", collaborationDao.getMyCollaborations(student.getIdStudent()));
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        return "collaboration/mis_colaboraciones";
     }
 
     @RequestMapping(value="/add")

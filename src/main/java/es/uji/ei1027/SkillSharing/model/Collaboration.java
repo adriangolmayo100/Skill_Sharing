@@ -1,8 +1,11 @@
 package es.uji.ei1027.SkillSharing.model;
 
+import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Collaboration{
     private int idRequest;
@@ -13,6 +16,32 @@ public class Collaboration{
     private Date finish;
     private int rating;
     private String comments;
+    private int idSkillType;
+    private String description;
+    private int duration;
+    public int getIdSkillType() {
+        return idSkillType;
+    }
+
+    public void setIdSkillType(int idSkillType) {
+        this.idSkillType = idSkillType;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 
 
     public int getIdRequest() {
@@ -63,22 +92,32 @@ public class Collaboration{
         this.comments = comments;
     }
 
+
     @Override
     public String toString() {
         return "Collaboration{" +
-                "id_offer=" + idOffer +
+                "idRequest=" + idRequest +
+                ", idOffer=" + idOffer +
                 ", start=" + start +
                 ", finish=" + finish +
                 ", rating=" + rating +
                 ", comments='" + comments + '\'' +
-                ", idRequest=" + idRequest +
+                ", idSkillType=" + idSkillType +
+                ", description='" + description + '\'' +
+                ", duration=" + duration +
                 '}';
     }
+
     public void createCollaboration(Offer offer,Request request){
         this.setIdOffer(offer.getIdOffer());
         this.setIdRequest(request.getIdRequest());
-        this.setStart(offer.getStart());
-        this.setFinish(offer.getFinish());
         this.setComments("");
+    }
+    public String getNameSkillType(List<SkillType> skillTypeList){
+        for(SkillType skillType: skillTypeList){
+            if(idSkillType==skillType.getIdSkillType())
+                return skillType.getName();
+        }
+        return "";
     }
 }

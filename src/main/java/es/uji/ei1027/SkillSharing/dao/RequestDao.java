@@ -19,10 +19,15 @@ public class RequestDao {
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
-
+    public Integer getNextId(){
+        try{
+            return jdbcTemplate.queryForObject("SELECT MAX(id_request) AS max_id FROM request",new MaxIdMapper()) + 1;
+        }catch(EmptyResultDataAccessException e){
+            return null;
+        }
+    }
     public void addRequest(Request request) {
-        List<Request>l=getRequests();
-        request.setIdRequest(l.size()+1);
+        request.setIdRequest(getNextId());
         jdbcTemplate.update("INSERT INTO Request VALUES(?, ?, ?, ?,?,?,?,?)",
                 request.getIdRequest(),request.getIdStudent(),request.getIdSkillType(),request.getDescription(),request.getStart(), request.getFinish(),request.getDuration(),request.isValid());
     }

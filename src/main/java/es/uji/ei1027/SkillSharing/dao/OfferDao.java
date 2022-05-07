@@ -19,13 +19,18 @@ public class OfferDao {
     public void setDataSource(DataSource dataSource) { jdbcTemplate = new JdbcTemplate(dataSource); }
 
     public void addOffer(Offer offer){
-        List<Offer>l=getOffers();
-        offer.setIdOffer(l.size()+1);
+        offer.setIdOffer(getNextId());
         jdbcTemplate.update("INSERT INTO Offer Values(?, ?, ?, ?, ?, ?, ?,?)",
                 offer.getIdOffer(), offer.getIdStudent(), offer.getIdSkillType(), offer.getDescription(),
                 offer.getStart(), offer.getFinish(), offer.getDuration(), offer.isValid());
     }
-
+    public Integer getNextId(){
+        try{
+            return jdbcTemplate.queryForObject("SELECT MAX(id_offer) AS max_id FROM offer",new MaxIdMapper()) + 1;
+        }catch(EmptyResultDataAccessException e){
+            return null;
+        }
+    }
     public void deleteOffer(Integer idOffer){
         jdbcTemplate.update("DELETE FROM Offer where id_offer=?", idOffer);
     }
@@ -41,7 +46,7 @@ public class OfferDao {
                 offer.getStart(), offer.getFinish(), offer.getDuration(),offer.isValid(), offer.getIdOffer());
     }
 
-    public Offer getOffer(Integer idOffer){
+    public Offer getOffer(int idOffer){
         try{
             return jdbcTemplate.queryForObject("Select * from offer where id_offer=?",
                     new OfferRowMapper(), idOffer);

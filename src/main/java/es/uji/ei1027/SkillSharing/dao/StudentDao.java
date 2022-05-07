@@ -10,8 +10,7 @@ import org.jasypt.util.password.BasicPasswordEncryptor;
 
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Repository // En Spring els DAOs van anotats amb @Repository
 public class StudentDao{
@@ -64,11 +63,10 @@ public class StudentDao{
     }
 
 
-    public int obtenerNuevoId(){ //Funcion para obtener el máximo id. Si por ejemplo el student 1 se borra, nos aseguramos de que el siguiente student no se meta en medio sino(como teniamos antes) que se vaya anotando al final
+    public Integer getNextId(){
         try{
-            return jdbcTemplate.queryForObject("Select MAX(id_student) from Student",
-                    new StudentRowMapper()).getIdStudent();
-        } catch (EmptyResultDataAccessException e) {
+            return jdbcTemplate.queryForObject("SELECT MAX(id_offer) AS max_id FROM offer",new MaxIdMapper()) + 1;
+        }catch(EmptyResultDataAccessException e){
             return -1;
         }
     }
