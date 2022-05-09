@@ -34,7 +34,11 @@ public class CollaborationController {
     }
 
     @RequestMapping("/list")
-    public String listCollaboration(Model model){
+    public String listCollaboration(HttpSession session, Model model){
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         model.addAttribute("collaborations", collaborationDao.getCollaborations());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "collaboration/list";
@@ -52,7 +56,11 @@ public class CollaborationController {
     }
 
     @RequestMapping(value="/add")
-    public String addCollaboration(Model model){
+    public String addCollaboration(HttpSession session, Model model){
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         model.addAttribute("collaboration", new Collaboration());
         return "collaboration/add";
     }
@@ -67,14 +75,22 @@ public class CollaborationController {
     }
 
     @RequestMapping(value="/update/{idRequest}/{idOffer}", method=RequestMethod.GET)
-    public String editCollaboration(Model model,@PathVariable Integer idRequest, @PathVariable Integer idOffer){
+    public String editCollaboration(HttpSession session, Model model,@PathVariable Integer idRequest, @PathVariable Integer idOffer){
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         model.addAttribute("collaboration", collaborationDao.getCollaboration(idRequest,idOffer));
         return "collaboration/update";
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(@ModelAttribute("collaboration") Collaboration collaboration,
+    public String processUpdateSubmit(HttpSession session, Model model, @ModelAttribute("collaboration") Collaboration collaboration,
                                       BindingResult bindingResult){
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         if (bindingResult.hasErrors())
             return "collaboration/update";
         collaborationDao.updateCollaboration(collaboration);

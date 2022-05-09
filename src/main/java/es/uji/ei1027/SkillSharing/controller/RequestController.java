@@ -28,8 +28,8 @@ public class RequestController {
     private SkillTypeDao skillTypeDao;
     private OfferDao offerDao;
     private CollaborationDao collaborationDao;
-
     private UserValidator validator = new UserValidator();
+
 
     @Autowired
     public void setCollaborationDao(CollaborationDao collaborationDao){
@@ -50,11 +50,9 @@ public class RequestController {
     @RequestMapping(value="/accept/{idRequest}", method=RequestMethod.GET)
     public String accept(HttpSession session, Model model, @PathVariable Integer idRequest) {
         Student student= (Student) session.getAttribute("student");
-        if ( student == null)
-        {
-            session.setAttribute("nextUrl","/request/accept/"+idRequest);
-            model.addAttribute("student", new Student());
-            return "login";
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        if (!mensaje.equals("")){
+            return mensaje;
         }
         Request request = requestDao.getRequest(idRequest);
         if (student.getIdStudent()!=request.getIdStudent()){
@@ -71,14 +69,22 @@ public class RequestController {
         return "redirect:../list";
     }
     @RequestMapping(value = "/delete/{idRequest}")
-    public String processDeleteRequest(@PathVariable Integer idRequest){
+    public String processDeleteRequest(HttpSession session, Model model, @PathVariable Integer idRequest){
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         requestDao.deleteRequest(idRequest);
         return "redirect:../mis_demandas";
     }
 
 
     @RequestMapping("/list")
-    public String listRequest(Model model){
+    public String listRequest(HttpSession session, Model model){
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         model.addAttribute("requests", requestDao.getValidRequests());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "request/list";
@@ -86,7 +92,10 @@ public class RequestController {
 
     @RequestMapping(value="/add")
     public String addRequest(HttpSession session,Model model){
-        String mensaje = validator.comprobar_conexion(session, model, "/request/add");
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         model.addAttribute("request", new Request());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "request/add";
@@ -94,11 +103,9 @@ public class RequestController {
     @RequestMapping(value="/mis_demandas")
     public String mis_requests(HttpSession session,Model model){
         Student student= (Student) session.getAttribute("student");
-        if ( student == null)
-        {
-            session.setAttribute("nextUrl","/request/mis_demandas/");
-            model.addAttribute("student", new Student());
-            return "login";
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        if (!mensaje.equals("")){
+            return mensaje;
         }
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         model.addAttribute("requests",requestDao.getRequests(student.getIdStudent()));
@@ -107,6 +114,8 @@ public class RequestController {
     @RequestMapping(value="/add", method=RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("request") Request request,Model model,
                                    BindingResult bindingResult,HttpSession session) {
+        RequestValidator requestValidator = new RequestValidator();
+        requestValidator.validate(request,bindingResult);
         if (bindingResult.hasErrors()){
             model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
             return "request/add";
@@ -119,7 +128,11 @@ public class RequestController {
     }
 
     @RequestMapping(value="/update/{idRequest}", method=RequestMethod.GET)
-    public String editRequest(Model model, @PathVariable Integer idRequest){
+    public String editRequest(HttpSession session, Model model, @PathVariable Integer idRequest){
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         model.addAttribute("request", requestDao.getRequest(idRequest));
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "request/update";

@@ -1,6 +1,7 @@
 package es.uji.ei1027.SkillSharing.model;
 
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -10,7 +11,9 @@ public class Request {
 
     private int idRequest;
     private String description;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date start;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date finish;
     private int duration;
     private int idStudent;

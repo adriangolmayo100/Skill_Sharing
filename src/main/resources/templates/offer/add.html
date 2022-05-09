@@ -10,29 +10,33 @@
 </head>
 <body>
 <div  layout:fragment="content">
-  <h1>Nova proposta</h1>
+  <h1>Nueva propuesta</h1>
   <form action="#" th:action="@{/offer/add}"
         th:object="${offer}" method="post">
     <table class="table table-striped">
       <tr>
 
-        <td><label>Descripció</label></td>
+        <td><label>Descripción</label></td>
         <td><input type="text" th:field="*{description}"/></td>
+        <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error">
 
 
       </tr>
       <tr>
-        <td><label>Duració</label></td>
-        <td><input type="text" th:field="*{duration}"/></td>
+        <td><label>Duración</label></td>
+        <td><input type="text" th:field="*{duration}" placeholder="Horas"/></td>
+        <td th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}"></td>
 
       </tr>
       <tr>
-        <td><label>Data de inici</label></td>
-        <td><input type="text" th:field="*{start}" placeholder="yyyy/MM/dd" /></td>
+        <td><label>Data de inicio</label></td>
+        <td><input type="text" th:field="*{start}" placeholder="dd/MM/yyyy" /></td>
+        <td th:text="${#temporals.format(prova.data,'dd MMMM yyyy')}"></td>
       </tr>
       <tr>
-        <td><label>Data de fi</label></td>
-        <td><input type="text" th:field="*{finish}" placeholder="yyyy/MM/dd" /></td>
+        <td><label>Data de fin</label></td>
+        <td><input type="text" th:field="*{finish}" placeholder="dd/MM/yyyy" /></td>
+        <td th:text="${#temporals.format(prova.data,'dd MMMM yyyy')}"></td>
       </tr>
 
       <tr>
