@@ -55,9 +55,9 @@ public class RequestDao {
             return null;
         }
     }
-    public Request getValidRequests() {
+    public List<Request> getValidRequests() {
         try {
-            return jdbcTemplate.queryForObject("SELECT * from Request WHERE valid=?",
+            return jdbcTemplate.query("SELECT * from Request WHERE valid=?",
                     new RequestRowMapper(), true);
         } catch (EmptyResultDataAccessException e) {
             return null;

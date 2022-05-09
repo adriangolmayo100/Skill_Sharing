@@ -54,9 +54,9 @@ public class OfferDao {
             return null;
         }
     }
-    public Offer getValidOffers() {
+    public List<Offer> getValidOffers() {
         try {
-            return jdbcTemplate.queryForObject("SELECT * from offer WHERE valid=?",
+            return jdbcTemplate.query("SELECT * from offer WHERE valid=?",
                     new OfferRowMapper(),true);
         } catch (EmptyResultDataAccessException e) {
             return null;
