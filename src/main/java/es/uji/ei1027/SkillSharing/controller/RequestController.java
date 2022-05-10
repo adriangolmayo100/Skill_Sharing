@@ -1,9 +1,6 @@
 package es.uji.ei1027.SkillSharing.controller;
 
-import es.uji.ei1027.SkillSharing.dao.CollaborationDao;
-import es.uji.ei1027.SkillSharing.dao.OfferDao;
-import es.uji.ei1027.SkillSharing.dao.RequestDao;
-import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
+import es.uji.ei1027.SkillSharing.dao.*;
 import es.uji.ei1027.SkillSharing.model.Collaboration;
 import es.uji.ei1027.SkillSharing.model.Offer;
 import es.uji.ei1027.SkillSharing.model.Request;
@@ -27,6 +24,8 @@ public class RequestController {
     private RequestDao requestDao;
     private SkillTypeDao skillTypeDao;
     private OfferDao offerDao;
+    @Autowired
+    private StudentDao studentDao;
     private CollaborationDao collaborationDao;
     private UserValidator validator = new UserValidator();
 
@@ -56,6 +55,12 @@ public class RequestController {
         }
         Request request = requestDao.getRequest(idRequest);
         if (student.getIdStudent()!=request.getIdStudent()){
+            Student studentOffers = student;
+            Student studentRequests = studentDao.obtenerStudent(request.getIdStudent());
+            studentOffers.setHoursGiven(studentOffers.getHoursGiven()+request.getDuration());
+            studentRequests.setHoursReceived(studentRequests.getHoursReceived()+request.getDuration());
+            studentDao.updateStudent(studentOffers);
+            studentDao.updateStudent(studentRequests);
             request.setValid(false);
             requestDao.updateRequest(request);
             Offer offer = new Offer();

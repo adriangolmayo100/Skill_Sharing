@@ -1,5 +1,6 @@
 package es.uji.ei1027.SkillSharing.dao;
 
+import es.uji.ei1027.SkillSharing.model.Offer;
 import es.uji.ei1027.SkillSharing.model.Request;
 import es.uji.ei1027.SkillSharing.model.SkillType;
 import es.uji.ei1027.SkillSharing.model.Student;
@@ -33,8 +34,11 @@ public class StudentDao{
                 contrasenaEncriptada, student.getCodePostal(), student.getHoursGiven(),student.getHoursReceived(), student.getDegree(),
                 student.getCourse(), student.isSkp(), student.getNumberPhone(), student.getGender(),student.isUnavailable());
     }
-
-    public Student obtenerStudent(String studentId){
+    public void updateStudent(Student student){
+        jdbcTemplate.update("UPDATE student SET name=?,email=?,username=?,password=?,postalcode=?,hours_given=?,hours_received=?,degree=?,course=?,skp=?,phone_number=?,gender=?,unavailible=? where id_student=?",
+                student.getName(),student.getEmail(),student.getUsername(),student.getPassword(),student.getCodePostal(),student.getHoursGiven(),student.getHoursReceived(),student.getDegree(),student.getCourse(),student.isSkp(),student.getNumberPhone(),student.getGender(),student.isUnavailable(),student.getIdStudent());
+    }
+    public Student obtenerStudent(int studentId){
         try{
             return jdbcTemplate.queryForObject("SELECT * from Student WHERE id_student=?",
                     new StudentRowMapper(), studentId);
@@ -68,14 +72,14 @@ public class StudentDao{
 
     public Integer getNextId(){
         try{
-            return jdbcTemplate.queryForObject("SELECT MAX(id_offer) AS max_id FROM offer",new MaxIdMapper()) + 1;
+            return jdbcTemplate.queryForObject("SELECT MAX(id_student) AS max_id FROM student",new MaxIdMapper()) + 1;
         }catch(EmptyResultDataAccessException e){
             return -1;
         }
     }
     public List<Student> getStudents() {
         try {
-            return jdbcTemplate.query("SELECT * from students",
+            return jdbcTemplate.query("SELECT * from student",
                     new StudentRowMapper());
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<Student>();

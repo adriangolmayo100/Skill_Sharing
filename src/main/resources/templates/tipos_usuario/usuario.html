@@ -13,8 +13,11 @@
 </head>
     <body>
     <div layout:fragment="content">
-
-    <div>
+        <div>
+            <p>Horas dadas: <i th:text="${hoursGiven}"></i></p>
+            <p>Horas recibidas: <i th:text="${hoursReceived}"></i></p>
+        </div>
+        <div>
             <a href="/offer/list" class="btn" role="button">Consultar Ofertas</a>
         </div>
         <div>

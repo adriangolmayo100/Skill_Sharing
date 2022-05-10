@@ -12,7 +12,7 @@
 <body>
 <div layout:fragment="content">
   <h1>Moderar usuarios</h1>
-  <table th:unless="${#lists.isEmpty(offers)}" class="table table-striped">
+  <table th:unless="${#lists.isEmpty(studentList)}" class="table table-striped">
     <thead class="table table-striped">
     <tr>
       <th>Nombre</th>
@@ -28,12 +28,12 @@
     </thead>
     <tbody>
     <tr th:each="student: ${studentList}">
-      <td th:text="${student.name"></td>
+      <td th:text="${student.name}"></td>
       <td th:text="${student.email}"></td>
       <td th:text="${student.username}"></td>
-      <td th:text="${student.balance}"></td>
       <td th:text="${student.hoursGiven}"></td>
       <td th:text="${student.hoursReceived}"></td>
+      <td th:text="${student.degree}"></td>
       <td th:text="${student.course}"></td>
       <td th:text="${student.skp}"></td>
       <td><a th:href="@{/student/anular/{id}(id=${student.idStudent})}" class="btn btn-success">Suspender cuenta</a>

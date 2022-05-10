@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     private StudentDao studentDao;
 
-    @RequestMapping("/list")
+    @RequestMapping("/pagUser")
     public String pagUser(HttpSession session, Model model){
         if (session.getAttribute("user") == null){
             model.addAttribute("user", new Student());
@@ -37,12 +37,15 @@ public class UserController {
         String mensaje = validator.comprobar_conexion(session, model, "/tipos_usuario/usuario");
         if (!mensaje.equals(""))
             return mensaje;
-        Student student = (Student) session.getAttribute("user");
+        Student student = (Student) session.getAttribute("student");
         int hoursGiven = student.getHoursGiven();
         int hoursReceived = student.getHoursReceived();
         model.addAttribute("hoursGiven",hoursGiven);
         model.addAttribute("hoursReceived",hoursReceived);
-        return "tipos_usuario/usuario";
+        if (!student.isSkp())
+            return "tipos_usuario/usuario";
+        else
+            return "tipos_usuario/skp";
     }
    @RequestMapping("/visitante")
     public String pagVisitante(HttpSession session, Model model){
@@ -50,11 +53,11 @@ public class UserController {
     }
     @RequestMapping("/list")
     public String moderarUsuario(HttpSession session, Model model){
-        String mensaje = validator.comprobar_conexion(session, model, "/tipos_usuario/moderar");
+        String mensaje = validator.comprobar_conexion(session, model, "/tipos_usuario/list");
         if (!mensaje.equals(""))
             return mensaje;
         List<Student> studentList = studentDao.getStudents();
-        model.addAttribute(studentList);
+        model.addAttribute("studentList",studentList);
         return "student/list";
     }
 }
