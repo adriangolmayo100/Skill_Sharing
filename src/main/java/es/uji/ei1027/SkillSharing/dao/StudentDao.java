@@ -1,6 +1,7 @@
 package es.uji.ei1027.SkillSharing.dao;
 
 import es.uji.ei1027.SkillSharing.model.Request;
+import es.uji.ei1027.SkillSharing.model.SkillType;
 import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -10,6 +11,8 @@ import org.jasypt.util.password.BasicPasswordEncryptor;
 
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Repository // En Spring els DAOs van anotats amb @Repository
@@ -25,10 +28,10 @@ public class StudentDao{
 
     public void nuevoStudent(Student student){
         String contrasenaEncriptada = encryptor.encryptPassword(student.getPassword());
-        jdbcTemplate.update("INSERT INTO Student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO Student VALUES(?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?)",
                 student.getIdStudent(), student.getName(), student.getEmail(), student.getUsername(),
-                contrasenaEncriptada, student.getCodePostal(), student.getBalance(), student.getDegree(),
-                student.getCourse(), student.isSkp(), student.getNumberPhone(), student.getGender());
+                contrasenaEncriptada, student.getCodePostal(), student.getHoursGiven(),student.getHoursReceived(), student.getDegree(),
+                student.getCourse(), student.isSkp(), student.getNumberPhone(), student.getGender(),student.isUnavailable());
     }
 
     public Student obtenerStudent(String studentId){
@@ -68,6 +71,14 @@ public class StudentDao{
             return jdbcTemplate.queryForObject("SELECT MAX(id_offer) AS max_id FROM offer",new MaxIdMapper()) + 1;
         }catch(EmptyResultDataAccessException e){
             return -1;
+        }
+    }
+    public List<Student> getStudents() {
+        try {
+            return jdbcTemplate.query("SELECT * from students",
+                    new StudentRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Student>();
         }
     }
 }

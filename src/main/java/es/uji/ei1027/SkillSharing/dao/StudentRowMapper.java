@@ -16,12 +16,14 @@ public class StudentRowMapper implements RowMapper<Student> {
         student.setUsername(rs.getString("username"));
         student.setPassword(rs.getString("password"));
         student.setCodePostal(rs.getInt("postal_code"));
-        student.setBalance(rs.getInt("balance"));
+        student.setHoursGiven(rs.getInt("hours_given"));
+        student.setHoursReceived(rs.getInt("hours_received"));
         student.setDegree(rs.getString("degree"));
         student.setCourse(rs.getInt("course"));
         student.setSkp(rs.getBoolean("skp"));
         student.setNumberPhone(rs.getInt("phone_number"));
         student.setGender(rs.getString("gender"));
+        student.setUnavailable(rs.getBoolean("unavailable"));
         return student;
     }
 }

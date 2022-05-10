@@ -7,12 +7,23 @@ public class Student {
     private String username;
     private String password;
     private int codePostal;
-    private int balance;
+    private int hoursGiven;
+    private int hoursReceived;
     private String degree;
     private int course;
     private boolean skp;
     private int numberPhone;
     private String gender;
+
+    private boolean unavailable;
+
+    public boolean isUnavailable() {
+        return unavailable;
+    }
+
+    public void setUnavailable(boolean unavailable) {
+        this.unavailable = unavailable;
+    }
 
     public int getIdStudent() {
         return idStudent;
@@ -62,12 +73,20 @@ public class Student {
         this.codePostal = codePostal;
     }
 
-    public int getBalance() {
-        return balance;
+    public int getHoursGiven() {
+        return hoursGiven;
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
+    public void setHoursGiven(int hoursGiven) {
+        this.hoursGiven = hoursGiven;
+    }
+
+    public int getHoursReceived() {
+        return hoursReceived;
+    }
+
+    public void setHoursReceived(int hoursReceived) {
+        this.hoursReceived = hoursReceived;
     }
 
     public String getDegree() {
@@ -118,13 +137,15 @@ public class Student {
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", postalCode=" + codePostal +
-                ", balance=" + balance +
+                ", codePostal=" + codePostal +
+                ", hoursGiven=" + hoursGiven +
+                ", hoursReceived=" + hoursReceived +
                 ", degree='" + degree + '\'' +
                 ", course=" + course +
                 ", skp=" + skp +
-                ", phoneNumber=" + numberPhone +
+                ", numberPhone=" + numberPhone +
                 ", gender='" + gender + '\'' +
+                ", unavailable=" + unavailable +
                 '}';
     }
 }

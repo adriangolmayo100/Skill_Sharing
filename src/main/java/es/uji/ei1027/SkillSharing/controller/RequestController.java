@@ -80,11 +80,7 @@ public class RequestController {
 
 
     @RequestMapping("/list")
-    public String listRequest(HttpSession session, Model model){
-        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
-        if (!mensaje.equals("")){
-            return mensaje;
-        }
+    public String listRequest(Model model){
         model.addAttribute("requests", requestDao.getValidRequests());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "request/list";

@@ -41,9 +41,11 @@ public class RegisterController {
         if (max_id == -1)
             max_id = 0;
         student.setIdStudent(max_id);
-        student.setBalance(0);
+        student.setHoursGiven(0);
+        student.setHoursReceived(0);
+        student.setUnavailable(false);
         studentDao.nuevoStudent(student);
-        return "redirect:../";
+        return "redirect:/student/list";
     }
 
 }

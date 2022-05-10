@@ -9,14 +9,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/tipos_usuario")
 public class UserController {
-    private StudentDao studentDao;
     private UserValidator validator = new UserValidator();
 
     @Autowired
-    public void setDao(StudentDao userDao){ this.studentDao = userDao; }
+    private StudentDao studentDao;
 
     @RequestMapping("/list")
     public String pagUser(HttpSession session, Model model){
@@ -36,6 +37,24 @@ public class UserController {
         String mensaje = validator.comprobar_conexion(session, model, "/tipos_usuario/usuario");
         if (!mensaje.equals(""))
             return mensaje;
+        Student student = (Student) session.getAttribute("user");
+        int hoursGiven = student.getHoursGiven();
+        int hoursReceived = student.getHoursReceived();
+        model.addAttribute("hoursGiven",hoursGiven);
+        model.addAttribute("hoursReceived",hoursReceived);
         return "tipos_usuario/usuario";
+    }
+   @RequestMapping("/visitante")
+    public String pagVisitante(HttpSession session, Model model){
+        return "tipos_usuario/visitante";
+    }
+    @RequestMapping("/list")
+    public String moderarUsuario(HttpSession session, Model model){
+        String mensaje = validator.comprobar_conexion(session, model, "/tipos_usuario/moderar");
+        if (!mensaje.equals(""))
+            return mensaje;
+        List<Student> studentList = studentDao.getStudents();
+        model.addAttribute(studentList);
+        return "student/list";
     }
 }

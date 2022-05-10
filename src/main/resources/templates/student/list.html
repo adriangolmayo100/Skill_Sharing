@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+  <title>Consultar ofertas</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="/css/estilo.css"
+        th:href="@{/css/estilo.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+  <h1>Moderar usuarios</h1>
+  <table th:unless="${#lists.isEmpty(offers)}" class="table table-striped">
+    <thead class="table table-striped">
+    <tr>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>Username</th>
+      <th>Horas dadas</th>
+      <th>Horas recibidas</th>
+      <th>Degree</th>
+      <th>Course</th>
+      <th>Administrador</th>
+      <th>Anular cuenta</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student: ${studentList}">
+      <td th:text="${student.name"></td>
+      <td th:text="${student.email}"></td>
+      <td th:text="${student.username}"></td>
+      <td th:text="${student.balance}"></td>
+      <td th:text="${student.hoursGiven}"></td>
+      <td th:text="${student.hoursReceived}"></td>
+      <td th:text="${student.course}"></td>
+      <td th:text="${student.skp}"></td>
+      <td><a th:href="@{/student/anular/{id}(id=${student.idStudent})}" class="btn btn-success">Suspender cuenta</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <a href="register/datos">Añadir usuario</a>
+</div>
+</body>
+</html>

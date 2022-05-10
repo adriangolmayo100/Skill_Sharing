@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+  <link rel="stylesheet" type="text/css"
+        href="/css/estilo.css"
+        th:href="@{/css/estilo.css}"/>
+  <title>Visitante</title>
+  <meta charset="UTF-8"/>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+</head>
+<body>
+<div layout:fragment="content">
+  <div>
+    <a href="/offer/list" class="btn" role="button">Consultar Ofertas</a>
+  </div>
+  <div>
+    <a href="/request/list" class="btn" role="button">Consultar demandas</a>
+  </div>
+</div>
+
+</body>
+</html>

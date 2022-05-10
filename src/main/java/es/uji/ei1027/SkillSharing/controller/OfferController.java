@@ -58,11 +58,7 @@ public class OfferController {
 
 
     @RequestMapping("/list")
-    public String listOffer(Model model, HttpSession session){
-        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
-        if (!mensaje.equals("")){
-            return mensaje;
-        }
+    public String listOffer(Model model){
         model.addAttribute("offers", offerDao.getValidOffers());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "offer/list";
