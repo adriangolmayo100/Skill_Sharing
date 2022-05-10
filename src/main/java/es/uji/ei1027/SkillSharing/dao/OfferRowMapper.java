@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.time.LocalDate;
 
 public final class OfferRowMapper implements RowMapper<Offer> {
     @Override
@@ -17,8 +18,8 @@ public final class OfferRowMapper implements RowMapper<Offer> {
         offer.setIdStudent(rs.getInt("id_student"));
         offer.setIdSkillType(rs.getInt("id_skilltype"));
         offer.setDescription(rs.getString("description"));
-        offer.setStart(rs.getDate("start"));
-        offer.setFinish(rs.getDate("finish"));
+        offer.setStart(rs.getObject("start", LocalDate.class));
+        offer.setFinish(rs.getObject("finish", LocalDate.class));
         offer.setDuration(rs.getInt("duration"));
         offer.setValid(rs.getBoolean("valid"));
         return offer;

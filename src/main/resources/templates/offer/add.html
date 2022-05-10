@@ -29,14 +29,13 @@
 
       </tr>
       <tr>
-        <td><label>Data de inicio</label></td>
+        <td><label>Fecha de inicio</label></td>
         <td><input type="text" th:field="*{start}" placeholder="dd/MM/yyyy" /></td>
         <td th:text="${#temporals.format(start,'dd MMMM yyyy')}"></td>
       </tr>
       <tr>
-        <td><label>Data de fin</label></td>
+        <td><label>Fecha de fin</label></td>
         <td><input type="text" th:field="*{finish}" placeholder="dd/MM/yyyy" /></td>
-        <td th:text="${#temporals.format(finish,'dd MMMM yyyy')}"></td>
       </tr>
 
       <tr>
