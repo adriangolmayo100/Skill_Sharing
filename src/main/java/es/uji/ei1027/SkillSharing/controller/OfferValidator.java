@@ -34,6 +34,6 @@ public class OfferValidator implements Validator {
         if(fin - inicio < 0)
             errors.rejectValue("finish", "valores incorrectos", "La fecha de finalización debe ser mayor que la de inicio");
         if(fin - inicio - offer.getDuration() < 0)
-            errors.rejectValue("duration", "valor incorrecto", "La duración sobrepasa el tiempo de la oferta");
+            errors.rejectValue("duration", "valor incorrecto", "La duración es muy grande para las fechas seleccionadas");
     }
 }
