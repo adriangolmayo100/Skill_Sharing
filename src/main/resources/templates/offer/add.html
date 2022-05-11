@@ -24,7 +24,7 @@
       </tr>
       <tr>
         <td><label>Duración</label></td>
-        <td><input type="number" th:field="*{duration}" placeholder="Horas" maxlength="3"/></td>
+        <td><input type="number" th:field="*{duration}" placeholder="Horas" max="500" min = 0/></td>
         <td th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}"></td>
 
       </tr>
