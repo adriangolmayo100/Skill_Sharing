@@ -89,7 +89,7 @@ public class OfferController {
         offer.setValid(true);
         offer.setIdStudent(student.getIdStudent());
         offerDao.addOffer(offer);
-        return "redirect:/offer/mis_ofertas";
+        return "redirect:/offer/correcto";
     }
     @RequestMapping(value="/accept/{id}", method=RequestMethod.GET)
     public String accept(HttpSession session, Model model, @PathVariable Integer id) {
