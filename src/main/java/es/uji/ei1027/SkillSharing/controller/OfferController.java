@@ -1,9 +1,6 @@
 package es.uji.ei1027.SkillSharing.controller;
 
-import es.uji.ei1027.SkillSharing.dao.CollaborationDao;
-import es.uji.ei1027.SkillSharing.dao.OfferDao;
-import es.uji.ei1027.SkillSharing.dao.RequestDao;
-import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
+import es.uji.ei1027.SkillSharing.dao.*;
 import es.uji.ei1027.SkillSharing.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +19,8 @@ import java.util.List;
 @RequestMapping("/offer")
 public class OfferController {
 
+    @Autowired
+    private StudentDao studentDao;
     private OfferDao offerDao;
     private SkillTypeDao skillTypeDao;
     private RequestDao requestDao;
@@ -58,13 +57,20 @@ public class OfferController {
 
 
     @RequestMapping("/list")
-    public String listOffer(Model model){
+    public String listOffers(Model model){
         model.addAttribute("offers", offerDao.getValidOffers());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "offer/list";
     }
 
-
+    @RequestMapping("/list/{id}")
+    public String listOffers(Model model,@PathVariable Integer idRequest){
+        Request request = requestDao.getRequest(idRequest);
+        model.addAttribute("requestSearch", request);
+        model.addAttribute("offers", offerDao.getValidOffers(request.getIdSkillType()));
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        return "offer/listBySkillType";
+    }
     @RequestMapping(value="/add")
     public String addOffer(HttpSession session,Model model){
         String mensaje = validator.comprobar_conexion(session, model, "offer/add");
@@ -92,7 +98,7 @@ public class OfferController {
         return "redirect:/offer/mis_ofertas";
     }
     @RequestMapping(value="/accept/{id}", method=RequestMethod.GET)
-    public String accept(HttpSession session, Model model, @PathVariable Integer id) {
+    public String acceptOffer(HttpSession session, Model model, @PathVariable Integer id) {
         Student student= (Student) session.getAttribute("student");
         String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
         if (!mensaje.equals("")){
@@ -100,12 +106,44 @@ public class OfferController {
         }
         Offer offer = offerDao.getOffer(id);
         if (student.getIdStudent()!=offer.getIdStudent()){
+            Student studentRequests = student;
+            Student studentOffers = studentDao.obtenerStudent(offer.getIdStudent());
+            studentOffers.setHoursGiven(studentOffers.getHoursGiven()+offer.getDuration());
+            studentRequests.setHoursReceived(studentRequests.getHoursReceived()+offer.getDuration());
+            studentDao.updateStudent(studentOffers);
+            studentDao.updateStudent(studentRequests);
             offer.setValid(false);
             offerDao.updateOffer(offer);
             Request request = new Request();
             request.setIdStudent(student.getIdStudent());
             request.createRequestForOffer(offer);
             requestDao.addRequest(request);
+            Collaboration collaboration = new Collaboration();
+            collaboration.createCollaboration(offer,request);
+            collaborationDao.addCollaboration(collaboration);
+        }
+        return "redirect:../list";
+    }
+    @RequestMapping(value="/accept/{id_offer}/{id_request}", method=RequestMethod.GET)
+    public String accept(HttpSession session, Model model, @PathVariable Integer id_offer,@PathVariable Integer id_request) {
+        Student student= (Student) session.getAttribute("student");
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
+        Offer offer = offerDao.getOffer(id_offer);
+        Request request = requestDao.getRequest(id_request);
+        if (student.getIdStudent()!=offer.getIdStudent()){
+            Student studentRequests = studentDao.obtenerStudent(request.getIdStudent());
+            Student studentOffers = studentDao.obtenerStudent(offer.getIdStudent());
+            studentOffers.setHoursGiven(studentOffers.getHoursGiven()+offer.getDuration());
+            studentRequests.setHoursReceived(studentRequests.getHoursReceived()+offer.getDuration());
+            studentDao.updateStudent(studentOffers);
+            studentDao.updateStudent(studentRequests);
+            offer.setValid(false);
+            offerDao.updateOffer(offer);
+            request.setValid(false);
+            requestDao.updateRequest(request);
             Collaboration collaboration = new Collaboration();
             collaboration.createCollaboration(offer,request);
             collaborationDao.addCollaboration(collaboration);

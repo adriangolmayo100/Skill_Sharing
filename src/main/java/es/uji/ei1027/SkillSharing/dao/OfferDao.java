@@ -32,7 +32,7 @@ public class OfferDao {
         }
     }
     public void deleteOffer(Integer idOffer){
-        jdbcTemplate.update("DELETE FROM Offer where id_offer=?", idOffer);
+        jdbcTemplate.update("UPDATE offer SET finish=CURRENT_DATE-1, valid=false WHERE id_offer=?", idOffer);
     }
 
     public void deleteOffer(Offer offer){
@@ -58,6 +58,14 @@ public class OfferDao {
         try {
             return jdbcTemplate.query("SELECT * from offer WHERE valid=?",
                     new OfferRowMapper(),true);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+    public List<Offer> getValidOffers(int idSkillType) {
+        try {
+            return jdbcTemplate.query("SELECT * from offer WHERE valid=?,id_skilltype=?",
+                    new OfferRowMapper(),true,idSkillType);
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
