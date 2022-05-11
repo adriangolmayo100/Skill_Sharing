@@ -86,9 +86,6 @@ public class OfferController {
             return "offer/add";
         }
         Student student= (Student) session.getAttribute("student");
-        String[] campos = offer.getStart().toString().split("-");
-        int inicio = Integer.parseInt(campos[0]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[2]) * 24;
-        System.out.println(inicio);
         offer.setValid(true);
         offer.setIdStudent(student.getIdStudent());
         offerDao.addOffer(offer);
