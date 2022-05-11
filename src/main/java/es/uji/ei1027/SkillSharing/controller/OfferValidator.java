@@ -5,6 +5,8 @@ import es.uji.ei1027.SkillSharing.model.Offer;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.util.List;
+
 public class OfferValidator implements Validator {
 
 
@@ -19,7 +21,14 @@ public class OfferValidator implements Validator {
         if (offer.getDescription().trim().equals(""))
             errors.rejectValue("description","obligatorio","Hay que introducir una descripción");
         if (offer.getDuration()<=0)
-            errors.rejectValue("duration","valor incorrecto","La duració tiene que se > 0");
-
+            errors.rejectValue("duration","valor incorrecto","La duración tiene que se > 0");
+        String[] campos = offer.getStart().toString().split("-");
+        int inicio = Integer.parseInt(campos[0]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[2]) * 24;
+        campos = offer.getFinish().toString().split("-");
+        int fin = Integer.parseInt(campos[0]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[2]) * 24;
+        if(fin - inicio < 0)
+            errors.rejectValue("finish", "valores incorrectos", "La fecha de finalización debe ser mayor que la de inicio");
+        if(fin - inicio - offer.getDuration() < 0)
+            errors.rejectValue("duration", "valor incorrecto", "La duración sobrepasa el tiempo de la oferta");
     }
 }

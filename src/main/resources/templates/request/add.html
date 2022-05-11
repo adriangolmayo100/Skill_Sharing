@@ -18,21 +18,25 @@
 
                 <td><label>Descripción</label></td>
                 <td><input type="text" th:field="*{description}"/></td>
+                <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error">
 
 
             </tr>
             <tr>
                 <td><label>Duración</label></td>
-                <td><input type="text" th:field="*{duration}" placeholder="Horas de duración" th:class="${#fields.hasErrors('duration')} ? needcorrection"/>
+                <td><input type="text" th:field="*{duration}" placeholder="Horas" maxlength="2"/></td>
+                <td th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}"></td>
 
             </tr>
             <tr>
-                <td><label>Data de inicio</label></td>
+                <td><label>Fecha de inicio</label></td>
                 <td><input type="text" th:field="*{start}" placeholder="dd/MM/yyyy" /></td>
+                <td th:if="${#fields.hasErrors('start')}" th:errors="*{start}"></td>
             </tr>
             <tr>
-                <td><label>Data de fin</label></td>
+                <td><label>Fecha de fin</label></td>
                 <td><input type="text" th:field="*{finish}" placeholder="dd/MM/yyyy" /></td>
+                <td th:if="${#fields.hasErrors('finish')}" th:errors="*{finish}"></td>
             </tr>
 
             <tr>
