@@ -20,8 +20,8 @@ public class CollaborationDao {
     }
 
     public void addCollaboration(Collaboration collaboration) {
-        jdbcTemplate.update("INSERT INTO Collaboration VALUES(?, ?, ?, ?)",
-                collaboration.getIdRequest(), collaboration.getIdOffer(),collaboration.getRating(),collaboration.getComments());
+        jdbcTemplate.update("INSERT INTO Collaboration VALUES(?, ?, ?, ?,?,?)",
+                collaboration.getIdRequest(), collaboration.getIdOffer(),collaboration.getRating(),collaboration.getStart(),collaboration.getFinish(),collaboration.getComments());
     }
 
     public void deleteCollaboration(int idrequest, int id_offer) {
@@ -35,8 +35,8 @@ public class CollaborationDao {
     }
 
     public void updateCollaboration(Collaboration collaboration) {
-        jdbcTemplate.update("UPDATE Collaboration SET rating=?,comments=? WHERE id_request== and id_offer=?",
-                collaboration.getRating(),collaboration.getComments(),collaboration.getIdRequest(),collaboration.getIdOffer());
+        jdbcTemplate.update("UPDATE Collaboration SET rating=?,comments=?,start=?,finish=? WHERE id_request== and id_offer=?",
+                collaboration.getRating(),collaboration.getStart(),collaboration.getFinish(),collaboration.getComments(),collaboration.getIdRequest(),collaboration.getIdOffer());
     }
 
     public Collaboration getCollaboration(int idRequest, int id_offer) {

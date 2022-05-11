@@ -4,6 +4,7 @@ import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +12,9 @@ public class Collaboration{
     private int idRequest;
     private int idOffer;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date start;
+    private LocalDate start;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date finish;
+    private LocalDate  finish;
     private int rating;
     private String comments;
     private int idSkillType;
@@ -60,19 +61,19 @@ public class Collaboration{
         this.idOffer = idOffer;
     }
 
-    public Date getStart() {
+    public LocalDate getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(LocalDate start) {
         this.start = start;
     }
 
-    public Date getFinish() {
+    public LocalDate getFinish() {
         return finish;
     }
 
-    public void setFinish(Date finish) {
+    public void setFinish(LocalDate finish) {
         this.finish = finish;
     }
 

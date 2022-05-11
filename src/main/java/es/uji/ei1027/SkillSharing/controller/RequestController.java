@@ -82,7 +82,7 @@ public class RequestController {
         requestDao.deleteRequest(idRequest);
         return "redirect:../mis_demandas";
     }
-    @RequestMapping("/list/{id}")
+    @RequestMapping("/list/{idOffer}")
     public String listRequests(Model model,@PathVariable Integer idOffer){
         Offer offer = offerDao.getOffer(idOffer);
         model.addAttribute("offerSearch",offer);
@@ -156,15 +156,15 @@ public class RequestController {
         requestDao.updateRequest(request);
         return "redirect:../mis_demandas";
     }
-    @RequestMapping(value="/accept/{id_offer}/{id_request}", method=RequestMethod.GET)
-    public String accept(HttpSession session, Model model, @PathVariable Integer id_offer,@PathVariable Integer id_request) {
+    @RequestMapping(value="/accept/{idRequest}/{idOffer}", method=RequestMethod.GET)
+    public String accept(HttpSession session, Model model, @PathVariable Integer idRequest,@PathVariable Integer idOffer) {
         Student student= (Student) session.getAttribute("student");
         String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
         if (!mensaje.equals("")){
             return mensaje;
         }
-        Offer offer = offerDao.getOffer(id_offer);
-        Request request = requestDao.getRequest(id_request);
+        Offer offer = offerDao.getOffer(idRequest);
+        Request request = requestDao.getRequest(idOffer);
         if (student.getIdStudent()!=offer.getIdStudent()){
             Student studentRequests = studentDao.obtenerStudent(request.getIdStudent());
             Student studentOffers = studentDao.obtenerStudent(offer.getIdStudent());
@@ -180,6 +180,6 @@ public class RequestController {
             collaboration.createCollaboration(offer,request);
             collaborationDao.addCollaboration(collaboration);
         }
-        return "redirect:../list";
+        return "redirect:../../list";
     }
 }

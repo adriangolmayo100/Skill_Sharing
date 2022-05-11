@@ -63,7 +63,7 @@ public class OfferController {
         return "offer/list";
     }
 
-    @RequestMapping("/list/{id}")
+    @RequestMapping("/list/{idRequest}")
     public String listOffers(Model model,@PathVariable Integer idRequest){
         Request request = requestDao.getRequest(idRequest);
         model.addAttribute("requestSearch", request);
@@ -85,6 +85,10 @@ public class OfferController {
     @RequestMapping(value="/add", method=RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("offer") Offer offer, Model model,
                                    BindingResult bindingResult,HttpSession session) {
+        String mensaje = validator.comprobar_conexion(session, model, "offer/add");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         OfferValidator offerValidator = new OfferValidator();
         offerValidator.validate(offer,bindingResult);
         if (bindingResult.hasErrors()){
@@ -124,15 +128,15 @@ public class OfferController {
         }
         return "redirect:../list";
     }
-    @RequestMapping(value="/accept/{id_offer}/{id_request}", method=RequestMethod.GET)
-    public String accept(HttpSession session, Model model, @PathVariable Integer id_offer,@PathVariable Integer id_request) {
+    @RequestMapping(value="/accept/{idOffer}/{idRequest}", method=RequestMethod.GET)
+    public String accept(HttpSession session, Model model, @PathVariable Integer idOffer,@PathVariable Integer idRequest) {
         Student student= (Student) session.getAttribute("student");
         String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
         if (!mensaje.equals("")){
             return mensaje;
         }
-        Offer offer = offerDao.getOffer(id_offer);
-        Request request = requestDao.getRequest(id_request);
+        Offer offer = offerDao.getOffer(idOffer);
+        Request request = requestDao.getRequest(idRequest);
         if (student.getIdStudent()!=offer.getIdStudent()){
             Student studentRequests = studentDao.obtenerStudent(request.getIdStudent());
             Student studentOffers = studentDao.obtenerStudent(offer.getIdStudent());
@@ -148,7 +152,7 @@ public class OfferController {
             collaboration.createCollaboration(offer,request);
             collaborationDao.addCollaboration(collaboration);
         }
-        return "redirect:../list";
+        return "redirect:../../list";
     }
 
     @RequestMapping(value="/update/{idOffer}", method=RequestMethod.GET)

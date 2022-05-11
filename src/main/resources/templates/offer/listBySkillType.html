@@ -30,7 +30,7 @@
             <td th:text="${offer.start}"></td>
             <td th:text="${offer.finish}"></td>
             <td th:text="${offer.duration}"></td>
-            <td><a th:href="@{/offer/accept/{id}(id=${offer.idOffer})/{id}(id=${requestSearch.idRequest})}" class="btn btn-success">Aceptar</a>
+            <td><a th:href="@{/offer/accept/{idOffer}/{idRequest}(idOffer=${offer.idOffer},idRequest=${requestSearch.idRequest})}" class="btn btn-success">Aceptar</a>
             </td>
         </tr>
         </tbody>

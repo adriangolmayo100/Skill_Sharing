@@ -64,7 +64,7 @@ public class OfferDao {
     }
     public List<Offer> getValidOffers(int idSkillType) {
         try {
-            return jdbcTemplate.query("SELECT * from offer WHERE valid=?,id_skilltype=?",
+            return jdbcTemplate.query("SELECT * from offer WHERE valid=? and id_skilltype=?",
                     new OfferRowMapper(),true,idSkillType);
         } catch (EmptyResultDataAccessException e) {
             return null;
@@ -82,8 +82,8 @@ public class OfferDao {
 
     public List<Offer> getOffers(int idUser){
         try{
-            return jdbcTemplate.query("SELECT * FROM offer WHERE id_student=?",
-                    new OfferRowMapper(),idUser);
+            return jdbcTemplate.query("SELECT * FROM offer WHERE valid=? and id_student=?",
+                    new OfferRowMapper(),true,idUser);
         }catch(EmptyResultDataAccessException e){
             return new ArrayList<>();
         }
