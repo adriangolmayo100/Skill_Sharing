@@ -57,7 +57,11 @@ public class OfferController {
 
 
     @RequestMapping("/list")
-    public String listOffers(Model model){
+    public String listOffers(Model model, HttpSession session){
+        String mensaje = validator.comprobar_conexion(session, model, "offer/add");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         model.addAttribute("offers", offerDao.getValidOffers());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "offer/list";
@@ -99,7 +103,7 @@ public class OfferController {
         offer.setValid(true);
         offer.setIdStudent(student.getIdStudent());
         offerDao.addOffer(offer);
-        return "redirect:/offer/correcto";
+        return "redirect:correcto";
     }
     @RequestMapping(value="/accept/{id}", method=RequestMethod.GET)
     public String acceptOffer(HttpSession session, Model model, @PathVariable Integer id) {
@@ -187,6 +191,11 @@ public class OfferController {
         Offer offer = offerDao.getOffer(idOffer);
         offer.updateOffer(offerModel);
         offerDao.updateOffer(offer);
-        return "redirect:../mis_ofertas";
+        return "offer/correcto";
+    }
+
+    @RequestMapping(value="/correcto")
+    public String operacion_correcta(){
+        return "offer/correcto";
     }
 }
