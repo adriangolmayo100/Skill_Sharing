@@ -31,3 +31,16 @@ h2 {
 	text-align: right;
 margin-right: 10pt;
 }
+
+.botonIndex {
+    color: #000000;
+    background-color: #999999;
+    text-align: center;
+    margin-top:auto;
+    font-size:80%
+}
+
+.menu {
+     display: flex;
+     background-color: skyblue;
+}
