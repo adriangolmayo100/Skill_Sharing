@@ -3,16 +3,15 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/base}">
 <head>
-    <title>Consultar ofertas</title>
+    <title>Consultar ofertas por habilidad</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/estilo.css"
           th:href="@{/css/estilo.css}"/>
 </head>
-
 <body>
 <div layout:fragment="content">
-    <h1>Consultar mis ofertas</h1>
+    <h1>Ofertas activas de <i th:text="${requestSearch.getNameSkillType(skillTypes)}"></i></h1>
     <table th:unless="${#lists.isEmpty(offers)}" class="table table-striped">
         <thead class="table table-striped">
         <tr>
@@ -21,9 +20,7 @@
             <th>Inicio</th>
             <th>Fin</th>
             <th>Duración</th>
-            <th>Consultar solicitudes relacionadas</th>
-            <th>Actualizar</th>
-            <th>Borrar</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -33,16 +30,11 @@
             <td th:text="${offer.start}"></td>
             <td th:text="${offer.finish}"></td>
             <td th:text="${offer.duration}"></td>
-            <td><a th:href="@{/request/list/{idRequest}(idRequest=${offer.idOffer})}" class="btn btn-success">Consultar</a></td>
-            <td><a th:href="@{/offer/update/{id}(id=${offer.idOffer})}" class="btn btn-success">Actualizar</a></td>
-            <td><a th:href="@{/offer/delete/{id}(id=${offer.idOffer})}" class="btn btn-success">Eliminar</a></td>
-        </tr>
-        <tr>
-            <td><a th:href="@{/offer/add}" class="btn btn-success">Añadir</a></td>
+            <td><a th:href="@{/offer/accept/{idOffer}/{idRequest}(idOffer=${offer.idOffer},idRequest=${requestSearch.idRequest})}" class="btn btn-success">Aceptar</a>
+            </td>
         </tr>
         </tbody>
     </table>
-
 </div>
 </body>
 </html>

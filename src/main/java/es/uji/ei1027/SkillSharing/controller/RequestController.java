@@ -47,7 +47,7 @@ public class RequestController {
         this.skillTypeDao = skillType;
     }
     @RequestMapping(value="/accept/{idRequest}", method=RequestMethod.GET)
-    public String accept(HttpSession session, Model model, @PathVariable Integer idRequest) {
+    public String acceptRequest(HttpSession session, Model model, @PathVariable Integer idRequest) {
         Student student= (Student) session.getAttribute("student");
         String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
         if (!mensaje.equals("")){
@@ -82,10 +82,17 @@ public class RequestController {
         requestDao.deleteRequest(idRequest);
         return "redirect:../mis_demandas";
     }
+    @RequestMapping("/list/{idOffer}")
+    public String listRequests(Model model,@PathVariable Integer idOffer){
+        Offer offer = offerDao.getOffer(idOffer);
+        model.addAttribute("offerSearch",offer);
+        model.addAttribute("requests", requestDao.getValidRequests(offer.getIdSkillType()));
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
 
-
+        return "request/listBySkillType";
+    }
     @RequestMapping("/list")
-    public String listRequest(Model model){
+    public String listRequests(Model model){
         model.addAttribute("requests", requestDao.getValidRequests());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "request/list";
@@ -148,5 +155,31 @@ public class RequestController {
         request.updateRequest(requestModel);
         requestDao.updateRequest(request);
         return "redirect:../mis_demandas";
+    }
+    @RequestMapping(value="/accept/{idRequest}/{idOffer}", method=RequestMethod.GET)
+    public String accept(HttpSession session, Model model, @PathVariable Integer idRequest,@PathVariable Integer idOffer) {
+        Student student= (Student) session.getAttribute("student");
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
+        Offer offer = offerDao.getOffer(idRequest);
+        Request request = requestDao.getRequest(idOffer);
+        if (student.getIdStudent()!=offer.getIdStudent()){
+            Student studentRequests = studentDao.obtenerStudent(request.getIdStudent());
+            Student studentOffers = studentDao.obtenerStudent(offer.getIdStudent());
+            studentOffers.setHoursGiven(studentOffers.getHoursGiven()+offer.getDuration());
+            studentRequests.setHoursReceived(studentRequests.getHoursReceived()+offer.getDuration());
+            studentDao.updateStudent(studentOffers);
+            studentDao.updateStudent(studentRequests);
+            offer.setValid(false);
+            offerDao.updateOffer(offer);
+            request.setValid(false);
+            requestDao.updateRequest(request);
+            Collaboration collaboration = new Collaboration();
+            collaboration.createCollaboration(offer,request);
+            collaborationDao.addCollaboration(collaboration);
+        }
+        return "redirect:../../list";
     }
 }

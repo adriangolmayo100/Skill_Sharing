@@ -5,8 +5,8 @@
   <title>Crear una oferta</title>
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-  <link rel="stylesheet" type="text/css" href="/css/estilo.css"
-        th:href="@{/css/estilo.css}"/>
+  <link rel="stylesheet" type="text/css" href="/estilo.css"
+        th:href="@{/estilo.css}"/>
 </head>
 <body>
 <div  layout:fragment="content">
@@ -24,17 +24,19 @@
       </tr>
       <tr>
         <td><label>Duración</label></td>
-        <td><input type="text" th:field="*{duration}" placeholder="Horas"/></td>
+        <td><input type="number" th:field="*{duration}" placeholder="Horas" maxlength="3"/></td>
         <td th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}"></td>
 
       </tr>
       <tr>
         <td><label>Fecha de inicio</label></td>
         <td><input type="text" th:field="*{start}" placeholder="dd/MM/yyyy" /></td>
+        <td th:if="${#fields.hasErrors('start')}" th:errors="*{start}"></td>
       </tr>
       <tr>
         <td><label>Fecha de fin</label></td>
         <td><input type="text" th:field="*{finish}" placeholder="dd/MM/yyyy" /></td>
+        <td th:if="${#fields.hasErrors('finish')}" th:errors="*{finish}"></td>
       </tr>
 
       <tr>

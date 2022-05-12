@@ -35,7 +35,7 @@ public class StudentDao{
                 student.getCourse(), student.isSkp(), student.getNumberPhone(), student.getGender(),student.isUnavailable());
     }
     public void updateStudent(Student student){
-        jdbcTemplate.update("UPDATE student SET name=?,email=?,username=?,password=?,postalcode=?,hours_given=?,hours_received=?,degree=?,course=?,skp=?,phone_number=?,gender=?,unavailible=? where id_student=?",
+        jdbcTemplate.update("UPDATE student SET name=?,email=?,username=?,password=?,postal_code=?,hours_given=?,hours_received=?,degree=?,course=?,skp=?,phone_number=?,gender=?,unavailible=? where id_student=?",
                 student.getName(),student.getEmail(),student.getUsername(),student.getPassword(),student.getCodePostal(),student.getHoursGiven(),student.getHoursReceived(),student.getDegree(),student.getCourse(),student.isSkp(),student.getNumberPhone(),student.getGender(),student.isUnavailable(),student.getIdStudent());
     }
     public Student obtenerStudent(int studentId){

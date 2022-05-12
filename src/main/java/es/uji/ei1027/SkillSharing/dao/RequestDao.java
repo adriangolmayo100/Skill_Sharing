@@ -33,12 +33,12 @@ public class RequestDao {
     }
 
     public void deleteRequest(int idrequest) {
-        jdbcTemplate.update("DELETE from Request where id_request=?",
+        jdbcTemplate.update("DELETE from Request SET finish=CURRENT_DATE-1, valid=false where id_request=?",
                 idrequest );
     }
 
     public void deleteRequest(Request request) {
-        jdbcTemplate.update("DELETE from Request where id_request=?",
+        jdbcTemplate.update("UPDATE request SET finish=CURRENT_DATE-1 WHERE id_request=?",
                 request.getIdRequest());
     }
 
@@ -63,6 +63,14 @@ public class RequestDao {
             return null;
         }
     }
+    public List<Request> getValidRequests(int idSkillType) {
+        try {
+            return jdbcTemplate.query("SELECT * from Request WHERE valid=? and id_skilltype=?",
+                    new RequestRowMapper(), true, idSkillType);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
 
     public List<Request> getRequests() {
         try {
@@ -75,8 +83,8 @@ public class RequestDao {
 
     public List<Request> getRequests(int idUser) {
         try {
-            return jdbcTemplate.query("SELECT * from Request WHERE id_student=?",
-                    new RequestRowMapper(), idUser);
+            return jdbcTemplate.query("SELECT * from Request WHERE valid=? and id_student=?",
+                    new RequestRowMapper(),true, idUser);
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<Request>();
         }

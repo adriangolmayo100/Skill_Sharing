@@ -20,8 +20,9 @@
             <th>Inicio</th>
             <th>Fin</th>
             <th>Duración</th>
-            <th></th>
-            <th></th>
+            <th>Consultar ofertas relacionadas</th>
+            <th>Actualizar</th>
+            <th>Borrar</th>
         </tr>
         </thead>
         <tbody>
@@ -31,6 +32,7 @@
             <td th:text="${request.start}"></td>
             <td th:text="${request.finish}"></td>
             <td th:text="${request.duration}"></td>
+            <td><a th:href="@{/offer/list/{idRequest}(idRequest=${request.idRequest})}" class="btn btn-success">Consultar</a></td>
             <td><a th:href="@{/request/update/{id}(id=${request.idRequest})}" class="btn btn-success">Actualizar</a></td>
             <td><a th:href="@{/request/delete/{id}(id=${request.idRequest})}" class="btn btn-success">Eliminar</a></td>
         </tr>
