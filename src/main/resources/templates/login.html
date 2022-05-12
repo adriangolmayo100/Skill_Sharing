@@ -4,8 +4,8 @@
       layout:decorate="~{fragments/base}">
 <head>
     <link rel="stylesheet" type="text/css"
-          href="/css/estilo.css"
-          th:href="@{/css/estilo.css}"/>
+          href="/estilo.css"
+          th:href="@{/estilo.css}"/>
     <title>Login</title>
     <meta charset="UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
@@ -13,19 +13,24 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h2>Accés</h2>
+    <h2>Acceso</h2>
 <form action="#" th:action="@{/login}"
       th:object="${student}" method="post">
     <p>
+        <div class="loginUsers">
         <label>Nombre de usuario:</label>
         <input class="form_control" type="text" th:field="*{username}"/>
     <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+    </div>
     </p>
     <p>
+        <div class="loginUsers">
         <label>Contraseña:</label>
         <input class="form_control" type="password" th:field="*{password}"/>
     <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+    </div>
     </p>
+
     <input type="submit" value="Accedir" />
 </form>
 </div>

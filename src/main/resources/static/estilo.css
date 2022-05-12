@@ -7,13 +7,13 @@ body {
 /* Capçalera de nivell 1 */
 h1 {
    font-size: x-large;
-   color: orange;
+   color: black;
 }
 
 /* Capçalera de nivell 2 */
 h2 {
    font-size: large;
-   color: blue;
+   color: black;
 }
 
 /* Classe CSS error */
@@ -27,7 +27,68 @@ h2 {
      background-color:yellow;
 }
 .loggeduser {
-	color: gray;
-	text-align: right;
-margin-right: 10pt;
+	color: grey;
+	width:69%;
+    margin-left:170px;
+    margin-right:170px;
+    margin-right: 50pt;
+}
+
+.botonIndex {
+    margin-top:60px;
+    background-color: #999999;
+    margin-left: 500px;
+    margin-right: 500px;
+    text-align:center;
+    webkit-border-radius: 28;
+    moz-border-radius: 28;
+    border-radius: 28px;
+    webkit-box-shadow: 6px 5px 24px;
+    moz-box-shadow: 6px 5px 24px;
+    box-shadow: 6px 5px 24px;
+    font-family: Arial;
+    color: #000000;
+    font-size: 27px;
+    padding: 19px;
+    text-decoration: none;
+}
+
+/*Titulo SkillSHaring en index */
+.titulo {
+    margin-top:60px;
+    color: #000000;
+    font-family: source sans pro;
+    text-align:center;
+}
+
+/*titulo en fragments base */
+.tituloBase{
+    color: #000000;
+    font-family: source sans pro;
+    text-align: center;
+    margin-top:30px;
+    font-text:90%;
+}
+
+nav {
+    width:69%;
+    margin-left:170px;
+    margin-right:170px;
+    background-color: #999999;
+    text-align:center;
+    margin-top:auto;
+    font-family: source sans pro;
+    color: #000000;
+    font-size: 20px;
+    padding: 100px;
+}
+
+.loginUsers{
+    color: #000000;
+    font-family: source sans pro;
+    margin-top:30px;
+    width:80%;
+    margin-left:170px;
+    margin-right:170px;
+    font-text:90%;
 }

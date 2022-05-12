@@ -132,7 +132,7 @@ public class RequestController {
         request.setValid(true);
         request.setIdStudent(student.getIdStudent());
         requestDao.addRequest(request);
-        return "redirect:/request/mis_demandas";
+        return "redirect:correcto";
     }
 
     @RequestMapping(value="/update/{idRequest}", method=RequestMethod.GET)
@@ -154,7 +154,7 @@ public class RequestController {
         Request request= requestDao.getRequest(id_request);
         request.updateRequest(requestModel);
         requestDao.updateRequest(request);
-        return "redirect:../mis_demandas";
+        return "request/correcto";
     }
     @RequestMapping(value="/accept/{idRequest}/{idOffer}", method=RequestMethod.GET)
     public String accept(HttpSession session, Model model, @PathVariable Integer idRequest,@PathVariable Integer idOffer) {
@@ -181,5 +181,9 @@ public class RequestController {
             collaborationDao.addCollaboration(collaboration);
         }
         return "redirect:../../list";
+    }
+    @RequestMapping(value="/correcto")
+    public String operacion_correcta(){
+        return "request/correcto";
     }
 }

@@ -14,7 +14,7 @@
     />
 
     <!-- app css  -->
-    <link type="text/css" th:href="@{/css/estilo.css}" href="/css/estilo.css"
+    <link type="text/css" th:href="@{/estilo.css}" href="/estilo.css"
           rel="stylesheet"/>
 
     <title layout:title-pattern="$CONTENT_TITLE">Skill Sharing</title>
@@ -22,14 +22,14 @@
 
 <body class="container">
 <header class="page-header">
-    <h1>Compartir habilidades</h1>
+    <div class="tituloBase"><h1>Skill Sharing</h1></div>
 </header>
 <div th:replace="fragments/nav"></div>
 <div th:replace="fragments/logininfo"></div>
 <div layout:fragment="content"></div>
 <footer>
     <hr>
-    <p class="text-muted">Compartir es vivir</p>
+    <p class="text-muted loggeduser">mbsy</p>
 </footer>
 </body>
 </html>
