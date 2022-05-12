@@ -53,6 +53,25 @@ h2 {
     text-decoration: none;
 }
 
+.botonAcceder {
+    margin-top:60px;
+    background-color: #7FFF00;
+    margin-left: 400px;
+    margin-right: 400px;
+    text-align:right;
+    webkit-border-radius: 28;
+    moz-border-radius: 28;
+    border-radius: 28px;
+    webkit-box-shadow: 6px 5px 24px;
+    moz-box-shadow: 6px 5px 24px;
+    box-shadow: 6px 5px 24px;
+    font-family: Arial;
+    color: #000000;
+    font-size: 20px;
+    padding: 19px;
+    text-decoration: none;
+}
+
 /*Titulo SkillSHaring en index */
 .titulo {
     margin-top:60px;
@@ -92,3 +111,12 @@ nav {
     margin-right:170px;
     font-text:90%;
 }
+
+/*Separador de los inputs del login */
+.separador{
+    margin-left:40px;
+}
+
+.separador2{
+     margin-left:90px;
+ }
