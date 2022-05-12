@@ -2,11 +2,11 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/estilo.css"/>
+    <link rel="stylesheet" type="text/css" href="/estilo.css"
+          th:href="@{/estilo.css}"/>
     <title>Título</title>
 </head>
 <body>
-<div class="menu">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="navbar-collapse collapse">
         <ul class="navbar-nav mr-auto">
@@ -18,6 +18,5 @@
         </ul>
     </div>
 </nav>
-</div>
 </body>
 </html>
