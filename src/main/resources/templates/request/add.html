@@ -10,7 +10,7 @@
 </head>
 <body>
 <div  layout:fragment="content">
-    <h1>Nueva solicitud</h1>
+    <div class="titulo"><h1>Nueva Solicitud</h1></div>
     <form action="#" th:action="@{/request/add}"
           th:object="${request}" method="post">
         <table class="table table-striped">
@@ -49,7 +49,7 @@
             </tr>
 
             <tr>
-                <td colspan="2"><input type="submit" value="Afegeix solicitud" /></td>
+                <td colspan="2"><input type="submit" value="Añadir Demanda" class="botones" /></td>
             </tr>
         </table>
     </form>

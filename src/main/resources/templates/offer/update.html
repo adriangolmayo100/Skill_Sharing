@@ -10,7 +10,7 @@
 </head>
 <body>
 <div  layout:fragment="content">
-    <h1>Nova proposta</h1>
+    <div><h1>Nueva Propuesta</h1></div>
     <form action="#" th:action="@{/offer/update/{id}(id=${offer.idOffer})}"
           th:object="${offer}" method="post">
         <table class="table table-striped">
@@ -44,7 +44,7 @@
             </tr>
 
             <tr>
-                <td colspan="2"><input type="submit" value="Aceptar" /></td>
+                <td colspan="2"><input type="submit" value="Aceptar" class="botones" /></td>
             </tr>
         </table>
     </form>

@@ -10,7 +10,7 @@
 </head>
 <body>
 <div  layout:fragment="content">
-  <h1>Nueva propuesta</h1>
+  <div class="titulo"> <h1>Nueva propuesta</h1> </div>
   <form action="#" th:action="@{/offer/add}"
         th:object="${offer}" method="post">
     <table class="table table-striped">
@@ -49,7 +49,8 @@
       </tr>
 
       <tr>
-        <td colspan="2"><input type="submit" value="Afegeix proposta" /></td>
+
+        <td colspan="2"><input type="submit" value="Añadir Oferta" class="botones" /></td>
       </tr>
     </table>
   </form>

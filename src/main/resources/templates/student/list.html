@@ -11,7 +11,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-  <h1>Moderar usuarios</h1>
+  <div class="titulo"><h1>Moderar Usuarios</h1></div>
   <table th:unless="${#lists.isEmpty(studentList)}" class="table table-striped">
     <thead class="table table-striped">
     <tr>
@@ -36,12 +36,12 @@
       <td th:text="${student.degree}"></td>
       <td th:text="${student.course}"></td>
       <td th:text="${student.skp}"></td>
-      <td><a th:href="@{/student/anular/{id}(id=${student.idStudent})}" class="btn btn-success">Suspender cuenta</a>
+      <td><a th:href="@{/student/anular/{id}(id=${student.idStudent})}" class="btn btn-danger">Suspender cuenta</a>
       </td>
     </tr>
     </tbody>
   </table>
-  <a href="register/datos">Añadir usuario</a>
+  <a href="register/datos" class="botones">Añadir usuario</a>
 </div>
 </body>
 </html>
