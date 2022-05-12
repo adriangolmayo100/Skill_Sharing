@@ -11,7 +11,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>Consultar propuestas</h1>
+    <div class="titulo"><h1>Consultar Demandas</h1></div>
     <table th:unless="${#lists.isEmpty(requests)}" class="table table-striped">
         <thead class="table table-striped">
         <tr>
@@ -34,7 +34,9 @@
         </tr>
         </tbody>
     </table>
-    <a href="add">Añadir propuesta</a>
+    <div class="botones">
+    <a href="add">Añadir Demanda</a>
+    </div>
 </div>
 </body>
 </html>

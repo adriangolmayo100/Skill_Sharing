@@ -6,12 +6,12 @@
   <title>Consultar ofertas</title>
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-  <link rel="stylesheet" type="text/css" href="/css/estilo.css"
-        th:href="@{/css/estilo.css}"/>
+  <link rel="stylesheet" type="text/css" href="/estilo.css"
+        th:href="@{/estilo.css}"/>
 </head>
 <body>
 <div layout:fragment="content">
-  <h1>Consultar ofertas</h1>
+  <div class="titulo"><h1>Consultar ofertas</h1></div>
   <table th:unless="${#lists.isEmpty(offers)}" class="table table-striped">
     <thead class="table table-striped">
     <tr>
@@ -35,7 +35,9 @@
     </tr>
     </tbody>
   </table>
-  <a href="add">Añadir oferta</a>
-</div>
+  <div class="botones">
+  <a class="bnt" href="add">Añadir oferta</a>
+  </div>
+  </div>
 </body>
 </html>

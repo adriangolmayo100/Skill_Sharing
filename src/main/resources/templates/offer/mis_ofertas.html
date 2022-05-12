@@ -12,7 +12,7 @@
 
 <body>
 <div layout:fragment="content">
-    <h1>Consultar mis ofertas</h1>
+    <div class="titulo"><h1>Consultar mis ofertas</h1></div>
     <table th:unless="${#lists.isEmpty(offers)}" class="table table-striped">
         <thead class="table table-striped">
         <tr>
@@ -38,7 +38,7 @@
             <td><a th:href="@{/offer/delete/{id}(id=${offer.idOffer})}" class="btn btn-success">Eliminar</a></td>
         </tr>
         <tr>
-            <td><a th:href="@{/offer/add}" class="btn btn-success">Añadir</a></td>
+            <!--<td><a th:href="@{/offer/add}" class="btn btn-success">Añadir</a></td>-->
         </tr>
         </tbody>
     </table>

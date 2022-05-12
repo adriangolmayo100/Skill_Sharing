@@ -11,7 +11,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>Consultar mis Demandas</h1>
+    <div class="titulo"><h1>Consultar mis Demandas</h1></div>
     <table th:unless="${#lists.isEmpty(requests)}" class="table table-striped">
         <thead class="table table-striped">
         <tr>
@@ -37,7 +37,7 @@
             <td><a th:href="@{/request/delete/{id}(id=${request.idRequest})}" class="btn btn-success">Eliminar</a></td>
         </tr>
         <tr>
-            <td><a th:href="@{/request/add}" class="btn btn-success">Añadir</a></td>
+           <!-- <td><a th:href="@{/request/add}" class="btn btn-success">Añadir</a></td>-->
         </tr>
         </tbody>
     </table>

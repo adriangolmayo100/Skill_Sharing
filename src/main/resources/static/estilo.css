@@ -72,6 +72,30 @@ h2 {
         text-decoration: none;
     }
 
+.botones {
+       margin-top:60px;
+           background-color: #999999;
+           margin-left: 460px;
+           margin-right:460px;
+           text-align:center;
+           webkit-border-radius: 28;
+           moz-border-radius: 28;
+           border-radius: 28px;
+           webkit-box-shadow: 6px 5px 24px;
+           moz-box-shadow: 6px 5px 24px;
+           box-shadow: 6px 5px 24px;
+           font-family: Arial;
+           color: #000000;
+           font-size: 20px;
+           padding: 19px;
+           text-decoration: none;
+       }
+/*Le quito el azul a los enlaces */
+a {color:#000000;}
+a:visited {color:#000000;}
+a:active {color:#000000;}
+a:hover {color:#000000;}
+
 /*Estilo para la interfaz de usuario and visitante, etc */
 .botonesUsuario {
    margin-top:60px;
