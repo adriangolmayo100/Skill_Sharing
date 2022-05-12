@@ -4,15 +4,15 @@
       layout:decorate="~{fragments/base}">
 <head>
     <link rel="stylesheet" type="text/css"
-          href="/css/estilo.css"
-          th:href="@{/css/estilo.css}"/>
+          href="/estilo.css"
+          th:href="@{/estilo.css}"/>
     <title>Usuario</title>
     <meta charset="UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
 
 </head>
     <body>
-    <div layout:fragment="content">
+    <div  layout:fragment="content">
         <div>
             <p>Horas dadas: <i th:text="${hoursGiven}"></i></p>
             <p>Horas recibidas: <i th:text="${hoursReceived}"></i></p>
@@ -20,7 +20,7 @@
         <div>
             <a href="/offer/list" class="btn" role="button">Consultar Ofertas</a>
         </div>
-        <div>
+        <div class="botonesUsuario">
             <a href="/request/list" class="btn" role="button">Consultar demandas</a>
         </div>
         <div>

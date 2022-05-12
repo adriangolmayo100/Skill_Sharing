@@ -55,21 +55,41 @@ h2 {
 
 .botonAcceder {
     margin-top:60px;
-    background-color: #7FFF00;
-    margin-left: 400px;
-    margin-right: 400px;
-    text-align:right;
-    webkit-border-radius: 28;
-    moz-border-radius: 28;
-    border-radius: 28px;
-    webkit-box-shadow: 6px 5px 24px;
-    moz-box-shadow: 6px 5px 24px;
-    box-shadow: 6px 5px 24px;
-    font-family: Arial;
-    color: #000000;
-    font-size: 20px;
-    padding: 19px;
-    text-decoration: none;
+        background-color: #7FFF00;
+        margin-left: 400px;
+        margin-right: 400px;
+        text-align:right;
+        webkit-border-radius: 28;
+        moz-border-radius: 28;
+        border-radius: 28px;
+        webkit-box-shadow: 6px 5px 24px;
+        moz-box-shadow: 6px 5px 24px;
+        box-shadow: 6px 5px 24px;
+        font-family: Arial;
+        color: #000000;
+        font-size: 20px;
+        padding: 19px;
+        text-decoration: none;
+    }
+
+/*Estilo para la interfaz de usuario and visitante, etc */
+.botonesUsuario {
+   margin-top:60px;
+       background-color: #999999;
+       margin-left: 500px;
+       margin-right: 500px;
+       text-align:center;
+       webkit-border-radius: 28;
+       moz-border-radius: 28;
+       border-radius: 28px;
+       webkit-box-shadow: 6px 5px 24px;
+       moz-box-shadow: 6px 5px 24px;
+       box-shadow: 6px 5px 24px;
+       font-family: Arial;
+       color: #000000;
+       font-size: 27px;
+       padding: 19px;
+       text-decoration: none;
 }
 
 /*Titulo SkillSHaring en index */
