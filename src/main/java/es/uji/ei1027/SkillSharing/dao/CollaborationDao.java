@@ -20,8 +20,8 @@ public class CollaborationDao {
     }
 
     public void addCollaboration(Collaboration collaboration) {
-        jdbcTemplate.update("INSERT INTO Collaboration VALUES(?, ?, ?, ?,?,?)",
-                collaboration.getIdRequest(), collaboration.getIdOffer(),collaboration.getRating(),collaboration.getStart(),collaboration.getFinish(),collaboration.getComments());
+        jdbcTemplate.update("INSERT INTO Collaboration VALUES(?, ?, ?, ?,?,?,?)",
+                collaboration.getIdRequest(), collaboration.getIdOffer(),collaboration.getRating(),collaboration.getStart(),collaboration.getFinish(),collaboration.getDuration(),collaboration.getComments());
     }
 
     public void deleteCollaboration(int idrequest, int id_offer) {
@@ -56,12 +56,58 @@ public class CollaborationDao {
             return new ArrayList<Collaboration>();
         }
     }
-    public List<Collaboration> getMyCollaborations(int idStudent) {
+    public List<Collaboration> getMyCollaborationsWhenOffer(int idStudent) {
         try {
-            return jdbcTemplate.query("SELECT * from Collaboration " +
-                            "JOIN offer AS of USING(id_offer) JOIN request AS re USING(id_request)" +
-                            "WHERE of.id_student=?or re.id_student=?",
-                    new CollaborationRowMapper(),idStudent,idStudent);
+            return jdbcTemplate.query("SELECT co.id_request, co.id_offer, co.start," +
+                            "co.finish,co.duration, co.rating, of.id_skilltype,co.comments, " +
+                            "of.id_student as id_offer_student, re.description,re.id_student as id_request_student " +
+                            "from Collaboration as co " +
+                            "JOIN request AS re USING(id_request) " +
+                            "JOIN offer AS of USING(id_offer) " +
+                            "WHERE of.id_student=? and of.valid=?",
+                    new CollaborationRowMapper(),idStudent,false);
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Collaboration>();
+        }
+    }
+    public List<Collaboration> getMyCollaborationsWhenRequest(int idStudent) {
+        try {
+            return jdbcTemplate.query("SELECT co.id_request, co.id_offer, co.start," +
+                            "co.finish,co.duration, co.rating, of.id_skilltype,co.comments, " +
+                            "of.id_student as id_offer_student, re.description,re.id_student as id_request_student " +
+                            "from Collaboration as co " +
+                            "JOIN request AS re USING(id_request) " +
+                            "JOIN offer AS of USING(id_offer) " +
+                            "WHERE re.id_student=? and re.valid=?",
+                    new CollaborationRowMapper(),idStudent,false);
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Collaboration>();
+        }
+    }
+    public List<Collaboration> getMyRequestCollaborationsWhenOffer(int idStudent) {
+        try {
+            return jdbcTemplate.query("SELECT co.id_request, co.id_offer, co.start," +
+                            "co.finish,co.duration, co.rating, of.id_skilltype,co.comments, " +
+                            "of.id_student as id_offer_student, re.description,re.id_student as id_request_student " +
+                            "from Collaboration as co " +
+                            "JOIN request AS re USING(id_request) " +
+                            "JOIN offer AS of USING(id_offer) " +
+                            "WHERE of.id_student=? and of.valid=?",
+                    new CollaborationRowMapper(),idStudent,true);
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Collaboration>();
+        }
+    }
+    public List<Collaboration> getMyRequestCollaborationsWhenRequest(int idStudent) {
+        try {
+            return jdbcTemplate.query("SELECT co.id_request, co.id_offer, co.start," +
+                            "co.finish,co.duration, co.rating, of.id_skilltype,co.comments, " +
+                            "of.id_student as id_offer_student, re.description,re.id_student as id_request_student " +
+                            "from Collaboration as co " +
+                            "JOIN request AS re USING(id_request) " +
+                            "JOIN offer AS of USING(id_offer) " +
+                            "WHERE re.id_student=? and re.valid=?",
+                    new CollaborationRowMapper(),idStudent,true);
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<Collaboration>();
         }

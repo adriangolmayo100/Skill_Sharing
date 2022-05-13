@@ -15,22 +15,24 @@
     <table th:unless="${#lists.isEmpty(requests)}" class="table table-striped">
         <thead class="table table-striped">
         <tr>
-            <th>Habilidad</th>
-            <th>Descripción Demanda</th>
             <th>Inicio</th>
             <th>Fin</th>
-            <th>Duración</th>
-            <th>Consultar ofertas relacionadas</th>
+            <th>Descripción de la propuesta</th>
+            <th>Habilidad</th>
+            <th>Nivel dificultad (1-5)</th>
+            <th>Duración en horas</th>
+            <th>Consultar solicitudes relacionadas</th>
             <th>Actualizar</th>
             <th>Borrar</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="request: ${requests}">
-            <td th:text="${request.getNameSkillType(skillTypes)}"></td>
-            <td th:text="${request.description}"></td>
             <td th:text="${request.start}"></td>
             <td th:text="${request.finish}"></td>
+            <td th:text="${request.description}"></td>
+            <td th:text="${request.getNameSkillType(skillTypes)}"></td>
+            <td th:text="${request.getLevelSkillType(skillTypes)}"></td>
             <td th:text="${request.duration}"></td>
             <td><a th:href="@{/offer/list/{idRequest}(idRequest=${request.idRequest})}" class="btn btn-success">Consultar</a></td>
             <td><a th:href="@{/request/update/{id}(id=${request.idRequest})}" class="btn btn-success">Actualizar</a></td>
@@ -39,7 +41,7 @@
         </tbody>
     </table>
     <div class="botones">
-        <a th:href="@{/request/add}" class="bnt">Añadir</a>
+        <a href="add">Añadir Demanda</a>
     </div>
 </div>
 </body>

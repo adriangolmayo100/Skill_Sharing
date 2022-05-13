@@ -16,27 +16,28 @@
     <table th:unless="${#lists.isEmpty(offers)}" class="table table-striped">
         <thead class="table table-striped">
         <tr>
-            <th>Habilidad</th>
-            <th>Descripción oferta</th>
             <th>Inicio</th>
             <th>Fin</th>
-            <th>Duración</th>
-            <th>Consultar solicitudes relacionadas</th>
+            <th>Descripción de la oferta</th>
+            <th>Habilidad ofrecida</th>
+            <th>Nivel dificultad (1-5)</th>
+            <th>Duración en horas</th>
+            <th>Consultar demandas relacionadas</th>
             <th>Actualizar</th>
             <th>Borrar</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="offer: ${offers}">
-            <td th:text="${offer.getNameSkillType(skillTypes)}"></td>
-            <td th:text="${offer.description}"></td>
             <td th:text="${offer.start}"></td>
             <td th:text="${offer.finish}"></td>
+            <td th:text="${offer.description}"></td>
+            <td th:text="${offer.getNameSkillType(skillTypes)}"></td>
+            <td th:text="${offer.getLevelSkillType(skillTypes)}"></td>
             <td th:text="${offer.duration}"></td>
             <td><a th:href="@{/request/list/{idRequest}(idRequest=${offer.idOffer})}" class="btn btn-success">Consultar</a></td>
             <td><a th:href="@{/offer/update/{id}(id=${offer.idOffer})}" class="btn btn-success">Actualizar</a></td>
-            <td><a th:href="@{/offer/delete/{id}(id=${offer.idOffer})}" class="btn btn-success">Eliminar</a></td>
-        </tr>
+            <td><a th:href="@{/offer/delete/{id}(id=${offer.idOffer})}" class="btn btn-success">Eliminar</a></td>        </tr>
         </tbody>
     </table>
     <div class="botones">

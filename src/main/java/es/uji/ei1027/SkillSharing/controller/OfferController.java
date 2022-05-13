@@ -58,6 +58,7 @@ public class OfferController {
 
     @RequestMapping("/list")
     public String listOffers(Model model, HttpSession session){
+        model.addAttribute("students",studentDao.getStudents());
         model.addAttribute("offers", offerDao.getValidOffers());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "offer/list";
@@ -123,7 +124,7 @@ public class OfferController {
             request.createRequestForOffer(offer);
             requestDao.addRequest(request);
             Collaboration collaboration = new Collaboration();
-            collaboration.createCollaboration(offer,request);
+            collaboration.createCollaboration(offer,request.getIdRequest());
             collaborationDao.addCollaboration(collaboration);
         }
         return "redirect:../list";
@@ -149,10 +150,10 @@ public class OfferController {
             request.setValid(false);
             requestDao.updateRequest(request);
             Collaboration collaboration = new Collaboration();
-            collaboration.createCollaboration(offer,request);
+            collaboration.createCollaboration(offer,request.getIdRequest());
             collaborationDao.addCollaboration(collaboration);
         }
-        return "redirect:/offer/mis_demandas";
+        return "redirect:/offer/mis_ofertas";
     }
 
     @RequestMapping(value="/update/{idOffer}", method=RequestMethod.GET)
@@ -192,6 +193,7 @@ public class OfferController {
 
     @RequestMapping(value="/correcto")
     public String operacion_correcta(){
+
         return "offer/correcto";
     }
 }

@@ -9,31 +9,87 @@
     <link rel="stylesheet" type="text/css" href="/estilo.css"
           th:href="@{/estilo.css}"/>
 </head>
-
 <body>
-<div class="container">
-    <div class="titulo"><h1>Mis Colaboraciones</h1></div>
-    <table class="table table-striped">
+<div layout:fragment="content">
+    <div class="titulo"><h1>Mis Colaboraciones como ofertante</h1></div>
+    <table th:unless="${#lists.isEmpty(collaborationsImOffer)}" class="table table-striped">
         <thead>
         <tr>
-            <th>Skill type</th>
-            <th>Description</th>
-            <th>start</th>
-            <th>finish</th>
-            <th>Duration</th>
-            <th>rating</th>
-            <th>comments</th>
+            <th>Inicio</th>
+            <th>Final</th>
+            <th>Descripción de la colaboración</th>
+            <th>Habilidad a enseñar</th>
+            <th>Estudiante en colaboración</th>
+            <th>Duración (en horas)</th>
+            <th>Valoración (1-5)</th>
+            <th>Comentarios</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="colaboration: ${collaborations}">
-            <td th:text="${colaboration.getNameSkillType(skillTypes)}"></td>
-            <td th:text="${colaboration.description}"></td>
-            <td th:text="${colaboration.start}"></td>
-            <td th:text="${colaboration.finish}"></td>
-            <td th:text="${colaboration.duration}"></td>
-            <td th:text="${colaboration.rating}"></td>
-            <td th:text="${colaboration.comments}"></td>
+        <tr th:each="collaboration: ${collaborationsImOffer}">
+            <td th:text="${collaboration.start}"></td>
+            <td th:text="${collaboration.finish}"></td>
+            <td th:text="${collaboration.description}"></td>
+            <td th:text="${collaboration.getNameSkillType(skillTypes)}"></td>
+            <td th:text="${collaboration.getNameStudentsRequest(students)}"></td>
+            <td th:text="${collaboration.duration}"></td>
+            <td>
+                <div th:if="${collaboration.rating>0}">
+                    <p th:text="${collaboration.rating}"></p>
+                </div>
+                <div th:unles="${collaboration.rating>0}">
+                    No se ha valorado la colaboración todavía
+                </div>
+            </td>
+            <td>
+                <div th:if="${collaboration.comments.length()>0}">
+                    <p th:text="${colaboration.comments}"></p>
+                </div>
+                <div th:unles="${collaboration.comments.length()>0}">
+                    No hay comentatios sobre la valoración todavía
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="titulo"><h1>Mis Colaboraciones como demandante</h1></div>
+    <table th:unless="${#lists.isEmpty(collaborationsImRequest)}" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Inicio</th>
+            <th>Final</th>
+            <th>Descripción de la colaboración</th>
+            <th>Habilidad a enseñar</th>
+            <th>Estudiante en colaboración</th>
+            <th>Duración (en horas)</th>
+            <th>Valoración (1-5)</th>
+            <th>Comentarios</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="collaboration: ${collaborationsImRequest}">
+            <td th:text="${collaboration.start}"></td>
+            <td th:text="${collaboration.finish}"></td>
+            <td th:text="${collaboration.description}"></td>
+            <td th:text="${collaboration.getNameSkillType(skillTypes)}"></td>
+            <td th:text="${collaboration.getNameStudentsOffers(students)}"></td>
+            <td th:text="${collaboration.duration}"></td>
+            <td>
+                <div th:if="${collaboration.rating>0}">
+                    <p th:text="${collaboration.rating}"></p>
+                </div>
+                <div th:unles="${collaboration.rating>0}">
+                    No se ha valorado la colaboración todavía
+                </div>
+            </td>
+            <td>
+                <div th:if="${collaboration.comments.length()>0}">
+                    <p th:text="${colaboration.comments}"></p>
+                </div>
+                <div th:unles="${collaboration.comments.length()>0}">
+                    No hay comentatios sobre la valoración todavía
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>

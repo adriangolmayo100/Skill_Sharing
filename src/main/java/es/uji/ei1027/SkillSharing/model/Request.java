@@ -86,6 +86,13 @@ public class Request {
         }
         return "";
     }
+    public int getLevelSkillType(List<SkillType> skillTypeList){
+        for(SkillType skillType: skillTypeList){
+            if(idSkillType==skillType.getIdSkillType())
+                return skillType.getLevel();
+        }
+        return 1;
+    }
     public void setSkillType(String name){
         SkillTypeDao s = new SkillTypeDao();
         List<SkillType> l = s.getSkillTypes();
@@ -95,15 +102,14 @@ public class Request {
             }
         }
     }
-    public List<String> getNameSkillTypes(){
-        SkillTypeDao s = new SkillTypeDao();
-        List<SkillType> l = s.getSkillTypes();
-        List<String> names = new ArrayList<>();
-        for (SkillType sk : l){
-            names.add(sk.getName());
+    public String getNameStudent(List<Student> students){
+        for(Student student: students){
+            if(idStudent==student.getIdStudent())
+                return student.getName();
         }
-        return names;
+        return "";
     }
+
     public void createRequestForOffer(Offer offer){
         this.description=offer.getDescription();
         this.duration=offer.getDuration();

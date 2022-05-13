@@ -12,6 +12,30 @@
 <div  layout:fragment="content">
 
     <h1>Operación realizada correctamente</h1>
+    <div layout:fragment="content">
+        <h1>Ofertas activas de <i th:text="${requestSearch.getNameSkillType(skillTypes)}"></i></h1>
+        <table th:unless="${#lists.isEmpty(offers)}" class="table table-striped">
+            <thead class="table table-striped">
+            <tr>
+                <th>Habilidad</th>
+                <th>Descripción oferta</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>Duración</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="offer: ${offers}">
+                <td th:text="${offer.getNameSkillType(skillTypes)}"></td>
+                <td th:text="${offer.description}"></td>
+                <td th:text="${offer.start}"></td>
+                <td th:text="${offer.finish}"></td>
+                <td th:text="${offer.duration}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <div class="botonIndex">
         <a href="/offer/mis_ofertas" class="btn" role="button">Aceptar</a>
     </div>

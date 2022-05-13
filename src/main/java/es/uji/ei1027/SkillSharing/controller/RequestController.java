@@ -68,7 +68,7 @@ public class RequestController {
             offer.setIdStudent(student.getIdStudent());
             offerDao.addOffer(offer);
             Collaboration collaboration = new Collaboration();
-            collaboration.createCollaboration(offer,request);
+            collaboration.createCollaboration(request,offer.getIdOffer());
             collaborationDao.addCollaboration(collaboration);
         }
         return "redirect:../list";
@@ -93,6 +93,7 @@ public class RequestController {
     }
     @RequestMapping("/list")
     public String listRequests(Model model){
+        model.addAttribute("students",studentDao.getStudents());
         model.addAttribute("requests", requestDao.getValidRequests());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "request/list";
@@ -177,11 +178,11 @@ public class RequestController {
             request.setValid(false);
             requestDao.updateRequest(request);
             Collaboration collaboration = new Collaboration();
-            collaboration.createCollaboration(offer,request);
+            collaboration.createCollaboration(request,offer.getIdOffer());
             collaborationDao.addCollaboration(collaboration);
             System.out.println();
         }
-        return "redirect:/request/mis_ofertas";
+        return "redirect:/request/mis_demandas";
     }
     @RequestMapping(value="/correcto")
     public String operacion_correcta(){

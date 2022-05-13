@@ -2,6 +2,7 @@ package es.uji.ei1027.SkillSharing.controller;
 
 import es.uji.ei1027.SkillSharing.dao.CollaborationDao;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
+import es.uji.ei1027.SkillSharing.dao.StudentDao;
 import es.uji.ei1027.SkillSharing.model.Collaboration;
 import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class CollaborationController {
     private CollaborationDao collaborationDao;
     @Autowired
     private SkillTypeDao skillTypeDao;
+    @Autowired
+    private StudentDao studentDao;
     @Autowired
     public void setCollaborationDao(CollaborationDao collaborationDao){
         this.collaborationDao = collaborationDao;
@@ -50,7 +53,9 @@ public class CollaborationController {
         if (!mensaje.equals("")){
             return mensaje;
         }
-        model.addAttribute("collaborations", collaborationDao.getMyCollaborations(student.getIdStudent()));
+        model.addAttribute("students", studentDao.getStudents());
+        model.addAttribute("collaborationsImRequest", collaborationDao.getMyCollaborationsWhenRequest(student.getIdStudent()));
+        model.addAttribute("collaborationsImOffer", collaborationDao.getMyCollaborationsWhenOffer(student.getIdStudent()));
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "collaboration/mis_colaboraciones";
     }

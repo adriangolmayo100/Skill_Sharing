@@ -19,7 +19,44 @@ public class Collaboration{
     private String comments;
     private int idSkillType;
     private String description;
+
+    @Override
+    public String toString() {
+        return "Collaboration{" +
+                "idRequest=" + idRequest +
+                ", idOffer=" + idOffer +
+                ", start=" + start +
+                ", finish=" + finish +
+                ", rating=" + rating +
+                ", comments='" + comments + '\'' +
+                ", idSkillType=" + idSkillType +
+                ", description='" + description + '\'' +
+                ", duration=" + duration +
+                ", idStudentOffers=" + idStudentOffers +
+                ", idStudentRequest=" + idStudentRequest +
+                '}';
+    }
+
     private int duration;
+    private int idStudentOffers;
+    private int idStudentRequest;
+
+    public int getIdStudentOffers() {
+        return idStudentOffers;
+    }
+
+    public void setIdStudentOffers(int idStudentOffers) {
+        this.idStudentOffers = idStudentOffers;
+    }
+
+    public int getIdStudentRequest() {
+        return idStudentRequest;
+    }
+
+    public void setIdStudentRequest(int idStudentRequest) {
+        this.idStudentRequest = idStudentRequest;
+    }
+
     public int getIdSkillType() {
         return idSkillType;
     }
@@ -94,25 +131,35 @@ public class Collaboration{
     }
 
 
-    @Override
-    public String toString() {
-        return "Collaboration{" +
-                "idRequest=" + idRequest +
-                ", idOffer=" + idOffer +
-                ", start=" + start +
-                ", finish=" + finish +
-                ", rating=" + rating +
-                ", comments='" + comments + '\'' +
-                ", idSkillType=" + idSkillType +
-                ", description='" + description + '\'' +
-                ", duration=" + duration +
-                '}';
-    }
-
-    public void createCollaboration(Offer offer,Request request){
+    public void createCollaboration(Offer offer,int idRequest){
         this.setIdOffer(offer.getIdOffer());
-        this.setIdRequest(request.getIdRequest());
+        this.setIdRequest(idRequest);
+        this.setDuration(offer.getDuration());
+        this.setStart(offer.getStart());
+        this.setFinish(offer.getFinish());
         this.setComments("");
+    }
+    public void createCollaboration(Request request,int idOffer){
+        this.setIdOffer(idOffer);
+        this.setIdRequest(request.getIdRequest());
+        this.setDuration(request.getDuration());
+        this.setStart(request.getStart());
+        this.setFinish(request.getFinish());
+        this.setComments("");
+    }
+    public String getNameStudentsOffers(List<Student> students){
+        for(Student student: students){
+            if(idStudentOffers==student.getIdStudent())
+                return student.getName();
+        }
+        return "";
+    }
+    public String getNameStudentsRequest(List<Student> students){
+        for(Student student: students){
+            if(idStudentRequest==student.getIdStudent())
+                return student.getName();
+        }
+        return "";
     }
     public String getNameSkillType(List<SkillType> skillTypeList){
         for(SkillType skillType: skillTypeList){
