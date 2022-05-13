@@ -11,34 +11,34 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
 
 </head>
-    <body>
-    <div  layout:fragment="content">
-        <div>
-            <p>Horas dadas: <i th:text="${hoursGiven}"></i></p>
-            <p>Horas recibidas: <i th:text="${hoursReceived}"></i></p>
-        </div>
-        <div>
-            <a href="/offer/list" class="btn" role="button">Consultar Ofertas</a>
-        </div>
-        <div class="botonesUsuario">
-            <a href="/request/list" class="btn" role="button">Consultar demandas</a>
-        </div>
-        <div>
-            <a href="/offer/mis_ofertas" class="btn" role="button">Mis ofertas</a>
-        </div>
-        <div>
-            <a href="/request/mis_demandas" class="btn" role="button">Mis demandas</a>
-        </div>
-        <div>
-            <a href="/collaboration/mis_colaboraciones" class="btn" role="button">Mis colaboraciones</a>
-        </div>
-        <div>
-            <a href="/offer/add" class="btn" role="button">Crear ofertas</a>
-        </div>
-        <div>
-            <a href="/request/add" class="btn" role="button">Crear demandas</a>
-        </div>
+<body>
+<div layout:fragment="content">
+    <div class="titulo">
+        <p>Horas dadas: <i th:text="${hoursGiven}"></i></p>
+        <p>Horas recibidas: <i th:text="${hoursReceived}"></i></p>
     </div>
+    <div class="botonesUsuario">
+        <a href="/offer/list" class="btn" role="button">Consultar Ofertas</a>
+    </div>
+    <div class="botonesUsuario">
+        <a href="/request/list" class="btn" role="button">Consultar demandas</a>
+    </div>
+    <div class="botonesUsuario">
+        <a href="/offer/mis_ofertas" class="btn" role="button">Mis ofertas</a>
+    </div>
+    <div class="botonesUsuario">
+        <a href="/request/mis_demandas" class="btn" role="button">Mis demandas</a>
+    </div>
+    <div class="botonesUsuario">
+        <a href="/collaboration/mis_colaboraciones" class="btn" role="button">Mis colaboraciones</a>
+    </div>
+    <div class="botonesUsuario">
+        <a href="/offer/add" class="btn" role="button">Crear ofertas</a>
+    </div>
+    <div class="botonesUsuario">
+        <a href="/request/add" class="btn" role="button">Crear demandas</a>
+    </div>
+</div>
 
-    </body>
+</body>
 </html>
