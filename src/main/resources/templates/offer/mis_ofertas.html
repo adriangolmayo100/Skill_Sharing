@@ -37,12 +37,11 @@
             <td><a th:href="@{/offer/update/{id}(id=${offer.idOffer})}" class="btn btn-success">Actualizar</a></td>
             <td><a th:href="@{/offer/delete/{id}(id=${offer.idOffer})}" class="btn btn-success">Eliminar</a></td>
         </tr>
-        <tr>
-            <td olspan="8"><a th:href="@{/offer/add}" class="botones">Añadir</a></td>
-        </tr>
         </tbody>
     </table>
-
+    <div class="botones">
+        <a th:href="@{/request/add}" class="bnt">Añadir</a>
+    </div>
 </div>
 </body>
 </html>
