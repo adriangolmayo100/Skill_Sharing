@@ -22,7 +22,6 @@
                 <th>Nivel dificultad (1-5)</th>
                 <th>Duración en horas</th>
                 <th>Estudiante que demanda</th>
-                <th></th>
             </tr>
             </thead>
         <tbody>
@@ -34,7 +33,6 @@
                 <td th:text="${request.getLevelSkillType(skillTypes)}"></td>
                 <td th:text="${request.duration}"></td>
                 <td th:text="${request.getNameStudent(students)}"></td>
-                <td><a th:href="@{/request/accept/{id}(id=${request.idRequest})}" class="btn btn-success">Aceptar</a>
             </tr>
         </tbody>
     </table>

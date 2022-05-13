@@ -15,22 +15,27 @@
     <table th:unless="${#lists.isEmpty(offers)}" class="table table-striped">
         <thead class="table table-striped">
         <tr>
-            <th>Habilidad</th>
-            <th>Descripción oferta</th>
             <th>Inicio</th>
             <th>Fin</th>
-            <th>Duración</th>
+            <th>Descripción de la oferta</th>
+            <th>Habilidad ofrecida</th>
+            <th>Nivel dificultad (1-5)</th>
+            <th>Duración en horas</th>
+            <th>Estudiante que oferta</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="offer: ${offers}">
-            <td th:text="${offer.getNameSkillType(skillTypes)}"></td>
-            <td th:text="${offer.description}"></td>
             <td th:text="${offer.start}"></td>
             <td th:text="${offer.finish}"></td>
+            <td th:text="${offer.description}"></td>
+            <td th:text="${offer.getNameSkillType(skillTypes)}"></td>
+            <td th:text="${offer.getLevelSkillType(skillTypes)}"></td>
             <td th:text="${offer.duration}"></td>
-        </tr>
+            <td th:text="${offer.getNameStudent(students)}"></td>
+            <td><a th:href="@{/offer/accept/{idOffer}/{idRequest}(idRequest=${requestSearch.idRequest}, idOffer=${offer.idOffer})}" class="btn btn-success">Aceptar</a>
+
         </tbody>
     </table>
 </div>

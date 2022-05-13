@@ -70,6 +70,7 @@ public class OfferController {
         model.addAttribute("requestSearch", request);
         model.addAttribute("offers", offerDao.getValidOffers(request.getIdSkillType()));
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("students",studentDao.getStudents());
         return "offer/listBySkillType";
     }
     @RequestMapping(value="/add")
@@ -138,16 +139,14 @@ public class OfferController {
         }
         Offer offer = offerDao.getOffer(idOffer);
         Request request = requestDao.getRequest(idRequest);
-        if (student.getIdStudent()!=offer.getIdStudent()){
+        if (student.getIdStudent()!=offer.getIdStudent() && collaborationDao.getCollaboration(idRequest,idOffer)==null){
             Student studentRequests = studentDao.obtenerStudent(request.getIdStudent());
             Student studentOffers = studentDao.obtenerStudent(offer.getIdStudent());
             studentOffers.setHoursGiven(studentOffers.getHoursGiven()+offer.getDuration());
             studentRequests.setHoursReceived(studentRequests.getHoursReceived()+offer.getDuration());
             studentDao.updateStudent(studentOffers);
             studentDao.updateStudent(studentRequests);
-            offer.setValid(false);
             offerDao.updateOffer(offer);
-            request.setValid(false);
             requestDao.updateRequest(request);
             Collaboration collaboration = new Collaboration();
             collaboration.createCollaboration(offer,request.getIdRequest());

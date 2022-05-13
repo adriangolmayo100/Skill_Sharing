@@ -38,6 +38,22 @@
                     <p th:text="${collaboration.rating}"></p>
                 </div>
                 <div th:unles="${collaboration.rating>0}">
+                    <a href="/collaboration/rate/{idOffer}/{idRequest}(idRequest=${collaboration.idRequest, idOffer=${collaboration.idOffer})}" class="btn btn-success">Valorar colaboración</a>
+                </div>
+            </td>
+            <td>
+                <div th:if="${collaboration.comments.length()>0}">
+                    <p th:text="${colaboration.comments}"></p>
+                </div>
+                <div th:unles="${collaboration.comments.length()>0}">
+                    <a href="/collaboration/comment/{idOffer}/{idRequest}(idRequest=${collaboration.idRequest, idOffer=${collaboration.idOffer})" class="btn btn-success">Comenta la colaboración</a>
+                </div>
+            </td>
+            <td>
+                <div th:if="${collaboration.rating>0}">
+                    <p th:text="${collaboration.rating}"></p>
+                </div>
+                <div th:unles="${collaboration.rating>0}">
                     No se ha valorado la colaboración todavía
                 </div>
             </td>
@@ -79,7 +95,9 @@
                     <p th:text="${collaboration.rating}"></p>
                 </div>
                 <div th:unles="${collaboration.rating>0}">
-                    No se ha valorado la colaboración todavía
+                    <div class="botonesUsuario">
+                        <a href="/collaboration/rate" class="btn" role="button">Valorar colaboración</a>
+                    </div>
                 </div>
             </td>
             <td>
@@ -87,7 +105,9 @@
                     <p th:text="${colaboration.comments}"></p>
                 </div>
                 <div th:unles="${collaboration.comments.length()>0}">
-                    No hay comentatios sobre la valoración todavía
+                    <div class="botonesUsuario">
+                        <a href="/collaboration/comment" class="btn" role="button">Comenta la colaboración</a>
+                    </div>
                 </div>
             </td>
         </tr>

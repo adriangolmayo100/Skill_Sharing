@@ -88,6 +88,7 @@ public class RequestController {
         model.addAttribute("offerSearch",offer);
         model.addAttribute("requests", requestDao.getValidRequests(offer.getIdSkillType()));
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("students",studentDao.getStudents());
 
         return "request/listBySkillType";
     }
@@ -101,7 +102,7 @@ public class RequestController {
 
     @RequestMapping(value="/add")
     public String addRequest(HttpSession session,Model model){
-        String mensaje = validator.comprobar_conexion(session, model, "/add");
+        String mensaje = validator.comprobar_conexion(session, model, "/request/add");
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -112,7 +113,7 @@ public class RequestController {
     @RequestMapping(value="/mis_demandas")
     public String mis_requests(HttpSession session,Model model){
         Student student= (Student) session.getAttribute("student");
-        String mensaje = validator.comprobar_conexion(session, model, "/offer/mis_demandas");
+        String mensaje = validator.comprobar_conexion(session, model, "/request/mis_demandas");
         if (!mensaje.equals("")){
             return mensaje;
         }

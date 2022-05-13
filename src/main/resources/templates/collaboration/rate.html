@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+  <title>Crear nova proposta</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="/css/estilo.css"
+        th:href="@{/css/estilo.css}"/>
+</head>
+<body>
+<div  layout:fragment="content">
+  <div><h1>Nueva ratio</h1></div>
+  <form action="#" th:action="@{/collaboration/rate/idOffer/idRequest}"
+        th:object="${collaboration}" method="post">
+    <table class="table table-striped">
+      <tr>
+        <td><label>Rate</label></td>
+        <td><input type="text" th:field="*{rate}"/></td>
+      </tr>
+
+      <tr>
+        <td colspan="2"><input type="submit" value="Aceptar" class="botones" /></td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+</html>
