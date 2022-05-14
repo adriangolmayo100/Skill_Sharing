@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Consultar ofertas</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="titulo"><h1>Moderar Usuarios</h1></div>
+    <table th:unless="${#lists.isEmpty(studentList)}" class="table table-striped">
+        <thead class="table table-striped">
+        <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Usuario</th>
+            <th>Horas dadas</th>
+            <th>Horas recibidas</th>
+            <th>Grado</th>
+            <th>Curso</th>
+            <th>Banear/Recuperar cuenta</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student: ${studentList}">
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.email}"></td>
+            <td th:text="${student.username}"></td>
+            <td th:text="${student.hoursGiven}"></td>
+            <td th:text="${student.hoursReceived}"></td>
+            <td th:text="${student.degree}"></td>
+            <td th:text="${student.course}"></td>
+            <td colspan="2">
+                <div th:if="${student.unavailable}">
+                    <a th:href="@{/student/recuperar/{id}(id=${student.idStudent})}" class="btn btn-success">Devolver cuenta</a>
+                    <p>Motivo baneo: <i th:text="${student.banReason}"></i></p>
+                </div>
+                <div th:unless="${student.unavailable}">
+                    <a th:href="@{/student/anular/{id}(id=${student.idStudent})}" class="btn btn-danger">Suspender cuenta</a>
+                </div>
+            </td>
+            <td>
+            <td>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="register/datos" class="botones">Añadir usuario</a>
+</div>
+</body>
+</html>

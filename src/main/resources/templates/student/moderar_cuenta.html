@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Moderar cuenta</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
+</head>
+<body>
+<div  layout:fragment="content">
+    <div><h1>Baneo</h1></div>
+    <form action="#" th:action="@{/student/anular/{idStudent}(idStudent=${student.idStudent})}"
+          th:object="${student}" method="post">
+        <table class="table table-striped">
+            <tr>
+                <td><label>Motivo baneo</label></td>
+                <td><input type="text" th:field="*{banReason}"/></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Aceptar" class="botones" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

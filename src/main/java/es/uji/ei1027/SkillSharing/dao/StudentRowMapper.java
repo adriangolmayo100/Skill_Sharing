@@ -23,7 +23,8 @@ public class StudentRowMapper implements RowMapper<Student> {
         student.setSkp(rs.getBoolean("skp"));
         student.setNumberPhone(rs.getInt("phone_number"));
         student.setGender(rs.getString("gender"));
-        student.setUnavailable(rs.getBoolean("unavailible"));
+        student.setUnavailable(rs.getBoolean("unavailable"));
+        student.setBanReason(rs.getString("reason_ban"));
         return student;
     }
 }

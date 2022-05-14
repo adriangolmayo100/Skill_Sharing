@@ -32,6 +32,11 @@ public class SkillTypeController {
         model.addAttribute("skills", skillTypeDao.getSkillTypes());
         return "skilltype/list";
     }
+    @RequestMapping("/listWithStatistics")
+    public String listSkillTypesWithStatistics(Model model) {
+        model.addAttribute("skills", skillTypeDao.getSkillTypeWithStatistics());
+        return "skilltype/listWithStatistics";
+    }
 
     @RequestMapping(value="/add")
     public String addRequest(Model model) {

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Listado skill type</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+  <h1>Gestionar habilidades</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Nivel</th>
+      <th>Número de ofertas activas con dicha actividad</th>
+      <th>Número de demandas activas con dicha actividad</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="skill: ${skills}">
+      <td th:text="${skill.name}"></td>
+      <td th:text="${skill.description}"></td>
+      <td th:text="${skill.level}"></td>
+      <td th:text="${skill.numberOfOffers}"></td>
+      <td th:text="${skill.numberOfRequest}"></td>
+      <td><a th:href="@{/skilltype/update/{idSkilltype}(idSkilltype=${skill.idSkillType})}" class="btn btn-warning" role="button">Editar</a></td>
+      <td><a th:href="@{/skilltype/delete/{idSkilltype}(idSkilltype=${skill.idSkillType})}" class="btn btn-danger" role="button">Borrar</a></td>
+    </tr>
+    </tbody>
+  </table>
+  <a href="add" class="btn btn-succes" role="button">Añadir habilidad</a>
+</div>
+</body>
+</html>

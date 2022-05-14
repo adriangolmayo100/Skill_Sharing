@@ -1,8 +1,5 @@
 package es.uji.ei1027.SkillSharing.dao;
 
-import es.uji.ei1027.SkillSharing.model.Offer;
-import es.uji.ei1027.SkillSharing.model.Request;
-import es.uji.ei1027.SkillSharing.model.SkillType;
 import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -29,14 +26,14 @@ public class StudentDao{
 
     public void nuevoStudent(Student student){
         String contrasenaEncriptada = encryptor.encryptPassword(student.getPassword());
-        jdbcTemplate.update("INSERT INTO Student VALUES(?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?)",
+        jdbcTemplate.update("INSERT INTO Student VALUES(?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?,?)",
                 student.getIdStudent(), student.getName(), student.getEmail(), student.getUsername(),
                 contrasenaEncriptada, student.getCodePostal(), student.getHoursGiven(),student.getHoursReceived(), student.getDegree(),
-                student.getCourse(), student.isSkp(), student.getNumberPhone(), student.getGender(),student.isUnavailable());
+                student.getCourse(), student.isSkp(), student.getNumberPhone(), student.getGender(),student.isUnavailable(),student.getBanReason());
     }
     public void updateStudent(Student student){
-        jdbcTemplate.update("UPDATE student SET name=?,email=?,username=?,password=?,postal_code=?,hours_given=?,hours_received=?,degree=?,course=?,skp=?,phone_number=?,gender=?,unavailible=? where id_student=?",
-                student.getName(),student.getEmail(),student.getUsername(),student.getPassword(),student.getCodePostal(),student.getHoursGiven(),student.getHoursReceived(),student.getDegree(),student.getCourse(),student.isSkp(),student.getNumberPhone(),student.getGender(),student.isUnavailable(),student.getIdStudent());
+        jdbcTemplate.update("UPDATE student SET name=?,email=?,username=?,password=?,postal_code=?,hours_given=?,hours_received=?,degree=?,course=?,skp=?,phone_number=?,gender=?,unavailable=?,reason_ban=? where id_student=?",
+                student.getName(),student.getEmail(),student.getUsername(),student.getPassword(),student.getCodePostal(),student.getHoursGiven(),student.getHoursReceived(),student.getDegree(),student.getCourse(),student.isSkp(),student.getNumberPhone(),student.getGender(),student.isUnavailable(),student.getBanReason(),student.getIdStudent());
     }
     public Student obtenerStudent(int studentId){
         try{
@@ -72,7 +69,8 @@ public class StudentDao{
 
     public Integer getNextId(){
         try{
-            return jdbcTemplate.queryForObject("SELECT MAX(id_student) AS max_id FROM student",new MaxIdMapper()) + 1;
+            return jdbcTemplate.queryForObject("SELECT MAX(id_student) AS max_id FROM student",
+                    new MaxIdMapper()) + 1;
         }catch(EmptyResultDataAccessException e){
             return -1;
         }
@@ -85,4 +83,21 @@ public class StudentDao{
             return new ArrayList<Student>();
         }
     }
+    public Student getStudent(int idStudent) {
+        try {
+            return jdbcTemplate.queryForObject("SELECT * from student WHERE id_student=?",
+                    new StudentRowMapper(),idStudent);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+    public List<Student> getStudentsWithOutSkps() {
+        try {
+            return jdbcTemplate.query("SELECT * from student WHERE skp=?",
+                    new StudentRowMapper(),false);
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Student>();
+        }
+    }
+
 }

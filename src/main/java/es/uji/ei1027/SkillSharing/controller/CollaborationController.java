@@ -76,8 +76,9 @@ public class CollaborationController {
         if (!mensaje.equals("")){
             return mensaje;
         }
-        model.addAttribute("collaboration", new Collaboration());
-        return "/collaboration/rate/"+idRequest+"/"+idOffer;
+        Collaboration collaboration = collaborationDao.getCollaboration(idRequest,idOffer);
+        model.addAttribute("collaboration",collaboration );
+        return "/collaboration/rate";
     }
     @RequestMapping(value="/rate/{idRequest}/{idOffer}",method= RequestMethod.POST)
     public String putRate(HttpSession session, Model model, @ModelAttribute("collaboration") Collaboration collaborationModel,Offer offerModel, @PathVariable Integer idRequest, @PathVariable Integer idOffer){
@@ -88,27 +89,29 @@ public class CollaborationController {
         Collaboration collaboration=collaborationDao.getCollaboration(idRequest,idOffer);
         collaboration.setRating(collaborationModel.getRating());
         collaborationDao.updateCollaboration(collaboration);
-        return "/collaboration/mis_colaboraciones";
+        return "redirect:/collaboration/mis_colaboraciones";
     }
     @RequestMapping(value="/comment/{idRequest}/{idOffer}")
-    public String addComment(HttpSession session, Model model,@PathVariable Integer idRequest,@PathVariable Integer idOffer){
-        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/rate/"+idRequest+"/"+idOffer);
+    public String addComment(HttpSession session, Model model,@PathVariable Integer idRequest,
+                             @PathVariable Integer idOffer){
+        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/comment/"+idRequest+"/"+idOffer);
         if (!mensaje.equals("")){
             return mensaje;
         }
-        model.addAttribute("collaboration", new Collaboration());
-        return "/collaboration/comment/"+idRequest+"/"+idOffer;
+        Collaboration collaboration = collaborationDao.getCollaboration(idRequest,idOffer);
+        model.addAttribute("collaboration",collaboration );
+        return "/collaboration/comment";
     }
     @RequestMapping(value="/comment/{idRequest}/{idOffer}",method= RequestMethod.POST)
-    public String putComment(HttpSession session, Model model, @ModelAttribute("collaboration") Collaboration collaborationModel,Offer offerModel, @PathVariable Integer idRequest, @PathVariable Integer idOffer){
-        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/rate/"+idRequest+"/"+idOffer);
+    public String putComment(HttpSession session, Model model, @ModelAttribute("collaboration") Collaboration collaborationModel,@PathVariable Integer idRequest, @PathVariable Integer idOffer){
+        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/comment/"+idRequest+"/"+idOffer);
         if (!mensaje.equals("")){
             return mensaje;
         }
         Collaboration collaboration=collaborationDao.getCollaboration(idRequest,idOffer);
         collaboration.setComments(collaborationModel.getComments());
         collaborationDao.updateCollaboration(collaboration);
-        return "/collaboration/mis_colaboraciones";
+        return "redirect:/collaboration/mis_colaboraciones";
     }
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("collaboration") Collaboration collaboration,

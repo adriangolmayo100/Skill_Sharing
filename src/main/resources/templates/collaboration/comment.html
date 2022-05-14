@@ -11,12 +11,12 @@
 <body>
 <div  layout:fragment="content">
   <div><h1>Nuevo comentario</h1></div>
-  <form action="#" th:action="@{/collaboration/comment/idOffer/idRequest}"
+  <form action="#" th:action="@{/collaboration/comment/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}"
         th:object="${collaboration}" method="post">
     <table class="table table-striped">
       <tr>
         <td><label>Comentario</label></td>
-        <td><input type="text" th:field="*{comment}"/></td>
+        <td><input type="text" th:field="*{comments}"/></td>
       </tr>
 
       <tr>

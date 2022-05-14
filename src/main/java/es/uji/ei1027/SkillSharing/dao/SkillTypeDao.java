@@ -28,7 +28,7 @@ public class SkillTypeDao {
     }
     public Integer getNextId(){
         try{
-            return jdbcTemplate.queryForObject("SELECT MAX(id_skilltype) AS max_id FROM skilltype",new MaxIdMapper());
+            return jdbcTemplate.queryForObject("SELECT MAX(id_skilltype) AS max_id FROM skilltype",new MaxIdMapper()) + 1;
         }catch(EmptyResultDataAccessException e){
             return null;
         }
@@ -49,6 +49,22 @@ public class SkillTypeDao {
                     new SkillTypeRowMapper(), idskilltype);
         } catch (EmptyResultDataAccessException e) {
             return null;
+        }
+    }
+    public List<SkillType> getSkillTypeWithStatistics() {
+        try {
+            return jdbcTemplate.query("SELECT st.id_skilltype, st.name, st.description, st.level," +
+                            "(SELECT COUNT(off.id_skilltype) " +
+                            "FROM offer as off " +
+                            "WHERE off.id_skilltype=st.id_skilltype) AS number_offers, " +
+                            "(SELECT COUNT(re.id_skilltype)" +
+                            "FROM request as re " +
+                            "WHERE re.id_skilltype=st.id_skilltype) AS number_requests " +
+                            "from SkillType as st " +
+                            "WHERE id_skilltype=st.id_skilltype",
+                    new SkillTypeStatisticsRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<SkillType>();
         }
     }
 

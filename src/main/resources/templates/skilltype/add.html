@@ -7,14 +7,10 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>Nou SkilType</h2>
+<h2>Nueva habilidad</h2>
 <form action="#" th:action="@{/skilltype/add}"
       th:object="${skilltype}" method="post">
     <table>
-        <tr>
-            <td><label>ID</label></td>
-            <td><input type="number" th:field="*{idSkillType}" /></td>
-        </tr>
         <tr>
             <td><label>Name</label></td>
             <td><input type="text" th:field="*{name}" /></td>
@@ -29,7 +25,7 @@
         </tr>
 
         <tr>
-            <td colspan="2"><input type="submit" value="Afegeix skilltype" /></td>
+            <td colspan="2"><input type="submit" value="Añadir habilidad" /></td>
         </tr>
     </table>
 </form>

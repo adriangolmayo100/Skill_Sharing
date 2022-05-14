@@ -16,6 +16,36 @@ public class Student {
     private String gender;
 
     private boolean unavailable;
+    private String banReason;
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "idStudent=" + idStudent +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", codePostal=" + codePostal +
+                ", hoursGiven=" + hoursGiven +
+                ", hoursReceived=" + hoursReceived +
+                ", degree='" + degree + '\'' +
+                ", course=" + course +
+                ", skp=" + skp +
+                ", numberPhone=" + numberPhone +
+                ", gender='" + gender + '\'' +
+                ", unavailable=" + unavailable +
+                ", ban_reason='" + banReason + '\'' +
+                '}';
+    }
+
+    public String getBanReason() {
+        return banReason;
+    }
+
+    public void setBanReason(String banReason) {
+        this.banReason = banReason;
+    }
 
     public boolean isUnavailable() {
         return unavailable;
@@ -129,23 +159,4 @@ public class Student {
         this.gender = gender;
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "idStudent=" + idStudent +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", codePostal=" + codePostal +
-                ", hoursGiven=" + hoursGiven +
-                ", hoursReceived=" + hoursReceived +
-                ", degree='" + degree + '\'' +
-                ", course=" + course +
-                ", skp=" + skp +
-                ", numberPhone=" + numberPhone +
-                ", gender='" + gender + '\'' +
-                ", unavailable=" + unavailable +
-                '}';
-    }
 }

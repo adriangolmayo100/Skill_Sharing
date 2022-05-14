@@ -9,6 +9,26 @@ public class SkillType {
      private String description;
      private int level;
 
+     private int numberOfOffers;
+
+    private int numberOfRequest;
+    public int getNumberOfOffers() {
+        return numberOfOffers;
+    }
+
+    public void setNumberOfOffers(int numberOfOffers) {
+        this.numberOfOffers = numberOfOffers;
+    }
+
+    public int getNumberOfRequest() {
+        return numberOfRequest;
+    }
+
+    public void setNumberOfRequest(int numberOfRequest) {
+        this.numberOfRequest = numberOfRequest;
+    }
+
+
 
     public int getIdSkillType() {
         return idSkillType;

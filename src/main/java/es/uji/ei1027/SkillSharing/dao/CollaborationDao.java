@@ -35,14 +35,14 @@ public class CollaborationDao {
     }
 
     public void updateCollaboration(Collaboration collaboration) {
-        jdbcTemplate.update("UPDATE Collaboration SET rating=?,comments=?,start=?,finish=?,duration=? WHERE id_request== and id_offer=?",
-                collaboration.getRating(),collaboration.getStart(),collaboration.getFinish(),collaboration.getComments(),collaboration.getDuration(),collaboration.getIdRequest(),collaboration.getIdOffer());
+        jdbcTemplate.update("UPDATE Collaboration SET rating=?,comments=?,start=?,finish=?,duration=? WHERE id_request=? and id_offer=?",
+                collaboration.getRating(),collaboration.getComments(),collaboration.getStart(),collaboration.getFinish(),collaboration.getDuration(),collaboration.getIdRequest(),collaboration.getIdOffer());
     }
 
     public Collaboration getCollaboration(int idRequest, int id_offer) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * from Collaboration JOIN offer USING(id_offer) WHERE id_request=? AND id_offer=?",
-                    new CollaborationRowMapper(), idRequest,id_offer);
+            return jdbcTemplate.queryForObject("SELECT * from Collaboration WHERE id_request=? AND id_offer=?",
+                    new CollaborationStandarRowMapper(), idRequest,id_offer);
         } catch (EmptyResultDataAccessException e) {
             return null;
         }

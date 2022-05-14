@@ -4,20 +4,17 @@
       layout:decorate="~{fragments/base}">
 <head>
     <link rel="stylesheet" type="text/css"
-          href="/estilo.css"
-          th:href="@{/estilo.css}"/>
-    <title>Skp</title>
+          href="/css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
+    <title>Baneado</title>
     <meta charset="UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
 
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="botonesUsuario">
-        <a href="/student/listWithOutSkp" class="btn" role="button">Moderar usuarios</a>
-    </div>
-    <div class="botonesUsuario">
-        <a href="/skilltype/listWithStatistics" class="btn" role="button">Gestionar skillTypes</a>
+    <div>
+        <p>Has sido baneado por lo siguiente:  <i th:text="${student.banReason}"></i> </p>
     </div>
 </div>
 

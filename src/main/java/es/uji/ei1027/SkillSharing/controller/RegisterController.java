@@ -45,6 +45,7 @@ public class RegisterController {
         student.setHoursGiven(0);
         student.setHoursReceived(0);
         student.setUnavailable(false);
+        student.setBanReason("");
         studentDao.nuevoStudent(student);
         return "redirect:/tipos_usuario/list";
     }

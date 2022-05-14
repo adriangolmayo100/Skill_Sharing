@@ -9,11 +9,10 @@
 </head>
 <body>
 <div class="container">
-    <h1>Lista de skill type</h1>
+    <h1>Gestionar habilidades</h1>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>ID Skill</th>
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Nivel</th>
@@ -21,7 +20,6 @@
         </thead>
         <tbody>
         <tr th:each="skill: ${skills}">
-            <td th:text="${skill.idSkillType}"></td>
             <td th:text="${skill.name}"></td>
             <td th:text="${skill.description}"></td>
             <td th:text="${skill.level}"></td>
@@ -30,7 +28,7 @@
         </tr>
         </tbody>
     </table>
-    <a href="add" class="btn btn-succes" role="button">Añadir Skill</a>
+    <a href="add" class="btn btn-succes" role="button">Añadir habilidad</a>
 </div>
 </body>
 </html>

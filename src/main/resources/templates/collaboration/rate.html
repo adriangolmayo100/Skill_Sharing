@@ -11,12 +11,12 @@
 <body>
 <div  layout:fragment="content">
   <div><h1>Nueva ratio</h1></div>
-  <form action="#" th:action="@{/collaboration/rate/idOffer/idRequest}"
+  <form action="#" th:action="@{/collaboration/rate/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}"
         th:object="${collaboration}" method="post">
     <table class="table table-striped">
       <tr>
         <td><label>Rate</label></td>
-        <td><input type="text" th:field="*{rate}"/></td>
+        <td><input type="number" th:field="*{rating}"/></td>
       </tr>
 
       <tr>

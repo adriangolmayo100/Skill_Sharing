@@ -35,7 +35,7 @@ public class LoginController {
     }
 
     @RequestMapping(value="/login", method=RequestMethod.POST)          //Comprobación de login
-    public String checkLogin(@ModelAttribute("student") Student student,
+    public String checkLogin(@ModelAttribute("student") Student student, Model model,
                              BindingResult bindingResult, HttpSession session) throws FileNotFoundException {
         UserValidator userValidator = new UserValidator();
         if (bindingResult.hasErrors()) {
@@ -54,6 +54,10 @@ public class LoginController {
         session.setAttribute("student", student_completo);
         // Autenticats correctament.
         // Guardem les dades de l'usuari autenticat a la sessió
+        if (student.isUnavailable()){
+            model.addAttribute("banReason",student.getBanReason());
+            return "redirect:tipos_usuario/baneado";
+        }
         if (session.getAttribute("nextUrl") != null){
             String nextUrl = session.getAttribute("nextUrl").toString();
             session.removeAttribute("nextUrl");

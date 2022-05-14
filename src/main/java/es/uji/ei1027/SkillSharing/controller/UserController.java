@@ -51,13 +51,5 @@ public class UserController {
     public String pagVisitante(HttpSession session, Model model){
         return "tipos_usuario/visitante";
     }
-    @RequestMapping("/list")
-    public String moderarUsuario(HttpSession session, Model model){
-        String mensaje = validator.comprobar_conexion(session, model, "/tipos_usuario/list");
-        if (!mensaje.equals(""))
-            return mensaje;
-        List<Student> studentList = studentDao.getStudents();
-        model.addAttribute("studentList",studentList);
-        return "student/list";
-    }
+
 }
