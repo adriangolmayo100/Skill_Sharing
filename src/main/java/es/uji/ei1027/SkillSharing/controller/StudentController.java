@@ -1,5 +1,8 @@
 package es.uji.ei1027.SkillSharing.controller;
 
+import es.uji.ei1027.SkillSharing.dao.OfferDao;
+import es.uji.ei1027.SkillSharing.dao.RequestDao;
+import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import es.uji.ei1027.SkillSharing.dao.StudentDao;
 import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,12 @@ public class StudentController {
 
     @Autowired
     private StudentDao studentDao;
+    @Autowired
+    private OfferDao offerDao;
+    @Autowired
+    private RequestDao requestDao;
+    @Autowired
+    private SkillTypeDao skillTypeDao;
     @RequestMapping("/list")
     public String listarUsuarios(HttpSession session, Model model){
         String mensaje = validator.comprobar_conexion(session, model, "/student/list");
@@ -28,6 +37,19 @@ public class StudentController {
         List<Student> studentList = studentDao.getStudents();
         model.addAttribute("studentList",studentList);
         return "student/list";
+    }
+    @RequestMapping("/informacion/{idStudent}")
+    public String informacionUsuario(HttpSession session, Model model, @PathVariable int idStudent){
+        String mensaje = validator.comprobar_conexion(session, model, "/student/informacion/"+idStudent);
+        if (!mensaje.equals(""))
+            return mensaje;
+        model.addAttribute("student",studentDao.getStudent(idStudent));
+        model.addAttribute("students",studentDao.getStudents());
+        model.addAttribute("offers",offerDao.getOffers(idStudent));
+        model.addAttribute("request",requestDao.getRequests(idStudent));
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+
+        return "/student/informacion";
     }
     @RequestMapping("/listWithOutSkp")
     public String mostrarUsuariosNoSkps(HttpSession session, Model model){

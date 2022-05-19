@@ -2,7 +2,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/base}">
 <head>
-  <title>Crear nova proposta</title>
+  <title>Valorar colaboración</title>
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
   <link rel="stylesheet" type="text/css" href="/css/estilo.css"
@@ -10,15 +10,22 @@
 </head>
 <body>
 <div  layout:fragment="content">
-  <div><h1>Nueva ratio</h1></div>
+  <div><h1>Valorar la colaboración</h1></div>
   <form action="#" th:action="@{/collaboration/rate/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}"
         th:object="${collaboration}" method="post">
     <table class="table table-striped">
       <tr>
-        <td><label>Rate</label></td>
-        <td><input type="number" th:field="*{rating}"/></td>
+        <td><label>Duración total (en horas)</label></td>
+        <td><input type="number" th:field="*{duration}"/></td>
       </tr>
-
+       <tr>
+        <td><label>Valoración (de 1 a 5 )</label></td>
+        <td><input max="5" min="1" type="number" th:field="*{rating}"/></td>
+       </tr>
+       <tr>
+        <td><label>Opinión</label></td>
+        <td><input type="text" th:field="*{comments}"/></td>
+       </tr>
       <tr>
         <td colspan="2"><input type="submit" value="Aceptar" class="botones" /></td>
       </tr>
