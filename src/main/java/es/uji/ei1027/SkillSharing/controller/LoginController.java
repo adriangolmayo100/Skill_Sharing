@@ -38,13 +38,13 @@ public class LoginController {
     public String checkLogin(@ModelAttribute("student") Student student, Model model,
                              BindingResult bindingResult, HttpSession session) throws FileNotFoundException {
         UserValidator userValidator = new UserValidator();
+        userValidator.validate(student, bindingResult);
         if (bindingResult.hasErrors()) {
             return "login";
         }
         // Comprova que el login siga correcte
         // intentant carregar les dades de l'usuari
 
-        userValidator.validate(student, bindingResult);
         if (studentDao.loadStudent(student.getUsername(),student.getPassword()) == null){
             //bindingResult.rejectValue("username", "badUser", "no se ha introducido un usuario");
             return "redirect:/login";
@@ -54,10 +54,6 @@ public class LoginController {
         session.setAttribute("student", student_completo);
         // Autenticats correctament.
         // Guardem les dades de l'usuari autenticat a la sessió
-        if (student.isUnavailable()){
-            model.addAttribute("banReason",student.getBanReason());
-            return "redirect:tipos_usuario/baneado";
-        }
         if (session.getAttribute("nextUrl") != null){
             String nextUrl = session.getAttribute("nextUrl").toString();
             session.removeAttribute("nextUrl");

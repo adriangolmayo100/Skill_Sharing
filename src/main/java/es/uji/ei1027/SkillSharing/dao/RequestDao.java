@@ -1,6 +1,7 @@
 package es.uji.ei1027.SkillSharing.dao;
 
 import es.uji.ei1027.SkillSharing.model.Request;
+import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -33,7 +34,7 @@ public class RequestDao {
     }
 
     public void deleteRequest(int idrequest) {
-        jdbcTemplate.update("DELETE from Request SET finish=CURRENT_DATE-1, valid=false where id_request=?",
+        jdbcTemplate.update("UPDATE request SET finish=CURRENT_DATE-1, valid=false where id_request=?",
                 idrequest );
     }
 
@@ -63,10 +64,22 @@ public class RequestDao {
             return null;
         }
     }
-    public List<Request> getValidRequests(int idSkillType) {
+    public List<Student> getStudentsWithIdSkillType(int idSkilltypes, int idStudent) {
         try {
-            return jdbcTemplate.query("SELECT * from Request WHERE valid=? and id_skilltype=?",
-                    new RequestRowMapper(), true, idSkillType);
+            return jdbcTemplate.query("SELECT st.* " +
+                    "from Request as re " +
+                    "JOIN student as st USING(id_student)\n" +
+                    "WHERE valid=?" +
+                    "and re.id_skilltype=?" +
+                    "and st.id_student!=?;" ,new StudentRowMapper(), true,idSkilltypes,idStudent);
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Student>();
+        }
+    }
+    public List<Request> getValidRequests(int idSkillType, int idStudent) {
+        try {
+            return jdbcTemplate.query("SELECT * from Request WHERE valid=? and id_skilltype=? and id_student=?",
+                    new RequestRowMapper(), true, idSkillType,idStudent);
         } catch (EmptyResultDataAccessException e) {
             return null;
         }

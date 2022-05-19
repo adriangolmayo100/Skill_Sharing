@@ -12,6 +12,18 @@
 <div  layout:fragment="content">
 
     <h1>Operación realizada correctamente</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Se ha enviado un correo a las siguientes personas.</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student: ${studentsEmail}">
+                <td th:text="${student.email}"></td>
+            </tr>
+        </tbody>
+    </table>
     <div class="botonIndex">
         <a href="/offer/mis_ofertas" class="btn" role="button">Aceptar</a>
     </div>

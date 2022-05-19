@@ -62,10 +62,18 @@ public class OfferDao {
             return null;
         }
     }
-    public List<Offer> getValidOffers(int idSkillType) {
+    public List<Offer> getValidOffers(Request request) {
         try {
-            return jdbcTemplate.query("SELECT * from offer WHERE valid=? and id_skilltype=?",
-                    new OfferRowMapper(),true,idSkillType);
+            return jdbcTemplate.query("SELECT * \n" +
+                            "from offer \n" +
+                            "WHERE valid=?\n" +
+                            "and id_skilltype=? \n" +
+                            "and id_student!=?\n" +
+                            "and NOT EXISTS\n" +
+                            "(SELECT id_offer\n" +
+                            "FROM collaboration\n" +
+                            "WHERE id_request=?)",
+                    new OfferRowMapper(),true,request.getIdSkillType(), request.getIdStudent(), request.getIdRequest());
         } catch (EmptyResultDataAccessException e) {
             return null;
         }

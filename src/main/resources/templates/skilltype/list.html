@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
 <head>
-    <meta charset="UTF-8">
     <title>Listado skill type</title>
     <meta charset="UTF-8" />
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
 </head>
 <body>
-<div class="container">
-    <h1>Gestionar habilidades</h1>
+<div layout:fragment="content">
+    <div class="titulo"><h1>Gestionar habilidades</h1></div>
     <table class="table table-striped">
         <thead>
         <tr>

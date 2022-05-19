@@ -86,7 +86,7 @@ public class RequestController {
     public String listRequests(Model model,@PathVariable Integer idOffer){
         Offer offer = offerDao.getOffer(idOffer);
         model.addAttribute("offerSearch",offer);
-        model.addAttribute("requests", requestDao.getValidRequests(offer.getIdSkillType()));
+        model.addAttribute("requests", requestDao.getValidRequests(offer.getIdSkillType(),offer.getIdStudent()));
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         model.addAttribute("students",studentDao.getStudents());
 
@@ -134,7 +134,7 @@ public class RequestController {
         request.setValid(true);
         request.setIdStudent(student.getIdStudent());
         requestDao.addRequest(request);
-        return "redirect:correcto";
+        return "request/correcto";
     }
 
     @RequestMapping(value="/update/{idRequest}", method=RequestMethod.GET)
@@ -184,9 +184,5 @@ public class RequestController {
             System.out.println();
         }
         return "redirect:/request/mis_demandas";
-    }
-    @RequestMapping(value="/correcto")
-    public String operacion_correcta(){
-        return "request/correcto";
     }
 }

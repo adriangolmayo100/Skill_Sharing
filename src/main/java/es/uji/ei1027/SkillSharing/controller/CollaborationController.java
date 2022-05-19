@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/collaboration")
@@ -58,6 +59,7 @@ public class CollaborationController {
         model.addAttribute("collaborationsImRequest", collaborationDao.getMyCollaborationsWhenRequest(student.getIdStudent()));
         model.addAttribute("collaborationsImOffer", collaborationDao.getMyCollaborationsWhenOffer(student.getIdStudent()));
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("today", LocalDate.now());
         return "collaboration/mis_colaboraciones";
     }
 

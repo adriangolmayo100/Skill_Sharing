@@ -56,13 +56,13 @@ public class SkillTypeDao {
             return jdbcTemplate.query("SELECT st.id_skilltype, st.name, st.description, st.level," +
                             "(SELECT COUNT(off.id_skilltype) " +
                             "FROM offer as off " +
-                            "WHERE off.id_skilltype=st.id_skilltype) AS number_offers, " +
+                            "WHERE off.id_skilltype=st.id_skilltype and off.valid=?) AS number_offers, " +
                             "(SELECT COUNT(re.id_skilltype)" +
                             "FROM request as re " +
-                            "WHERE re.id_skilltype=st.id_skilltype) AS number_requests " +
+                            "WHERE re.id_skilltype=st.id_skilltype  and re.valid=?) AS number_requests " +
                             "from SkillType as st " +
                             "WHERE id_skilltype=st.id_skilltype",
-                    new SkillTypeStatisticsRowMapper());
+                    new SkillTypeStatisticsRowMapper(),true,true);
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<SkillType>();
         }

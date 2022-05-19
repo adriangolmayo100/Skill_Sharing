@@ -42,6 +42,10 @@ public class UserController {
         int hoursReceived = student.getHoursReceived();
         model.addAttribute("hoursGiven",hoursGiven);
         model.addAttribute("hoursReceived",hoursReceived);
+        if (student.isUnavailable()){
+            model.addAttribute("banReason",student.getBanReason());
+            return "tipos_usuario/baneado";
+        }
         if (!student.isSkp())
             return "tipos_usuario/usuario";
         else

@@ -68,7 +68,7 @@ public class OfferController {
     public String listOffers(Model model,@PathVariable Integer idRequest){
         Request request = requestDao.getRequest(idRequest);
         model.addAttribute("requestSearch", request);
-        model.addAttribute("offers", offerDao.getValidOffers(request.getIdSkillType()));
+        model.addAttribute("offers", offerDao.getValidOffers(request));
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         model.addAttribute("students",studentDao.getStudents());
         return "offer/listBySkillType";
@@ -101,7 +101,8 @@ public class OfferController {
         offer.setValid(true);
         offer.setIdStudent(student.getIdStudent());
         offerDao.addOffer(offer);
-        return "redirect:correcto";
+        model.addAttribute("studentsEmail",requestDao.getStudentsWithIdSkillType(offer.getIdSkillType(),offer.getIdStudent()));
+        return "offer/correcto";
     }
     @RequestMapping(value="/accept/{id}", method=RequestMethod.GET)
     public String acceptOffer(HttpSession session, Model model, @PathVariable Integer id) {
@@ -152,7 +153,7 @@ public class OfferController {
             collaboration.createCollaboration(offer,request.getIdRequest());
             collaborationDao.addCollaboration(collaboration);
         }
-        return "redirect:/offer/mis_ofertas";
+        return "redirect:/collaboration/mis_colaboraciones";
     }
 
     @RequestMapping(value="/update/{idOffer}", method=RequestMethod.GET)
@@ -190,9 +191,4 @@ public class OfferController {
         return "offer/correcto";
     }
 
-    @RequestMapping(value="/correcto")
-    public String operacion_correcta(){
-
-        return "offer/correcto";
-    }
 }
