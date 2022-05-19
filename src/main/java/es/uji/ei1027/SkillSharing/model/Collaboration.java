@@ -19,6 +19,11 @@ public class Collaboration{
     private String comments;
     private int idSkillType;
     private String description;
+    private boolean valid;
+
+    public boolean isValid() {
+        return valid;
+    }
 
     @Override
     public String toString() {
@@ -31,10 +36,15 @@ public class Collaboration{
                 ", comments='" + comments + '\'' +
                 ", idSkillType=" + idSkillType +
                 ", description='" + description + '\'' +
+                ", valid=" + valid +
                 ", duration=" + duration +
                 ", idStudentOffers=" + idStudentOffers +
                 ", idStudentRequest=" + idStudentRequest +
                 '}';
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
     }
 
     private int duration;

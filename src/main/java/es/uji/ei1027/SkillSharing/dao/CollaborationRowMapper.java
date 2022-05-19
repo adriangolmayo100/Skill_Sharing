@@ -23,6 +23,7 @@ public final class CollaborationRowMapper implements RowMapper<Collaboration> {
         collaboration.setDescription(rs.getString("description"));
         collaboration.setRating(rs.getInt("rating"));
         collaboration.setComments(rs.getString("comments"));
+        collaboration.setValid(rs.getBoolean("valid"));
         return collaboration;
     }
 

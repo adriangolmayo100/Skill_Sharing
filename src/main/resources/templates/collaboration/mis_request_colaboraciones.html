@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Listar mis solicitudes de colaboraciones</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/estilo.css"
+          th:href="@{/estilo.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="titulo"><h1>Solicitudes de colaboración disponibles</h1></div>
+    <table th:unless="${#lists.isEmpty(collaborationsImOffer)}" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Inicio</th>
+            <th>Final</th>
+            <th>Descripción de la colaboración</th>
+            <th>Habilidad a enseñar</th>
+            <th>Estudiante que quiere colaborar</th>
+            <th>Duración (en horas)</th>
+            <th>Aceptar solicitud</th>
+            <th>Rechazar solicitud</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="collaboration: ${collaborationsImOffer}">
+            <td th:text="${collaboration.start}"></td>
+            <td th:text="${collaboration.finish}"></td>
+            <td th:text="${collaboration.description}"></td>
+            <td th:text="${collaboration.getNameSkillType(skillTypes)}"></td>
+            <td th:text="${collaboration.getNameStudentsRequest(students)}"></td>
+            <td th:text="${collaboration.duration}"></td>
+            <td><a th:href="@{/collaboration/accept/{idOffer}/{idRequest}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}" class="btn btn-success">Aceptar solicitud</a>
+            <td><a th:href="@{/collaboration/delete/{idOffer}/{idRequest}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}" class="btn btn-danger">Rechazar solicitud</a>
+        </tr>
+        </tbody>
+    </table>
+    <div class="titulo"><h1>Mis solicitudes de colaboraciones</h1></div>
+    <table th:unless="${#lists.isEmpty(collaborationsImRequest)}" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Inicio</th>
+            <th>Final</th>
+            <th>Descripción de la colaboración</th>
+            <th>Habilidad a enseñar</th>
+            <th>Estudiante que oferta la colaboración</th>
+            <th>Duración (en horas)</th>
+            <th>Cancelar solicitudes</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="collaboration: ${collaborationsImRequest}">
+            <td th:text="${collaboration.start}"></td>
+            <td th:text="${collaboration.finish}"></td>
+            <td th:text="${collaboration.description}"></td>
+            <td th:text="${collaboration.getNameSkillType(skillTypes)}"></td>
+            <td th:text="${collaboration.getNameStudentsOffers(students)}"></td>
+            <td th:text="${collaboration.duration}"></td>
+            <td><a th:href="@{/collaboration/delete/{idOffer}/{idRequest}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}" class="btn btn-danger">Cancelar solicitud</a>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -155,6 +155,7 @@ public class OfferController {
             requestDao.updateRequest(request);
             Collaboration collaboration = new Collaboration();
             collaboration.createCollaboration(offer,request.getIdRequest());
+            collaboration.setValid(false);
             collaborationDao.addCollaboration(collaboration);
             model.addAttribute("student",studentDao.getStudent(offer.getIdStudent()));
         }

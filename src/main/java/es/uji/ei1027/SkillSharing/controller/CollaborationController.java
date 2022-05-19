@@ -32,10 +32,17 @@ public class CollaborationController {
         this.collaborationDao = collaborationDao;
     }
 
-    @RequestMapping(value = "/delete/{idRequest}/{idOffer}")
+    @RequestMapping(value = "/delete/{idOffer}/{idRequest}")
     public String processDeleteCollaboration(@PathVariable Integer idRequest,@PathVariable Integer idOffer){
         collaborationDao.deleteCollaboration(idRequest,idOffer);
-        return "redirect:../../list";
+        return "redirect:/collaboration/mis_request_colaboraciones";
+    }
+  @RequestMapping(value = "/accept/{idOffer}/{idRequest}")
+    public String acceptCollaboration(@PathVariable Integer idRequest,@PathVariable Integer idOffer){
+        Collaboration collaboration = collaborationDao.getCollaboration(idRequest,idOffer);
+        collaboration.setValid(true);
+        collaborationDao.updateCollaboration(collaboration);
+        return "redirect:/collaboration/mis_colaboraciones";
     }
 
     @RequestMapping("/list")
@@ -61,6 +68,19 @@ public class CollaborationController {
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         model.addAttribute("today", LocalDate.now());
         return "collaboration/mis_colaboraciones";
+    }
+  @RequestMapping("/mis_request_colaboraciones")
+    public String listMisRequestCollaboration(HttpSession session, Model model){
+        Student student = (Student) session.getAttribute("student");
+        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/mis_request_colaboraciones");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
+        model.addAttribute("students", studentDao.getStudents());
+        model.addAttribute("collaborationsImRequest", collaborationDao.getMyRequestCollaborationsWhenRequest(student.getIdStudent()));
+        model.addAttribute("collaborationsImOffer", collaborationDao.getMyRequestCollaborationsWhenOffer(student.getIdStudent()));
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        return "collaboration/mis_request_colaboraciones";
     }
 
     @RequestMapping(value="/add")
