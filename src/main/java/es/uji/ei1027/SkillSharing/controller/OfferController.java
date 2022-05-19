@@ -65,7 +65,11 @@ public class OfferController {
     }
 
     @RequestMapping("/list/{idRequest}")
-    public String listOffers(Model model,@PathVariable Integer idRequest){
+    public String listOffers(HttpSession session, Model model,@PathVariable Integer idRequest){
+        String mensaje = validator.comprobar_conexion(session, model, "/offer/list/"+idRequest);
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         Request request = requestDao.getRequest(idRequest);
         model.addAttribute("requestSearch", request);
         model.addAttribute("offers", offerDao.getValidOffers(request));
@@ -134,7 +138,7 @@ public class OfferController {
     @RequestMapping(value="/accept/{idOffer}/{idRequest}", method=RequestMethod.GET)
     public String accept(HttpSession session, Model model, @PathVariable Integer idOffer,@PathVariable Integer idRequest) {
         Student student= (Student) session.getAttribute("student");
-        String mensaje = validator.comprobar_conexion(session, model, "/accept/"+idOffer+"/"+idRequest);
+        String mensaje = validator.comprobar_conexion(session, model, "/offer/accept/"+idOffer+"/"+idRequest);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -152,8 +156,9 @@ public class OfferController {
             Collaboration collaboration = new Collaboration();
             collaboration.createCollaboration(offer,request.getIdRequest());
             collaborationDao.addCollaboration(collaboration);
+            model.addAttribute("student",studentDao.getStudent(offer.getIdStudent()));
         }
-        return "redirect:/collaboration/mis_colaboraciones";
+        return "/collaboration/correcto";
     }
 
     @RequestMapping(value="/update/{idOffer}", method=RequestMethod.GET)

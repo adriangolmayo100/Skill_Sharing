@@ -56,7 +56,10 @@ public class OfferDao {
     }
     public List<Offer> getValidOffers() {
         try {
-            return jdbcTemplate.query("SELECT * from offer WHERE valid=?",
+            return jdbcTemplate.query("SELECT * " +
+                            "from offer" +
+                            " WHERE valid=?" +
+                            "and finish>CURRENT_DATE",
                     new OfferRowMapper(),true);
         } catch (EmptyResultDataAccessException e) {
             return null;
@@ -67,6 +70,7 @@ public class OfferDao {
             return jdbcTemplate.query("SELECT * \n" +
                             "from offer \n" +
                             "WHERE valid=?\n" +
+                            "and finish>CURRENT_DATE " +
                             "and id_skilltype=? \n" +
                             "and id_student!=?\n" +
                             "and NOT EXISTS\n" +

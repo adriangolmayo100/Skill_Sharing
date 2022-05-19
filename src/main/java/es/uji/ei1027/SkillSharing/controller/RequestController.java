@@ -83,7 +83,11 @@ public class RequestController {
         return "redirect:../mis_demandas";
     }
     @RequestMapping("/list/{idOffer}")
-    public String listRequests(Model model,@PathVariable Integer idOffer){
+    public String listRequests(HttpSession session, Model model,@PathVariable Integer idOffer){
+        String mensaje = validator.comprobar_conexion(session, model, "request/list/"+idOffer);
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         Offer offer = offerDao.getOffer(idOffer);
         model.addAttribute("offerSearch",offer);
         model.addAttribute("requests", requestDao.getValidRequests(offer.getIdSkillType(),offer.getIdStudent()));

@@ -58,7 +58,10 @@ public class RequestDao {
     }
     public List<Request> getValidRequests() {
         try {
-            return jdbcTemplate.query("SELECT * from Request WHERE valid=?",
+            return jdbcTemplate.query("SELECT * " +
+                            "from Request" +
+                            " WHERE valid=?" +
+                            "and finish>CURRENT_DATE",
                     new RequestRowMapper(), true);
         } catch (EmptyResultDataAccessException e) {
             return null;
@@ -78,7 +81,12 @@ public class RequestDao {
     }
     public List<Request> getValidRequests(int idSkillType, int idStudent) {
         try {
-            return jdbcTemplate.query("SELECT * from Request WHERE valid=? and id_skilltype=? and id_student=?",
+            return jdbcTemplate.query("SELECT * " +
+                            "from Request " +
+                            "WHERE valid=? " +
+                            "and id_skilltype=? " +
+                            "and id_student!=? " +
+                            "and finish>CURRENT_DATE",
                     new RequestRowMapper(), true, idSkillType,idStudent);
         } catch (EmptyResultDataAccessException e) {
             return null;

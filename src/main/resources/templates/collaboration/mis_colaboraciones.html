@@ -83,7 +83,7 @@
                         <a th:href="@{/collaboration/rate/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}">Comenta la colaboración</a>
                     </div>
                     <div th:unless="${collaboration.finish.isBefore(today)}">
-                        <p> Todavia no ha acabado la colaboración</p>
+                        <p> Todavía no ha acabado la colaboración</p>
                     </div>
                 </div>
 
@@ -97,7 +97,7 @@
                         <a th:href="@{/collaboration/comment/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}">Comenta la colaboración</a>
                     </div>
                     <div th:unless="${collaboration.finish.isBefore(today)}">
-                        <p> Todavia no ha acabado la colaboración</p>
+                        <p> Todavía no ha acabado la colaboración</p>
                     </div>
                 </div>
             </td>

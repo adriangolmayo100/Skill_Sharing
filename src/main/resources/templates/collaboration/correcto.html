@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Correcto</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="estilo.css"
+          th:href="@{estilo.css}"/>
+</head>
+<body>
+<div  layout:fragment="content">
+
+    <h1>Operación realizada correctamente</h1>
+    <p><b>Se ha enviado una solicitud a la siguiente persona</b></p>
+    <p>Se ha enviado un correo a: <i th:text="${student.getName()}"></i></p>
+    <div class="botonIndex">
+        <a href="/collaboration/mis_colaboraciones" class="btn" role="button">Aceptar</a>
+    </div>
+</div>
+</body>
+</html>

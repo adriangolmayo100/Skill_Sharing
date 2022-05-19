@@ -72,6 +72,14 @@ public class CollaborationController {
         model.addAttribute("collaboration", new Collaboration());
         return "collaboration/add";
     }
+    @RequestMapping(value="/add", method= RequestMethod.POST)
+    public String processAddSubmit(@ModelAttribute("collaboration") Collaboration collaboration,
+                                   BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "collaboration/add";
+        collaborationDao.addCollaboration(collaboration);
+        return "redirect:list";
+    }
     @RequestMapping(value="/rate/{idRequest}/{idOffer}")
     public String addRate(HttpSession session, Model model,@PathVariable Integer idRequest,@PathVariable Integer idOffer){
         String mensaje = validator.comprobar_conexion(session, model, "/collaboration/rate/"+idRequest+"/"+idOffer);
@@ -114,14 +122,6 @@ public class CollaborationController {
         collaboration.setComments(collaborationModel.getComments());
         collaborationDao.updateCollaboration(collaboration);
         return "redirect:/collaboration/mis_colaboraciones";
-    }
-    @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("collaboration") Collaboration collaboration,
-                                   BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "collaboration/add";
-        collaborationDao.addCollaboration(collaboration);
-        return "redirect:list";
     }
 
     @RequestMapping(value="/update/{idRequest}/{idOffer}", method=RequestMethod.GET)
