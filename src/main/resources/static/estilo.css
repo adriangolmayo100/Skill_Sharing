@@ -119,8 +119,8 @@ a:hover {color:#000000;}
 .botonesUsuario {
    margin-top:60px;
        background-color: #999999;
-       margin-left: 400px;
-       margin-right: 400px;
+       margin-left: 20px;
+       margin-right: 20px;
        text-align:center;
        webkit-border-radius: 28;
        moz-border-radius: 28;
@@ -182,4 +182,10 @@ nav {
 
 .separador2{
      margin-left:90px;
+ }
+ .table_center{
+     margin: auto;
+ }
+ .center{
+    text-align:center;
  }
