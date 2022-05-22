@@ -136,7 +136,7 @@ public class Offer {
     public void createOfferForRequest(Request request){
         this.description=request.getDescription();
         this.duration=request.getDuration();
-        //this.start=request.getStart();
+        this.start=request.getStart();
         this.finish=request.getFinish();
         this.idSkillType=request.getIdSkillType();
         this.valid=request.isValid();

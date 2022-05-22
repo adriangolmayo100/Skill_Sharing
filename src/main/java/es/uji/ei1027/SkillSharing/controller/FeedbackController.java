@@ -32,6 +32,6 @@ public class FeedbackController {
 
     @RequestMapping(value = "/collaboration_correcto")
     public String collaborationCorrecto(){
-        return "/feedback/collaboration_correcto";
+        return "feedback/collaboration_correcto";
     }
 }
