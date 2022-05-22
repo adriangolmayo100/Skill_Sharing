@@ -94,9 +94,8 @@ public class OfferController {
         if (!mensaje.equals("")){
             return mensaje;
         }
-        System.out.println("Hello");
         OfferValidator offerValidator = new OfferValidator();
-        offerValidator.validadorFecha(offer, start, true, bindingResult);
+        //offerValidator.validadorFecha(offer, start, true, bindingResult);
         if (bindingResult.hasErrors()){
             model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
             return "offer/add";

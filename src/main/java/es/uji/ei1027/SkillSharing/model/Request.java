@@ -12,9 +12,11 @@ public class Request {
 
     private int idRequest;
     private String description;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate  start;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    //    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate start;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate  finish;
     private int duration;
     private int idStudent;

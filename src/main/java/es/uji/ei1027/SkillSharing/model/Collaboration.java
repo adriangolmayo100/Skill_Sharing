@@ -11,9 +11,11 @@ import java.util.List;
 public class Collaboration{
     private int idRequest;
     private int idOffer;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    //    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate start;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate  finish;
     private int rating;
     private String comments;

@@ -14,9 +14,11 @@ public class Offer {
     private int idStudent;
     private int idSkillType;
     private String description;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+//    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate start;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate  finish;
     private int duration;
     private boolean valid;
@@ -83,10 +85,6 @@ public class Offer {
 
     public void setStart(LocalDate  start) {
         this.start = start;
-    }
-    public void setStart(String  start) {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        this.start = LocalDate.parse(start, format);;
     }
 
     public LocalDate  getFinish() {
