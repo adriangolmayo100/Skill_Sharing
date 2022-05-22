@@ -30,12 +30,12 @@
       </tr>
       <tr>
         <td><label>Fecha de inicio</label></td>
-        <td><input type="text" class="form control" id="start" name="start" placeholder="dd/MM/yyyy" maxlength="10" /></td>
+        <td><input type="date" class="form control" id="start" name="start" placeholder="dd/MM/yyyy" maxlength="10" /></td>
         <td th:if="${#fields.hasErrors('start')}" th:errors="*{start}"></td>
       </tr>
       <tr>
         <td><label>Fecha de fin</label></td>
-        <td><input type="text" th:field="*{finish}" placeholder="dd/MM/yyyy" /></td>
+        <td><input type="date" th:field="*{finish}" placeholder="dd/MM/yyyy" /></td>
         <td th:if="${#fields.hasErrors('finish')}" th:errors="*{finish}"></td>
       </tr>
 

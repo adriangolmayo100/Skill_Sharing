@@ -105,4 +105,22 @@ class UserValidator implements Validator {      //Clase para comprobar que no se
             }
         return "";
     }
+    public String comprobar_conexion(HttpSession session, Model model, String url) {
+        Student student = (Student) session.getAttribute("student");
+        if (url.equals("/tipos_usuario/usuario")) {
+            if (student == null) {
+                session.setAttribute("nextUrl", url);
+                model.addAttribute("student", new Student());
+                return "login";
+            }
+        }else {
+            boolean skp = false;
+            if (student == null || skp != student.isSkp()) {
+                session.setAttribute("nextUrl", url);
+                model.addAttribute("student", new Student());
+                return "login";
+            }
+        }
+        return "";
+    }
 }

@@ -90,11 +90,11 @@ public class OfferController {
     @RequestMapping(value="/add", method=RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("offer") Offer offer,@PathParam("start") String start, Model model,
                                    BindingResult bindingResult,HttpSession session) {
-        System.out.println(start);
         String mensaje = validator.comprobar_conexion(session, model, "/offer/add", false);
         if (!mensaje.equals("")){
             return mensaje;
         }
+        System.out.println("Hello");
         OfferValidator offerValidator = new OfferValidator();
         offerValidator.validadorFecha(offer, start, true, bindingResult);
         if (bindingResult.hasErrors()){

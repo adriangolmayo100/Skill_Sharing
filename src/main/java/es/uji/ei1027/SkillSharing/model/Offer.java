@@ -4,6 +4,7 @@ import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -83,6 +84,10 @@ public class Offer {
     public void setStart(LocalDate  start) {
         this.start = start;
     }
+    public void setStart(String  start) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        this.start = LocalDate.parse(start, format);;
+    }
 
     public LocalDate  getFinish() {
         return finish;
@@ -141,9 +146,8 @@ public class Offer {
     public void updateOffer(Offer offer){
         this.setDescription(offer.getDescription());
         this.setFinish(offer.getFinish());
-        //this.setStart(offer.getStart());
+        this.setStart(offer.getStart());
         this.setDuration(offer.getDuration());
         this.setIdSkillType(offer.getIdSkillType());
     }
-
 }
