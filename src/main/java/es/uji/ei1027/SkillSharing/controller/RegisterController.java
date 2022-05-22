@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
@@ -17,13 +18,14 @@ import java.io.IOException;
 public class RegisterController {
     StudentDao studentDao = new StudentDao();
 
+
     @Autowired
     public void setRequestDao(StudentDao studentDao) {
         this.studentDao=studentDao;
     }
 
     @RequestMapping("/datos")
-    public String registerDatos(Model model){
+    public String registerDatos(HttpSession session, Model model){
         model.addAttribute("student", new Student());
         return "register/datos";
     }
@@ -47,7 +49,7 @@ public class RegisterController {
         student.setUnavailable(false);
         student.setBanReason("");
         studentDao.nuevoStudent(student);
-        return "redirect:/tipos_usuario/list";
+        return "feedback/skp_correcto";
     }
 
 }

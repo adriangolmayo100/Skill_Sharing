@@ -22,6 +22,11 @@ public class FeedbackController {
         return "/feedback/request_correcto";
     }
 
+    @RequestMapping(value = "/skp_correcto")
+    public String skpCorrecto(){
+        return "/feedback/skp_correcto";
+    }
+
     @RequestMapping(value = "/collaboration_error")
     public String collaborationError(){
         return "/feedback/collaboration_error";

@@ -20,34 +20,42 @@
             <tr>
                 <td><label>Nombre</label></td>
                 <td><input type="text" th:field="*{name}"></td>
+                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error">
             </tr>
             <tr>
                 <td><label>Email</label></td>
                 <td><input type="text" th:field="*{email}"></td>
+                <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error">
             </tr>
             <tr>
                 <td><label>Usuario</label></td>
                 <td><input type="text" th:field="*{username}"></td>
+                <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error">
             </tr>
             <tr>
                 <td><label>Contraseña</label></td>
                 <td><input type="text" th:field="*{password}"></td>
+                <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error">
             </tr>
             <tr>
                 <td><label>Código Postal</label></td>
                 <td><input type="number" th:field="*{codePostal}"></td>
+                <td th:if="${#fields.hasErrors('codePostal')}" th:errors="*{codePostal}" class="error">
             </tr>
             <tr>
                 <td><label>Grado</label></td>
                 <td><input type="text" th:field="*{degree}"></td>
+                <td th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}" class="error">
             </tr>
             <tr>
                 <td><label>Curso</label></td>
                 <td><input type="number" th:field="*{course}"></td>
+                <td th:if="${#fields.hasErrors('course')}" th:errors="*{course}" class="error">
             </tr>
             <tr>
                 <td><label>teléfono</label></td>
                 <td><input type="number" th:field="*{numberPhone}" maxlength="9"></td>
+                <td th:if="${#fields.hasErrors('numberPhone')}" th:errors="*{numberPhone}" class="error">
             </tr>
             <tr>
                 <td><label>Género</label></td>
