@@ -4,6 +4,7 @@ import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class Offer {
@@ -75,8 +76,8 @@ public class Offer {
         this.description = description;
     }
 
-    public LocalDate  getStart() {
-        return start;
+    public LocalDate getStart() {
+        return this.start;
     }
 
     public void setStart(LocalDate  start) {
@@ -132,7 +133,7 @@ public class Offer {
     public void createOfferForRequest(Request request){
         this.description=request.getDescription();
         this.duration=request.getDuration();
-        this.start=request.getStart();
+        //this.start=request.getStart();
         this.finish=request.getFinish();
         this.idSkillType=request.getIdSkillType();
         this.valid=request.isValid();
@@ -140,7 +141,7 @@ public class Offer {
     public void updateOffer(Offer offer){
         this.setDescription(offer.getDescription());
         this.setFinish(offer.getFinish());
-        this.setStart(offer.getStart());
+        //this.setStart(offer.getStart());
         this.setDuration(offer.getDuration());
         this.setIdSkillType(offer.getIdSkillType());
     }

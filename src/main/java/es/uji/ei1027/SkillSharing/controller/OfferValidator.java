@@ -6,6 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class OfferValidator implements Validator {
@@ -35,5 +36,17 @@ public class OfferValidator implements Validator {
             errors.rejectValue("finish", "valores incorrectos", "La fecha de finalización debe ser mayor que la de inicio");
         if(fin - inicio - offer.getDuration() < 0)
             errors.rejectValue("duration", "valor incorrecto", "La duración es muy grande para las fechas seleccionadas");
+    }
+
+    public void validadorFecha(Offer offer, String fecha, boolean start, Errors errors){
+        try{
+            System.out.println(fecha);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate fechaBuena = LocalDate.parse(fecha, formatter);
+            System.out.println(fechaBuena);
+            offer.setStart(fechaBuena);
+        }catch (Exception e){
+            errors.rejectValue("start", "valor incorrecto", "MAL");
+        }
     }
 }
