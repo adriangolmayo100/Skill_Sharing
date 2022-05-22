@@ -51,7 +51,7 @@ public class CollaborationController {
 
     @RequestMapping("/list")
     public String listCollaboration(HttpSession session, Model model){
-        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}", false);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -62,7 +62,7 @@ public class CollaborationController {
     }
     @RequestMapping("/statistics")
     public String listCollaborationStatistic(HttpSession session, Model model){
-        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/statistics/");
+        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/statistics/", true);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -75,7 +75,7 @@ public class CollaborationController {
     @RequestMapping("/mis_colaboraciones")
     public String listMisCollaboration(HttpSession session, Model model){
         Student student = (Student) session.getAttribute("student");
-        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/mis_colaboraciones");
+        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/mis_colaboraciones", false);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -89,7 +89,7 @@ public class CollaborationController {
   @RequestMapping("/mis_request_colaboraciones")
     public String listMisRequestCollaboration(HttpSession session, Model model){
         Student student = (Student) session.getAttribute("student");
-        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/mis_request_colaboraciones");
+        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/mis_request_colaboraciones", false);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -102,7 +102,7 @@ public class CollaborationController {
 
     @RequestMapping(value="/add")
     public String addCollaboration(HttpSession session, Model model){
-        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}", false);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -119,7 +119,7 @@ public class CollaborationController {
     }
     @RequestMapping(value="/rate/{idRequest}/{idOffer}")
     public String addRate(HttpSession session, Model model,@PathVariable Integer idRequest,@PathVariable Integer idOffer){
-        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/rate/"+idRequest+"/"+idOffer);
+        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/rate/"+idRequest+"/"+idOffer, false);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -129,7 +129,7 @@ public class CollaborationController {
     }
     @RequestMapping(value="/rate/{idRequest}/{idOffer}",method= RequestMethod.POST)
     public String putRate(HttpSession session, Model model, @ModelAttribute("collaboration") Collaboration collaborationModel,Offer offerModel, @PathVariable Integer idRequest, @PathVariable Integer idOffer){
-        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/rate/"+idRequest+"/"+idOffer);
+        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/rate/"+idRequest+"/"+idOffer, false);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -149,7 +149,7 @@ public class CollaborationController {
 
     @RequestMapping(value="/update/{idRequest}/{idOffer}", method=RequestMethod.GET)
     public String editCollaboration(HttpSession session, Model model,@PathVariable Integer idRequest, @PathVariable Integer idOffer){
-        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}", false);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -160,7 +160,7 @@ public class CollaborationController {
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(HttpSession session, Model model, @ModelAttribute("collaboration") Collaboration collaboration,
                                       BindingResult bindingResult){
-        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}", false);
         if (!mensaje.equals("")){
             return mensaje;
         }

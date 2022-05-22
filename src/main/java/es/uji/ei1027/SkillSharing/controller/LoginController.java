@@ -88,11 +88,14 @@ class UserValidator implements Validator {      //Clase para comprobar que no se
         if (password.equals(""))
             errors.rejectValue("password", "badPassword", "usuario requerido");
     }
-    public String comprobar_conexion(HttpSession session, Model model, String url) {
+    public String comprobar_conexion(HttpSession session, Model model, String url, boolean skp) {
         Student student = (Student) session.getAttribute("student");
         if (student == null) {
             session.setAttribute("nextUrl", url);
             model.addAttribute("student", new Student());
+            return "login";
+        }
+        if(skp != student.isSkp()){
             return "login";
         }
         return "";

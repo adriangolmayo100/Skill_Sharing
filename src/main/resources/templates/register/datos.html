@@ -54,7 +54,7 @@
             </tr>
             <tr>
                 <td><label>teléfono</label></td>
-                <td><input type="number" th:field="*{numberPhone}" maxlength="9"></td>
+                <td><input type="number" th:field="*{numberPhone}" size="9"></td>
                 <td th:if="${#fields.hasErrors('numberPhone')}" th:errors="*{numberPhone}" class="error">
             </tr>
             <tr>

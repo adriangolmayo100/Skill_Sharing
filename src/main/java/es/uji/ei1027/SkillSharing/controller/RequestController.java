@@ -49,7 +49,7 @@ public class RequestController {
     @RequestMapping(value="/accept/{idRequest}", method=RequestMethod.GET)
     public String acceptRequest(HttpSession session, Model model, @PathVariable Integer idRequest) {
         Student student= (Student) session.getAttribute("student");
-        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}");
+        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}", false);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -70,7 +70,7 @@ public class RequestController {
     }
     @RequestMapping(value = "/delete/{idRequest}")
     public String processDeleteRequest(HttpSession session, Model model, @PathVariable Integer idRequest){
-        String mensaje = validator.comprobar_conexion(session, model, "/request/delete/"+idRequest);
+        String mensaje = validator.comprobar_conexion(session, model, "/request/delete/"+idRequest, false);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -79,7 +79,7 @@ public class RequestController {
     }
     @RequestMapping("/list/{idOffer}")
     public String listRequests(HttpSession session, Model model,@PathVariable Integer idOffer){
-        String mensaje = validator.comprobar_conexion(session, model, "request/list/"+idOffer);
+        String mensaje = validator.comprobar_conexion(session, model, "request/list/"+idOffer, false);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -101,7 +101,7 @@ public class RequestController {
 
     @RequestMapping(value="/add")
     public String addRequest(HttpSession session,Model model){
-        String mensaje = validator.comprobar_conexion(session, model, "/request/add");
+        String mensaje = validator.comprobar_conexion(session, model, "/request/add", false);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -112,7 +112,7 @@ public class RequestController {
     @RequestMapping(value="/mis_demandas")
     public String mis_requests(HttpSession session,Model model){
         Student student= (Student) session.getAttribute("student");
-        String mensaje = validator.comprobar_conexion(session, model, "/request/mis_demandas");
+        String mensaje = validator.comprobar_conexion(session, model, "/request/mis_demandas", false);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -138,7 +138,7 @@ public class RequestController {
 
     @RequestMapping(value="/update/{idRequest}", method=RequestMethod.GET)
     public String editRequest(HttpSession session, Model model, @PathVariable Integer idRequest){
-        String mensaje = validator.comprobar_conexion(session, model, "/update/"+idRequest);
+        String mensaje = validator.comprobar_conexion(session, model, "/update/"+idRequest, false);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -160,7 +160,7 @@ public class RequestController {
     @RequestMapping(value="/accept/{idRequest}/{idOffer}", method=RequestMethod.GET)
     public String accept(HttpSession session, Model model, @PathVariable Integer idRequest,@PathVariable Integer idOffer) {
         Student student= (Student) session.getAttribute("student");
-        String mensaje = validator.comprobar_conexion(session, model, "/request/accept/"+idRequest+"/"+idOffer);
+        String mensaje = validator.comprobar_conexion(session, model, "/request/accept/"+idRequest+"/"+idOffer, false);
         if (!mensaje.equals("")){
             return mensaje;
         }

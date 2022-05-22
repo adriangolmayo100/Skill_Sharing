@@ -31,7 +31,7 @@ public class StudentController {
     private SkillTypeDao skillTypeDao;
     @RequestMapping("/list")
     public String listarUsuarios(HttpSession session, Model model){
-        String mensaje = validator.comprobar_conexion(session, model, "/student/list");
+        String mensaje = validator.comprobar_conexion(session, model, "/student/list", true);
         if (!mensaje.equals(""))
             return mensaje;
         List<Student> studentList = studentDao.getStudents();
@@ -40,7 +40,7 @@ public class StudentController {
     }
     @RequestMapping("/informacion/{idStudent}")
     public String informacionUsuario(HttpSession session, Model model, @PathVariable int idStudent){
-        String mensaje = validator.comprobar_conexion(session, model, "/student/informacion/"+idStudent);
+        String mensaje = validator.comprobar_conexion(session, model, "/student/informacion/"+idStudent, true);
         if (!mensaje.equals(""))
             return mensaje;
         model.addAttribute("student",studentDao.getStudent(idStudent));
@@ -53,7 +53,7 @@ public class StudentController {
     }
     @RequestMapping("/listWithOutSkp")
     public String mostrarUsuariosNoSkps(HttpSession session, Model model){
-        String mensaje = validator.comprobar_conexion(session, model, "/student/listWithOutSkp");
+        String mensaje = validator.comprobar_conexion(session, model, "/student/listWithOutSkp", true);
         if (!mensaje.equals(""))
             return mensaje;
         List<Student> studentList = studentDao.getStudentsWithOutSkps();
@@ -62,7 +62,7 @@ public class StudentController {
     }
     @RequestMapping("/anular/{idStudent}")
     public String moderarUsuario(HttpSession session, Model model, @PathVariable int idStudent){
-        String mensaje = validator.comprobar_conexion(session, model, "/student/anular/"+idStudent);
+        String mensaje = validator.comprobar_conexion(session, model, "/student/anular/"+idStudent, true);
         if (!mensaje.equals(""))
             return mensaje;
         Student student = studentDao.getStudent(idStudent);
@@ -71,7 +71,7 @@ public class StudentController {
     }
     @RequestMapping(value = "/anular/{idStudent}",method = RequestMethod.POST)
     public String anularUsuario(HttpSession session, Model model, @PathVariable int idStudent, @ModelAttribute("student") Student studentModel){
-        String mensaje = validator.comprobar_conexion(session, model, "/student/anular/"+idStudent);
+        String mensaje = validator.comprobar_conexion(session, model, "/student/anular/"+idStudent, true);
         if (!mensaje.equals(""))
             return mensaje;
         Student student = studentDao.getStudent(idStudent);
@@ -82,7 +82,7 @@ public class StudentController {
     }
     @RequestMapping("/recuperar/{idStudent}")
     public String recuperarUsuario(HttpSession session, Model model, @PathVariable int idStudent){
-        String mensaje = validator.comprobar_conexion(session, model, "/student/recuperar/"+idStudent);
+        String mensaje = validator.comprobar_conexion(session, model, "/student/recuperar/"+idStudent, true);
         if (!mensaje.equals(""))
             return mensaje;
         Student student = studentDao.getStudent(idStudent);
