@@ -33,22 +33,19 @@
             <td th:text="${collaboration.getNameSkillType(skillTypes)}"></td>
             <td th:text="${collaboration.getNameStudentsRequest(students)}"></td>
             <td th:text="${collaboration.duration}"></td>
-            <td>
-                <div th:if="${collaboration.rating>0}">
+            <div th:if="${collaboration.rating>0}">
+                <td>
                     <p th:text="${collaboration.rating}"></p>
-                </div>
-                <div th:unless="${collaboration.rating>0}">
-                    No se ha valorado la colaboración
-                </div>
-            </td>
-            <td>
-                <div th:if="${collaboration.comments.length()>0}">
+                </td>
+                <td>
                     <p th:text="${collaboration.comments}"></p>
-                </div>
-                <div th:unless="${collaboration.comments.length()>0}">
-                    No hay comentatios sobre la valoración
-                </div>
-            </td>
+                </td>
+            </div>
+            <div th:unless="${collaboration.rating>0}">
+                <td colspan="2">
+                    No se ha valorado la colaboración
+                </td>
+            </div>
         </tr>
         </tbody>
     </table>
@@ -74,33 +71,24 @@
             <td th:text="${collaboration.getNameSkillType(skillTypes)}"></td>
             <td th:text="${collaboration.getNameStudentsOffers(students)}"></td>
             <td th:text="${collaboration.duration}"></td>
-            <td>
-                <div th:if="${collaboration.rating>0}">
+            <div th:if="${collaboration.rating>0}">
+                <td>
                     <p th:text="${collaboration.rating}"></p>
-                </div>
-                <div th:unless="${collaboration.rating>0}">
-                    <div th:if="${collaboration.finish.isBefore(today)}">
-                        <a th:href="@{/collaboration/rate/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}">Comenta la colaboración</a>
-                    </div>
-                    <div th:unless="${collaboration.finish.isBefore(today)}">
-                        <p> Todavía no ha acabado la colaboración</p>
-                    </div>
-                </div>
-
-            </td>
-            <td>
-                <div th:if="${collaboration.comments.length()>0}">
+                </td>
+                <td>
                     <p th:text="${collaboration.comments}"></p>
-                </div>
-                <div th:unless="${collaboration.comments.length()>0}">
+                </td>
+            </div>
+            <div th:unless="${collaboration.rating>0}">
+                <td colspan="2">
                     <div th:if="${collaboration.finish.isBefore(today)}">
-                        <a th:href="@{/collaboration/comment/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}">Comenta la colaboración</a>
+                        <a th:href="@{/collaboration/rate/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}">Valorar la colaboración</a>
                     </div>
                     <div th:unless="${collaboration.finish.isBefore(today)}">
                         <p> Todavía no ha acabado la colaboración</p>
                     </div>
-                </div>
-            </td>
+                </td>
+            </div>
         </tr>
         </tbody>
     </table>

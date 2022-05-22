@@ -1,8 +1,6 @@
 package es.uji.ei1027.SkillSharing.controller;
 
-import es.uji.ei1027.SkillSharing.dao.CollaborationDao;
-import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
-import es.uji.ei1027.SkillSharing.dao.StudentDao;
+import es.uji.ei1027.SkillSharing.dao.*;
 import es.uji.ei1027.SkillSharing.model.Collaboration;
 import es.uji.ei1027.SkillSharing.model.Offer;
 import es.uji.ei1027.SkillSharing.model.Student;
@@ -28,6 +26,12 @@ public class CollaborationController {
     @Autowired
     private StudentDao studentDao;
     @Autowired
+    private OfferDao offerDao;
+    @Autowired
+    private RequestDao requestDao;
+
+
+    @Autowired
     public void setCollaborationDao(CollaborationDao collaborationDao){
         this.collaborationDao = collaborationDao;
     }
@@ -52,8 +56,21 @@ public class CollaborationController {
             return mensaje;
         }
         model.addAttribute("collaborations", collaborationDao.getCollaborations());
+        model.addAttribute("collaborationsRequest", collaborationDao.getCollaborations());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         return "collaboration/list";
+    }
+    @RequestMapping("/statistics")
+    public String listCollaborationStatistic(HttpSession session, Model model){
+        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/statistics/");
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
+        model.addAttribute("students", studentDao.getStudents());
+        model.addAttribute("collaborations", collaborationDao.getCollaborations());
+        model.addAttribute("collaborationsRequest", collaborationDao.getRequestCollaborations());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        return "collaboration/statistics";
     }
     @RequestMapping("/mis_colaboraciones")
     public String listMisCollaboration(HttpSession session, Model model){
@@ -118,28 +135,14 @@ public class CollaborationController {
         }
         Collaboration collaboration=collaborationDao.getCollaboration(idRequest,idOffer);
         collaboration.setRating(collaborationModel.getRating());
-        collaborationDao.updateCollaboration(collaboration);
-        return "redirect:/collaboration/mis_colaboraciones";
-    }
-    @RequestMapping(value="/comment/{idRequest}/{idOffer}")
-    public String addComment(HttpSession session, Model model,@PathVariable Integer idRequest,
-                             @PathVariable Integer idOffer){
-        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/comment/"+idRequest+"/"+idOffer);
-        if (!mensaje.equals("")){
-            return mensaje;
-        }
-        Collaboration collaboration = collaborationDao.getCollaboration(idRequest,idOffer);
-        model.addAttribute("collaboration",collaboration );
-        return "/collaboration/comment";
-    }
-    @RequestMapping(value="/comment/{idRequest}/{idOffer}",method= RequestMethod.POST)
-    public String putComment(HttpSession session, Model model, @ModelAttribute("collaboration") Collaboration collaborationModel,@PathVariable Integer idRequest, @PathVariable Integer idOffer){
-        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/comment/"+idRequest+"/"+idOffer);
-        if (!mensaje.equals("")){
-            return mensaje;
-        }
-        Collaboration collaboration=collaborationDao.getCollaboration(idRequest,idOffer);
+        collaboration.setDuration(collaborationModel.getDuration());
         collaboration.setComments(collaborationModel.getComments());
+        Student studentRequests = studentDao.obtenerStudent(requestDao.getRequest(idRequest).getIdStudent());
+        Student studentOffers = studentDao.obtenerStudent(offerDao.getOffer(idOffer).getIdStudent());
+        studentOffers.setHoursGiven(studentOffers.getHoursGiven()+collaboration.getDuration());
+        studentRequests.setHoursReceived(studentRequests.getHoursReceived()+collaboration.getDuration());
+        studentDao.updateStudent(studentOffers);
+        studentDao.updateStudent(studentRequests);
         collaborationDao.updateCollaboration(collaboration);
         return "redirect:/collaboration/mis_colaboraciones";
     }

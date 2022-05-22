@@ -54,10 +54,14 @@ public class CollaborationDao {
 
     public List<Collaboration> getCollaborations() {
         try {
-            return jdbcTemplate.query("SELECT * " +
-                            "from Collaboration " +
-                            "JOIN offer USING(id_offer)" +
-                            "and valid=?",
+            return jdbcTemplate.query("SELECT co.id_request, co.id_offer, co.start," +
+                            "co.finish,co.duration, co.rating, of.id_skilltype,co.comments, " +
+                            "of.id_student as id_offer_student, re.description," +
+                            "re.id_student as id_request_student, co.valid " +
+                            "from Collaboration as co " +
+                            "JOIN request AS re USING(id_request) " +
+                            "JOIN offer AS of USING(id_offer) " +
+                            "WHERE co.valid=?",
                     new CollaborationRowMapper(),true);
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<Collaboration>();
@@ -65,10 +69,14 @@ public class CollaborationDao {
     }
     public List<Collaboration> getRequestCollaborations() {
         try {
-            return jdbcTemplate.query("SELECT * " +
-                            "from Collaboration " +
-                            "JOIN offer USING(id_offer)" +
-                            "and valid=?",
+            return jdbcTemplate.query("SELECT co.id_request, co.id_offer, co.start," +
+                            "co.finish,co.duration, co.rating, of.id_skilltype,co.comments, " +
+                            "of.id_student as id_offer_student, re.description," +
+                            "re.id_student as id_request_student, co.valid " +
+                            "from Collaboration as co " +
+                            "JOIN request AS re USING(id_request) " +
+                            "JOIN offer AS of USING(id_offer) " +
+                            "WHERE co.valid=?",
                     new CollaborationRowMapper(),false);
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<Collaboration>();

@@ -19,6 +19,7 @@ public final class CollaborationStandarRowMapper implements RowMapper<Collaborat
         collaboration.setDuration(rs.getInt("duration"));
         collaboration.setRating(rs.getInt("rating"));
         collaboration.setComments(rs.getString("comments"));
+        collaboration.setValid(rs.getBoolean("valid"));
         return collaboration;
     }
 

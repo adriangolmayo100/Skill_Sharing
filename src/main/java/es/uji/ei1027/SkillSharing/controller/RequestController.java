@@ -55,12 +55,6 @@ public class RequestController {
         }
         Request request = requestDao.getRequest(idRequest);
         if (student.getIdStudent()!=request.getIdStudent()){
-            Student studentOffers = student;
-            Student studentRequests = studentDao.obtenerStudent(request.getIdStudent());
-            studentOffers.setHoursGiven(studentOffers.getHoursGiven()+request.getDuration());
-            studentRequests.setHoursReceived(studentRequests.getHoursReceived()+request.getDuration());
-            studentDao.updateStudent(studentOffers);
-            studentDao.updateStudent(studentRequests);
             request.setValid(false);
             requestDao.updateRequest(request);
             Offer offer = new Offer();
@@ -172,12 +166,6 @@ public class RequestController {
         Offer offer = offerDao.getOffer(idOffer);
         Request request = requestDao.getRequest(idRequest);
         if (student.getIdStudent()!=offer.getIdStudent()){
-            Student studentRequests = studentDao.obtenerStudent(request.getIdStudent());
-            Student studentOffers = studentDao.obtenerStudent(offer.getIdStudent());
-            studentOffers.setHoursGiven(studentOffers.getHoursGiven()+offer.getDuration());
-            studentRequests.setHoursReceived(studentRequests.getHoursReceived()+offer.getDuration());
-            studentDao.updateStudent(studentOffers);
-            studentDao.updateStudent(studentRequests);
             offer.setValid(false);
             offerDao.updateOffer(offer);
             request.setValid(false);

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/estilo.css"
+          th:href="@{/estilo.css}"/>
+    <title>Información de Student</title>
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="titulo"><h1>Información de <i th:text="${student.name}"></i></h1></div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>E-mail</th>
+            <th>Usuario</th>
+            <th>Codigo Postal</th>
+            <th>Grado</th>
+            <th>Curso</th>
+            <th>Telefono</th>
+            <th>Género</th>
+            <th>Horas dadas</th>
+            <th>Horas recibidas</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><i th:text="${student.name}"></i></td>
+            <td><i th:text="${student.email}"></i></td>
+            <td><i th:text="${student.username}"></i></td>
+            <td><i th:text="${student.codePostal}"></i></td>
+            <td><i th:text="${student.degree}"></i></td>
+            <td><i th:text="${student.course}"></i></td>
+            <td><i th:text="${student.numberPhone}"></i></td>
+            <td><i th:text="${student.gender}"></i></td>
+            <td><i th:text="${student.hoursGiven}"></i></td>
+            <td><i th:text="${student.hoursReceived}"></i></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="titulo"><h1>Ofertas de <i th:text="${student.name}"></i></h1></div>
+    <table th:unless="${#lists.isEmpty(offers)}" class="table table-striped">
+        <thead class="table table-striped">
+        <tr>
+            <th>Inicio</th>
+            <th>Fin</th>
+            <th>Descripción de la oferta</th>
+            <th>Habilidad ofrecida</th>
+            <th>Nivel dificultad (1-5)</th>
+            <th>Duración en horas</th>
+            <th>Estudiante que oferta</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="offer: ${offers}">
+            <td th:text="${offer.start}"></td>
+            <td th:text="${offer.finish}"></td>
+            <td th:text="${offer.description}"></td>
+            <td th:text="${offer.getNameSkillType(skillTypes)}"></td>
+            <td th:text="${offer.getLevelSkillType(skillTypes)}"></td>
+            <td th:text="${offer.duration}"></td>
+            <td th:text="${offer.getNameStudent(students)}"></td>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="titulo"><h1>Demandas de <i th:text="${student.name}"></i></h1></div>
+    <table th:unless="${#lists.isEmpty(requests)}" class="table table-striped">
+        <thead class="table table-striped">
+        <tr>
+            <th>Inicio</th>
+            <th>Fin</th>
+            <th>Descripción de la propuesta</th>
+            <th>Habilidad</th>
+            <th>Nivel dificultad (1-5)</th>
+            <th>Duración en horas</th>
+            <th>Consultar solicitudes relacionadas</th>
+            <th>Actualizar</th>
+            <th>Borrar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="request: ${requests}">
+            <td th:text="${request.start}"></td>
+            <td th:text="${request.finish}"></td>
+            <td th:text="${request.description}"></td>
+            <td th:text="${request.getNameSkillType(skillTypes)}"></td>
+            <td th:text="${request.getLevelSkillType(skillTypes)}"></td>
+            <td th:text="${request.duration}"></td>
+            <td><a th:href="@{/offer/list/{idRequest}(idRequest=${request.idRequest})}" class="btn btn-success">Consultar</a></td>
+            <td><a th:href="@{/request/update/{id}(id=${request.idRequest})}" class="btn btn-success">Actualizar</a></td>
+            <td><a th:href="@{/request/delete/{id}(id=${request.idRequest})}" class="btn btn-success">Eliminar</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

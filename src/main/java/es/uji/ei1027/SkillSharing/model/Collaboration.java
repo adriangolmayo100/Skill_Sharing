@@ -144,6 +144,7 @@ public class Collaboration{
     public void createCollaboration(Offer offer,int idRequest){
         this.setIdOffer(offer.getIdOffer());
         this.setIdRequest(idRequest);
+        this.setDescription(offer.getDescription());
         this.setDuration(offer.getDuration());
         this.setStart(offer.getStart());
         this.setFinish(offer.getFinish());
@@ -152,6 +153,7 @@ public class Collaboration{
     public void createCollaboration(Request request,int idOffer){
         this.setIdOffer(idOffer);
         this.setIdRequest(request.getIdRequest());
+        this.setDescription(request.getDescription());
         this.setDuration(request.getDuration());
         this.setStart(request.getStart());
         this.setFinish(request.getFinish());
