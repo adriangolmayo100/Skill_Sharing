@@ -51,7 +51,7 @@ public class OfferController {
             return mensaje;
         }
         offerDao.deleteOffer(idOffer);
-        return "redirect:../mis_ofertas";
+        return "feedback/offer_correcto";
     }
 
 
@@ -132,8 +132,9 @@ public class OfferController {
             Collaboration collaboration = new Collaboration();
             collaboration.createCollaboration(offer,request.getIdRequest());
             collaborationDao.addCollaboration(collaboration);
+            return "/feedback/collaboration_correcto";
         }
-        return "redirect:../list";
+        return "/feedback/collaboration_erroneo";
     }
     @RequestMapping(value="/accept/{idOffer}/{idRequest}", method=RequestMethod.GET)
     public String accept(HttpSession session, Model model, @PathVariable Integer idOffer,@PathVariable Integer idRequest) {
@@ -152,8 +153,9 @@ public class OfferController {
             collaboration.setValid(false);
             collaborationDao.addCollaboration(collaboration);
             model.addAttribute("student",studentDao.getStudent(offer.getIdStudent()));
+            return "/feedback/collaboration_correcto";
         }
-        return "/collaboration/correcto";
+        return "/feedback/collaboration_erroneo";
     }
 
     @RequestMapping(value="/update/{idOffer}", method=RequestMethod.GET)
@@ -188,7 +190,7 @@ public class OfferController {
         Offer offer = offerDao.getOffer(idOffer);
         offer.updateOffer(offerModel);
         offerDao.updateOffer(offer);
-        return "offer/correcto";
+        return "feedback/offer_correcto";
     }
 
 }

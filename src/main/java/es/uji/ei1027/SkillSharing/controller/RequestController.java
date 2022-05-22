@@ -64,8 +64,9 @@ public class RequestController {
             Collaboration collaboration = new Collaboration();
             collaboration.createCollaboration(request,offer.getIdOffer());
             collaborationDao.addCollaboration(collaboration);
+            return "/feedback/collaboration_correcto";
         }
-        return "redirect:../list";
+        return "/feedback/collaboration_erroneo";
     }
     @RequestMapping(value = "/delete/{idRequest}")
     public String processDeleteRequest(HttpSession session, Model model, @PathVariable Integer idRequest){
@@ -74,7 +75,7 @@ public class RequestController {
             return mensaje;
         }
         requestDao.deleteRequest(idRequest);
-        return "redirect:../mis_demandas";
+        return "feedback/request_correcto";
     }
     @RequestMapping("/list/{idOffer}")
     public String listRequests(HttpSession session, Model model,@PathVariable Integer idOffer){
@@ -132,7 +133,7 @@ public class RequestController {
         request.setValid(true);
         request.setIdStudent(student.getIdStudent());
         requestDao.addRequest(request);
-        return "request/correcto";
+        return "feedback/request_correcto";
     }
 
     @RequestMapping(value="/update/{idRequest}", method=RequestMethod.GET)
@@ -154,7 +155,7 @@ public class RequestController {
         Request request= requestDao.getRequest(id_request);
         request.updateRequest(requestModel);
         requestDao.updateRequest(request);
-        return "request/correcto";
+        return "feedback/request_correcto";
     }
     @RequestMapping(value="/accept/{idRequest}/{idOffer}", method=RequestMethod.GET)
     public String accept(HttpSession session, Model model, @PathVariable Integer idRequest,@PathVariable Integer idOffer) {
@@ -174,7 +175,8 @@ public class RequestController {
             collaboration.createCollaboration(request,offer.getIdOffer());
             collaborationDao.addCollaboration(collaboration);
             System.out.println();
+            return "/feedback/collaboration_correcto";
         }
-        return "redirect:/request/mis_demandas";
+        return "/feedback/collaboration_erroneo";
     }
 }

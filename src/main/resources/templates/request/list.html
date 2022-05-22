@@ -33,6 +33,7 @@
                 <td th:text="${request.getLevelSkillType(skillTypes)}"></td>
                 <td th:text="${request.duration}"></td>
                 <td th:text="${request.getNameStudent(students)}"></td>
+                <td><a th:href="@{/request/accept/{id}(id=${request.idRequest})}" class="btn btn-success">Aceptar</a></td>
             </tr>
         </tbody>
     </table>

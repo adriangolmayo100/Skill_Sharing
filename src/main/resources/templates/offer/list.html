@@ -33,7 +33,9 @@
       <td th:text="${offer.getLevelSkillType(skillTypes)}"></td>
       <td th:text="${offer.duration}"></td>
       <td th:text="${offer.getNameStudent(students)}"></td>
-      </td>
+      <td><a th:href="@{/offer/accept/{id}(id=${offer.idOffer})}" class="btn btn-success">Aceptar</a>
+
+    </td>
     </tr>
     </tbody>
   </table>
