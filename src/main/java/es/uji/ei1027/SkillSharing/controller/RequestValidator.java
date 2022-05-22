@@ -21,11 +21,11 @@ public class RequestValidator implements Validator {
         if (request.getDuration()<=0)
             errors.rejectValue("duration","valor incorrecto","La duració tiene que se > 0");
         String[] campos = request.getStart().toString().split("-");
-        int inicio = Integer.parseInt(campos[0]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[2]) * 24;
+        int inicio = Integer.parseInt(campos[2]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[0]) * 24; //AÑO - MES - DIA
         campos = request.getFinish().toString().split("-");
-        int fin = Integer.parseInt(campos[0]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[2]) * 24;
+        int fin = Integer.parseInt(campos[2]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[0]) * 24;
         campos = java.time.LocalDate.now().toString().split("-");
-        int fecha_actual = Integer.parseInt(campos[0]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[2]) * 24;
+        int fecha_actual = Integer.parseInt(campos[2]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[0]) * 24;
         if(inicio <= fecha_actual)
             errors.rejectValue("start", "valor incorrecto", "La fecha de inicio debe ser posterior a la de hoy");
         if(fin - inicio < 0)

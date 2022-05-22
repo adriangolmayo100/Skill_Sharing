@@ -64,9 +64,9 @@ public class RequestController {
             Collaboration collaboration = new Collaboration();
             collaboration.createCollaboration(request,offer.getIdOffer());
             collaborationDao.addCollaboration(collaboration);
-            return "/feedback/collaboration_correcto";
+            return "feedback/collaboration_correcto";
         }
-        return "/feedback/collaboration_erroneo";
+        return "feedback/request_propio";
     }
     @RequestMapping(value = "/delete/{idRequest}")
     public String processDeleteRequest(HttpSession session, Model model, @PathVariable Integer idRequest){
@@ -175,8 +175,8 @@ public class RequestController {
             collaboration.createCollaboration(request,offer.getIdOffer());
             collaborationDao.addCollaboration(collaboration);
             System.out.println();
-            return "/feedback/collaboration_correcto";
+            return "feedback/collaboration_correcto";
         }
-        return "/feedback/collaboration_erroneo";
+        return "feedback/request_propio";
     }
 }

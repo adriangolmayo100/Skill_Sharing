@@ -25,11 +25,11 @@ public class OfferValidator implements Validator {
         if (offer.getDuration()<=0)
             errors.rejectValue("duration","valor incorrecto","La duración tiene que se > 0");
         String[] campos = offer.getStart().toString().split("-");
-        int inicio = Integer.parseInt(campos[0]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[2]) * 24;
+        int inicio = Integer.parseInt(campos[2]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[0]) * 24; //AÑO - MES - DIA
         campos = offer.getFinish().toString().split("-");
-        int fin = Integer.parseInt(campos[0]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[2]) * 24;
+        int fin = Integer.parseInt(campos[2]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[0]) * 24;
         campos = java.time.LocalDate.now().toString().split("-");
-        int fecha_actual = Integer.parseInt(campos[0]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[2]) * 24;
+        int fecha_actual = Integer.parseInt(campos[2]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[0]) * 24;
         if(inicio <= fecha_actual)
             errors.rejectValue("start", "valor incorrecto", "La fecha de inicio debe ser posterior a la de hoy");
         if(fin - inicio < 0)
@@ -38,15 +38,4 @@ public class OfferValidator implements Validator {
             errors.rejectValue("duration", "valor incorrecto", "La duración es muy grande para las fechas seleccionadas");
     }
 
-    public void validadorFecha(Offer offer, String fecha, boolean start, Errors errors){
-        try{
-            System.out.println(fecha);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate fechaBuena = LocalDate.parse(fecha, formatter);
-            System.out.println(fechaBuena);
-            offer.setStart(fechaBuena);
-        }catch (Exception e){
-            errors.rejectValue("start", "valor incorrecto", "MAL");
-        }
-    }
 }

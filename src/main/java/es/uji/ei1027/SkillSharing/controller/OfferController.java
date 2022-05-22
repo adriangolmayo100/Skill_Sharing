@@ -95,7 +95,6 @@ public class OfferController {
             return mensaje;
         }
         OfferValidator offerValidator = new OfferValidator();
-        //offerValidator.validadorFecha(offer, start, true, bindingResult);
         if (bindingResult.hasErrors()){
             model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
             return "offer/add";
@@ -106,12 +105,11 @@ public class OfferController {
             return "offer/add";
         }
         Student student= (Student) session.getAttribute("student");
-        //offer.setStart(LocalDate.parse(start));
         offer.setValid(true);
         offer.setIdStudent(student.getIdStudent());
-        System.out.println(offer.toString());
         model.addAttribute("studentsEmail",requestDao.getStudentsWithIdSkillType(offer.getIdSkillType(),offer.getIdStudent()));
-        return "offer/correcto";
+        offerDao.addOffer(offer);
+        return "feedback/offer_correcto";
     }
     @RequestMapping(value="/accept/{id}", method=RequestMethod.GET)
     public String acceptOffer(HttpSession session, Model model, @PathVariable Integer id) {
@@ -131,9 +129,9 @@ public class OfferController {
             Collaboration collaboration = new Collaboration();
             collaboration.createCollaboration(offer,request.getIdRequest());
             collaborationDao.addCollaboration(collaboration);
-            return "/feedback/collaboration_correcto";
+            return "feedback/collaboration_correcto";
         }
-        return "/feedback/collaboration_erroneo";
+        return "feedback/offer_propio";
     }
     @RequestMapping(value="/accept/{idOffer}/{idRequest}", method=RequestMethod.GET)
     public String accept(HttpSession session, Model model, @PathVariable Integer idOffer,@PathVariable Integer idRequest) {
@@ -152,9 +150,9 @@ public class OfferController {
             collaboration.setValid(false);
             collaborationDao.addCollaboration(collaboration);
             model.addAttribute("student",studentDao.getStudent(offer.getIdStudent()));
-            return "/feedback/collaboration_correcto";
+            return "feedback/collaboration_correcto";
         }
-        return "/feedback/collaboration_erroneo";
+        return "feedback/offer_erroneo";
     }
 
     @RequestMapping(value="/update/{idOffer}", method=RequestMethod.GET)
