@@ -2,6 +2,7 @@ package es.uji.ei1027.SkillSharing.controller;
 
 import javax.servlet.http.HttpSession;
 
+import es.uji.ei1027.SkillSharing.dao.StatisticDao;
 import es.uji.ei1027.SkillSharing.dao.StudentDao;
 import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class UserController {
 
     @Autowired
     private StudentDao studentDao;
+    @Autowired
+    private StatisticDao statisticDao;
 
     @RequestMapping("/pagUser")
     public String pagUser(HttpSession session, Model model){
@@ -38,18 +41,17 @@ public class UserController {
         if (!mensaje.equals(""))
             return mensaje;
         Student student = (Student) session.getAttribute("student");
-        int hoursGiven = student.getHoursGiven();
-        int hoursReceived = student.getHoursReceived();
-        model.addAttribute("hoursGiven",hoursGiven);
-        model.addAttribute("hoursReceived",hoursReceived);
         if (student.isUnavailable()){
             model.addAttribute("banReason",student.getBanReason());
             return "tipos_usuario/baneado";
         }
-        if (!student.isSkp())
-            return "tipos_usuario/usuario";
-        else
+        if (student.isSkp())
             return "tipos_usuario/skp";
+        model.addAttribute("hoursGiven",student.getHoursGiven());
+        model.addAttribute("hoursReceived",student.getHoursReceived());
+        model.addAttribute("statisticsCollaboration",statisticDao.getStatisticCollaborationsFromStudent(student.getIdStudent()));
+        model.addAttribute("statisticsOffersRequests",statisticDao.getStatisticOffersRequestFromStudent(student.getIdStudent()));
+        return "tipos_usuario/usuario";
     }
    @RequestMapping("/visitante")
     public String pagVisitante(HttpSession session, Model model){

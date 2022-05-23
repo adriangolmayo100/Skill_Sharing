@@ -1,9 +1,6 @@
 package es.uji.ei1027.SkillSharing.controller;
 
-import es.uji.ei1027.SkillSharing.dao.OfferDao;
-import es.uji.ei1027.SkillSharing.dao.RequestDao;
-import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
-import es.uji.ei1027.SkillSharing.dao.StudentDao;
+import es.uji.ei1027.SkillSharing.dao.*;
 import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +18,8 @@ import java.util.List;
 public class StudentController {
     private UserValidator validator = new UserValidator();
 
+    @Autowired
+    private StatisticDao statisticDao;
     @Autowired
     private StudentDao studentDao;
     @Autowired
@@ -48,6 +47,8 @@ public class StudentController {
         model.addAttribute("offers",offerDao.getOffers(idStudent));
         model.addAttribute("request",requestDao.getRequests(idStudent));
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("statisticsCollaboration",statisticDao.getStatisticCollaborationsFromStudent(idStudent));
+        model.addAttribute("statisticsOffersRequests",statisticDao.getStatisticOffersRequestFromStudent(idStudent));
 
         return "/student/informacion";
     }

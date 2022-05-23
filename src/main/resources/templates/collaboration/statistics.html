@@ -31,8 +31,8 @@
             <td th:text="${collaboration.finish}"></td>
             <td th:text="${collaboration.getNameSkillType(skillTypes)}"></td>
             <td th:text="${collaboration.description}"></td>
-            <td th:text="${collaboration.getNameStudentsRequest(students)}"></td>
-            <td th:text="${collaboration.getNameStudentsOffers(students)}"></td>
+            <td> <a th:href="@{/student/informacion/{idStudent}(idStudent=${collaboration.idStudentOffers})}" th:text="${collaboration.getNameStudentsOffers(students)}"></a></td>
+            <td> <a th:href="@{/student/informacion/{idStudent}(idStudent=${collaboration.idStudentRequest})}" th:text="${collaboration.getNameStudentsRequest(students)}"></a></td>
             <td th:text="${collaboration.duration}"></td>
             <td><a th:href="@{/collaboration/delete/{idOffer}/{idRequest}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}" class="btn btn-danger">Anular colaboración</a>
 
@@ -61,8 +61,8 @@
             <td th:text="${collaboration.finish}"></td>
             <td th:text="${collaboration.getNameSkillType(skillTypes)}"></td>
             <td th:text="${collaboration.description}"></td>
-            <td> <a th:href="@{/student/informacion/{idStudent}(idStudent=${collaboration.idStudentOffers})}" th:text="${collaboration.getNameStudentsOffers(students)}"></a></td>
             <td> <a th:href="@{/student/informacion/{idStudent}(idStudent=${collaboration.idStudentRequest})}" th:text="${collaboration.getNameStudentsRequest(students)}"></a></td>
+            <td> <a th:href="@{/student/informacion/{idStudent}(idStudent=${collaboration.idStudentOffers})}" th:text="${collaboration.getNameStudentsOffers(students)}"></a></td>
             <td th:text="${collaboration.duration}"></td>
             <div th:if="${collaboration.rating>0}">
                 <td>

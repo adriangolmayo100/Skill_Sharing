@@ -26,6 +26,10 @@
             <th>Género</th>
             <th>Horas dadas</th>
             <th>Horas recibidas</th>
+            <th>Ofertas publicadas</th>
+            <th>Demandas publicadas</th>
+            <th>Colaboraciones terminadas</th>
+            <th>Valoración media (Arreglarlo Imanol y Marc, cuando es 0 no hay valoración)</th>
         </tr>
         </thead>
         <tbody>
@@ -40,6 +44,10 @@
             <td><i th:text="${student.gender}"></i></td>
             <td><i th:text="${student.hoursGiven}"></i></td>
             <td><i th:text="${student.hoursReceived}"></i></td>
+            <td><i th:text="${statisticsOffersRequests.ofertasPublicadas}"></i></td>
+            <td><i th:text="${statisticsOffersRequests.demandasPublicadas}"></i></td>
+            <td><i th:text="${statisticsCollaboration.colaboracionesCumplidasConExito}"></i></td>
+            <td><i th:text="${statisticsCollaboration.valoracionMedia}"></i></td>
         </tr>
         </tbody>
     </table>

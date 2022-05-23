@@ -16,6 +16,10 @@
     <div class="titulo">
         <p>Horas dadas: <i th:text="${hoursGiven}"></i></p>
         <p>Horas recibidas: <i th:text="${hoursReceived}"></i></p>
+        <p>Colaboraciones en total: <i th:text="${statisticsCollaboration.colaboracionesCumplidasConExito}"></i></p>
+        <p>Valoración media(Si es 0, no hay, arreglarlo Imanol o Marc): <i th:text="${statisticsCollaboration.valoracionMedia}"></i></p>
+        <p>Ofertas publicadas en total: <i th:text="${statisticsOffersRequests.ofertasPublicadas}"></i></p>
+        <p>Demandas publicadas en total: <i th:text="${statisticsOffersRequests.demandasPublicadas}"></i></p>
     </div>
     <table class="table_center">
         <tr>
