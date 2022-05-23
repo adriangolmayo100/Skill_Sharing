@@ -1,5 +1,7 @@
 package es.uji.ei1027.SkillSharing.dao;
 
+import es.uji.ei1027.SkillSharing.RowMappers.MaxIdMapper;
+import es.uji.ei1027.SkillSharing.RowMappers.OfferRowMapper;
 import es.uji.ei1027.SkillSharing.model.Offer;
 import es.uji.ei1027.SkillSharing.model.Request;
 import org.springframework.beans.factory.annotation.Autowired;

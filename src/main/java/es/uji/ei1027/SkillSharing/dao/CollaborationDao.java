@@ -1,5 +1,7 @@
 package es.uji.ei1027.SkillSharing.dao;
 
+import es.uji.ei1027.SkillSharing.RowMappers.CollaborationRowMapper;
+import es.uji.ei1027.SkillSharing.RowMappers.CollaborationStandarRowMapper;
 import es.uji.ei1027.SkillSharing.model.Collaboration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

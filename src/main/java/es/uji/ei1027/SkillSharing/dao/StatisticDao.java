@@ -1,5 +1,7 @@
 package es.uji.ei1027.SkillSharing.dao;
 
+import es.uji.ei1027.SkillSharing.RowMappers.StatisticCollaborationRowMapper;
+import es.uji.ei1027.SkillSharing.RowMappers.StatisticOffersRequestsRowMapper;
 import es.uji.ei1027.SkillSharing.model.StatisticStudent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

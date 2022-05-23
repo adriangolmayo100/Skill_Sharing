@@ -1,5 +1,7 @@
 package es.uji.ei1027.SkillSharing.dao;
 
+import es.uji.ei1027.SkillSharing.RowMappers.MaxIdMapper;
+import es.uji.ei1027.SkillSharing.RowMappers.StudentRowMapper;
 import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

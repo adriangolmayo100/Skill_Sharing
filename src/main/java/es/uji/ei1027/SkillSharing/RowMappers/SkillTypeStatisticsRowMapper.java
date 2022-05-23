@@ -1,4 +1,4 @@
-package es.uji.ei1027.SkillSharing.dao;
+package es.uji.ei1027.SkillSharing.RowMappers;
 
 import es.uji.ei1027.SkillSharing.model.SkillType;
 import org.springframework.jdbc.core.RowMapper;
