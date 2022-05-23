@@ -24,6 +24,8 @@ public class OfferController {
     private SkillTypeDao skillTypeDao;
     private RequestDao requestDao;
     private CollaborationDao collaborationDao;
+    @Autowired
+    private StatisticDao statisticDao;
     private UserValidator validator = new UserValidator();
 
 
@@ -60,6 +62,7 @@ public class OfferController {
         model.addAttribute("students",studentDao.getStudents());
         model.addAttribute("offers", offerDao.getValidOffers());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("statisticStudents", statisticDao.getStatisticCollaborations());
         return "offer/list";
     }
 
@@ -74,6 +77,8 @@ public class OfferController {
         model.addAttribute("offers", offerDao.getValidOffers(request));
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
         model.addAttribute("students",studentDao.getStudents());
+        model.addAttribute("statisticStudents", statisticDao.getStatisticCollaborations());
+
         return "offer/listBySkillType";
     }
     @RequestMapping(value="/add")

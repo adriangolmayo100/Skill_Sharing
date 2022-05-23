@@ -148,4 +148,18 @@ public class Offer {
         this.setDuration(offer.getDuration());
         this.setIdSkillType(offer.getIdSkillType());
     }
+    public float getValoracionMediaOfertante(List<StatisticStudent> statisticStudents){
+        for (StatisticStudent statisticStudent: statisticStudents){
+            if (this.idStudent==statisticStudent.getIdStudent())
+                return statisticStudent.getValoracionMedia();
+        }
+        return 0;
+    }
+    public int getValoracionColaboracionesRealizadas(List<StatisticStudent> statisticStudents){
+        for (StatisticStudent statisticStudent: statisticStudents){
+            if (this.idStudent==statisticStudent.getIdStudent())
+                return statisticStudent.getColaboracionesCumplidasConExito();
+        }
+        return 0;
+    }
 }

@@ -22,6 +22,9 @@
       <th>Nivel dificultad (1-5)</th>
       <th>Duración en horas</th>
       <th>Estudiante que oferta</th>
+      <th>Valoración media del estudiante que oferta</th>
+      <th>Colaboraciones cumplidas del estudiante que oferta</th>
+      <th</th>
     </tr>
     </thead>
     <tbody>
@@ -33,9 +36,8 @@
       <td th:text="${offer.getLevelSkillType(skillTypes)}"></td>
       <td th:text="${offer.duration}"></td>
       <td th:text="${offer.getNameStudent(students)}"></td>
-      <td><a th:href="@{/offer/accept/{id}(id=${offer.idOffer})}" class="btn btn-success">Aceptar</a>
-
-    </td>
+      <td th:text="${offer.getValoracionMediaOfertante(statisticStudents)}"></td>
+      <td th:text="${offer.getValoracionColaboracionesRealizadas(statisticStudents)}"></td>
     </tr>
     </tbody>
   </table>
