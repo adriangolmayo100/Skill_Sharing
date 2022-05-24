@@ -55,6 +55,11 @@ public class UserController {
     }
    @RequestMapping("/visitante")
     public String pagVisitante(HttpSession session, Model model){
+       Student student1 = (Student) session.getAttribute("student");
+       if ( student1 != null)
+       {
+           session.invalidate();
+       }
         return "tipos_usuario/visitante";
     }
 
