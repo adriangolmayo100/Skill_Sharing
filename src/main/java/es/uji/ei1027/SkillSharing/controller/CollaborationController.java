@@ -57,7 +57,7 @@ public class CollaborationController {
         }
         model.addAttribute("collaborations", collaborationDao.getCollaborations());
         model.addAttribute("collaborationsRequest", collaborationDao.getCollaborations());
-        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         return "collaboration/list";
     }
     @RequestMapping("/statistics")
@@ -69,7 +69,7 @@ public class CollaborationController {
         model.addAttribute("students", studentDao.getStudents());
         model.addAttribute("collaborations", collaborationDao.getCollaborations());
         model.addAttribute("collaborationsRequest", collaborationDao.getRequestCollaborations());
-        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         return "collaboration/statistics";
     }
     @RequestMapping("/mis_colaboraciones")
@@ -82,7 +82,7 @@ public class CollaborationController {
         model.addAttribute("students", studentDao.getStudents());
         model.addAttribute("collaborationsImRequest", collaborationDao.getMyCollaborationsWhenRequest(student.getIdStudent()));
         model.addAttribute("collaborationsImOffer", collaborationDao.getMyCollaborationsWhenOffer(student.getIdStudent()));
-        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         model.addAttribute("today", LocalDate.now());
         return "collaboration/mis_colaboraciones";
     }
@@ -96,7 +96,7 @@ public class CollaborationController {
         model.addAttribute("students", studentDao.getStudents());
         model.addAttribute("collaborationsImRequest", collaborationDao.getMyRequestCollaborationsWhenRequest(student.getIdStudent()));
         model.addAttribute("collaborationsImOffer", collaborationDao.getMyRequestCollaborationsWhenOffer(student.getIdStudent()));
-        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         return "collaboration/mis_request_colaboraciones";
     }
 

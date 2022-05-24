@@ -4,8 +4,6 @@ import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 public class Offer {
@@ -126,7 +124,7 @@ public class Offer {
     }
     public void setSkillType(String name){
         SkillTypeDao s = new SkillTypeDao();
-        List<SkillType> l = s.getSkillTypes();
+        List<SkillType> l = s.getSkillTypesValid();
         for  (SkillType sk : l){
             if (sk.getName().equals(name)){
                 setIdSkillType(sk.getIdSkillType());

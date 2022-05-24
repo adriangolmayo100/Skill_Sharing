@@ -3,9 +3,7 @@ package es.uji.ei1027.SkillSharing.model;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Request {
@@ -97,7 +95,7 @@ public class Request {
     }
     public void setSkillType(String name){
         SkillTypeDao s = new SkillTypeDao();
-        List<SkillType> l = s.getSkillTypes();
+        List<SkillType> l = s.getSkillTypesValid();
         for  (SkillType sk : l){
             if (sk.getName().equals(name)){
                 setIdSkillType(sk.getIdSkillType());

@@ -15,6 +15,7 @@ public final class SkillTypeRowMapper implements RowMapper<SkillType>{
         skillType.setName(rs.getString("name"));
         skillType.setDescription(rs.getString("description"));
         skillType.setLevel(rs.getInt("level"));
+        skillType.setValid(rs.getBoolean("valid"));
         return skillType;
 
     }

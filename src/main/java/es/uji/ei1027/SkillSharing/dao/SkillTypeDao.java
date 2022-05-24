@@ -71,6 +71,16 @@ public class SkillTypeDao {
         }
     }
 
+    public List<SkillType> getSkillTypesValid() {
+        try {
+            return jdbcTemplate.query("SELECT * " +
+                            "from SkillType" +
+                            "WHERE valid = ?",
+                    new SkillTypeRowMapper(),true);
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<SkillType>();
+        }
+    }
     public List<SkillType> getSkillTypes() {
         try {
             return jdbcTemplate.query("SELECT * from SkillType",
@@ -79,4 +89,5 @@ public class SkillTypeDao {
             return new ArrayList<SkillType>();
         }
     }
+
 }

@@ -84,6 +84,14 @@ public class OfferDao {
             return null;
         }
     }
+    public void anularOfertas(int idStudent){
+        jdbcTemplate.update("UPDATE offer " +
+                "SET valid=?, finish=CURRENT_DATE-1 where id_student=?",false, idStudent);
+    }
+    public void anularOfertasSkillType(int idSkilltype){
+        jdbcTemplate.update("UPDATE offer " +
+                "SET valid=?, finish=CURRENT_DATE-1 where id_skilltype=?",false, idSkilltype);
+    }
 
     public List<Offer> getOffers(){
         try{

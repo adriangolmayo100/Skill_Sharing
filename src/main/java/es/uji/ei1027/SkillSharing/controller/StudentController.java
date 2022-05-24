@@ -46,7 +46,7 @@ public class StudentController {
         model.addAttribute("students",studentDao.getStudents());
         model.addAttribute("offers",offerDao.getOffers(idStudent));
         model.addAttribute("request",requestDao.getRequests(idStudent));
-        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         model.addAttribute("statisticsCollaboration",statisticDao.getStatisticCollaborationsFromStudent(idStudent));
         model.addAttribute("statisticsOffersRequests",statisticDao.getStatisticOffersRequestFromStudent(idStudent));
 
@@ -78,6 +78,8 @@ public class StudentController {
         Student student = studentDao.getStudent(idStudent);
         student.setBanReason(studentModel.getBanReason());
         student.setUnavailable(true);
+        offerDao.anularOfertas(student.getIdStudent());
+        requestDao.anularDemandas(student.getIdStudent());
         studentDao.updateStudent(student);
         return "redirect:/student/listWithOutSkp";
     }

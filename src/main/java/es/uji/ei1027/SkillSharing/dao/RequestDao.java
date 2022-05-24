@@ -95,6 +95,14 @@ public class RequestDao {
             return null;
         }
     }
+    public void anularDemandas(int idStudent){
+        jdbcTemplate.update("UPDATE request " +
+                "SET valid=?, finish=CURRENT_DATE-1 where id_student=?",false, idStudent);
+    }
+    public void anularDemandasSkillType(int idskillType){
+        jdbcTemplate.update("UPDATE request " +
+                "SET valid=?, finish=CURRENT_DATE-1 where id_skilltype=?",false, idskillType);
+    }
 
     public List<Request> getRequests() {
         try {

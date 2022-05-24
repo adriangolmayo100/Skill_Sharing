@@ -86,7 +86,7 @@ public class RequestController {
         Offer offer = offerDao.getOffer(idOffer);
         model.addAttribute("offerSearch",offer);
         model.addAttribute("requests", requestDao.getValidRequests(offer.getIdSkillType(),offer.getIdStudent()));
-        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         model.addAttribute("students",studentDao.getStudents());
 
         return "request/listBySkillType";
@@ -95,7 +95,7 @@ public class RequestController {
     public String listRequests(Model model){
         model.addAttribute("students",studentDao.getStudents());
         model.addAttribute("requests", requestDao.getValidRequests());
-        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         return "request/list";
     }
 
@@ -106,7 +106,7 @@ public class RequestController {
             return mensaje;
         }
         model.addAttribute("request", new Request());
-        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         return "request/add";
     }
     @RequestMapping(value="/mis_demandas")
@@ -116,7 +116,7 @@ public class RequestController {
         if (!mensaje.equals("")){
             return mensaje;
         }
-        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         model.addAttribute("requests",requestDao.getRequests(student.getIdStudent()));
         return "request/mis_demandas";
     }
@@ -126,7 +126,7 @@ public class RequestController {
         RequestValidator requestValidator = new RequestValidator();
         requestValidator.validate(request,bindingResult);
         if (bindingResult.hasErrors()){
-            model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+            model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
             return "request/add";
         }
         Student student= (Student) session.getAttribute("student");
@@ -143,7 +143,7 @@ public class RequestController {
             return mensaje;
         }
         model.addAttribute("request", requestDao.getRequest(idRequest));
-        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         return "request/update";
     }
 

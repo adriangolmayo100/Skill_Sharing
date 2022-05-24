@@ -31,7 +31,12 @@
       <td th:text="${skill.numberOfOffers}"></td>
       <td th:text="${skill.numberOfRequest}"></td>
       <td><a th:href="@{/skilltype/update/{idSkilltype}(idSkilltype=${skill.idSkillType})}" class="btn btn-warning" role="button">Editar</a></td>
-      <td><a th:href="@{/skilltype/delete/{idSkilltype}(idSkilltype=${skill.idSkillType})}" class="btn btn-danger" role="button">Borrar</a></td>
+      <div>
+        <td><a th:href="@{/skilltype/delete/{idSkilltype}(idSkilltype=${skill.idSkillType})}" class="btn btn-danger" role="button">Anular</a></td>
+      </div>
+      <div>
+        <td><a th:href="@{/skilltype/delete/{idSkilltype}(idSkilltype=${skill.idSkillType})}" class="btn btn-danger" role="button">Anular</a></td>
+      </div>
     </tr>
     </tbody>
   </table>

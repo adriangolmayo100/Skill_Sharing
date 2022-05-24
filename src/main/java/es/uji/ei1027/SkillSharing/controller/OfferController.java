@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
-import java.time.LocalDate;
 import java.util.List;
 
 
@@ -61,7 +60,7 @@ public class OfferController {
     public String listOffers(Model model, HttpSession session){
         model.addAttribute("students",studentDao.getStudents());
         model.addAttribute("offers", offerDao.getValidOffers());
-        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         model.addAttribute("statisticStudents", statisticDao.getStatisticCollaborations());
         return "offer/list";
     }
@@ -75,7 +74,7 @@ public class OfferController {
         Request request = requestDao.getRequest(idRequest);
         model.addAttribute("requestSearch", request);
         model.addAttribute("offers", offerDao.getValidOffers(request));
-        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         model.addAttribute("students",studentDao.getStudents());
         model.addAttribute("statisticStudents", statisticDao.getStatisticCollaborations());
 
@@ -88,7 +87,7 @@ public class OfferController {
             return mensaje;
         }
         model.addAttribute("offer", new Offer());
-        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         return "offer/add";
     }
 
@@ -101,12 +100,12 @@ public class OfferController {
         }
         OfferValidator offerValidator = new OfferValidator();
         if (bindingResult.hasErrors()){
-            model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+            model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
             return "offer/add";
         }
         offerValidator.validate(offer,bindingResult);
         if (bindingResult.hasErrors()){
-            model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+            model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
             return "offer/add";
         }
         Student student= (Student) session.getAttribute("student");
@@ -167,7 +166,7 @@ public class OfferController {
             return mensaje;
         }
         model.addAttribute("offer", offerDao.getOffer(idOffer));
-        model.addAttribute("skillTypes", skillTypeDao.getSkillTypes());
+        model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         return "offer/update";
     }
     @RequestMapping(value="/mis_ofertas")
@@ -179,7 +178,7 @@ public class OfferController {
             model.addAttribute("student", new Student());
             return "login";
         }
-        List<SkillType> skillTypeList = skillTypeDao.getSkillTypes();
+        List<SkillType> skillTypeList = skillTypeDao.getSkillTypesValid();
         model.addAttribute("skillTypes", skillTypeList);
         model.addAttribute("offers",offerDao.getOffers(student.getIdStudent()));
         return "offer/mis_ofertas";

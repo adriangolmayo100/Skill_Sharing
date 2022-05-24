@@ -1,5 +1,7 @@
 package es.uji.ei1027.SkillSharing.controller;
 
+import es.uji.ei1027.SkillSharing.dao.OfferDao;
+import es.uji.ei1027.SkillSharing.dao.RequestDao;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import es.uji.ei1027.SkillSharing.model.SkillType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/skilltype")
 public class SkillTypeController {
-
+    @Autowired
+    private OfferDao offerDao;
     private SkillTypeDao skillTypeDao;
+    @Autowired
+    private RequestDao requestDao;
     @Autowired
     public void setRequestDao(SkillTypeDao skillTypeDao) {
 
@@ -24,12 +29,16 @@ public class SkillTypeController {
 
     @RequestMapping(value = "/delete/{idSkillType}")
     public String processDeleteSkillType(@PathVariable int idSkillType) {
-        skillTypeDao.deleteSkillType(idSkillType);
+        SkillType skillType = skillTypeDao.getSkillType(idSkillType);
+        skillType.setValid(false);
+        offerDao.anularOfertasSkillType(idSkillType);
+        requestDao.anularDemandasSkillType(idSkillType);
+        skillTypeDao.updateSkillType(skillType);
         return "redirect:../list";
     }
     @RequestMapping("/list")
     public String listSkillTypes(Model model) {
-        model.addAttribute("skills", skillTypeDao.getSkillTypes());
+        model.addAttribute("skills", skillTypeDao.getSkillTypesValid());
         return "skilltype/list";
     }
     @RequestMapping("/listWithStatistics")

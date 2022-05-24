@@ -12,6 +12,29 @@ public class SkillType {
      private int numberOfOffers;
 
     private int numberOfRequest;
+
+    @Override
+    public String toString() {
+        return "SkillType{" +
+                "idSkillType=" + idSkillType +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", level=" + level +
+                ", numberOfOffers=" + numberOfOffers +
+                ", numberOfRequest=" + numberOfRequest +
+                ", valid=" + valid +
+                '}';
+    }
+
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    }
+
+    private boolean valid;
     public int getNumberOfOffers() {
         return numberOfOffers;
     }
@@ -62,13 +85,4 @@ public class SkillType {
         this.level = level;
     }
 
-    @Override
-    public String toString() {
-        return "SkillType{" +
-                "skillType=" + idSkillType +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", level=" + level +
-                '}';
-    }
 }
