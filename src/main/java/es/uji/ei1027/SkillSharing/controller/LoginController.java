@@ -99,12 +99,17 @@ class UserValidator implements Validator {      //Clase para comprobar que no se
 
             }
         }else {
-                if (student == null || skp != student.isSkp()) {
-                    session.setAttribute("nextUrl", url);
-                    model.addAttribute("student", new Student());
-                    return "login";
-                }
+            if (student == null) {
+                session.setAttribute("nextUrl", url);
+                model.addAttribute("student", new Student());
+                return "login";
             }
+            if (skp != student.isSkp()) {
+                session.setAttribute("nextUrl", url);
+                model.addAttribute("student", new Student());
+                return "feedback/cuenta_incorrecta";
+            }
+        }
         return "";
     }
     public String comprobar_conexion(HttpSession session, Model model, String url) {

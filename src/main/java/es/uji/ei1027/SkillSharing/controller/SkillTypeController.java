@@ -85,6 +85,8 @@ public class SkillTypeController {
         if (!mensaje.equals("")){
             return mensaje;
         }
+        SkillTypeValidator skillTypeValidator = new SkillTypeValidator();
+        skillTypeValidator.validate(skillType, bindingResult);
         if (bindingResult.hasErrors())
             return "request/add";
         skillType.setValid(true);
@@ -111,6 +113,8 @@ public class SkillTypeController {
         if (!mensaje.equals("")){
             return mensaje;
         }
+        SkillTypeValidator skillTypeValidator = new SkillTypeValidator();
+        skillTypeValidator.validate(skillType, bindingResult);
         if (bindingResult.hasErrors())
             return "skilltype/update";
         SkillType skillTypeBBDD = skillTypeDao.getSkillType(skillType.getIdSkillType());

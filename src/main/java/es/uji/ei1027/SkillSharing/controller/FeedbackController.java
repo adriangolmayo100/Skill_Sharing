@@ -34,4 +34,7 @@ public class FeedbackController {
     public String collaborationCorrecto(){
         return "feedback/collaboration_correcto";
     }
+
+    @RequestMapping(value = "/cuenta_incorrecta")
+    public String cuentaErronea(){ return "/fededback/cuenta_incorrecta"; }
 }
