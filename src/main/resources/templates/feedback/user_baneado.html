@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+  <title>Correcto</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="estilo.css"
+        th:href="@{estilo.css}"/>
+</head>
+<body>
+<div  layout:fragment="content">
+
+  <h1>Usaurio baneado: <i th:text="${student.getName()}"></i></h1>
+  <p><b>Motivo: </b><i th:text="${student.getBanReason()}"></i></p>
+  <div class="botonIndex">
+    <a href="login" class="btn" role="button">Volver</a>
+  </div>
+</div>
+</body>
+</html>

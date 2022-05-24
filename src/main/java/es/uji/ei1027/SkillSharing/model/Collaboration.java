@@ -1,5 +1,7 @@
 package es.uji.ei1027.SkillSharing.model;
 
+import es.uji.ei1027.SkillSharing.dao.OfferDao;
+import es.uji.ei1027.SkillSharing.dao.RequestDao;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -181,5 +183,11 @@ public class Collaboration{
                 return skillType.getName();
         }
         return "";
+    }
+
+    public boolean compareTime(int idOffer, int idRequest){
+        OfferDao offerDao = new OfferDao();
+        RequestDao requestDao = new RequestDao();
+        return true;
     }
 }
