@@ -6,6 +6,13 @@ public class StatisticStudent {
     public int getIdStudent() {
         return idStudent;
     }
+    public StatisticStudent(){
+        super();
+    }
+    public StatisticStudent(int idStudent){
+        super();
+        this.idStudent=idStudent;
+    }
 
     public void setIdStudent(int idStudent) {
         this.idStudent = idStudent;

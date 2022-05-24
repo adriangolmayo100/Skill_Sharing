@@ -25,8 +25,8 @@ public class SkillTypeDao {
 
     public void addSkillType(SkillType skillType){
         skillType.setIdSkillType(getNextId());
-        jdbcTemplate.update("INSERT INTO SkillType VALUES(?, ?, ?, ?)",
-                skillType.getIdSkillType(),skillType.getName(),skillType.getDescription(),skillType.getLevel());
+        jdbcTemplate.update("INSERT INTO SkillType VALUES(?, ?, ?, ?,?)",
+                skillType.getIdSkillType(),skillType.getName(),skillType.getDescription(),skillType.getLevel(),skillType.isValid());
 
     }
     public Integer getNextId(){
@@ -42,8 +42,8 @@ public class SkillTypeDao {
     }
 
     public void updateSkillType(SkillType skillType) {
-        jdbcTemplate.update("UPDATE SkillType SET name=?, description=?,level=? where id_skilltype=?",
-                skillType.getName(),skillType.getDescription(),skillType.getLevel(),skillType.getIdSkillType());
+        jdbcTemplate.update("UPDATE SkillType SET name=?, description=?,level=?, valid=?where id_skilltype=?",
+                skillType.getName(),skillType.getDescription(),skillType.getLevel(),skillType.getIdSkillType(),skillType.isValid());
     }
 
     public SkillType getSkillType(int idskilltype) {
@@ -74,7 +74,7 @@ public class SkillTypeDao {
     public List<SkillType> getSkillTypesValid() {
         try {
             return jdbcTemplate.query("SELECT * " +
-                            "from SkillType" +
+                            "from SkillType " +
                             "WHERE valid = ?",
                     new SkillTypeRowMapper(),true);
         } catch (EmptyResultDataAccessException e) {

@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -31,7 +32,7 @@ public class StatisticDao {
                     "                          WHERE st.id_student=?\n" +
                     "                          GROUP BY st.id_student",new StatisticCollaborationRowMapper(),id_student);
         }catch (EmptyResultDataAccessException e){
-            return null;
+            return new StatisticStudent(id_student);
         }
     }
     public List<StatisticStudent> getStatisticCollaborations(){
@@ -44,7 +45,7 @@ public class StatisticDao {
                     "                          LEFT JOIN collaboration as co USING(id_offer)\n" +
                     "                          GROUP BY st.id_student",new StatisticCollaborationRowMapper());
         }catch (EmptyResultDataAccessException e){
-            return null;
+            return new ArrayList<>();
         }
     }
      public StatisticStudent getStatisticOffersRequestFromStudent(int id_student){
@@ -56,7 +57,7 @@ public class StatisticDao {
                     "WHERE st.id_student=?" +
                     "GROUP BY st.id_student" ,new StatisticOffersRequestsRowMapper(),id_student);
         }catch (EmptyResultDataAccessException e){
-            return null;
+            return new StatisticStudent(id_student);
         }
     }
     public List<StatisticStudent> getStatisticOffersRequest(){
@@ -67,7 +68,7 @@ public class StatisticDao {
                     "        LEFT JOIN request AS re USING(id_student)\n" +
                     "        GROUP BY st.id_student",new StatisticOffersRequestsRowMapper());
         }catch (EmptyResultDataAccessException e){
-            return null;
+            return new ArrayList<>();
         }
     }
 }
