@@ -33,7 +33,7 @@ public class SkillTypeDao {
         try{
             return jdbcTemplate.queryForObject("SELECT MAX(id_skilltype) AS max_id FROM skilltype",new MaxIdMapper()) + 1;
         }catch(EmptyResultDataAccessException e){
-            return null;
+            return 1;
         }
     }
     public void deleteSkillType(int idSkillType) {

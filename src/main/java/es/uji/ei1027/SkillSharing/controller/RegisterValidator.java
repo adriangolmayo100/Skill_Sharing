@@ -18,9 +18,9 @@ public class RegisterValidator implements Validator {
         if (student.getName().trim().equals(""))
             errors.rejectValue("name", "obligatorio", "Debe introducir un nombre");
         if (student.getEmail().trim().equals(""))
-            errors.rejectValue("email", "obligatorio", "Debe ntroducir un correo");
+            errors.rejectValue("email", "obligatorio", "Debe introducir un correo");
         if (student.getUsername().trim().equals(""))
-            errors.rejectValue("username", "obligatorio", "Debe ntroducir un nombre de usuario");
+            errors.rejectValue("username", "obligatorio", "Debe introducir un nombre de usuario");
         if (student.getPassword().trim().equals(""))
             errors.rejectValue("password", "obligatorio", "Debe introducir una contraseña");
         if (student.getDegree().trim().equals(""))

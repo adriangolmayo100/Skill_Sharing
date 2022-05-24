@@ -29,7 +29,7 @@ public class LoginController {
         Student student1 = (Student) session.getAttribute("student");
         if ( student1 != null)
         {
-            return "tipos_usuario/usuario";
+            return "redirect:/tipos_usuario/usuario";
         }
         return "login";
     }

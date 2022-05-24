@@ -27,7 +27,7 @@ public class RequestDao {
         try{
             return jdbcTemplate.queryForObject("SELECT MAX(id_request) AS max_id FROM request",new MaxIdMapper()) + 1;
         }catch(EmptyResultDataAccessException e){
-            return null;
+            return 1;
         }
     }
     public void addRequest(Request request) {

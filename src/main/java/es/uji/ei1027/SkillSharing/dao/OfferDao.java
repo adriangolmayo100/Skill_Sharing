@@ -30,7 +30,7 @@ public class OfferDao {
         try{
             return jdbcTemplate.queryForObject("SELECT MAX(id_offer) AS max_id FROM offer",new MaxIdMapper()) + 1;
         }catch(EmptyResultDataAccessException e){
-            return null;
+            return 1;
         }
     }
     public void deleteOffer(Integer idOffer){

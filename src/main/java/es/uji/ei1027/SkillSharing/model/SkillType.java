@@ -85,4 +85,9 @@ public class SkillType {
         this.level = level;
     }
 
+    public void actualizar(SkillType skillType){
+        this.setName(skillType.getName());
+        this.setDescription(skillType.getDescription());
+        this.setLevel(skillType.getLevel());
+    }
 }

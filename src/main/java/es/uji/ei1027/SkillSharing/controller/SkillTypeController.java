@@ -105,11 +105,11 @@ public class SkillTypeController {
     }
 
 
-    @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit( HttpSession session, Model model,
+    @RequestMapping(value="/update/{idSkillType}", method = RequestMethod.POST)
+    public String processUpdateSubmit( HttpSession session, Model model, @PathVariable Integer idSkillType,
             @ModelAttribute("skilltype") SkillType skillType,
             BindingResult bindingResult) {
-        String mensaje = validator.comprobar_conexion(session, model, "/skilltype/update/"+skillType.getIdSkillType(), true);
+        String mensaje = validator.comprobar_conexion(session, model, "/skilltype/update/"+idSkillType, true);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -117,9 +117,9 @@ public class SkillTypeController {
         skillTypeValidator.validate(skillType, bindingResult);
         if (bindingResult.hasErrors())
             return "skilltype/update";
-        SkillType skillTypeBBDD = skillTypeDao.getSkillType(skillType.getIdSkillType());
-        skillType.setValid(skillTypeBBDD.isValid());
-        skillTypeDao.updateSkillType(skillType);
+        SkillType skillTypeBBDD = skillTypeDao.getSkillType(idSkillType);
+        skillTypeBBDD.actualizar(skillType);
+        skillTypeDao.updateSkillType(skillTypeBBDD);
         return "redirect:/skilltype/listWithStatistics";
     }
 }

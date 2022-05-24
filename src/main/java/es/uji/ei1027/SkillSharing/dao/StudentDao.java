@@ -74,7 +74,7 @@ public class StudentDao{
             return jdbcTemplate.queryForObject("SELECT MAX(id_student) AS max_id FROM student",
                     new MaxIdMapper()) + 1;
         }catch(EmptyResultDataAccessException e){
-            return -1;
+            return 1;
         }
     }
     public List<Student> getStudents() {
