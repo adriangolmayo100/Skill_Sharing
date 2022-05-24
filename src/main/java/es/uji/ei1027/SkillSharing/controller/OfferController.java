@@ -99,10 +99,6 @@ public class OfferController {
             return mensaje;
         }
         OfferValidator offerValidator = new OfferValidator();
-        if (bindingResult.hasErrors()){
-            model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
-            return "offer/add";
-        }
         offerValidator.validate(offer,bindingResult);
         if (bindingResult.hasErrors()){
             model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
