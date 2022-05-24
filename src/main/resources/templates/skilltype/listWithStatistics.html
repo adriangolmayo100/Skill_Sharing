@@ -21,6 +21,8 @@
       <th>Nivel</th>
       <th>Número de ofertas activas con dicha actividad</th>
       <th>Número de demandas activas con dicha actividad</th>
+      <th></th>
+      <th></th>
     </tr>
     </thead>
     <tbody>
@@ -31,11 +33,11 @@
       <td th:text="${skill.numberOfOffers}"></td>
       <td th:text="${skill.numberOfRequest}"></td>
       <td><a th:href="@{/skilltype/update/{idSkilltype}(idSkilltype=${skill.idSkillType})}" class="btn btn-warning" role="button">Editar</a></td>
-      <div>
-        <td><a th:href="@{/skilltype/delete/{idSkilltype}(idSkilltype=${skill.idSkillType})}" class="btn btn-danger" role="button">Anular</a></td>
+      <div th:if="${skill.valid}">
+        <td><a th:href="@{/skilltype/anular/{idSkilltype}(idSkilltype=${skill.idSkillType})}" class="btn btn-danger" role="button">Anular</a></td>
       </div>
-      <div>
-        <td><a th:href="@{/skilltype/delete/{idSkilltype}(idSkilltype=${skill.idSkillType})}" class="btn btn-danger" role="button">Anular</a></td>
+      <div th:unless="${skill.valid}">
+        <td><a th:href="@{/skilltype/recuperar/{idSkilltype}(idSkilltype=${skill.idSkillType})}" class="btn btn-success" role="button">Recuperar</a></td>
       </div>
     </tr>
     </tbody>

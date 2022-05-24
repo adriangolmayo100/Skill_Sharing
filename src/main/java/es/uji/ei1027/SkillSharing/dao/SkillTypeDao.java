@@ -43,7 +43,7 @@ public class SkillTypeDao {
 
     public void updateSkillType(SkillType skillType) {
         jdbcTemplate.update("UPDATE SkillType SET name=?, description=?,level=?, valid=?where id_skilltype=?",
-                skillType.getName(),skillType.getDescription(),skillType.getLevel(),skillType.getIdSkillType(),skillType.isValid());
+                skillType.getName(),skillType.getDescription(),skillType.getLevel(),skillType.isValid(),skillType.getIdSkillType());
     }
 
     public SkillType getSkillType(int idskilltype) {
@@ -56,7 +56,7 @@ public class SkillTypeDao {
     }
     public List<SkillType> getSkillTypeWithStatistics() {
         try {
-            return jdbcTemplate.query("SELECT st.id_skilltype, st.name, st.description, st.level," +
+            return jdbcTemplate.query("SELECT st.id_skilltype, st.name, st.description, st.level, st.valid as validSkillType, " +
                             "(SELECT COUNT(off.id_skilltype) " +
                             "FROM offer as off " +
                             "WHERE off.id_skilltype=st.id_skilltype and off.valid=?) AS number_offers, " +

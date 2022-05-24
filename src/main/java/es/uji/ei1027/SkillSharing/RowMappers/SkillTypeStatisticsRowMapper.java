@@ -16,7 +16,7 @@ public class SkillTypeStatisticsRowMapper implements RowMapper<SkillType> {
         skillType.setLevel(rs.getInt("level"));
         skillType.setNumberOfOffers(rs.getInt("number_offers"));
         skillType.setNumberOfRequest(rs.getInt("number_requests"));
-        skillType.setValid(rs.getBoolean("valid"));
+        skillType.setValid(rs.getBoolean("validSkillType"));
         return skillType;
 
     }

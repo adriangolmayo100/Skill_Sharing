@@ -32,7 +32,7 @@ public class SkillTypeController {
 
     @RequestMapping(value = "/anular/{idSkillType}")
     public String anularSkillType(HttpSession session, Model model,@PathVariable int idSkillType) {
-        String mensaje = validator.comprobar_conexion(session, model, "/anular/"+idSkillType, false);
+        String mensaje = validator.comprobar_conexion(session, model, "/skilltype/anular/"+idSkillType, true);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -45,7 +45,7 @@ public class SkillTypeController {
     }
     @RequestMapping(value = "/recuperar/{idSkillType}")
     public String recuperarSkillType(HttpSession session, Model model, @PathVariable int idSkillType) {
-        String mensaje = validator.comprobar_conexion(session, model, "/recuperar/"+idSkillType, false);
+        String mensaje = validator.comprobar_conexion(session, model, "/skilltype/recuperar/"+idSkillType, true);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -61,7 +61,7 @@ public class SkillTypeController {
     }
     @RequestMapping("/listWithStatistics")
     public String listSkillTypesWithStatistics(HttpSession session, Model model) {
-        String mensaje = validator.comprobar_conexion(session, model, "/skilltype/listWithStatistics/", false);
+        String mensaje = validator.comprobar_conexion(session, model, "/skilltype/listWithStatistics/", true);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -71,7 +71,7 @@ public class SkillTypeController {
 
     @RequestMapping(value="/add")
     public String addRequest(HttpSession session, Model model) {
-        String mensaje = validator.comprobar_conexion(session, model,"/skilltype/add", false);
+        String mensaje = validator.comprobar_conexion(session, model,"/skilltype/add", true);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -81,7 +81,7 @@ public class SkillTypeController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(HttpSession session, Model model,@ModelAttribute("skilltype") SkillType skillType,
                                    BindingResult bindingResult) {
-        String mensaje = validator.comprobar_conexion(session, model, "/skilltype/add", false);
+        String mensaje = validator.comprobar_conexion(session, model, "/skilltype/add", true);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -94,7 +94,7 @@ public class SkillTypeController {
 
     @RequestMapping(value="/update/{idSkillType}", method = RequestMethod.GET)
     public String editSkillType(HttpSession session, Model model,@PathVariable Integer idSkillType) {
-        String mensaje = validator.comprobar_conexion(session, model, "/skilltype/update/"+idSkillType, false);
+        String mensaje = validator.comprobar_conexion(session, model, "/skilltype/update/"+idSkillType, true);
         if (!mensaje.equals("")){
             return mensaje;
         }
@@ -107,12 +107,14 @@ public class SkillTypeController {
     public String processUpdateSubmit( HttpSession session, Model model,
             @ModelAttribute("skilltype") SkillType skillType,
             BindingResult bindingResult) {
-        String mensaje = validator.comprobar_conexion(session, model, "/skilltype/update/"+skillType.getIdSkillType(), false);
+        String mensaje = validator.comprobar_conexion(session, model, "/skilltype/update/"+skillType.getIdSkillType(), true);
         if (!mensaje.equals("")){
             return mensaje;
         }
         if (bindingResult.hasErrors())
             return "skilltype/update";
+        SkillType skillTypeBBDD = skillTypeDao.getSkillType(skillType.getIdSkillType());
+        skillType.setValid(skillTypeBBDD.isValid());
         skillTypeDao.updateSkillType(skillType);
         return "redirect:/skilltype/listWithStatistics";
     }
