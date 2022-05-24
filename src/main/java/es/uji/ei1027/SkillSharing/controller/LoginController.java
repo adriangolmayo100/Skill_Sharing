@@ -29,7 +29,7 @@ public class LoginController {
         Student student1 = (Student) session.getAttribute("student");
         if ( student1 != null)
         {
-            return "redirect:tipos_usuario/usuario";
+            return "tipos_usuario/usuario";
         }
         return "login";
     }
@@ -61,7 +61,7 @@ public class LoginController {
         }
 
         // Lleva a la página de usuario
-        return "redirect:tipos_usuario/usuario";
+        return "tipos_usuario/usuario";
     }
 
     @RequestMapping("/logout")
@@ -95,6 +95,8 @@ class UserValidator implements Validator {      //Clase para comprobar que no se
                 session.setAttribute("nextUrl", url);
                 model.addAttribute("student", new Student());
                 return "login";
+            }if(student.isUnavailable()){
+
             }
         }else {
                 if (student == null || skp != student.isSkp()) {
