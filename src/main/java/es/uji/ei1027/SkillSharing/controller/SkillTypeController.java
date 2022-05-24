@@ -88,7 +88,7 @@ public class SkillTypeController {
         SkillTypeValidator skillTypeValidator = new SkillTypeValidator();
         skillTypeValidator.validate(skillType, bindingResult);
         if (bindingResult.hasErrors())
-            return "request/add";
+            return "skilltype/add";
         skillType.setValid(true);
         skillTypeDao.addSkillType(skillType);
         return "redirect:/skilltype/listWithStatistics";
