@@ -12,11 +12,13 @@
 <div  layout:fragment="content">
 
     <h1>Operación realizada correctamente</h1>
-    <table>
-        <thead>
-            <tr>
-            </tr>
-        </thead>
+    <p>Correo enviado a: </p>
+    <table th:unless="${#lists.isEmpty(studentsEmail)}" class="table table-striped">
+        <tbody>
+        <tr th:each="student: ${studentsEmail}">
+            <td> <p><i th:text="${student.email}"></i></p></td>
+        </tr>
+        </tbody>
     </table>
     <div class="botonIndex">
         <a href="/offer/mis_ofertas" class="btn" role="button">Aceptar</a>
