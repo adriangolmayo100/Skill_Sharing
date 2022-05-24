@@ -61,7 +61,7 @@ public class LoginController {
         }
 
         // Lleva a la página de usuario
-        return "tipos_usuario/usuario";
+        return "redirect:/tipos_usuario/usuario";
     }
 
     @RequestMapping("/logout")

@@ -12,6 +12,10 @@ public class StatisticStudent {
     public StatisticStudent(int idStudent){
         super();
         this.idStudent=idStudent;
+        this.ofertasPublicadas=0;
+        this.demandasPublicadas=0;
+        this.colaboracionesCumplidasConExito=0;
+        this.valoracionMedia=0f;
     }
 
     public void setIdStudent(int idStudent) {
