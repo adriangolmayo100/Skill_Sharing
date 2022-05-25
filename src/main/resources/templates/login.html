@@ -3,6 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
       <!--layout:decorate="~{fragments/base}"-->
 <head>
+    <a href="/"><img SRC="logoUji.jpg" ALT="AQUI VA UNA IMAGEN"></a>
     <link rel="stylesheet" type="text/css"
           href="/estilo.css"
           th:href="@{/estilo.css}"/>
@@ -12,7 +13,7 @@
 
 </head>
 <body>
-<div layout:fragment="content">
+<div layout:fragment="content" class="bordeLogin">
     <div class="titulo"><h2>Acceso</h2></div>
 <form action="#" th:action="@{/login}"
       th:object="${student}" method="post">

@@ -8,6 +8,22 @@ img {
    margin-left: 300px;
    margin-right: 290px;
 }
+
+.bordeLogin{
+    border-color: gray;
+      border-width: 3px;
+      border-style: ridge;
+      margin-left: 300px;
+      margin-right: 300px;
+      margin-bottom: 150px;
+}
+
+.logoPiePag{
+    width: 20%;
+       margin-left: 20px;
+       margin-right: 20px;
+}
+
 /* Capçalera de nivell 1 */
 h1 {
    font-size: x-large;
@@ -56,11 +72,30 @@ h2 {
     padding: 19px;
     text-decoration: none;
 }
+/*botines para las opciones de los skp*/
+.botonSKP {
+    margin-top:35px;
+    background-color: #999999;
+    margin-left: 400px;
+    margin-right: 400px;
+    text-align:center;
+    webkit-border-radius: 28;
+    moz-border-radius: 28;
+    border-radius: 28px;
+    webkit-box-shadow: 6px 5px 24px;
+    moz-box-shadow: 6px 5px 24px;
+    box-shadow: 6px 5px 24px;
+    font-family: Arial;
+    color: #000000;
+    font-size: 27px;
+    padding: 19px;
+    text-decoration: none;
+}
 
 .botonAcceder {
     margin-top:60px;
         background-color: #7FFF00;
-        margin-left: 600px;
+        margin-left: 300px;
         margin-right: 600px;
         text-align:right;
         webkit-border-radius: 28;
@@ -174,8 +209,8 @@ nav {
     font-family: source sans pro;
     margin-top:30px;
     width:80%;
-    margin-left:470px;
-    margin-right:470px;
+    margin-left:170px;
+    margin-right:170px;
     font-text:90%;
 }
 
