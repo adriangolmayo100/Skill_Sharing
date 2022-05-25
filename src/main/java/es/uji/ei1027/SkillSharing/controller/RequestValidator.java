@@ -17,7 +17,7 @@ public class RequestValidator implements Validator {
     public void validate(Object obj, Errors errors) {
         Request request = (Request) obj;
         boolean fechas_validas = true;
-        if (request.getDescription().trim().equals(""))
+        if (request.getDescription() == null || request.getDescription().trim().equals(""))
             errors.rejectValue("description", "obligatorio", "Hay que introducir una descripción");
         if (request.getDuration() <= 0)
             errors.rejectValue("duration", "valor incorrecto", "La duración tiene que ser mayor que 0");

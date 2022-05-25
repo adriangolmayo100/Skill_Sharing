@@ -2,7 +2,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/base}">
 <head>
-    <title>Crear nova proposta</title>
+    <title>Actualizar oferta</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/estilo.css"
@@ -10,28 +10,32 @@
 </head>
 <body>
 <div  layout:fragment="content">
-    <div><h1>Nueva Propuesta</h1></div>
+    <div><h1>Actualizar oferta</h1></div>
     <form action="#" th:action="@{/offer/update/{id}(id=${offer.idOffer})}"
           th:object="${offer}" method="post">
         <table class="table table-striped">
             <tr>
-                <td><label>Descripció</label></td>
-                <td><input type="text" th:field="*{description}"/></td>
+                <td><label>Descripción</label></td>
+                <td><input type="text" th:field="*{description}" maxlength="50"/></td>
+                <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error">
 
 
             </tr>
             <tr>
-                <td><label>Duració</label></td>
-                <td><input type="text" th:field="*{duration}"/></td>
+                <td><label>Duración</label></td>
+                <td><input type="number" th:field="*{duration}" placeholder="Horas" max="200" required/></td>
+                <td th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}" class="error"></td>
 
             </tr>
             <tr>
-                <td><label>Data de inici</label></td>
-                <td><input type="date" th:field="*{start}" placeholder="dd/MM/yyyy" /></td>
+                <td><label>Fecha de inicio</label></td>
+                <td><input type="date" th:field="*{start}" placeholder="dd/MM/yyyy"/></td>
+                <td th:if="${#fields.hasErrors('start')}" th:errors="*{start}" class="error"></td>
             </tr>
             <tr>
-                <td><label>Data de fi</label></td>
-                <td><input type="date" th:field="*{finish}" placeholder="dd/MM/yyyy" /></td>
+                <td><label>Fecha de fin</label></td>
+                <td><input type="date" th:field="*{finish}" placeholder="dd/MM/yyyy"/></td>
+                <td th:if="${#fields.hasErrors('finish')}" th:errors="*{finish}" class="error"></td>
             </tr>
 
             <tr>

@@ -148,11 +148,19 @@ public class RequestController {
     }
 
     @RequestMapping(value="/update/{id_request}", method = RequestMethod.POST)
-    public String processUpdateSubmit(@ModelAttribute("request") Request requestModel, @PathVariable int id_request,
+    public String processUpdateSubmit(HttpSession session, Model model, @ModelAttribute("request") Request requestModel, @PathVariable int id_request,
                                       BindingResult bindingResult){
-        if (bindingResult.hasErrors())
-            return "request/update";
+        String mensaje = validator.comprobar_conexion(session, model, "/request/update/"+id_request+"/", false);
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         Request request= requestDao.getRequest(id_request);
+        RequestValidator requestValidator = new RequestValidator();
+        requestValidator.validate(requestModel,bindingResult);
+        if (bindingResult.hasErrors()){
+            model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
+            return "request/update";
+        }
         request.updateRequest(requestModel);
         requestDao.updateRequest(request);
         return "feedback/request_correcto";

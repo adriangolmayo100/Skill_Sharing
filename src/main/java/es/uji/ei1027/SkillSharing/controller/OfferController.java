@@ -180,11 +180,19 @@ public class OfferController {
         return "offer/mis_ofertas";
     }
     @RequestMapping(value="/update/{idOffer}", method = RequestMethod.POST)
-    public String processUpdateSubmit(@ModelAttribute("offer") Offer offerModel,
+    public String processUpdateSubmit(HttpSession session, Model model, @ModelAttribute("offer") Offer offerModel,
                                       BindingResult bindingResult,@PathVariable Integer idOffer){
-        if (bindingResult.hasErrors())
-            return "offer/update";
+        String mensaje = validator.comprobar_conexion(session, model, "/offer/update"+idOffer, false);
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         Offer offer = offerDao.getOffer(idOffer);
+        OfferValidator offerValidator = new OfferValidator();
+        offerValidator.validate(offerModel,bindingResult);
+        if (bindingResult.hasErrors()){
+            model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
+            return "offer/update";
+        }
         offer.updateOffer(offerModel);
         offerDao.updateOffer(offer);
         return "feedback/offer_correcto";
