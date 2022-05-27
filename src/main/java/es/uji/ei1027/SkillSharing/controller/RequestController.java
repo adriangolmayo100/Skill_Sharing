@@ -53,6 +53,9 @@ public class RequestController {
         if (!mensaje.equals("")){
             return mensaje;
         }
+        int diferencia = student.getHoursReceived() - student.getHoursGiven();
+        if(diferencia > 20)
+            return "feedback/balance_negativo";
         Request request = requestDao.getRequest(idRequest);
         if (student.getIdStudent()!=request.getIdStudent()){
             request.setValid(false);
@@ -105,6 +108,10 @@ public class RequestController {
         if (!mensaje.equals("")){
             return mensaje;
         }
+        Student student = (Student) session.getAttribute("student");
+        int diferencia = student.getHoursReceived() - student.getHoursGiven();
+        if(diferencia > 20)
+            return "feedback/balance_negativo";
         model.addAttribute("request", new Request());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         return "request/add";
@@ -123,15 +130,24 @@ public class RequestController {
     @RequestMapping(value="/add", method=RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("request") Request request,Model model,
                                    BindingResult bindingResult,HttpSession session) {
+        Student student= (Student) session.getAttribute("student");
+        String mensaje = validator.comprobar_conexion(session, model, "/request/mis_demandas", false);
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
+        int diferencia = student.getHoursReceived() - student.getHoursGiven();
+        if(diferencia > 20)
+            return "feedback/balance_negativo";
+        model.addAttribute("student", student);
+        request.setIdStudent(student.getIdStudent());
+        System.out.println(student.toString());
         RequestValidator requestValidator = new RequestValidator();
         requestValidator.validate(request,bindingResult);
         if (bindingResult.hasErrors()){
             model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
             return "request/add";
         }
-        Student student= (Student) session.getAttribute("student");
         request.setValid(true);
-        request.setIdStudent(student.getIdStudent());
         requestDao.addRequest(request);
         return "feedback/request_correcto";
     }
@@ -172,6 +188,9 @@ public class RequestController {
         if (!mensaje.equals("")){
             return mensaje;
         }
+        int diferencia = student.getHoursReceived() - student.getHoursGiven();
+        if(diferencia > 20)
+            return "feedback/balance_negativo";
         Offer offer = offerDao.getOffer(idOffer);
         Request request = requestDao.getRequest(idRequest);
         if (student.getIdStudent()!=offer.getIdStudent()){

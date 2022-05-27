@@ -1,12 +1,12 @@
 package es.uji.ei1027.SkillSharing.controller;
 
-import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import es.uji.ei1027.SkillSharing.model.Request;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+@Controller
 public class RequestValidator implements Validator {
-
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -21,7 +21,6 @@ public class RequestValidator implements Validator {
             errors.rejectValue("description", "obligatorio", "Hay que introducir una descripción");
         if (request.getDuration() <= 0)
             errors.rejectValue("duration", "valor incorrecto", "La duración tiene que ser mayor que 0");
-
         if (request.getStart() == null) {
             errors.rejectValue("start", "obligatorio", "Debe introducir una fecha");
             fechas_validas = false;

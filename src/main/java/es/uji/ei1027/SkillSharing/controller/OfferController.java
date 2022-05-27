@@ -86,6 +86,10 @@ public class OfferController {
         if (!mensaje.equals("")){
             return mensaje;
         }
+        Student student = (Student) session.getAttribute("student");
+        int diferencia = student.getHoursGiven() - student.getHoursReceived();
+        if(diferencia > 20)
+            return "feedback/balance_negativo";
         model.addAttribute("offer", new Offer());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         return "offer/add";
@@ -98,13 +102,16 @@ public class OfferController {
         if (!mensaje.equals("")){
             return mensaje;
         }
+        Student student = (Student) session.getAttribute("student");
+        int diferencia = student.getHoursGiven() - student.getHoursReceived();
+        if(diferencia > 20)
+            return "feedback/balance_negativo";
         OfferValidator offerValidator = new OfferValidator();
         offerValidator.validate(offer,bindingResult);
         if (bindingResult.hasErrors()){
             model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
             return "offer/add";
         }
-        Student student= (Student) session.getAttribute("student");
         offer.setValid(true);
         offer.setIdStudent(student.getIdStudent());
         model.addAttribute("studentsEmail",requestDao.getStudentsWithIdSkillType(offer.getIdSkillType(),offer.getIdStudent()));
@@ -118,6 +125,9 @@ public class OfferController {
         if (!mensaje.equals("")){
             return mensaje;
         }
+        int diferencia = student.getHoursGiven() - student.getHoursReceived();
+        if(diferencia > 20)
+            return "feedback/balance_negativo";
         Offer offer = offerDao.getOffer(id);
         if (student.getIdStudent()!=offer.getIdStudent()){
             offer.setValid(false);
@@ -140,6 +150,9 @@ public class OfferController {
         if (!mensaje.equals("")){
             return mensaje;
         }
+        int diferencia = student.getHoursGiven() - student.getHoursReceived();
+        if(diferencia > 20)
+            return "feedback/balance_negativo";
         Offer offer = offerDao.getOffer(idOffer);
         Request request = requestDao.getRequest(idRequest);
         if (student.getIdStudent()!=offer.getIdStudent() && collaborationDao.getCollaboration(idRequest,idOffer)==null){

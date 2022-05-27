@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <meta charset="UTF-8">
+    <title>Balance negativo</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="estilo.css"
+          th:href="@{estilo.css}"/>
+</head>
+<body>
+<div  layout:fragment="content">
+
+    <h1>Operación cancelada, recuerde que la diferencia entre las horas impartidas y las horas recibida debe ser de un máximo de 20 horas</h1>
+    <div class="botonIndex">
+        <a href="/tipos_usuario/usuario" class="btn" role="button">Volver</a>
+    </div>
+
+</div>
+</body>
+</html>
