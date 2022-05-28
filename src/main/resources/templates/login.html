@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-      <!--layout:decorate="~{fragments/base}"-->
+<!--layout:decorate="~{fragments/base}"-->
 <head>
     <a href="/"><img SRC="logoUji.jpg" ALT="AQUI VA UNA IMAGEN"></a>
     <link rel="stylesheet" type="text/css"
@@ -15,25 +15,25 @@
 <body>
 <div layout:fragment="content" class="bordeLogin">
     <div class="titulo"><h2>Acceso</h2></div>
-<form action="#" th:action="@{/login}"
-      th:object="${student}" method="post">
-    <p>
+    <form action="#" th:action="@{/login}"
+          th:object="${student}" method="post">
+        <p>
         <div class="loginUsers">
-        <label>Nombre de usuario:</label>
-        <input class="form_control separador" type="text" th:field="*{username}"/>
-    <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
-    </div>
-    </p>
-    <p>
+            <label>Nombre de usuario:</label>
+            <input class="form_control separador" type="text" th:field="*{username}"/>
+            <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+        </div>
+        </p>
+        <p>
         <div class="loginUsers">
-        <label>Contraseña:</label>
-        <input class="form_control separador2" type="password" th:field="*{password}"/>
-    <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-    </div>
-    </p>
+            <label>Contraseña:</label>
+            <input class="form_control separador2" type="password" th:field="*{password}"/>
+            <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        </div>
+        </p>
 
-    <input class="botonAcceder" type="submit" value="Acceder" />
-</form>
+        <input class="botonAcceder" type="submit" value="Acceder" />
+    </form>
 </div>
 </body>
 </html>

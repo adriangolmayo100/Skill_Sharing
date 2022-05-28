@@ -3,18 +3,19 @@ body {
    font-family: Helvetica, Arial, sans-serif;
    background-color: white;
 }
+
 img {
    width: 50%;
-   margin-left: 300px;
-   margin-right: 290px;
+   margin-left: 370px;
+   margin-right: 370px;
 }
 
 .bordeLogin{
     border-color: gray;
       border-width: 3px;
       border-style: ridge;
-      margin-left: 300px;
-      margin-right: 300px;
+      margin-left: 370px;
+      margin-right: 280px;
       margin-bottom: 150px;
 }
 
@@ -222,6 +223,7 @@ nav {
 .separador2{
      margin-left:90px;
  }
+
  .table_center{
      margin: auto;
  }
