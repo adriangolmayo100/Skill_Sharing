@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.time.LocalDate;
+
 @Controller
 public class RequestValidator implements Validator {
 
@@ -30,18 +32,16 @@ public class RequestValidator implements Validator {
             fechas_validas = false;
         }
         if (fechas_validas) {
-            String[] campos = request.getStart().toString().split("-");
-            int inicio = Integer.parseInt(campos[2]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[0]) * 24; //AÑO - MES - DIA
-            campos = request.getFinish().toString().split("-");
-            int fin = Integer.parseInt(campos[2]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[0]) * 24;
-            campos = java.time.LocalDate.now().toString().split("-");
-            int fecha_actual = Integer.parseInt(campos[2]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[0]) * 24;
-            if (inicio <= fecha_actual)
+            LocalDate inicio = request.getStart();
+            LocalDate fin = request.getFinish();
+            LocalDate fechaActual = java.time.LocalDate.now();
+            if (fechaActual.isAfter(inicio))
                 errors.rejectValue("start", "valor incorrecto", "La fecha de inicio debe ser posterior a la de hoy");
-            if (fin - inicio < 0)
+            if (inicio.isAfter(fin))
                 errors.rejectValue("finish", "valores incorrectos", "La fecha de finalización debe ser mayor que la de inicio");
-            if (fin - inicio - request.getDuration() < 0)
-                errors.rejectValue("duration", "valor incorrecto", "La duración sobrepasa el tiempo de la oferta");
+            long diasExtra = request.getDuration() / 24;
+            if (inicio.plusDays(diasExtra).isAfter(fin))
+                errors.rejectValue("duration", "valor incorrecto", "La duración es muy grande para las fechas seleccionadas");
         }
     }
 }

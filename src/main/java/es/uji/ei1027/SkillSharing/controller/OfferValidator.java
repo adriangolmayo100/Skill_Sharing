@@ -1,13 +1,10 @@
 package es.uji.ei1027.SkillSharing.controller;
 
-import es.uji.ei1027.SkillSharing.dao.SkillTypeDao;
 import es.uji.ei1027.SkillSharing.model.Offer;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
+
 
 public class OfferValidator implements Validator {
 
@@ -34,17 +31,15 @@ public class OfferValidator implements Validator {
             fechas_validas = false;
         }
         if (fechas_validas) {
-            String[] campos = offer.getStart().toString().split("-");
-            int inicio = Integer.parseInt(campos[2]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[0]) * 24; //AÑO - MES - DIA
-            campos = offer.getFinish().toString().split("-");
-            int fin = Integer.parseInt(campos[2]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[0]) * 24;
-            campos = java.time.LocalDate.now().toString().split("-");
-            int fecha_actual = Integer.parseInt(campos[2]) * 365 * 24 + Integer.parseInt(campos[1]) * 30 * 24 + Integer.parseInt(campos[0]) * 24;
-            if (inicio <= fecha_actual)
+            LocalDate inicio = offer.getStart();
+            LocalDate fin = offer.getFinish();
+            LocalDate fechaActual = java.time.LocalDate.now();
+            if (fechaActual.isAfter(inicio))
                 errors.rejectValue("start", "valor incorrecto", "La fecha de inicio debe ser posterior a la de hoy");
-            if (fin - inicio < 0)
+            if (inicio.isAfter(fin))
                 errors.rejectValue("finish", "valores incorrectos", "La fecha de finalización debe ser mayor que la de inicio");
-            if (fin - inicio - offer.getDuration() < 0)
+            long diasExtra = offer.getDuration() / 24;
+            if (inicio.plusDays(diasExtra).isAfter(fin))
                 errors.rejectValue("duration", "valor incorrecto", "La duración es muy grande para las fechas seleccionadas");
         }
     }

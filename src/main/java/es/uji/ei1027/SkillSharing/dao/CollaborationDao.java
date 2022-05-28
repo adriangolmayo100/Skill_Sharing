@@ -147,5 +147,21 @@ public class CollaborationDao {
             } catch (EmptyResultDataAccessException e) {
                 return new ArrayList<Collaboration>();
             }
+    }
+    public List<Collaboration> getAllParticipants(int idOffer){
+        try {
+            return jdbcTemplate.query("SELECT co.id_request, co.id_offer, co.start," +
+                            "co.finish,co.duration, co.rating, of.id_skilltype,co.comments, " +
+                            "of.id_student as id_offer_student, re.description," +
+                            "re.id_student as id_request_student, co.valid " +
+                            "from Collaboration as co " +
+                            "JOIN request AS re USING(id_request) " +
+                            "JOIN offer AS of USING(id_offer) " +
+                            "WHERE of.id_offer=?" +
+                            "and co.valid=?",
+                            new CollaborationRowMapper(), idOffer, true);
+        }catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Collaboration>();
         }
+    }
 }
