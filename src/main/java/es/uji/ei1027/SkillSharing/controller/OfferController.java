@@ -203,6 +203,7 @@ public class OfferController {
         OfferValidator offerValidator = new OfferValidator();
         offerValidator.validate(offerModel,bindingResult);
         if (bindingResult.hasErrors()){
+            model.addAttribute("offer", offerDao.getOffer(idOffer));
             model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
             return "offer/update";
         }

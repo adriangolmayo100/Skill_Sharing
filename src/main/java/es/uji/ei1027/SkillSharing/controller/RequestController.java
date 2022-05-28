@@ -174,6 +174,7 @@ public class RequestController {
         RequestValidator requestValidator = new RequestValidator();
         requestValidator.validate(requestModel,bindingResult);
         if (bindingResult.hasErrors()){
+            model.addAttribute("request", request);
             model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
             return "request/update";
         }
