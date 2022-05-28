@@ -34,7 +34,7 @@
             <td> <a th:href="@{/student/informacion/{idStudent}(idStudent=${collaboration.idStudentOffers})}" th:text="${collaboration.getNameStudentsOffers(students)}"></a></td>
             <td> <a th:href="@{/student/informacion/{idStudent}(idStudent=${collaboration.idStudentRequest})}" th:text="${collaboration.getNameStudentsRequest(students)}"></a></td>
             <td th:text="${collaboration.duration}"></td>
-            <td><a th:href="@{/collaboration/delete/{idOffer}/{idRequest}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}" class="btn btn-danger">Anular colaboración</a>
+            <td><a th:href="@{/collaboration/deleteSKP/{idOffer}/{idRequest}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}" class="btn btn-danger">Anular colaboración</a>
 
         </tr>
         </tbody>

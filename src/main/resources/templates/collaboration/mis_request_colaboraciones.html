@@ -34,7 +34,7 @@
             <td th:text="${collaboration.getNameStudentsRequest(students)}"></td>
             <td th:text="${collaboration.duration}"></td>
             <td><a th:href="@{/collaboration/accept/{idOffer}/{idRequest}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}" class="btn btn-success">Aceptar solicitud</a>
-            <td><a th:href="@{/collaboration/delete/{idOffer}/{idRequest}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}" class="btn btn-danger">Rechazar solicitud</a>
+            <td><a th:href="@{/collaboration/deleteUser/{idOffer}/{idRequest}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}" class="btn btn-danger">Rechazar solicitud</a>
         </tr>
         </tbody>
     </table>
@@ -59,7 +59,7 @@
             <td th:text="${collaboration.getNameSkillType(skillTypes)}"></td>
             <td th:text="${collaboration.getNameStudentsOffers(students)}"></td>
             <td th:text="${collaboration.duration}"></td>
-            <td><a th:href="@{/collaboration/delete/{idOffer}/{idRequest}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}" class="btn btn-danger">Cancelar solicitud</a>
+            <td><a th:href="@{/collaboration/deleteUser/{idOffer}/{idRequest}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}" class="btn btn-danger">Cancelar solicitud</a>
         </tr>
         </tbody>
     </table>

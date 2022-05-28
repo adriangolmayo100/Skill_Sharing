@@ -36,13 +36,31 @@ public class CollaborationController {
         this.collaborationDao = collaborationDao;
     }
 
-    @RequestMapping(value = "/delete/{idOffer}/{idRequest}")
-    public String processDeleteCollaboration(@PathVariable Integer idRequest,@PathVariable Integer idOffer){
+    @RequestMapping(value = "/deleteSKP/{idOffer}/{idRequest}")
+    public String processDeleteCollaborationSKP(HttpSession session, Model model, @PathVariable Integer idRequest,@PathVariable Integer idOffer){
+        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/statistics/", true);
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
+        collaborationDao.deleteCollaboration(idRequest,idOffer);
+        return "redirect:/collaboration/statistics/";
+    }
+
+    @RequestMapping(value = "/deleteUser/{idOffer}/{idRequest}")
+    public String processDeleteCollaborationUser(HttpSession session, Model model, @PathVariable Integer idRequest,@PathVariable Integer idOffer){
+        String mensaje = validator.comprobar_conexion(session, model, "/collaboration/mis_request_colaboraciones", false);
+        if (!mensaje.equals("")){
+            return mensaje;
+        }
         collaborationDao.deleteCollaboration(idRequest,idOffer);
         return "redirect:/collaboration/mis_request_colaboraciones";
     }
   @RequestMapping(value = "/accept/{idOffer}/{idRequest}")
-    public String acceptCollaboration(@PathVariable Integer idRequest,@PathVariable Integer idOffer){
+    public String acceptCollaboration(HttpSession session, Model model, @PathVariable Integer idRequest,@PathVariable Integer idOffer){
+          String mensaje = validator.comprobar_conexion(session, model, "/collaboration/statistics/", true);
+          if (!mensaje.equals("")){
+              return mensaje;
+          }
         Collaboration collaboration = collaborationDao.getCollaboration(idRequest,idOffer);
         collaboration.setValid(true);
         collaborationDao.updateCollaboration(collaboration);

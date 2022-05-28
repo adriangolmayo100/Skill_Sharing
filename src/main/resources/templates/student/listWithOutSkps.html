@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
       layout:decorate="~{fragments/base}">
 <head>
     <title>Consultar ofertas</title>
@@ -23,6 +23,7 @@
             <th>Grado</th>
             <th>Curso</th>
             <th>Banear/Recuperar cuenta</th>
+            <th>Mirar estadísticas</th>
         </tr>
         </thead>
         <tbody>
@@ -44,12 +45,13 @@
                 </div>
             </td>
             <td>
-            <td>
             </td>
         </tr>
         </tbody>
     </table>
+    <a th:href="@{/collaboration/statistics}" class="botones">Mostrar estadísticas</a>
     <a href="/register/datos" class="botones">Añadir usuario</a>
+
 </div>
 </body>
 </html>
