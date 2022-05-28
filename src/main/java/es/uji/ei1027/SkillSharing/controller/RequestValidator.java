@@ -21,8 +21,9 @@ public class RequestValidator implements Validator {
         boolean fechas_validas = true;
         if (request.getDescription() == null || request.getDescription().trim().equals(""))
             errors.rejectValue("description", "obligatorio", "Hay que introducir una descripción");
-        if (request.getDuration() <= 0)
-            errors.rejectValue("duration", "valor incorrecto", "La duración tiene que ser mayor que 0");
+        int duracion = request.getDuration();
+        if (duracion < 0 || duracion > 20)
+            errors.rejectValue("duration", "valor incorrecto", "La duración debe ser entre 1 y 20 inclusive");
         if (request.getStart() == null) {
             errors.rejectValue("start", "obligatorio", "Debe introducir una fecha");
             fechas_validas = false;

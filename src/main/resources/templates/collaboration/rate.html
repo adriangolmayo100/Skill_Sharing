@@ -16,15 +16,18 @@
     <table class="table table-striped">
       <tr>
         <td><label>Duración total (en horas)</label></td>
-        <td><input type="number" th:field="*{duration}"/></td>
+        <td><input type="number" th:field="*{duration}" max="20" required/></td>
+          <td th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}" class="error"></td>
       </tr>
        <tr>
         <td><label>Valoración (de 1 a 5 )</label></td>
-        <td><input max="5" min="1" type="number" th:field="*{rating}"/></td>
+        <td><input max="5" min="1" type="number" th:field="*{rating}" required/></td>
+           <td th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" class="error"></td>
        </tr>
        <tr>
         <td><label>Opinión</label></td>
-        <td><input type="text" th:field="*{comments}"/></td>
+        <td><input type="text" th:field="*{comments}" size="50"/></td>
+           <td th:if="${#fields.hasErrors('comments')}" th:errors="*{number}" class="error"></td>
        </tr>
       <tr>
         <td colspan="2"><input type="submit" value="Aceptar" class="botones" /></td>

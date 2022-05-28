@@ -82,7 +82,7 @@
             <div th:unless="${collaboration.rating>0}">
                 <td colspan="2">
                     <div th:if="${collaboration.finish.isBefore(today)}">
-                        <a th:href="@{/collaboration/rate/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}">Valorar la colaboración</a>
+                        <a th:href="@{/collaboration/rate/{idRequest}/{idOffer}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}" class="btn btn-success">Valorar la colaboración</a>
                     </div>
                     <div th:unless="${collaboration.finish.isBefore(today)}">
                         <p> Todavía no ha acabado la colaboración</p>

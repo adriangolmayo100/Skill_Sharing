@@ -125,13 +125,18 @@ public class CollaborationController {
         }
         Collaboration collaboration = collaborationDao.getCollaboration(idRequest,idOffer);
         model.addAttribute("collaboration",collaboration );
-        return "/collaboration/rate";
+        return "collaboration/rate";
     }
     @RequestMapping(value="/rate/{idRequest}/{idOffer}",method= RequestMethod.POST)
-    public String putRate(HttpSession session, Model model, @ModelAttribute("collaboration") Collaboration collaborationModel,Offer offerModel, @PathVariable Integer idRequest, @PathVariable Integer idOffer){
+    public String putRate(HttpSession session, Model model, @ModelAttribute("collaboration") Collaboration collaborationModel,  BindingResult bindingResult, @PathVariable Integer idRequest, @PathVariable Integer idOffer){
         String mensaje = validator.comprobar_conexion(session, model, "/collaboration/rate/"+idRequest+"/"+idOffer, false);
         if (!mensaje.equals("")){
             return mensaje;
+        }
+        RateValidator rateValidator = new RateValidator();
+        rateValidator.validate(collaborationModel, bindingResult);
+        if (bindingResult.hasErrors()){
+            return "collaboration/rate";
         }
         Collaboration collaboration=collaborationDao.getCollaboration(idRequest,idOffer);
         collaboration.setRating(collaborationModel.getRating());

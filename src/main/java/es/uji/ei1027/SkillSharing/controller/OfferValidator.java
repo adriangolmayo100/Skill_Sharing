@@ -18,10 +18,11 @@ public class OfferValidator implements Validator {
     public void validate(Object obj, Errors errors) {
         Offer offer = (Offer) obj;
         boolean fechas_validas = true;
-        if (offer.getDescription().trim().equals(""))
+        if (offer.getDescription() == null || offer.getDescription().trim().equals(""))
             errors.rejectValue("description", "obligatorio", "Hay que introducir una descripción");
-        if (offer.getDuration() <= 0)
-            errors.rejectValue("duration", "valor incorrecto", "La duración tiene que ser mayor 0");
+        int duracion = offer.getDuration();
+        if (duracion < 0 || duracion > 20)
+            errors.rejectValue("duration", "valor incorrecto", "La duración debe ser entre 1 y 20 inclusive");
         if (offer.getStart() == null) {
             errors.rejectValue("start", "obligatorio", "Debe introducir una fecha");
             fechas_validas = false;
