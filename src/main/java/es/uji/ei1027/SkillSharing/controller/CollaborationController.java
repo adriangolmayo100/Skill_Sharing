@@ -135,10 +135,11 @@ public class CollaborationController {
         }
         RateValidator rateValidator = new RateValidator();
         rateValidator.validate(collaborationModel, bindingResult);
+        Collaboration collaboration=collaborationDao.getCollaboration(idRequest,idOffer);
         if (bindingResult.hasErrors()){
+            model.addAttribute("collaboration",collaboration );
             return "collaboration/rate";
         }
-        Collaboration collaboration=collaborationDao.getCollaboration(idRequest,idOffer);
         collaboration.setRating(collaborationModel.getRating());
         collaboration.setDuration(collaborationModel.getDuration());
         collaboration.setComments(collaborationModel.getComments());
