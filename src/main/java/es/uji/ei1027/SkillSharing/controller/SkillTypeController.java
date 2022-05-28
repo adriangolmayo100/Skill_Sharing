@@ -115,8 +115,10 @@ public class SkillTypeController {
         }
         SkillTypeValidator skillTypeValidator = new SkillTypeValidator();
         skillTypeValidator.validate(skillType, bindingResult);
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()){
+            model.addAttribute("skilltype", skillTypeDao.getSkillType(idSkillType));
             return "skilltype/update";
+        }
         SkillType skillTypeBBDD = skillTypeDao.getSkillType(idSkillType);
         skillTypeBBDD.actualizar(skillType);
         skillTypeDao.updateSkillType(skillTypeBBDD);
