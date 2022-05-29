@@ -12,6 +12,7 @@
 <body>
 <div layout:fragment="content">
     <div class="titulo"><h1>Consultar Demandas</h1></div>
+    <p>Muestra las demandas de colaboración activas del sistema.</p>
     <table th:unless="${#lists.isEmpty(requests)}" class="table table-striped">
         <thead class="table table-striped">
             <tr>

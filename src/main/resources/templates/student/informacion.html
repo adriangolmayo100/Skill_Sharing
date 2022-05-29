@@ -47,7 +47,14 @@
             <td><i th:text="${statisticsOffersRequests.ofertasPublicadas}"></i></td>
             <td><i th:text="${statisticsOffersRequests.demandasPublicadas}"></i></td>
             <td><i th:text="${statisticsCollaboration.colaboracionesCumplidasConExito}"></i></td>
-            <td><i th:text="${statisticsCollaboration.valoracionMedia}"></i></td>
+            <td>
+                <div th:if="${statisticsCollaboration.valoracionMedia==0}">
+                    <p>Todavía no se ha valorado ninguna colaboración.</p>
+                </div>
+                <div th:unless="${statisticsCollaboration.valoracionMedia==0}">
+                    <p><i th:text="${statisticsCollaboration.valoracionMedia}"></i></p>
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>

@@ -12,6 +12,7 @@
 <body>
 <div layout:fragment="content">
   <div class="titulo"><h1>Consultar ofertas</h1></div>
+  <p>Muestra las ofertas de colaboración activas del sistema.</p>
   <table th:unless="${#lists.isEmpty(offers)}" class="table table-striped">
     <thead class="table table-striped">
     <tr>
@@ -22,7 +23,7 @@
       <th>Nivel dificultad (1-5)</th>
       <th>Duración en horas</th>
       <th>Estudiante que oferta</th>
-      <th>Valoración media del estudiante que oferta. Si es 0 es que no hay arreglarlo Imanol o Marc para que salga otra cosa</th>
+      <th>Valoración media del estudiante que oferta</th>
       <th>Colaboraciones cumplidas del estudiante que oferta</th>
       <th</th>
     </tr>
@@ -36,7 +37,14 @@
       <td th:text="${offer.getLevelSkillType(skillTypes)}"></td>
       <td th:text="${offer.duration}"></td>
       <td th:text="${offer.getNameStudent(students)}"></td>
-      <td th:text="${offer.getValoracionMediaOfertante(statisticStudents)}"></td>
+      <td>
+        <div th:if="${offer.getValoracionMediaOfertante(statisticStudents)==0}">
+          <p>Todavía no se ha valorado ninguna colaboración.</p>
+        </div>
+        <div th:unless="${offer.getValoracionMediaOfertante(statisticStudents)==0}">
+          <p><i th:text="${offer.getValoracionMediaOfertante(statisticStudents)}"></i></p>
+        </div>
+      </td>
       <td th:text="${offer.getValoracionColaboracionesRealizadas(statisticStudents)}"></td>
     </tr>
     </tbody>

@@ -16,7 +16,8 @@ img {
       border-style: ridge;
       margin-left: 370px;
       margin-right: 280px;
-      margin-bottom: 150px;
+      padding-bottom:20px;
+      margin-bottom: 170px;
 }
 
 .logoPiePag{
