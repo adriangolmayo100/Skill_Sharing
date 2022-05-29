@@ -41,6 +41,7 @@ public class UserController {
         if (!mensaje.equals(""))
             return mensaje;
         Student student = (Student) session.getAttribute("student");
+        model.addAttribute("nameStudent",student.getName());
         if (student.isUnavailable()){
             model.addAttribute("banReason",student.getBanReason());
             return "tipos_usuario/baneado";

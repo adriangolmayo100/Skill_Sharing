@@ -57,7 +57,7 @@ public class CollaborationController {
     }
   @RequestMapping(value = "/accept/{idOffer}/{idRequest}")
     public String acceptCollaboration(HttpSession session, Model model, @PathVariable Integer idRequest,@PathVariable Integer idOffer){
-          String mensaje = validator.comprobar_conexion(session, model, "/collaboration/statistics/", true);
+          String mensaje = validator.comprobar_conexion(session, model, "/collaboration/statistics/", false);
           if (!mensaje.equals("")){
               return mensaje;
           }
@@ -120,7 +120,7 @@ public class CollaborationController {
 
     @RequestMapping(value="/add")
     public String addCollaboration(HttpSession session, Model model){
-        String mensaje = validator.comprobar_conexion(session, model, "/accept/{id}", false);
+        String mensaje = validator.comprobar_conexion(session, model, "/add", false);
         if (!mensaje.equals("")){
             return mensaje;
         }

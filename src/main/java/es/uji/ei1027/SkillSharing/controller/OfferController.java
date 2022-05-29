@@ -52,7 +52,7 @@ public class OfferController {
             return mensaje;
         }
         offerDao.deleteOffer(idOffer);
-        return "feedback/offer_correcto";
+        return "feedback/offer_delete";
     }
 
 
@@ -87,9 +87,6 @@ public class OfferController {
             return mensaje;
         }
         Student student = (Student) session.getAttribute("student");
-        int diferencia = student.getHoursGiven() - student.getHoursReceived();
-        if(diferencia > 20)
-            return "feedback/balance_negativo";
         model.addAttribute("offer", new Offer());
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         return "offer/add";
@@ -150,7 +147,7 @@ public class OfferController {
         if (!mensaje.equals("")){
             return mensaje;
         }
-        int diferencia = student.getHoursGiven() - student.getHoursReceived();
+        int diferencia = student.getHoursReceived() - student.getHoursGiven();
         if(diferencia > 20)
             return "feedback/balance_negativo";
         Offer offer = offerDao.getOffer(idOffer);

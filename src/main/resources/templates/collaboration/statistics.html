@@ -50,8 +50,8 @@
             <th>Final</th>
             <th>Habilidad en colaboración</th>
             <th>Descripción</th>
-            <th>Estudiante que demanda</th>
             <th>Estudiante que oferta</th>
+            <th>Estudiante que demanda</th>
             <th>Duración (en horas)</th>
             <th>Valoración (de 1-5) </th>
             <th>Comentarios</th>
@@ -64,8 +64,8 @@
             <td th:text="${collaboration.finish}"></td>
             <td th:text="${collaboration.getNameSkillType(skillTypes)}"></td>
             <td th:text="${collaboration.description}"></td>
-            <td> <a th:href="@{/student/informacion/{idStudent}(idStudent=${collaboration.idStudentRequest})}" th:text="${collaboration.getNameStudentsRequest(students)}"></a></td>
             <td> <a th:href="@{/student/informacion/{idStudent}(idStudent=${collaboration.idStudentOffers})}" th:text="${collaboration.getNameStudentsOffers(students)}"></a></td>
+            <td> <a th:href="@{/student/informacion/{idStudent}(idStudent=${collaboration.idStudentRequest})}" th:text="${collaboration.getNameStudentsRequest(students)}"></a></td>
             <td th:text="${collaboration.duration}"></td>
             <div th:if="${collaboration.rating>0}">
                 <td>
@@ -80,7 +80,7 @@
                     No se ha valorado la colaboración
                 </td>
             </div>
-            <td><a th:href="@{/collaboration/delete/{idOffer}/{idRequest}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}" class="btn btn-danger">Anular colaboración</a>
+            <td><a th:href="@{/collaboration/deleteSKP/{idOffer}/{idRequest}(idRequest=${collaboration.idRequest}, idOffer=${collaboration.idOffer})}" class="btn btn-danger">Anular colaboración</a>
         </tr>
         </tbody>
     </table>
