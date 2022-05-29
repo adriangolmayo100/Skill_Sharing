@@ -167,7 +167,7 @@ public class CollaborationController {
         studentDao.updateStudent(studentOffers);
         studentDao.updateStudent(studentRequests);
         collaborationDao.updateCollaboration(collaboration);
-        return "redirect:/collaboration/mis_colaboraciones";
+        return "feedback/rate_correcto";
     }
 
     @RequestMapping(value="/update/{idRequest}/{idOffer}", method=RequestMethod.GET)

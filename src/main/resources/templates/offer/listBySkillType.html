@@ -17,8 +17,8 @@
         <tr>
             <th>Inicio</th>
             <th>Fin</th>
-            <th>Descripción de la oferta</th>
-            <th>Habilidad ofrecida</th>
+            <th>Descripción</th>
+            <th>Tipo de habilidad</th>
             <th>Nivel dificultad (1-5)</th>
             <th>Duración en horas</th>
             <th>Estudiante que oferta</th>
@@ -45,7 +45,7 @@
                 </div>
             </td>
             <td th:text="${offer.getValoracionColaboracionesRealizadas(statisticStudents)}"></td>
-            <td><a th:href="@{/offer/accept/{idOffer}/{idRequest}(idRequest=${requestSearch.idRequest}, idOffer=${offer.idOffer})}" class="btn btn-success">Aceptar</a>
+            <td><a th:href="@{/offer/accept/{idOffer}/{idRequest}(idRequest=${requestSearch.idRequest}, idOffer=${offer.idOffer})}" class="btn btn-success">Solicitar colaboración</a>
 
         </tbody>
     </table>
