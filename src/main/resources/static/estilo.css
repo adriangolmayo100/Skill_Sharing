@@ -2,12 +2,13 @@
 body {
    font-family: Helvetica, Arial, sans-serif;
    background-color: white;
+   margin_bottom: 40px;
 }
 
 img {
-   width: 50%;
-   margin-left: 370px;
-   margin-right: 370px;
+   width: 40%;
+   margin-left: 550px;
+   margin-right: 550px;
 }
 
 .bordeLogin{
@@ -58,8 +59,8 @@ h2 {
 .botonIndex {
     margin-top:35px;
     background-color: #999999;
-    margin-left: 500px;
-    margin-right: 500px;
+    margin-left: 640px;
+    margin-right: 640px;
     text-align:center;
     webkit-border-radius: 28;
     moz-border-radius: 28;
@@ -67,11 +68,12 @@ h2 {
     webkit-box-shadow: 6px 5px 24px;
     moz-box-shadow: 6px 5px 24px;
     box-shadow: 6px 5px 24px;
-    font-family: Arial;
+    font-family: source sans pro;
     color: #000000;
     font-size: 27px;
     padding: 19px;
     text-decoration: none;
+    width:30%;
 }
 /*botines para las opciones de los skp*/
 .botonSKP {
@@ -86,11 +88,27 @@ h2 {
     webkit-box-shadow: 6px 5px 24px;
     moz-box-shadow: 6px 5px 24px;
     box-shadow: 6px 5px 24px;
-    font-family: Arial;
+    font-family: source sans pro;
     color: #000000;
     font-size: 27px;
     padding: 19px;
     text-decoration: none;
+}
+
+/*estilo para los titulos de las opciones que puede realizar el usuario*/
+.botonOpciones {
+    font: 25 2em/1 "Oswald", source sans pro;
+    letter-spacing: 0;
+    padding: .25em 0 .325em;
+    text-shadow: 0 0 80px rgba(255,255,255,.5);
+    background: url(https://i.ibb.co/RDTnNrT/animated-text-fill.png) repeat-y;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: aitf 80s linear infinite;
+    /* Activate hardware acceleration for smoother animations */
+    -webkit-transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
 }
 
 .botonAcceder {
@@ -105,7 +123,7 @@ h2 {
         webkit-box-shadow: 6px 5px 24px;
         moz-box-shadow: 6px 5px 24px;
         box-shadow: 6px 5px 24px;
-        font-family: Arial;
+        font-family: source sans pro;
         color: #000000;
         font-size: 20px;
         padding: 19px;
@@ -124,7 +142,7 @@ h2 {
            webkit-box-shadow: 6px 5px 24px;
            moz-box-shadow: 6px 5px 24px;
            box-shadow: 6px 5px 24px;
-           font-family: Arial;
+           font-family: source sans pro;
            color: #000000;
            font-size: 20px;
            padding: 19px;
@@ -143,7 +161,7 @@ h2 {
            webkit-box-shadow: 6px 5px 24px;
            moz-box-shadow: 6px 5px 24px;
            box-shadow: 6px 5px 24px;
-           font-family: Arial;
+           font-family: source sans pro;
            color: #000000;
            font-size: 20px;
            padding: 19px;
@@ -168,7 +186,7 @@ a:hover {color:#000000;}
        webkit-box-shadow: 6px 5px 24px;
        moz-box-shadow: 6px 5px 24px;
        box-shadow: 6px 5px 24px;
-       font-family: Arial;
+       font-family: source sans pro;
        color: #000000;
        font-size: 27px;
        padding: 19px;
@@ -177,7 +195,8 @@ a:hover {color:#000000;}
 
 /*Titulo SkillSHaring en index y para demas titulos de otras páginas*/
 .titulo {
-    margin-top:2px;
+
+    margin-top:50px;
     color: #000000;
     font-family: source sans pro;
     text-align:center;
