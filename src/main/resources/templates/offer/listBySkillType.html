@@ -38,7 +38,7 @@
             <td th:text="${offer.getNameStudent(students)}"></td>
             <td>
                 <div th:if="${offer.getValoracionMediaOfertante(statisticStudents)==0}">
-                    <p>Todavía no se ha valorado ninguna colaboración.</p>
+                    <p>No tiene ninguna colaboración.</p>
                 </div>
                 <div th:unless="${offer.getValoracionMediaOfertante(statisticStudents)==0}">
                     <p><i th:text="${offer.getValoracionMediaOfertante(statisticStudents)}"></i></p>
