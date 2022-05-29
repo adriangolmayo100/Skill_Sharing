@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
-    <link rel="stylesheet" type="text/css"
-          href="/css/estilo.css"
-          th:href="@{/css/estilo.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/estilo.css"
+          th:href="@{/estilo.css}"/>
     <title>Registrar</title>
     <meta charset="UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
 
 </head>
 <body>
-<h2>Nueva habilidad</h2>
+<div  layout:fragment="content">
+    <div class="titulo"><h2>Nueva habilidad</h2>
 <form action="#" th:action="@{/skilltype/add}"
       th:object="${skilltype}" method="post">
-    <table>
+    <table class="table table-striped">
         <tr>
             <td><label>Nombre del tipo de habilidad</label></td>
             <td><input type="text" th:field="*{name}" maxlength="50"/></td>
@@ -31,9 +32,11 @@
         </tr>
 
         <tr>
-            <td colspan="2"><input type="submit" value="Añadir habilidad" /></td>
+            <td colspan="2"><input type="submit" value="Añadir habilidad" class="botones"/></td>
         </tr>
     </table>
 </form>
+    </div>
+</div>
 </body>
 </html>

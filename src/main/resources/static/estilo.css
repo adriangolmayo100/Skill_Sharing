@@ -229,6 +229,14 @@ a:hover {color:#000000;}
     text-align:center;
 }
 
+.titulo2 {
+
+    margin-top:50px;
+    color: #000000;
+    font-family: source sans pro;
+    text-align:center;
+}
+
 /*titulo en fragments base */
 .tituloBase{
     color: #000000;
