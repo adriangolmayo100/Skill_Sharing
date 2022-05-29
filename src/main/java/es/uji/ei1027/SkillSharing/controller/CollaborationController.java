@@ -2,6 +2,7 @@ package es.uji.ei1027.SkillSharing.controller;
 
 import es.uji.ei1027.SkillSharing.dao.*;
 import es.uji.ei1027.SkillSharing.model.Collaboration;
+import es.uji.ei1027.SkillSharing.model.Request;
 import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,7 +65,8 @@ public class CollaborationController {
         Collaboration collaboration = collaborationDao.getCollaboration(idRequest,idOffer);
         collaboration.setValid(true);
         collaborationDao.updateCollaboration(collaboration);
-        model.addAttribute("student", studentDao.getStudent(collaboration.getIdStudentRequest()));
+        Request request = requestDao.getRequest(idRequest);
+        model.addAttribute("student", studentDao.getStudent(request.getIdStudent()));
         return "feedback/collaboration_correcto";
     }
 
