@@ -11,8 +11,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-<div class="titulo">
-<h2>Editar skilltype</h2>
+    <div class="titulo"> <h2>Editar skilltype</h2>
 <form action="#" th:action="@{/skilltype/update/{id}(id=${skilltype.idSkillType})}"
       th:object="${skilltype}" method="post">
     <table class="table table-striped">
