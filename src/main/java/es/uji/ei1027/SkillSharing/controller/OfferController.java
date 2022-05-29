@@ -52,7 +52,7 @@ public class OfferController {
             return mensaje;
         }
         offerDao.deleteOffer(idOffer);
-        return "feedback/offer_delete";
+        return "feedback/offer_correcto";
     }
 
 
