@@ -41,7 +41,7 @@ public class SkillTypeController {
         offerDao.anularOfertasSkillType(idSkillType);
         requestDao.anularDemandasSkillType(idSkillType);
         skillTypeDao.updateSkillType(skillType);
-        return "redirect:/skilltype/listWithStatistics";
+        return "feedback/skilltype_correcto";
     }
     @RequestMapping(value = "/recuperar/{idSkillType}")
     public String recuperarSkillType(HttpSession session, Model model, @PathVariable int idSkillType) {
@@ -52,7 +52,7 @@ public class SkillTypeController {
         SkillType skillType = skillTypeDao.getSkillType(idSkillType);
         skillType.setValid(true);
         skillTypeDao.updateSkillType(skillType);
-        return "redirect:/skilltype/listWithStatistics";
+        return "feedback/skilltype_correcto";
     }
     @RequestMapping("/list")
     public String listSkillTypes(Model model) {
@@ -91,7 +91,7 @@ public class SkillTypeController {
             return "skilltype/add";
         skillType.setValid(true);
         skillTypeDao.addSkillType(skillType);
-        return "redirect:/skilltype/listWithStatistics";
+        return "feedback/skilltype_correcto";
     }
 
     @RequestMapping(value="/update/{idSkillType}", method = RequestMethod.GET)
@@ -122,6 +122,6 @@ public class SkillTypeController {
         SkillType skillTypeBBDD = skillTypeDao.getSkillType(idSkillType);
         skillTypeBBDD.actualizar(skillType);
         skillTypeDao.updateSkillType(skillTypeBBDD);
-        return "redirect:/skilltype/listWithStatistics";
+        return "feedback/skilltype_correcto";
     }
 }

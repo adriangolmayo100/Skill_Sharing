@@ -140,7 +140,6 @@ public class RequestController {
             return "feedback/balance_negativo";
         model.addAttribute("student", student);
         request.setIdStudent(student.getIdStudent());
-        System.out.println(student.toString());
         RequestValidator requestValidator = new RequestValidator();
         requestValidator.validate(request,bindingResult);
         if (bindingResult.hasErrors()){
@@ -174,7 +173,6 @@ public class RequestController {
         RequestValidator requestValidator = new RequestValidator();
         requestValidator.validate(requestModel,bindingResult);
         if (bindingResult.hasErrors()){
-            model.addAttribute("request", request);
             model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
             return "request/update";
         }

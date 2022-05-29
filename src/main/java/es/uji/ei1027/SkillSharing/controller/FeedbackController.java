@@ -32,7 +32,12 @@ public class FeedbackController {
 
     @RequestMapping(value = "/collaboration_correcto")
     public String collaborationCorrecto(){
-        return "feedback/collaboration_correcto";
+        return "/feedback/collaboration_correcto";
+    }
+
+    @RequestMapping(value = "/collaboration_correcto_solicitudes")
+    public String collaborationCorrectoSolicitudes(){
+        return "/feedback/collaboration_correcto_solicitudes";
     }
 
     @RequestMapping(value = "/cuenta_incorrecta")

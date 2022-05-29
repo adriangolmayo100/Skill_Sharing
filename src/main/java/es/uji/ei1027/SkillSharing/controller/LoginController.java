@@ -26,8 +26,7 @@ public class LoginController {
     public String login(HttpSession session, Model model){
         Student student= (Student) session.getAttribute("student");
         model.addAttribute("student", new Student());
-        Student student1 = (Student) session.getAttribute("student");
-        if ( student1 != null)
+        if ( student != null)
         {
             return "redirect:/tipos_usuario/usuario";
         }
@@ -46,8 +45,8 @@ public class LoginController {
         // intentant carregar les dades de l'usuari
 
         if (studentDao.loadStudent(student.getUsername(),student.getPassword()) == null){
-            //bindingResult.rejectValue("username", "badUser", "no se ha introducido un usuario");
-            return "redirect:/login";
+            bindingResult.rejectValue("password", "valor incorrecto", "Usuario o contraseña incorrecta");
+            return "login";
         }
         String username = student.getUsername();
         Student student_completo = studentDao.obtenerStudentConUser(username);
@@ -71,7 +70,7 @@ public class LoginController {
     }
 }
 
-class UserValidator implements Validator {      //Clase para comprobar que no se pasan espacios en blanco. En verdad es una chorrada ya que esto lo hace el HTML
+class UserValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> cls) {
@@ -86,7 +85,7 @@ class UserValidator implements Validator {      //Clase para comprobar que no se
         if (username.equals(""))
             errors.rejectValue("username", "badUser", "usuario requerido");
         if (password.equals(""))
-            errors.rejectValue("password", "badPassword", "usuario requerido");
+            errors.rejectValue("password", "badPassword", "contraseña requerida");
     }
     public String comprobar_conexion(HttpSession session, Model model, String url, boolean skp) {
         Student student = (Student) session.getAttribute("student");
@@ -95,8 +94,6 @@ class UserValidator implements Validator {      //Clase para comprobar que no se
                 session.setAttribute("nextUrl", url);
                 model.addAttribute("student", new Student());
                 return "login";
-            }if(student.isUnavailable()){
-
             }
         }else {
             if (student == null) {
@@ -108,24 +105,6 @@ class UserValidator implements Validator {      //Clase para comprobar que no se
                 session.setAttribute("nextUrl", url);
                 model.addAttribute("student", new Student());
                 return "feedback/cuenta_incorrecta";
-            }
-        }
-        return "";
-    }
-    public String comprobar_conexion(HttpSession session, Model model, String url) {
-        Student student = (Student) session.getAttribute("student");
-        if (url.equals("/tipos_usuario/usuario")) {
-            if (student == null) {
-                session.setAttribute("nextUrl", url);
-                model.addAttribute("student", new Student());
-                return "login";
-            }
-        }else {
-            boolean skp = false;
-            if (student == null || skp != student.isSkp()) {
-                session.setAttribute("nextUrl", url);
-                model.addAttribute("student", new Student());
-                return "login";
             }
         }
         return "";

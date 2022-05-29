@@ -2,7 +2,6 @@ package es.uji.ei1027.SkillSharing.controller;
 
 import es.uji.ei1027.SkillSharing.dao.*;
 import es.uji.ei1027.SkillSharing.model.Collaboration;
-import es.uji.ei1027.SkillSharing.model.Offer;
 import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,7 +52,7 @@ public class CollaborationController {
             return mensaje;
         }
         collaborationDao.deleteCollaboration(idRequest,idOffer);
-        return "redirect:/collaboration/mis_request_colaboraciones";
+        return "feedback/collaboration_correcto_solicitudes";
     }
   @RequestMapping(value = "/accept/{idOffer}/{idRequest}")
     public String acceptCollaboration(HttpSession session, Model model, @PathVariable Integer idRequest,@PathVariable Integer idOffer){
@@ -64,7 +63,7 @@ public class CollaborationController {
         Collaboration collaboration = collaborationDao.getCollaboration(idRequest,idOffer);
         collaboration.setValid(true);
         collaborationDao.updateCollaboration(collaboration);
-        return "redirect:/collaboration/mis_colaboraciones";
+        return "feedback/collaboration_correcto";
     }
 
     @RequestMapping("/list")
@@ -133,7 +132,7 @@ public class CollaborationController {
         if (bindingResult.hasErrors())
             return "collaboration/add";
         collaborationDao.addCollaboration(collaboration);
-        return "redirect:list";
+        return "collaboration/mis_colaboraciones";
     }
     @RequestMapping(value="/rate/{idRequest}/{idOffer}")
     public String addRate(HttpSession session, Model model,@PathVariable Integer idRequest,@PathVariable Integer idOffer){
@@ -191,6 +190,6 @@ public class CollaborationController {
         if (bindingResult.hasErrors())
             return "collaboration/update";
         collaborationDao.updateCollaboration(collaboration);
-        return "redirect:list";
+        return "feedback/collaboration_correcto";
     }
 }
