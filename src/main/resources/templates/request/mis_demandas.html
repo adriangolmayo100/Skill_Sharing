@@ -41,6 +41,7 @@
         </tr>
         </tbody>
     </table>
+    <p th:unless="${not #lists.isEmpty(requests)}">No hay demandas publicadas</p>
     <div class="botones">
         <a href="add">Añadir Demanda</a>
     </div>

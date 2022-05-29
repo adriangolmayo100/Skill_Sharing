@@ -51,6 +51,7 @@
         </tr>
         </tbody>
     </table>
+    <p th:unless="${not #lists.isEmpty(collaborationsImOffer)}">No hay colaboraciones como ofertante</p>
     <div class="titulo"><h2>Mis Colaboraciones como demandante</h2></div>
     <p>Aquí se muestran las colaboraciones en las que participas como demandante.</p>
     <table th:unless="${#lists.isEmpty(collaborationsImRequest)}" class="table table-striped">
@@ -95,6 +96,7 @@
         </tr>
         </tbody>
     </table>
+    <p th:unless="${not #lists.isEmpty(collaborationsImRequest)}">No hay colaboraciones como demandante</p>
 </div>
 </body>
 </html>

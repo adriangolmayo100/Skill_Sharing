@@ -40,6 +40,7 @@
         </tr>
         </tbody>
     </table>
+    <p th:unless="${not #lists.isEmpty(collaborationsImOffer)}">No tienes propuestas de colaboración</p>
     <div class="titulo"><h2>Mis solicitudes de colaboración propuestas</h2></div>
     <p>Aquí se muestran las solicitudes de colaboración creadas por nosotros.</p>
     <table th:unless="${#lists.isEmpty(collaborationsImRequest)}" class="table table-striped">
@@ -66,6 +67,7 @@
         </tr>
         </tbody>
     </table>
+    <p th:unless="${not #lists.isEmpty(collaborationsImRequest)}">No has propuesto colaboraciones</p>
 </div>
 </body>
 </html>
