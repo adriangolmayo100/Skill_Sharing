@@ -11,8 +11,8 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="titulo"><h1>Gestionar tipos de habilidades</h1></div>
-    <table class="table table-striped">
+    <div class="titulo"><h1>Gestionar habilidades</h1></div>
+    <table th:unless="${#lists.isEmpty(skills)}" class="table table-striped">
         <thead>
         <tr>
             <th>Nombre</th>
@@ -30,6 +30,7 @@
         </tr>
         </tbody>
     </table>
+    <p th:unless="${not #lists.isEmpty(skills)}">No hay Skill Types creadas</p>
     <a href="add" class="btn btn-succes" role="button">Añadir habilidad</a>
 </div>
 </body>
