@@ -9,6 +9,8 @@ img {
    width: 40%;
    margin-left: 550px;
    margin-right: 550px;
+   display: flex;
+   justify-content: center;
 }
 
 .bordeLogin{
@@ -96,7 +98,7 @@ h2 {
     text-decoration: none;
 }
 
-/*estilo para los titulos de las opciones que puede realizar el usuario*/
+/*estilo para los titulos de las opciones que puede realizar el usuario y título principal*/
 .botonOpciones {
     font: 25 2em/1 "Oswald", source sans pro;
     letter-spacing: 0;
@@ -155,6 +157,24 @@ h2 {
            text-decoration: none;
        }
 
+.botonesModerarUsuarios {
+       margin-top:60px;
+           background-color: #999999;
+           margin-left: 120px;
+           margin-right:120px;
+           text-align:center;
+           webkit-border-radius: 20;
+           moz-border-radius: 20;
+           border-radius: 20px;
+           webkit-box-shadow: 5px 4px 23px;
+           moz-box-shadow: 5px 4px 23px;
+           box-shadow: 5px 4px 23px;
+           font-family: source sans pro;
+           color: #000000;
+           font-size: 18px;
+           padding: 16px;
+           text-decoration: none;
+       }
 .botonesVisitante {
        margin-top:60px;
            background-color: #999999;
@@ -183,8 +203,9 @@ a:hover {color:#000000;}
 .botonesUsuario {
    margin-top:60px;
        background-color: #999999;
-       margin-left: 20px;
-       margin-right: 20px;
+       margin-left: 25px;
+       margin-right: 25px;
+      /* margin: 0 auto;*/
        text-align:center;
        webkit-border-radius: 28;
        moz-border-radius: 28;
