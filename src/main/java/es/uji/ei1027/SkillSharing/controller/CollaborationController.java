@@ -52,6 +52,7 @@ public class CollaborationController {
             return mensaje;
         }
         collaborationDao.deleteCollaboration(idRequest,idOffer);
+        model.addAttribute("student", studentDao.getStudent(requestDao.getRequest(idRequest).getIdStudent()));
         return "feedback/collaboration_correcto_solicitudes";
     }
   @RequestMapping(value = "/accept/{idOffer}/{idRequest}")
@@ -63,6 +64,7 @@ public class CollaborationController {
         Collaboration collaboration = collaborationDao.getCollaboration(idRequest,idOffer);
         collaboration.setValid(true);
         collaborationDao.updateCollaboration(collaboration);
+        model.addAttribute("student", studentDao.getStudent(collaboration.getIdStudentRequest()));
         return "feedback/collaboration_correcto";
     }
 

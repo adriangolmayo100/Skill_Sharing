@@ -18,7 +18,7 @@
       <tr>
 
         <td><label>Descripción</label></td>
-        <td><input type="text" th:field="*{description}" maxlength="50"/></td>
+        <td><input type="text" th:field="*{description}" maxlength="50" required/></td>
         <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error">
 
 
