@@ -10,7 +10,8 @@
 </head>
 <body>
 <div  layout:fragment="content">
-    <div class="titulo"><h1>Nueva Demanda</h1></div>
+    <div class="titulo"> <h1>Crear demanda</h1> </div>
+    <p>Añade una nueva demanda de colaboración al sistema</p>
     <form action="#" th:action="@{/request/add}"
           th:object="${request}" method="post">
         <table class="table table-striped">
