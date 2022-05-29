@@ -12,7 +12,8 @@
 
 <body>
 <div layout:fragment="content">
-    <div class="titulo"><h1>Consultar mis ofertas</h1></div>
+    <div class="titulo"><h1>Mis ofertas</h1></div>
+    <p>Muestra mis ofertas de colaboración activas del sistema.</p>
     <table th:unless="${#lists.isEmpty(offers)}" class="table table-striped">
         <thead class="table table-striped">
         <tr>

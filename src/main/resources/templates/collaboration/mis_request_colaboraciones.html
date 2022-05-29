@@ -11,7 +11,9 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="titulo"><h1>Solicitudes de colaboración disponibles</h1></div>
+    <div class="titulo"><h1>Mis solicitudes de colaboración</h1></div>
+    <div class="titulo"><h2>Solicitudes pendientes</h2></div>
+    <p>Aquí se muestran las solicitudes de colaboración que proponen los estudiantes para ti.</p>
     <table th:unless="${#lists.isEmpty(collaborationsImOffer)}" class="table table-striped">
         <thead>
         <tr>
@@ -38,7 +40,8 @@
         </tr>
         </tbody>
     </table>
-    <div class="titulo"><h1>Mis solicitudes de colaboraciones</h1></div>
+    <div class="titulo"><h2>Mis solicitudes de colaboración propuestas</h2></div>
+    <p>Aquí se muestran las solicitudes de colaboración creadas por nosotros.</p>
     <table th:unless="${#lists.isEmpty(collaborationsImRequest)}" class="table table-striped">
         <thead>
         <tr>
