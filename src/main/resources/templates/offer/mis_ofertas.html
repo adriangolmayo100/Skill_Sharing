@@ -13,19 +13,19 @@
 <body>
 <div layout:fragment="content">
     <div class="titulo"><h1>Mis ofertas</h1></div>
-    <p>Muestra mis ofertas de colaboración activas del sistema.</p>
+    <p>Muestra mis ofertas de colaboración activas del sistema. Desde consultar demandas te enseña ofertas activas del mismo tipo de habilidad</p>
     <table th:unless="${#lists.isEmpty(offers)}" class="table table-striped">
         <thead class="table table-striped">
         <tr>
             <th>Inicio</th>
             <th>Fin</th>
-            <th>Descripción de la oferta</th>
-            <th>Habilidad ofrecida</th>
+            <th>Descripción</th>
+            <th>Tipo de habilidad</th>
             <th>Nivel dificultad (1-5)</th>
             <th>Duración en horas</th>
-            <th>Consultar demandas relacionadas</th>
             <th>Actualizar</th>
             <th>Borrar</th>
+            <th>Consultar demandas relacionadas</th>
         </tr>
         </thead>
         <tbody>
@@ -36,9 +36,10 @@
             <td th:text="${offer.getNameSkillType(skillTypes)}"></td>
             <td th:text="${offer.getLevelSkillType(skillTypes)}"></td>
             <td th:text="${offer.duration}"></td>
-            <td><a th:href="@{/request/list/{idOffer}(idOffer=${offer.idOffer})}" class="btn btn-success">Consultar</a></td>
-            <td><a th:href="@{/offer/update/{id}(id=${offer.idOffer})}" class="btn btn-success">Actualizar</a></td>
-            <td><a th:href="@{/offer/delete/{id}(id=${offer.idOffer})}" class="btn btn-success">Eliminar</a></td>        </tr>
+            <td><a th:href="@{/offer/update/{id}(id=${offer.idOffer})}" class="btn btn-danger">Actualizar</a></td>
+            <td><a th:href="@{/offer/delete/{id}(id=${offer.idOffer})}" class="btn btn-warning">Eliminar</a></td>
+        <td><a th:href="@{/request/list/{idOffer}(idOffer=${offer.idOffer})}" class="btn btn-success">Consultar</a></td>
+        </tr>
         </tbody>
     </table>
     <p th:unless="${not #lists.isEmpty(offers)}">No hay demandas publicadas</p>

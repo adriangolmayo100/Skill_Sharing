@@ -159,7 +159,7 @@ public class OfferController {
             collaboration.createCollaboration(offer,request.getIdRequest());
             collaboration.setValid(false);
             collaborationDao.addCollaboration(collaboration);
-            model.addAttribute("student",studentDao.getStudent(offer.getIdStudent()));
+            model.addAttribute("studentEmail",studentDao.getStudent(offer.getIdStudent()));
             return "feedback/collaboration_correcto";
         }
         return "feedback/offer_erroneo";

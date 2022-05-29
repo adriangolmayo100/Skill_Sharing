@@ -12,19 +12,19 @@
 <body>
 <div layout:fragment="content">
     <div class="titulo"><h1>Mis Demandas</h1></div>
-    <p>Muestra mis ofertas de colaboración activas del sistema.</p>
+    <p>Muestra mis ofertas de colaboración activas del sistema. Desde consultar ofertas te enseña ofertas activas del mismo tipo de habilidad a las que puedes solicitar una colaboración.</p>
     <table th:unless="${#lists.isEmpty(requests)}" class="table table-striped">
         <thead class="table table-striped">
         <tr>
             <th>Inicio</th>
             <th>Fin</th>
-            <th>Descripción de la propuesta</th>
-            <th>Habilidad</th>
+            <th>Descripción</th>
+            <th>Tipos de habilidad</th>
             <th>Nivel dificultad (1-5)</th>
             <th>Duración en horas</th>
-            <th>Consultar solicitudes relacionadas</th>
             <th>Actualizar</th>
             <th>Borrar</th>
+            <th>Consultar solicitudes relacionadas</th>
         </tr>
         </thead>
         <tbody>
@@ -35,9 +35,9 @@
             <td th:text="${request.getNameSkillType(skillTypes)}"></td>
             <td th:text="${request.getLevelSkillType(skillTypes)}"></td>
             <td th:text="${request.duration}"></td>
+            <td><a th:href="@{/request/update/{id}(id=${request.idRequest})}" class="btn btn-danger">Actualizar</a></td>
+            <td><a th:href="@{/request/delete/{id}(id=${request.idRequest})}" class="btn btn-warning">Eliminar</a></td>
             <td><a th:href="@{/offer/list/{idRequest}(idRequest=${request.idRequest})}" class="btn btn-success">Consultar</a></td>
-            <td><a th:href="@{/request/update/{id}(id=${request.idRequest})}" class="btn btn-success">Actualizar</a></td>
-            <td><a th:href="@{/request/delete/{id}(id=${request.idRequest})}" class="btn btn-success">Eliminar</a></td>
         </tr>
         </tbody>
     </table>
