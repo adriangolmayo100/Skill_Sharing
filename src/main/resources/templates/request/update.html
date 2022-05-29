@@ -11,6 +11,7 @@
 <body>
 <div  layout:fragment="content">
     <div><h1>Actualizar Demanda</h1></div>
+    <p>Permite actualizar los datos de la demanda de colaboración.</p>
     <form action="#" th:action="@{/request/update/{id}(id=${request.idRequest})}"
           th:object="${request}" method="post">
         <table class="table table-striped">

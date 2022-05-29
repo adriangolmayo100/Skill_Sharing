@@ -47,10 +47,6 @@ public class UserController {
         }
         if (student.isSkp())
             return "tipos_usuario/skp";
-        model.addAttribute("hoursGiven",student.getHoursGiven());
-        model.addAttribute("hoursReceived",student.getHoursReceived());
-        model.addAttribute("statisticsCollaboration",statisticDao.getStatisticCollaborationsFromStudent(student.getIdStudent()));
-        model.addAttribute("statisticsOffersRequests",statisticDao.getStatisticOffersRequestFromStudent(student.getIdStudent()));
         return "tipos_usuario/usuario";
     }
    @RequestMapping("/visitante")

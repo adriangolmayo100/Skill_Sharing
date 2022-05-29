@@ -11,7 +11,9 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="titulo"><h1>Consulta de proposiciones de colaboraciones</h1></div>
+    <div class="titulo"><h1>Consulta de estadisticas de colaboraciones</h1></div>
+    <div class="titulo"><h2>Consulta de solicitudes de colaboraciones</h2></div>
+    <p>Muestra todas las solicitudes de colaboración del sistema y permite anularlas.</p>
     <table th:unless="${#lists.isEmpty(collaborationsRequest)}" class="table table-striped">
         <thead>
         <tr>
@@ -39,7 +41,8 @@
         </tr>
         </tbody>
     </table>
-    <div class="titulo"><h1>Consulta de colaboraciones</h1></div>
+    <div class="titulo"><h2>Consulta de colaboraciones</h2></div>
+    <p>Muestra todas las colaboraciones del sistema y permite anularlas.</p>
     <table th:unless="${#lists.isEmpty(collaborations)}" class="table table-striped">
         <thead>
         <tr>

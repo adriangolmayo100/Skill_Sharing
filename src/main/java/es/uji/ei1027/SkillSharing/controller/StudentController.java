@@ -94,5 +94,17 @@ public class StudentController {
         studentDao.updateStudent(student);
         return "redirect:/student/listWithOutSkp";
     }
+    @RequestMapping("/statistics")
+    public String stadisticasUsuario(HttpSession session, Model model){
+        String mensaje = validator.comprobar_conexion(session, model, "/student/statistics", false);
+        if (!mensaje.equals(""))
+            return mensaje;
+        Student student = (Student) session.getAttribute("student");
+        model.addAttribute("hoursGiven",student.getHoursGiven());
+        model.addAttribute("hoursReceived",student.getHoursReceived());
+        model.addAttribute("statisticsCollaboration",statisticDao.getStatisticCollaborationsFromStudent(student.getIdStudent()));
+        model.addAttribute("statisticsOffersRequests",statisticDao.getStatisticOffersRequestFromStudent(student.getIdStudent()));
+        return "/student/estadisticas";
+    }
 
 }

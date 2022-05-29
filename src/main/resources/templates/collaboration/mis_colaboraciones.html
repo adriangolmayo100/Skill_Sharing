@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/base}">
 <head>
-    <title>Listar mis colaboraciones</title>
+    <title>Mis colaboraciones</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/estilo.css"
@@ -11,7 +11,9 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="titulo"><h1>Mis Colaboraciones como ofertante</h1></div>
+    <div class="titulo"><h1>Mis Colaboraciones del sistema</h1></div>
+    <div class="titulo"><h2>Mis Colaboraciones como ofertante</h2></div>
+    <p>Aquí se muestran las colaboraciones en las que participas como ofertante.</p>
     <table th:unless="${#lists.isEmpty(collaborationsImOffer)}" class="table table-striped">
         <thead>
         <tr>
@@ -49,7 +51,8 @@
         </tr>
         </tbody>
     </table>
-    <div class="titulo"><h1>Mis Colaboraciones como demandante</h1></div>
+    <div class="titulo"><h2>Mis Colaboraciones como demandante</h2></div>
+    <p>Aquí se muestran las colaboraciones en las que participas como demandante.</p>
     <table th:unless="${#lists.isEmpty(collaborationsImRequest)}" class="table table-striped">
         <thead>
         <tr>

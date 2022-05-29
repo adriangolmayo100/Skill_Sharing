@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css"
           href="/estilo.css"
           th:href="@{/estilo.css}"/>
-    <title>Estadísticas de Usuario</title>
+    <title>Consultar estadísticas</title>
     <meta charset="UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
 
@@ -15,6 +15,7 @@
 <body>
 <div layout:fragment="content">
     <div class="titulo">
+        <h1>Consultar estadísticas</h1>
         <p>Horas dadas: <i th:text="${hoursGiven}"></i></p>
         <p>Horas recibidas: <i th:text="${hoursReceived}"></i></p>
         <p>Colaboraciones en total: <i th:text="${statisticsCollaboration.colaboracionesCumplidasConExito}"></i></p>
@@ -28,6 +29,7 @@
         <p>Ofertas publicadas en total: <i th:text="${statisticsOffersRequests.ofertasPublicadas}"></i></p>
         <p>Demandas publicadas en total: <i th:text="${statisticsOffersRequests.demandasPublicadas}"></i></p>
     </div>
+    <a href="/tipos_usuario/usuario" class="btn" role="button">Aceptar</a>
 </div>
 </body>
 </html>

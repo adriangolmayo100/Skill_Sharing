@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/base}">
 <head>
-  <title>Consultar ofertas</title>
+  <title>Moderar usuarios</title>
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
   <link rel="stylesheet" type="text/css" href="/css/estilo.css"
@@ -12,6 +12,7 @@
 <body>
 <div layout:fragment="content">
   <div class="titulo"><h1>Moderar Usuarios</h1></div>
+  <p>Muestra todos los usuarios del sistema y permite banearles si el administrador lo ve oportuno.</p>
   <table th:unless="${#lists.isEmpty(studentList)}" class="table table-striped">
     <thead class="table table-striped">
     <tr>
