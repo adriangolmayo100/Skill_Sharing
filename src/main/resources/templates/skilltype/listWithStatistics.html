@@ -6,13 +6,14 @@
   <link rel="stylesheet" type="text/css"
         href="/estilo.css"
         th:href="@{/estilo.css}"/>
-  <title>Lista de Skp</title>
+  <title>Listado de habilidades</title>
   <meta charset="UTF-8"/>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
 </head>
 <body>
 <div layout:fragment="content">
-  <h1>Gestionar habilidades</h1>
+  <h1>Gestionar tipos de habilidades</h1>
+  <p>Permite administrar los tipos de habilidades del sistema.</p>
   <table class="table table-striped">
     <thead>
     <tr>
@@ -42,7 +43,7 @@
     </tr>
     </tbody>
   </table>
-  <a href="add" class="btn btn-succes" role="button">Añadir habilidad</a>
+  <a href="add" class="btn btn-success" role="button">Añadir un tipo de habilidad</a>
 </div>
 </body>
 </html>
