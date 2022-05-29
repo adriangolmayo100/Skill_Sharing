@@ -37,7 +37,7 @@
     </tr>
     </tbody>
   </table>
-  <p th:unless="${#lists.isEmpty(requests)}"> No hay demandas disponibles</p>
+  <p th:unless="${not #lists.isEmpty(requests)}"> No hay demandas disponibles</p>
 </div>
 </body>
 </html>
