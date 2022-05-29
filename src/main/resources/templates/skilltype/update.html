@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <title>Actualizar skilltype</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/estilo.css"
+          th:href="@{/estilo.css}"/>
 </head>
 <body>
+<div layout:fragment="content">
+<div class="titulo">
 <h2>Editar skilltype</h2>
 <form action="#" th:action="@{/skilltype/update/{id}(id=${skilltype.idSkillType})}"
       th:object="${skilltype}" method="post">
-    <table>
+    <table class="table table-striped">
         <tr>
             <td><label>Nombre del tipo de habilidad</label></td>
             <td><input type="text" th:field="*{name}" maxlength="50"/></td>
@@ -28,10 +33,12 @@
         </tr>
 
         <tr>
-            <td colspan="2"><input type="submit" value="Aceptar" /></td>
+            <td colspan="2"><input type="submit" value="Aceptar" class="botones"/></td>
         </tr>
     </table>
 
 </form>
+</div>
+</div>
 </body>
 </html>
