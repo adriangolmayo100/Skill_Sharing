@@ -45,7 +45,7 @@ public class StudentController {
         model.addAttribute("student",studentDao.getStudent(idStudent));
         model.addAttribute("students",studentDao.getStudents());
         model.addAttribute("offers",offerDao.getOffers(idStudent));
-        model.addAttribute("request",requestDao.getRequests(idStudent));
+        model.addAttribute("requests",requestDao.getRequests(idStudent));
         model.addAttribute("skillTypes", skillTypeDao.getSkillTypesValid());
         model.addAttribute("statisticsCollaboration",statisticDao.getStatisticCollaborationsFromStudent(idStudent));
         model.addAttribute("statisticsOffersRequests",statisticDao.getStatisticOffersRequestFromStudent(idStudent));

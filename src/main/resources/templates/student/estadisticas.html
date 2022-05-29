@@ -22,7 +22,7 @@
         <p>Colaboraciones en total: <i th:text="${statisticsCollaboration.colaboracionesCumplidasConExito}"></i></p>
         <p>Valoración media:</p>
         <div th:if="${statisticsCollaboration.valoracionMedia==0}">
-            <p>Todavía no se ha valorado ninguna colaboración.</p>
+            <p>No ha realizado colaboraciones</p>
         </div>
         <div th:unless="${statisticsCollaboration.valoracionMedia==0}">
             <p><i th:text="${statisticsCollaboration.valoracionMedia}"></i></p>

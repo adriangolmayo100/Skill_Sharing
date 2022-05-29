@@ -13,6 +13,7 @@
 <body>
 <div layout:fragment="content">
     <div class="titulo"><h1>Información de <i th:text="${student.name}"></i></h1></div>
+    <p>Toda la información almacenada sobre un usuario, además de algunos datos estadísticos.</p>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -26,10 +27,10 @@
             <th>Género</th>
             <th>Horas dadas</th>
             <th>Horas recibidas</th>
-            <th>Ofertas publicadas</th>
-            <th>Demandas publicadas</th>
-            <th>Colaboraciones terminadas</th>
-            <th>Valoración media (Arreglarlo Imanol y Marc, cuando es 0 no hay valoración)</th>
+            <th>Número ofertas publicadas</th>
+            <th>Número demandas publicadas</th>
+            <th>Número colaboraciones terminadas</th>
+            <th>Valoración media</th>
         </tr>
         </thead>
         <tbody>
@@ -49,7 +50,7 @@
             <td><i th:text="${statisticsCollaboration.colaboracionesCumplidasConExito}"></i></td>
             <td>
                 <div th:if="${statisticsCollaboration.valoracionMedia==0}">
-                    <p>Todavía no se ha valorado ninguna colaboración.</p>
+                    <p>No ha realizado colaboraciones</p>
                 </div>
                 <div th:unless="${statisticsCollaboration.valoracionMedia==0}">
                     <p><i th:text="${statisticsCollaboration.valoracionMedia}"></i></p>
@@ -59,16 +60,16 @@
         </tbody>
     </table>
     <div class="titulo"><h1>Ofertas de <i th:text="${student.name}"></i></h1></div>
+    <p>Toda la información sobre las ofertas del estudiante</p>
     <table th:unless="${#lists.isEmpty(offers)}" class="table table-striped">
         <thead class="table table-striped">
         <tr>
             <th>Inicio</th>
             <th>Fin</th>
-            <th>Descripción de la oferta</th>
-            <th>Habilidad ofrecida</th>
+            <th>Descripción</th>
+            <th>Tipo de habilidad</th>
             <th>Nivel dificultad (1-5)</th>
-            <th>Duración en horas</th>
-            <th>Estudiante que oferta</th>
+            <th>Duración (en horas)</th>
         </tr>
         </thead>
         <tbody>
@@ -79,8 +80,6 @@
             <td th:text="${offer.getNameSkillType(skillTypes)}"></td>
             <td th:text="${offer.getLevelSkillType(skillTypes)}"></td>
             <td th:text="${offer.duration}"></td>
-            <td th:text="${offer.getNameStudent(students)}"></td>
-            </td>
         </tr>
         </tbody>
     </table>
@@ -90,13 +89,10 @@
         <tr>
             <th>Inicio</th>
             <th>Fin</th>
-            <th>Descripción de la propuesta</th>
-            <th>Habilidad</th>
+            <th>Descripción</th>
+            <th>Tipo de habilidad</th>
             <th>Nivel dificultad (1-5)</th>
-            <th>Duración en horas</th>
-            <th>Consultar solicitudes relacionadas</th>
-            <th>Actualizar</th>
-            <th>Borrar</th>
+            <th>Duración (en horas)</th>
         </tr>
         </thead>
         <tbody>
@@ -107,9 +103,6 @@
             <td th:text="${request.getNameSkillType(skillTypes)}"></td>
             <td th:text="${request.getLevelSkillType(skillTypes)}"></td>
             <td th:text="${request.duration}"></td>
-            <td><a th:href="@{/offer/list/{idRequest}(idRequest=${request.idRequest})}" class="btn btn-success">Consultar</a></td>
-            <td><a th:href="@{/request/update/{id}(id=${request.idRequest})}" class="btn btn-success">Actualizar</a></td>
-            <td><a th:href="@{/request/delete/{id}(id=${request.idRequest})}" class="btn btn-success">Eliminar</a></td>
         </tr>
         </tbody>
     </table>
