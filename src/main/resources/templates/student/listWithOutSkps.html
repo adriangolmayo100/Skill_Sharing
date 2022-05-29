@@ -28,7 +28,7 @@
         </thead>
         <tbody>
         <tr th:each="student: ${studentList}">
-            <td th:text="${student.name}"></td>
+            <td> <a class="btn btn-success" th:href="@{/student/informacion/{idStudent}(idStudent=${student.idStudent})}" th:text="${student.name}"></a></td>
             <td th:text="${student.email}"></td>
             <td th:text="${student.username}"></td>
             <td th:text="${student.hoursGiven}"></td>
