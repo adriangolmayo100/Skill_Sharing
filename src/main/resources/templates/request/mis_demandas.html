@@ -19,7 +19,7 @@
             <th>Inicio</th>
             <th>Fin</th>
             <th>Descripción</th>
-            <th>Tipos de habilidad</th>
+            <th>Tipo de habilidad</th>
             <th>Nivel dificultad (1-5)</th>
             <th>Duración en horas</th>
             <th>Actualizar</th>
@@ -35,8 +35,8 @@
             <td th:text="${request.getNameSkillType(skillTypes)}"></td>
             <td th:text="${request.getLevelSkillType(skillTypes)}"></td>
             <td th:text="${request.duration}"></td>
-            <td><a th:href="@{/request/update/{id}(id=${request.idRequest})}" class="btn btn-danger">Actualizar</a></td>
-            <td><a th:href="@{/request/delete/{id}(id=${request.idRequest})}" class="btn btn-warning">Eliminar</a></td>
+            <td><a th:href="@{/request/update/{id}(id=${request.idRequest})}" class="btn btn-warning">Actualizar</a></td>
+            <td><a th:href="@{/request/delete/{id}(id=${request.idRequest})}" class="btn btn-danger">Eliminar</a></td>
             <td><a th:href="@{/offer/list/{idRequest}(idRequest=${request.idRequest})}" class="btn btn-success">Consultar</a></td>
         </tr>
         </tbody>

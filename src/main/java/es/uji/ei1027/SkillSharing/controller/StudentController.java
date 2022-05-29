@@ -81,7 +81,7 @@ public class StudentController {
         offerDao.anularOfertas(student.getIdStudent());
         requestDao.anularDemandas(student.getIdStudent());
         studentDao.updateStudent(student);
-        return "redirect:/student/listWithOutSkp";
+        return "/feedback/banear_cuenta";
     }
     @RequestMapping("/recuperar/{idStudent}")
     public String recuperarUsuario(HttpSession session, Model model, @PathVariable int idStudent){
@@ -92,7 +92,7 @@ public class StudentController {
         student.setBanReason("");
         student.setUnavailable(false);
         studentDao.updateStudent(student);
-        return "redirect:/student/listWithOutSkp";
+        return "/feedback/banear_cuenta";
     }
     @RequestMapping("/statistics")
     public String stadisticasUsuario(HttpSession session, Model model){

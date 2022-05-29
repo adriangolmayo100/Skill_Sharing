@@ -42,7 +42,7 @@ public class CollaborationController {
             return mensaje;
         }
         collaborationDao.deleteCollaboration(idRequest,idOffer);
-        return "redirect:/collaboration/statistics/";
+        return "/feedback/collaboration_anular_skp";
     }
 
     @RequestMapping(value = "/deleteUser/{idOffer}/{idRequest}")

@@ -24,7 +24,6 @@
             <th>Grado</th>
             <th>Curso</th>
             <th>Banear/Recuperar cuenta</th>
-            <th>Mirar estadísticas</th>
         </tr>
         </thead>
         <tbody>
@@ -36,7 +35,7 @@
             <td th:text="${student.hoursReceived}"></td>
             <td th:text="${student.degree}"></td>
             <td th:text="${student.course}"></td>
-            <td colspan="2">
+            <td>
                 <div th:if="${student.unavailable}">
                     <a th:href="@{/student/recuperar/{id}(id=${student.idStudent})}" class="btn btn-success">Devolver cuenta</a>
                     <p>Motivo baneo: <i th:text="${student.banReason}"></i></p>
@@ -45,12 +44,9 @@
                     <a th:href="@{/student/anular/{id}(id=${student.idStudent})}" class="btn btn-danger">Suspender cuenta</a>
                 </div>
             </td>
-            <td>
-            </td>
         </tr>
         </tbody>
     </table>
-    <a th:href="@{/collaboration/statistics}" class="botonesModerarUsuarios">Mostrar estadísticas</a>
     <a href="/register/datos" class="botonesModerarUsuarios">Añadir usuario</a>
 
 </div>

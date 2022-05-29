@@ -36,8 +36,8 @@
             <td th:text="${offer.getNameSkillType(skillTypes)}"></td>
             <td th:text="${offer.getLevelSkillType(skillTypes)}"></td>
             <td th:text="${offer.duration}"></td>
-            <td><a th:href="@{/offer/update/{id}(id=${offer.idOffer})}" class="btn btn-danger">Actualizar</a></td>
-            <td><a th:href="@{/offer/delete/{id}(id=${offer.idOffer})}" class="btn btn-warning">Eliminar</a></td>
+            <td><a th:href="@{/offer/update/{id}(id=${offer.idOffer})}" class="btn btn-warning">Actualizar</a></td>
+            <td><a th:href="@{/offer/delete/{id}(id=${offer.idOffer})}" class="btn btn-danger">Eliminar</a></td>
         <td><a th:href="@{/request/list/{idOffer}(idOffer=${offer.idOffer})}" class="btn btn-success">Consultar</a></td>
         </tr>
         </tbody>
