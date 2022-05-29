@@ -20,6 +20,9 @@
         </tr>
         </tbody>
     </table>
+    <div th:if="${#lists.isEmpty(studentsEmail)}">
+        <p>No se envió ningún email porque no hay ninguna demanda activa de ese tipo</p>
+    </div>
     <div class="botonIndex">
         <a href="/offer/mis_ofertas" class="btn" role="button">Aceptar</a>
     </div>

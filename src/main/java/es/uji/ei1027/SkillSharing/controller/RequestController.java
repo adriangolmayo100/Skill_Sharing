@@ -78,7 +78,7 @@ public class RequestController {
             return mensaje;
         }
         requestDao.deleteRequest(idRequest);
-        return "feedback/request_correcto";
+        return "feedback/request_delete";
     }
     @RequestMapping("/list/{idOffer}")
     public String listRequests(HttpSession session, Model model,@PathVariable Integer idOffer){
