@@ -8,7 +8,7 @@ Application make in Spring Java Framework. The main goal of the app is to help s
 You can install the package via Git,
 
 ```bash
-git clone https://github.com/adriangolmayo100/Skill-Colaboration-Application-
+git clone https://github.com/adriangolmayo100/Skill_Sharing
 ```
 
 ## License
